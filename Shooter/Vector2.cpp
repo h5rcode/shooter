@@ -26,10 +26,10 @@ double Vector2::computeAngleTo(Vector2 *destination) const
 		alpha = 0;
 	}
 	else {
-		double cosAlpha = (yDest - this->y) / sqrt((yDest - y) * (yDest - y) + (xDest - x)  * (xDest - x));
+		double cosAlpha = (xDest - this->x) / sqrt((yDest - y) * (yDest - y) + (xDest - x)  * (xDest - x));
 		alpha = acos(cosAlpha);
 
-		if (xDest > this->x)
+		if (yDest > this->y)
 		{
 			alpha = -alpha;
 		}

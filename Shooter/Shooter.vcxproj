@@ -19,9 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Crosshair.h" />
+    <ClInclude Include="Edge.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="GameSet.h" />
+    <ClInclude Include="GameSettings.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="IGameSet.h" />
+    <ClInclude Include="IGameSettings.h" />
+    <ClInclude Include="IGameState.h" />
+    <ClInclude Include="IInputManager.h" />
+    <ClInclude Include="IInputBindings.h" />
+    <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="IWeapon.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Crosshair.cpp" />
+    <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="GameSet.cpp" />
+    <ClCompile Include="GameSettings.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -1,30 +1,41 @@
 #include <SDL.h>
-
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+#include "GameSet.h"
+#include "GameSettings.h"
+#include "GameState.h"
+#include "SdlInputManager.h"
+#include "SdlRenderer.h"
 
 int main(int argc, char** argv) {
-	SDL_Init(SDL_INIT_VIDEO);
+	try {
+		GameSet gameSet;
+		GameSettings gameSettings;
+		SdlInputManager inputManager;
+		Player player;
+		GameState gameState(gameSet, gameSettings, inputManager, player);
 
-	SDL_Window* window = SDL_CreateWindow("SDL tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		SdlRenderer sdlRenderer;
 
-	SDL_Event event;
+		bool goOn = true;
+		Uint32 lastTicks = SDL_GetTicks();
+		while (goOn) {
+			Uint32 ticks = SDL_GetTicks();
+			Uint32 elapsed = ticks - lastTicks;
 
-	bool goOn = true;
-	while (goOn) {
-		SDL_WaitEvent(&event);
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			goOn = false;
-			break;
+			gameState.processInput();
 
-		default:
-			break;
+			if (gameState.isStopped()) {
+				sdlRenderer.quit();
+				goOn = false;
+				break;
+			}
+
+			gameState.update(elapsed);
+			sdlRenderer.render(gameState);
 		}
-	}
 
-	SDL_Quit();
-	return 0;
+		return 0;
+	}
+	catch (...) {
+		return -1;
+	}
 }

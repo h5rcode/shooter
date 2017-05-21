@@ -1,4 +1,6 @@
 #include <SDL.h>
+#include <stdexcept>
+
 #include "GameSet.h"
 #include "GameSettings.h"
 #include "GameState.h"
@@ -34,6 +36,10 @@ int main(int argc, char** argv) {
 		}
 
 		return 0;
+	}
+	catch (std::exception& e) {
+		const char* what = e.what();
+		return -1;
 	}
 	catch (...) {
 		return -1;

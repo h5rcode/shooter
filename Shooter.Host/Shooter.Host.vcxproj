@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Shooter;$(SolutionDir)Tools\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Shooter;$(SolutionDir)Tools\SDL2-2.0.5\include;$(SolutionDir)Tools\SDL2_image-2.0.1\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -93,11 +93,14 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)Tools\SDL2-2.0.5\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib; SDL2main.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget);$(SolutionDir)Tools\SDL2-2.0.5\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /d /y $(SolutionDir)Tools\SDL2-2.0.5\lib\$(PlatformTarget)\SDL2.dll  $(OutputPath)</Command>
+      <Command>xcopy /d /y $(SolutionDir)Tools\SDL2-2.0.5\lib\$(PlatformTarget)\SDL2.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\SDL2_image.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\libpng16-16.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\zlib1.dll  $(OutputPath)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

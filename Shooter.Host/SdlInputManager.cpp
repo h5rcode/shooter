@@ -1,8 +1,8 @@
-#include <stdexcept>
 
 #include "SdlInputManager.h"
 
-#include "SDL.h"
+#include <SDL.h>
+#include <stdexcept>
 
 SdlInputManager::SdlInputManager()
 {

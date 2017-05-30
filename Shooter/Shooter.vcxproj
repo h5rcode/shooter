@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Block.h" />
     <ClInclude Include="Crosshair.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Event.h" />
@@ -37,7 +36,6 @@
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Crosshair.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Event.cpp" />

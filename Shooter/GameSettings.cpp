@@ -6,5 +6,5 @@ GameSettings::GameSettings() {
 }
 
 double GameSettings::getAccelerationNorm() const {
-	return 1500;
+	return 1000;
 }

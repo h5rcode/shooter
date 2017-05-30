@@ -10,7 +10,7 @@ public:
 
 	double getNorm() const;
 
-	double computeAngleTo(Vector2 *destination) const;
+	double computeAngleTo(Vector2& destination) const;
 	void multiply(double alpha);
 	void normalize();
 

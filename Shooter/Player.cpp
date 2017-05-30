@@ -2,8 +2,10 @@
 
 const double MIN_SPEED = 0.01;
 
-Player::Player() :
-	_maxSpeed(5)
+Player::Player(std::string& texture) :
+	_friction(5),
+	_maxSpeed(10000),
+	_texture(texture)
 {
 }
 
@@ -13,6 +15,19 @@ bool Player::canAttack() const {
 
 IWeapon* Player::getEquipedWeapon() const {
 	return _equipedWeapon;
+}
+
+double Player::getOrientation()
+{
+	return _orientation;
+}
+
+Vector2& Player::getPosition() {
+	return _position;
+}
+
+std::string& Player::getTexture() {
+	return _texture;
 }
 
 void Player::move(int elapsedMs) {
@@ -35,6 +50,11 @@ void Player::move(int elapsedMs) {
 
 	Vector2 positionIncrement = multiply(_speed, elapsedS);
 	_position += positionIncrement;
+}
+
+void Player::pointAt(Vector2& position)
+{
+	_orientation = _position.computeAngleTo(position);
 }
 
 void Player::setAcceleration(Vector2& acceleration) {

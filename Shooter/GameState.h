@@ -10,8 +10,10 @@
 class GameState : public IGameState
 {
 public:
-	GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManager& inputManager, Player& player);
+	GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManager& inputManager, Crosshair& crosshair, Player& player);
 
+	Vector2& getCamera();
+	Crosshair& getCrosshair();
 	IGameSet& getGameSet() const;
 	Player& getPlayer() const;
 	bool isStopped();
@@ -24,6 +26,7 @@ private:
 
 private:
 	bool _isStopped;
+	Vector2 _camera;
 	Crosshair _crosshair;
 	IGameSet& _gameSet;
 	IGameSettings& _gameSettings;

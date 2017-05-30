@@ -8,9 +8,9 @@ class SdlInputManager : public IInputManager
 public:
 	SdlInputManager();
 
-	void getMouseState(int* mouseX, int* mouseY);
+	void getMouseState(int& mouseX, int& mouseY);
 	bool isKeyDown(Key key);
-	bool pollEvent(Event* event);
+	bool pollEvent(Event& event);
 
 private:
 	SDL_Scancode getSdlScanCode(Key key) const;

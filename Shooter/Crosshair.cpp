@@ -1,10 +1,15 @@
 #include "Crosshair.h"
 
-Crosshair::Crosshair()
+Crosshair::Crosshair(std::string& texture) : _texture(texture)
 {
 }
 
-Vector2* Crosshair::getPosition()
+Vector2& Crosshair::getPosition()
 {
-	return &_position;
+	return _position;
+}
+
+std::string& Crosshair::getTexture()
+{
+	return _texture;
 }

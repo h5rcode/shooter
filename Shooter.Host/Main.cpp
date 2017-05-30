@@ -12,8 +12,11 @@ int main(int argc, char** argv) {
 		GameSet gameSet;
 		GameSettings gameSettings;
 		SdlInputManager inputManager;
-		Player player;
-		GameState gameState(gameSet, gameSettings, inputManager, player);
+		std::string crosshairTexture = "D:\\Projets\\Shooter\\Resources\\img\\Crosshair.png";
+		std::string playerTexture = "D:\\Projets\\Shooter\\Resources\\img\\Player.png";
+		Crosshair crosshair(crosshairTexture);
+		Player player(playerTexture);
+		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);
 
 		SdlRenderer sdlRenderer;
 
@@ -33,6 +36,8 @@ int main(int argc, char** argv) {
 
 			gameState.update(elapsed);
 			sdlRenderer.render(gameState);
+
+			lastTicks = ticks;
 		}
 
 		return 0;

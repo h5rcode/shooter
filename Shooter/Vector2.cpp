@@ -12,10 +12,10 @@ double Vector2::getNorm() const
 	return sqrt(this->x * this->x + this->y * this->y);
 }
 
-double Vector2::computeAngleTo(Vector2 *destination) const
+double Vector2::computeAngleTo(Vector2& destination) const
 {
-	double xDest = destination->x;
-	double yDest = destination->y;
+	double xDest = destination.x;
+	double yDest = destination.y;
 
 	double x = this->x;
 	double y = this->y;

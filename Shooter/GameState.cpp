@@ -4,11 +4,12 @@
 #include "IGameSettings.h"
 #include "IInputManager.h"
 
-GameState::GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManager& inputManager, Player& player) :
+GameState::GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManager& inputManager, Crosshair& crosshair, Player& player) :
 	_isStopped(false),
 	_gameSet(gameSet),
 	_gameSettings(gameSettings),
 	_inputManager(inputManager),
+	_crosshair(crosshair),
 	_player(player)
 {
 }
@@ -42,8 +43,14 @@ void GameState::processInput()
 	Vector2 acceleration = getPlayerAcceleration();
 	_player.setAcceleration(acceleration);
 
+	int mouseX, mouseY;
+	_inputManager.getMouseState(mouseX, mouseY);
+	Vector2& crosshairPosition = _crosshair.getPosition();
+	crosshairPosition.x = mouseX;
+	crosshairPosition.y = mouseY;
+
 	Event event;
-	while (_inputManager.pollEvent(&event)) {
+	while (_inputManager.pollEvent(event)) {
 		EventType eventType = event.getType();
 
 		switch (eventType)
@@ -64,7 +71,19 @@ void GameState::processInput()
 
 void GameState::update(int elapsed)
 {
+	Vector2& crosshairPosition = _crosshair.getPosition();
+	_player.pointAt(crosshairPosition);
+
 	_player.move(elapsed);
+}
+
+Vector2& GameState::getCamera() {
+	return _camera;
+}
+
+Crosshair& GameState::getCrosshair()
+{
+	return _crosshair;
 }
 
 IGameSet& GameState::getGameSet() const {
@@ -78,9 +97,9 @@ Player& GameState::getPlayer() const {
 void GameState::handleMouseButtonDown() {
 	if (_player.canAttack()) {
 		int mouseX, mouseY;
-		_inputManager.getMouseState(&mouseX, &mouseY);
+		_inputManager.getMouseState(mouseX, mouseY);
 
-		Vector2* crosshairPosition = _crosshair.getPosition();
+		Vector2& crosshairPosition = _crosshair.getPosition();
 		IWeapon* weapon = _player.getEquipedWeapon();
 	}
 }

@@ -32,7 +32,7 @@ TEST(Vector2Test, computeAngleTo_should_return_0_when_vectors_are_equal)
 	Vector2 vector1(x, y);
 	Vector2 vector2(x, y);
 
-	double angle = vector1.computeAngleTo(&vector2);
+	double angle = vector1.computeAngleTo(vector2);
 
 	EXPECT_EQ(0, angle);
 }
@@ -42,7 +42,7 @@ TEST(Vector2Test, computeAngleTo_should_return_minus_Pi_when_destination_vector_
 	Vector2 center(0, 0);
 	Vector2 up(0, 1);
 
-	double angle = center.computeAngleTo(&up);
+	double angle = center.computeAngleTo(up);
 
 	EXPECT_EQ(-1.5707963267948966, angle);
 }
@@ -51,7 +51,7 @@ TEST(Vector2Test, computeAngleTo_should_return_0_when_destination_vector_is_righ
 	Vector2 center(0, 0);
 	Vector2 right(1, 0);
 
-	double angle = center.computeAngleTo(&right);
+	double angle = center.computeAngleTo(right);
 
 	EXPECT_EQ(0, angle);
 }
@@ -60,7 +60,7 @@ TEST(Vector2Test, computeAngleTo_should_return_pi_when_destination_vector_is_lef
 	Vector2 center(0, 0);
 	Vector2 left(-1, 0);
 
-	double angle = center.computeAngleTo(&left);
+	double angle = center.computeAngleTo(left);
 
 	EXPECT_EQ(3.1415926535897931, angle);
 }
@@ -69,7 +69,7 @@ TEST(Vector2Test, computeAngleTo_should_return_half_Pi_when_destination_vector_i
 	Vector2 center(0, 0);
 	Vector2 bottom(0, -1);
 
-	double angle = center.computeAngleTo(&bottom);
+	double angle = center.computeAngleTo(bottom);
 
 	EXPECT_EQ(1.5707963267948966, angle);
 }

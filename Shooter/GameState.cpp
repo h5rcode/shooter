@@ -74,7 +74,9 @@ void GameState::update(int elapsed)
 	Vector2& crosshairPosition = _crosshair.getPosition();
 	_player.pointAt(crosshairPosition);
 
-	_player.move(elapsed);
+	if (_gameSet.collidesWith(_player) == false) {
+		_player.move(elapsed);
+	}
 }
 
 Vector2& GameState::getCamera() {
@@ -86,7 +88,8 @@ Crosshair& GameState::getCrosshair()
 	return _crosshair;
 }
 
-IGameSet& GameState::getGameSet() const {
+IGameSet& GameState::getGameSet() const
+{
 	return _gameSet;
 }
 
@@ -94,7 +97,8 @@ Player& GameState::getPlayer() const {
 	return _player;
 }
 
-void GameState::handleMouseButtonDown() {
+void GameState::handleMouseButtonDown()
+{
 	if (_player.canAttack()) {
 		int mouseX, mouseY;
 		_inputManager.getMouseState(mouseX, mouseY);
@@ -104,6 +108,7 @@ void GameState::handleMouseButtonDown() {
 	}
 }
 
-bool GameState::isStopped() {
+bool GameState::isStopped()
+{
 	return _isStopped;
 }

@@ -1,10 +1,12 @@
 #include "SdlRenderer.h"
 
+#include <list>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdexcept>
 
 #include "Crosshair.h"
+#include "Wall.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -43,10 +45,21 @@ void SdlRenderer::render(IGameState& gameState) {
 	Player& player = gameState.getPlayer();
 	Crosshair& crosshair = gameState.getCrosshair();
 
+	render(gameSet, camera);
 	render(player, camera);
 	render(crosshair, camera);
 
 	SDL_RenderPresent(_sdlRenderer);
+}
+
+void SdlRenderer::render(IGameSet& gameSet, Vector2& camera) {
+	std::list<Wall> walls = gameSet.getWalls();
+
+	for (std::list<Wall>::iterator it = walls.begin(); it != walls.end(); ++it)
+	{
+		Wall wall = *it;
+		render(wall, camera);
+	}
 }
 
 void SdlRenderer::render(Crosshair& crosshair, Vector2 & camera)
@@ -62,6 +75,21 @@ void SdlRenderer::render(Player& player, Vector2& camera) {
 	std::string& texture = player.getTexture();
 	double orientation = player.getOrientation();
 	render(texture, position, camera, orientation);
+}
+
+void SdlRenderer::render(Prop & prop, Vector2 & camera)
+{
+	Vector2& position = prop.getPosition();
+	std::string& texture = prop.getTexture();
+	render(texture, position, camera, 0);
+}
+
+void SdlRenderer::render(Wall& wall, Vector2& camera) {
+	Vector2& start = wall.getStart();
+	Vector2& end = wall.getEnd();
+	std::string& texture = wall.getTexture();
+	double orientation = start.computeAngleTo(end);
+	render(texture, start, camera, orientation);
 }
 
 // TODO Do not load the texture each call, buffer it instead.
@@ -89,6 +117,7 @@ void SdlRenderer::render(std::string &texture, Vector2 & position, Vector2 & cam
 }
 
 void SdlRenderer::quit() {
+	SDL_DestroyRenderer(_sdlRenderer);
 	SDL_DestroyWindow(_sdlWindow);
 	SDL_Quit();
 }

@@ -33,7 +33,9 @@
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="IWeapon.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Prop.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Crosshair.cpp" />
@@ -43,7 +45,9 @@
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Prop.cpp" />
     <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

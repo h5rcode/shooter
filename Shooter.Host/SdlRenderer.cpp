@@ -85,10 +85,9 @@ void SdlRenderer::render(Prop & prop, Vector2 & camera)
 }
 
 void SdlRenderer::render(Wall& wall, Vector2& camera) {
-	Vector2& start = wall.getStart();
-	Vector2& end = wall.getEnd();
+	Vector2& start = wall.getPosition();
 	std::string& texture = wall.getTexture();
-	double orientation = start.computeAngleTo(end);
+	double orientation = wall.getOrientation();
 	render(texture, start, camera, orientation);
 }
 

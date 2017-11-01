@@ -6,13 +6,11 @@ GameSet::GameSet()
 
 	std::string wallTexture = "D:\\Projets\\shooter\\Resources\\img\\wall-01.png";
 
-	Vector2 s1(100, 0);
-	Vector2 e1(100, 256);
-	Vector2 s2(100, 256);
-	Vector2 e2(356, 256);
+	Vector2 position1(300, 500);
+	Vector2 position2(200, 256);
 
-	_walls.push_back(Wall(s1, e1, wallTexture));
-	_walls.push_back(Wall(s2, e2, wallTexture));
+	_walls.push_back(Wall(position1, 30, 100, 0.5, wallTexture));
+	_walls.push_back(Wall(position2, 100, 1000, 0, wallTexture));
 }
 
 bool GameSet::collidesWith(Player& player) const {

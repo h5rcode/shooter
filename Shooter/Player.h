@@ -18,6 +18,7 @@ public:
 	bool canAttack() const;
 	IWeapon* getEquipedWeapon() const;
 	double getOrientation();
+	Vector2 computePosition(int elapsedMs);
 	Vector2& getPosition();
 	std::string& getTexture();
 	void move(int elapsedMs);
@@ -25,6 +26,9 @@ public:
 	void setAcceleration(Vector2& acceleration);
 	void setEquipedWeapon(IWeapon* weapon);
 	void setMaxSpeed(double maxSpeed);
+
+private:
+	Vector2 computeSpeed(int elapsedMs);
 
 private:
 	double _friction;

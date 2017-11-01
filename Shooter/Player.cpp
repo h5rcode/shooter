@@ -22,6 +22,37 @@ double Player::getOrientation()
 	return _orientation;
 }
 
+Vector2 Player::computePosition(int elapsedMs)
+{
+	double elapsedS = (double)elapsedMs / 1000;
+
+	Vector2 nextSpeed = computeSpeed(elapsedMs);
+	Vector2 positionIncrement = multiply(nextSpeed, elapsedS);
+
+	return _position + positionIncrement;
+}
+
+Vector2 Player::computeSpeed(int elapsedMs) {
+	double elapsedS = (double)elapsedMs / 1000;
+
+	Vector2 friction = multiply(_speed, -_friction);
+	Vector2 speedIncrement = multiply(_acceleration + friction, elapsedS);
+
+	Vector2 nextSpeed = _speed + speedIncrement;
+
+	double speedNorm = nextSpeed.getNorm();
+	if (speedNorm > _maxSpeed) {
+		nextSpeed.normalize();
+		multiply(nextSpeed, _maxSpeed);
+	}
+	else if (speedNorm <= MIN_SPEED) {
+		nextSpeed.x = 0;
+		nextSpeed.y = 0;
+	}
+
+	return nextSpeed;
+}
+
 Vector2& Player::getPosition() {
 	return _position;
 }
@@ -33,23 +64,12 @@ std::string& Player::getTexture() {
 void Player::move(int elapsedMs) {
 	double elapsedS = (double)elapsedMs / 1000;
 
-	Vector2 friction = multiply(_speed, -_friction);
-	Vector2 speedIncrement = multiply(_acceleration + friction, elapsedS);
+	Vector2 nextSpeed = computeSpeed(elapsedMs);
+	Vector2 positionIncrement = multiply(nextSpeed, elapsedS);
+	Vector2 nextPosition = _position + positionIncrement;
 
-	_speed += speedIncrement;
-
-	double speedNorm = _speed.getNorm();
-	if (speedNorm > _maxSpeed) {
-		_speed.normalize();
-		multiply(_speed, _maxSpeed);
-	}
-	else if (speedNorm <= MIN_SPEED) {
-		_speed.x = 0;
-		_speed.y = 0;
-	}
-
-	Vector2 positionIncrement = multiply(_speed, elapsedS);
-	_position += positionIncrement;
+	_speed = nextSpeed;
+	_position = nextPosition;
 }
 
 void Player::pointAt(Vector2& position)

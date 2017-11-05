@@ -46,7 +46,7 @@ void SfmlRenderer::render(IGameState& gameState) {
 
 	sf::Text text;
 	text.setFont(font);
-	text.setColor(sf::Color::White);
+	text.setFillColor(sf::Color::White);
 	text.setString(stream.str());
 
 	_window.draw(text);
@@ -97,12 +97,14 @@ void SfmlRenderer::render(std::string &texture, Vector2 & position, double orien
 {
 	sf::Texture sfmlTexture;
 	sfmlTexture.loadFromFile(texture.c_str());
+	sfmlTexture.setSmooth(true);
+	sfmlTexture.setRepeated(true);
 
 	sf::Vector2u sfmlTextureSize = sfmlTexture.getSize();
 
 	int x = position.x - sfmlTextureSize.x / 2;
 	int y = position.y - sfmlTextureSize.y / 2;
-	int angle =  -180 * (orientation - M_PI / 2) / M_PI;
+	int angle =  -180 * (orientation - M_PI_2) / M_PI;
 
 	sf::Sprite sprite;
 	sprite.setTexture(sfmlTexture);

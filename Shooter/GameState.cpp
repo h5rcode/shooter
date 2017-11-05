@@ -45,6 +45,7 @@ void GameState::processInput()
 
 	int mouseX, mouseY;
 	_inputManager.getMouseState(mouseX, mouseY);
+
 	Vector2& crosshairPosition = _crosshair.getPosition();
 	crosshairPosition.x = mouseX;
 	crosshairPosition.y = mouseY;
@@ -76,10 +77,11 @@ void GameState::update(int elapsed)
 
 	if (_gameSet.collidesWith(_player) == false) {
 		_player.move(elapsed);
+		_camera.setPosition(_player.getPosition());
 	}
 }
 
-Vector2& GameState::getCamera() {
+Camera& GameState::getCamera() {
 	return _camera;
 }
 

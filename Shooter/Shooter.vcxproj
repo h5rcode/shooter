@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Crosshair.h" />
-    <ClInclude Include="Edge.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="GameSet.h" />
     <ClInclude Include="GameSettings.h" />
@@ -38,8 +38,8 @@
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Crosshair.cpp" />
-    <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="GameSet.cpp" />
     <ClCompile Include="GameSettings.cpp" />

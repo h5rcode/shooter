@@ -23,7 +23,7 @@
     <ProjectGuid>{2C7FB8A1-89B4-4184-979D-ECE1FAB84E24}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ShooterHost</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Shooter;$(SolutionDir)Tools\SDL2-2.0.5\include;$(SolutionDir)Tools\SDL2_image-2.0.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Shooter;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -90,17 +90,17 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Tools\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget);$(SolutionDir)Tools\SDL2-2.0.5\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib</AdditionalDependencies>
+      <SubSystem>NotSet</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)Tools\SFML-2.4.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /d /y $(SolutionDir)Tools\SDL2-2.0.5\lib\$(PlatformTarget)\SDL2.dll  $(OutputPath)
-xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\SDL2_image.dll  $(OutputPath)
-xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\libpng16-16.dll  $(OutputPath)
-xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\zlib1.dll  $(OutputPath)</Command>
+      <Command>xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-graphics-d-2.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-system-d-2.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-window-d-2.dll  $(OutputPath)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -124,12 +124,20 @@ xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\zlib1.dll
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Tools\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)Tools\SFML-2.4.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-graphics-2.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-system-2.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-window-2.dll  $(OutputPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -149,8 +157,8 @@ xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\zlib1.dll
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="SdlInputManager.cpp" />
-    <ClCompile Include="SdlRenderer.cpp" />
+    <ClCompile Include="SfmlInputManager.cpp" />
+    <ClCompile Include="SfmlRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shooter\Shooter.vcxproj">
@@ -158,8 +166,8 @@ xcopy /d /y $(SolutionDir)Tools\SDL2_image-2.0.1\lib\$(PlatformTarget)\zlib1.dll
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SdlInputManager.h" />
-    <ClInclude Include="SdlRenderer.h" />
+    <ClInclude Include="SfmlInputManager.h" />
+    <ClInclude Include="SfmlRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

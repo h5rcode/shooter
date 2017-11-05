@@ -1,43 +1,53 @@
-#include <SDL.h>
 #include <stdexcept>
+#include <windows.h>
+
+#include <SFML/Graphics.hpp>
 
 #include "GameSet.h"
 #include "GameSettings.h"
 #include "GameState.h"
-#include "SdlInputManager.h"
-#include "SdlRenderer.h"
+#include "SfmlInputManager.h"
+#include "SfmlRenderer.h"
 
-int main(int argc, char** argv) {
-	try {
+int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
+{
+	try
+	{
+		// TODO Handle screen dimensions.
+		sf::Vector2i screenDimensions(800, 600);
+		sf::RenderWindow renderWindow(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Shooter");
+		renderWindow.setMouseCursorVisible(false);
+
 		GameSet gameSet;
 		GameSettings gameSettings;
-		SdlInputManager inputManager;
+		SfmlInputManager inputManager(renderWindow);
+
+		// TODO Handle resource paths correctly.
 		std::string crosshairTexture = "D:\\Projets\\Shooter\\Resources\\img\\Crosshair.png";
 		std::string playerTexture = "D:\\Projets\\Shooter\\Resources\\img\\Player.png";
 		Crosshair crosshair(crosshairTexture);
 		Player player(playerTexture);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);
 
-		SdlRenderer sdlRenderer;
+		SfmlRenderer sfmlRenderer(renderWindow);
+
+		sf::Clock frameClock;
 
 		bool goOn = true;
-		Uint32 lastTicks = SDL_GetTicks();
 		while (goOn) {
-			Uint32 ticks = SDL_GetTicks();
-			Uint32 elapsed = ticks - lastTicks;
+
+			sf::Time frameTime = frameClock.restart();
 
 			gameState.processInput();
 
 			if (gameState.isStopped()) {
-				sdlRenderer.quit();
+				sfmlRenderer.quit();
 				goOn = false;
 				break;
 			}
 
-			gameState.update(elapsed);
-			sdlRenderer.render(gameState);
-
-			lastTicks = ticks;
+			gameState.update(frameTime.asMilliseconds());
+			sfmlRenderer.render(gameState);
 		}
 
 		return 0;

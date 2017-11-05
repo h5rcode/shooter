@@ -18,18 +18,18 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SdlInputManager.cpp">
+    <ClCompile Include="SfmlInputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SdlRenderer.cpp">
+    <ClCompile Include="SfmlRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SdlInputManager.h">
+    <ClInclude Include="SfmlInputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SdlRenderer.h">
+    <ClInclude Include="SfmlRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

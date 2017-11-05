@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Camera.h"
 #include "Crosshair.h"
 #include "IGameSet.h"
 #include "IGameSettings.h"
@@ -12,7 +13,7 @@ class GameState : public IGameState
 public:
 	GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManager& inputManager, Crosshair& crosshair, Player& player);
 
-	Vector2& getCamera();
+	Camera& getCamera();
 	Crosshair& getCrosshair();
 	IGameSet& getGameSet() const;
 	Player& getPlayer() const;
@@ -26,7 +27,7 @@ private:
 
 private:
 	bool _isStopped;
-	Vector2 _camera;
+	Camera _camera;
 	Crosshair _crosshair;
 	IGameSet& _gameSet;
 	IGameSettings& _gameSettings;

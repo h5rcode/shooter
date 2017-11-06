@@ -102,13 +102,11 @@ void SfmlRenderer::render(std::string &texture, Vector2 & position, double orien
 
 	sf::Vector2u sfmlTextureSize = sfmlTexture.getSize();
 
-	int x = position.x - sfmlTextureSize.x / 2;
-	int y = position.y - sfmlTextureSize.y / 2;
-	int angle =  -180 * (orientation - M_PI_2) / M_PI;
+	int angle = -180 * (orientation - M_PI_2) / M_PI;
 
 	sf::Sprite sprite;
 	sprite.setTexture(sfmlTexture);
-	sprite.setPosition(x, y);
+	sprite.setPosition(position.x, position.y);
 	sprite.setOrigin(sfmlTextureSize.x / 2, sfmlTextureSize.y / 2);
 	sprite.setRotation(angle);
 

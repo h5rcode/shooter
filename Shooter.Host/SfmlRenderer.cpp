@@ -97,8 +97,6 @@ void SfmlRenderer::render(std::string &texture, Vector2 & position, double orien
 {
 	sf::Texture sfmlTexture;
 	sfmlTexture.loadFromFile(texture.c_str());
-	sfmlTexture.setSmooth(true);
-	sfmlTexture.setRepeated(true);
 
 	sf::Vector2u sfmlTextureSize = sfmlTexture.getSize();
 

@@ -4,7 +4,7 @@ GameSet::GameSet()
 {
 	_walls = std::list<Wall>();
 
-	std::string wallTexture = "D:\\Projets\\shooter\\Resources\\img\\wall-01.png";
+	std::string wallTexture = "Resources/textures/wall-01.png";
 
 	Vector2 position1(300, 500);
 	Vector2 position2(200, 256);

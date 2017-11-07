@@ -20,7 +20,7 @@ void SfmlRenderer::render(IGameState& gameState) {
 	_window.clear();
 
 	sf::Font font;
-	font.loadFromFile("D:\\Projets\\shooter\\Resources\\img\\arial.ttf");
+	font.loadFromFile("Resources/fonts/arial.ttf");
 
 	IGameSet& gameSet = gameState.getGameSet();
 	Camera& camera = gameState.getCamera();

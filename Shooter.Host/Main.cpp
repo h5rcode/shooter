@@ -22,9 +22,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		GameSettings gameSettings;
 		SfmlInputManager inputManager(renderWindow);
 
-		// TODO Handle resource paths correctly.
-		std::string crosshairTexture = "D:\\Projets\\Shooter\\Resources\\img\\Crosshair.png";
-		std::string playerTexture = "D:\\Projets\\Shooter\\Resources\\img\\Player.png";
+		std::string crosshairTexture = "Resources/textures/Crosshair.png";
+		std::string playerTexture = "Resources/textures/Player.png";
 		Crosshair crosshair(crosshairTexture);
 		Player player(playerTexture);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);

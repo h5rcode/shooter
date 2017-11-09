@@ -21,7 +21,6 @@ private:
 private:
 	void render(IGameSet& gameSet);
 	void render(Crosshair& crosshair);
-	void render(Player& player);
 	void render(Prop& prop);
 	void render(Wall& wall);
 	void render(std::string &texture, Vector2 & position, double orientation);

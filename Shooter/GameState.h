@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "Camera.h"
 #include "Crosshair.h"
 #include "IGameSet.h"
@@ -19,7 +21,7 @@ public:
 	Player& getPlayer() const;
 	bool isStopped();
 	void processInput();
-	void update(int elapsed);
+	void update(sf::Time elapsedTime);
 
 private:
 	Vector2 getPlayerAcceleration();

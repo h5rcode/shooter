@@ -1,12 +1,34 @@
+#define _USE_MATH_DEFINES
+
 #include "Player.h"
+
+#include <math.h>
+
+#include "Animation.h"
+
 
 const double MIN_SPEED = 0.01;
 
-Player::Player(std::string& texture) :
+Player::Player() :
 	_friction(5),
 	_maxSpeed(10000),
-	_texture(texture)
+	_texture(),
+	_animation(),
+	_animatedSprite()
 {
+	_texture.loadFromFile("Resources/textures/character.png");
+
+	int frameWidth = 64;
+	int frameHeight = 64;
+	int numberOfFrames = 8;
+
+	_animation.setSpriteSheet(_texture);
+	for (int frameNumber = 0; frameNumber < numberOfFrames; frameNumber++) {
+		_animation.addFrame(sf::IntRect(0, frameNumber * frameHeight, frameWidth, frameHeight));
+	}
+
+	_animatedSprite.setAnimation(_animation);
+	_animatedSprite.setOrigin(frameWidth / 2, frameHeight / 2);
 }
 
 bool Player::canAttack() const {
@@ -22,21 +44,19 @@ double Player::getOrientation()
 	return _orientation;
 }
 
-Vector2 Player::computePosition(int elapsedMs)
+Vector2 Player::computePosition(sf::Time elapsedTime)
 {
-	double elapsedS = (double)elapsedMs / 1000;
-
-	Vector2 nextSpeed = computeSpeed(elapsedMs);
-	Vector2 positionIncrement = multiply(nextSpeed, elapsedS);
+	Vector2 nextSpeed = computeSpeed(elapsedTime);
+	Vector2 positionIncrement = multiply(nextSpeed, elapsedTime.asSeconds());
 
 	return _position + positionIncrement;
 }
 
-Vector2 Player::computeSpeed(int elapsedMs) {
-	double elapsedS = (double)elapsedMs / 1000;
+Vector2 Player::computeSpeed(sf::Time elapsedTime) {
+	double elapsedSeconds = elapsedTime.asSeconds();
 
 	Vector2 friction = multiply(_speed, -_friction);
-	Vector2 speedIncrement = multiply(_acceleration + friction, elapsedS);
+	Vector2 speedIncrement = multiply(_acceleration + friction, elapsedSeconds);
 
 	Vector2 nextSpeed = _speed + speedIncrement;
 
@@ -57,24 +77,35 @@ Vector2& Player::getPosition() {
 	return _position;
 }
 
-std::string& Player::getTexture() {
-	return _texture;
-}
+void Player::move(sf::Time elapsedTime) {
+	double elapsedSeconds = elapsedTime.asSeconds();
 
-void Player::move(int elapsedMs) {
-	double elapsedS = (double)elapsedMs / 1000;
-
-	Vector2 nextSpeed = computeSpeed(elapsedMs);
-	Vector2 positionIncrement = multiply(nextSpeed, elapsedS);
+	Vector2 nextSpeed = computeSpeed(elapsedTime);
+	Vector2 positionIncrement = multiply(nextSpeed, elapsedSeconds);
 	Vector2 nextPosition = _position + positionIncrement;
 
 	_speed = nextSpeed;
 	_position = nextPosition;
+
+	if (nextSpeed == Vector2(0, 0)) {
+		_animatedSprite.pause();
+	}
+	else {
+		_animatedSprite.play();
+		_animatedSprite.update(elapsedTime);
+	}
 }
 
 void Player::pointAt(Vector2& position)
 {
 	_orientation = _position.computeAngleTo(position);
+}
+
+void Player::render(sf::RenderWindow& renderWindow) {
+	int angle = -180 * (_orientation - M_PI_2) / M_PI;
+	_animatedSprite.setRotation(angle);
+	_animatedSprite.setPosition(_position.x, _position.y);
+	renderWindow.draw(_animatedSprite);
 }
 
 void Player::setAcceleration(Vector2& acceleration) {

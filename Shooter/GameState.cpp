@@ -70,13 +70,13 @@ void GameState::processInput()
 	}
 }
 
-void GameState::update(int elapsed)
+void GameState::update(sf::Time elapsedTime)
 {
 	Vector2& crosshairPosition = _crosshair.getPosition();
 	_player.pointAt(crosshairPosition);
 
 	if (_gameSet.collidesWith(_player) == false) {
-		_player.move(elapsed);
+		_player.move(elapsedTime);
 		_camera.setPosition(_player.getPosition());
 	}
 }

@@ -23,9 +23,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		SfmlInputManager inputManager(renderWindow);
 
 		std::string crosshairTexture = "Resources/textures/Crosshair.png";
-		std::string playerTexture = "Resources/textures/character.png";
 		Crosshair crosshair(crosshairTexture);
-		Player player(playerTexture);
+		Player player;
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);
 
 		SfmlRenderer sfmlRenderer(renderWindow);
@@ -45,7 +44,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 				break;
 			}
 
-			gameState.update(frameTime.asMilliseconds());
+			gameState.update(frameTime);
 			sfmlRenderer.render(gameState);
 		}
 

@@ -36,7 +36,7 @@ void SfmlRenderer::render(IGameState& gameState) {
 	_window.setView(view);
 
 	render(gameSet);
-	render(player);
+	player.render(_window);
 	render(crosshair);
 
 	Vector2 crosshairPosition = crosshair.getPosition();
@@ -69,13 +69,6 @@ void SfmlRenderer::render(Crosshair& crosshair)
 	Vector2& position = crosshair.getPosition();
 	std::string& texture = crosshair.getTexture();
 	double orientation = 0;
-	render(texture, position, orientation);
-}
-
-void SfmlRenderer::render(Player& player) {
-	Vector2& position = player.getPosition();
-	std::string& texture = player.getTexture();
-	double orientation = player.getOrientation();
 	render(texture, position, orientation);
 }
 

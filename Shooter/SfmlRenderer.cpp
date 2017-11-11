@@ -4,7 +4,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <list>
 #include <math.h>
 #include <sstream>
 
@@ -55,12 +54,12 @@ void SfmlRenderer::render(IGameState& gameState) {
 }
 
 void SfmlRenderer::render(IGameSet& gameSet) {
-	std::list<Wall> walls = gameSet.getWalls();
+	std::vector<std::shared_ptr<Wall>>& walls = gameSet.getWalls();
 
-	for (std::list<Wall>::iterator it = walls.begin(); it != walls.end(); ++it)
+	for (std::vector<std::shared_ptr<Wall>>::iterator it = walls.begin(); it != walls.end(); ++it)
 	{
-		Wall wall = *it;
-		render(wall);
+		std::shared_ptr<Wall> wall = *it;
+		wall->render(_window);
 	}
 }
 
@@ -77,13 +76,6 @@ void SfmlRenderer::render(Prop & prop)
 	Vector2& position = prop.getPosition();
 	std::string& texture = prop.getTexture();
 	render(texture, position, 0);
-}
-
-void SfmlRenderer::render(Wall& wall) {
-	Vector2& position = wall.getPosition();
-	std::string& texture = wall.getTexture();
-	double orientation = wall.getOrientation();
-	render(texture, position, orientation);
 }
 
 void SfmlRenderer::render(std::string &texture, Vector2 & position, double orientation)

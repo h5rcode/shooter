@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include <string>
 
 #include "Player.h"
@@ -13,12 +15,13 @@ public:
 	int getWidth() const;
 	int getLength() const;
 	double getOrientation() const;
-	std::string& getTexture();
 	bool collidesWith(Player& player) const;
+	void render(sf::RenderWindow& renderWindow);
 private:
 	Vector2 _position;
 	int _width;
 	int _length;
 	double _orientation;
-	std::string _texture;
+	sf::Texture _texture;
+	sf::Sprite _sprite;
 };

@@ -2,9 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Player.h"
 #include "IRenderer.h"
-#include "Wall.h"
 #include "Prop.h"
 
 class SfmlRenderer : public IRenderer
@@ -22,7 +20,6 @@ private:
 	void render(IGameSet& gameSet);
 	void render(Crosshair& crosshair);
 	void render(Prop& prop);
-	void render(Wall& wall);
 	void render(std::string &texture, Vector2 & position, double orientation);
 };
 

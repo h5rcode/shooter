@@ -4,18 +4,16 @@
 #include "Prop.h"
 #include "Wall.h"
 
-#include <list>
-
 class GameSet : public IGameSet
 {
 public:
 	GameSet();
 public:
 	bool collidesWith(Player & player) const;
-	std::list<Wall>& getWalls();
-	std::list<Prop>& getProps();
+	std::vector<std::shared_ptr<Wall>>& getWalls();
+	std::vector<std::shared_ptr<Prop>>& getProps();
 private:
-	std::list<Wall> _walls;
-	std::list<Prop> _props;
+	std::vector<std::shared_ptr<Wall>> _walls;
+	std::vector<std::shared_ptr<Prop>> _props;
 };
 

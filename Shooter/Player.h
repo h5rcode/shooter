@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 #include <SFML/Graphics.hpp>
@@ -19,7 +20,7 @@ public:
 	Player();
 
 	bool canAttack() const;
-	IWeapon* getEquipedWeapon() const;
+	std::shared_ptr<IWeapon> getEquipedWeapon() const;
 	double getOrientation();
 	Vector2 computePosition(sf::Time elapsedTime);
 	Vector2& getPosition();
@@ -28,7 +29,7 @@ public:
 	void pointAt(Vector2& position);
 	void render(sf::RenderWindow& renderWindow);
 	void setAcceleration(Vector2& acceleration);
-	void setEquipedWeapon(IWeapon* weapon);
+	void setEquipedWeapon(std::shared_ptr<IWeapon> weapon);
 	void setMaxSpeed(double maxSpeed);
 
 private:
@@ -46,7 +47,7 @@ private:
 	Animation _animation;
 	AnimatedSprite _animatedSprite;
 
-	IWeapon* _equipedWeapon;
+	std::shared_ptr<IWeapon> _equipedWeapon;
 
 	CharacterState _state;
 };

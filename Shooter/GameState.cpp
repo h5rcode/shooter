@@ -106,7 +106,7 @@ void GameState::handleMouseButtonDown()
 		_inputManager.getMouseState(mouseX, mouseY);
 
 		Vector2& crosshairPosition = _crosshair.getPosition();
-		IWeapon* weapon = _player.getEquipedWeapon();
+		std::shared_ptr<IWeapon> weapon = _player.getEquipedWeapon();
 	}
 }
 

@@ -35,7 +35,7 @@ bool Player::canAttack() const {
 	return _state == IDLE;
 }
 
-IWeapon* Player::getEquipedWeapon() const {
+std::shared_ptr<IWeapon> Player::getEquipedWeapon() const {
 	return _equipedWeapon;
 }
 
@@ -118,7 +118,7 @@ void Player::setAcceleration(Vector2& acceleration) {
 	_acceleration.y = acceleration.y;
 }
 
-void Player::setEquipedWeapon(IWeapon* weapon) {
+void Player::setEquipedWeapon(std::shared_ptr<IWeapon> weapon) {
 	_equipedWeapon = weapon;
 }
 

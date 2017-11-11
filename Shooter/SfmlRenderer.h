@@ -10,13 +10,15 @@ class SfmlRenderer : public IRenderer
 public:
 	SfmlRenderer(IGameState& gameState, sf::RenderWindow& window);
 
+public:
 	void render();
+
+private:
+	void renderHud();
 
 private:
 	IGameState& _gameState;
 	sf::RenderWindow& _window;
-
-private:
-	void renderHud();
+	sf::Font _font;
 };
 

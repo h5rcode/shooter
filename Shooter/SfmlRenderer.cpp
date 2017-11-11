@@ -9,8 +9,10 @@
 
 SfmlRenderer::SfmlRenderer(IGameState& gameState, sf::RenderWindow& window) :
 	_gameState(gameState),
-	_window(window)
+	_window(window),
+	_font()
 {
+	_font.loadFromFile("Resources/fonts/arial.ttf");
 }
 
 void SfmlRenderer::render() {
@@ -41,17 +43,21 @@ void SfmlRenderer::render() {
 }
 
 void SfmlRenderer::renderHud() {
+	Player& player = _gameState.getPlayer();
 	Crosshair& crosshair = _gameState.getCrosshair();
 	Vector2 crosshairPosition = crosshair.getPosition();
+	Vector2 playerSpeed = player.getSpeed();
 
 	std::stringstream stream;
 	stream << "Crosshair (" << crosshairPosition.x << ", " << crosshairPosition.y << ")";
-
-	sf::Font font;
-	font.loadFromFile("Resources/fonts/arial.ttf");
+	stream << std::endl;
+	stream << "Speed (" << playerSpeed.x << ", " << playerSpeed.y << ")";
+	stream << std::endl;
+	stream << "Speed norm = " << playerSpeed.getNorm();
 
 	sf::Text text;
-	text.setFont(font);
+	text.setFont(_font);
+	text.setScale(0.5f, 0.5f);
 	text.setFillColor(sf::Color::White);
 	text.setString(stream.str());
 

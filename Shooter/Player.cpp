@@ -44,6 +44,11 @@ double Player::getOrientation()
 	return _orientation;
 }
 
+const Vector2& Player::getSpeed()
+{
+	return _speed;
+}
+
 Vector2 Player::computePosition(sf::Time elapsedTime)
 {
 	Vector2 nextSpeed = computeSpeed(elapsedTime);

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include <string>
 #include "Vector2.h"
 
@@ -9,10 +11,13 @@ public:
 	Crosshair(std::string& texture);
 
 	Vector2& getPosition();
-	std::string& getTexture();
+
+	void render(sf::RenderWindow& renderWindow);
 
 private:
-	std::string& _texture;
+	sf::Texture _texture;
+	sf::Sprite _sprite;
+
 	Vector2 _position;
 };
 

@@ -44,3 +44,12 @@ std::vector<std::shared_ptr<Prop>>& GameSet::getProps()
 {
 	return _props;
 }
+
+void GameSet::render(sf::RenderWindow& renderWindow)
+{
+	for (std::vector<std::shared_ptr<Wall>>::iterator it = _walls.begin(); it != _walls.end(); ++it)
+	{
+		std::shared_ptr<Wall> wall = *it;
+		wall->render(renderWindow);
+	}
+}

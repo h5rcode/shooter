@@ -2,17 +2,21 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "IGameState.h"
 #include "IRenderer.h"
 
 class SfmlRenderer : public IRenderer
 {
 public:
-	SfmlRenderer(sf::RenderWindow& window);
+	SfmlRenderer(IGameState& gameState, sf::RenderWindow& window);
 
-	void render(IGameState& gameState);
-	void quit();
+	void render();
 
 private:
+	IGameState& _gameState;
 	sf::RenderWindow& _window;
+
+private:
+	void renderHud();
 };
 

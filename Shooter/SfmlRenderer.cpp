@@ -7,21 +7,19 @@
 #include "Crosshair.h"
 #include "Wall.h"
 
-SfmlRenderer::SfmlRenderer(sf::RenderWindow& window) :
+SfmlRenderer::SfmlRenderer(IGameState& gameState, sf::RenderWindow& window) :
+	_gameState(gameState),
 	_window(window)
 {
 }
 
-void SfmlRenderer::render(IGameState& gameState) {
+void SfmlRenderer::render() {
 	_window.clear();
 
-	sf::Font font;
-	font.loadFromFile("Resources/fonts/arial.ttf");
-
-	IGameSet& gameSet = gameState.getGameSet();
-	Camera& camera = gameState.getCamera();
-	Player& player = gameState.getPlayer();
-	Crosshair& crosshair = gameState.getCrosshair();
+	IGameSet& gameSet = _gameState.getGameSet();
+	Camera& camera = _gameState.getCamera();
+	Player& player = _gameState.getPlayer();
+	Crosshair& crosshair = _gameState.getCrosshair();
 
 	Vector2 cameraPosition = camera.getPosition();
 
@@ -35,20 +33,31 @@ void SfmlRenderer::render(IGameState& gameState) {
 	player.render(_window);
 	crosshair.render(_window);
 
+	renderHud();
+
+	_window.setView(view);
+
+	_window.display();
+}
+
+void SfmlRenderer::renderHud() {
+	Crosshair& crosshair = _gameState.getCrosshair();
 	Vector2 crosshairPosition = crosshair.getPosition();
 
 	std::stringstream stream;
 	stream << "Crosshair (" << crosshairPosition.x << ", " << crosshairPosition.y << ")";
+
+	sf::Font font;
+	font.loadFromFile("Resources/fonts/arial.ttf");
 
 	sf::Text text;
 	text.setFont(font);
 	text.setFillColor(sf::Color::White);
 	text.setString(stream.str());
 
+	sf::View defaultView = _window.getDefaultView();
+	_window.setView(defaultView);
+
 	_window.draw(text);
 
-	_window.display();
-}
-
-void SfmlRenderer::quit() {
 }

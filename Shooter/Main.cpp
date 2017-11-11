@@ -27,7 +27,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		Player player;
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);
 
-		SfmlRenderer sfmlRenderer(renderWindow);
+		SfmlRenderer sfmlRenderer(gameState, renderWindow);
 
 		sf::Clock frameClock;
 
@@ -39,13 +39,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 			gameState.processInput();
 
 			if (gameState.isStopped()) {
-				sfmlRenderer.quit();
 				goOn = false;
 				break;
 			}
 
 			gameState.update(frameTime);
-			sfmlRenderer.render(gameState);
+			sfmlRenderer.render();
 		}
 
 		return 0;

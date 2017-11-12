@@ -1,13 +1,14 @@
 #include "Prop.h"
 
-Prop::Prop(std::string & texture)
-	: _texture(texture)
+Prop::Prop(Vector2 position, int width, int height, double orientation, std::string& texture) :
+	_texture(texture),
+	_boundingBox(position, width, height, orientation)
 {
 }
 
-bool Prop::collidesWith(Player& player) const {
-	// TODO Implement collision detection.
-	return false;
+BoundingBox& Prop::getBoundingBox()
+{
+	return _boundingBox;
 }
 
 Vector2 & Prop::getPosition()

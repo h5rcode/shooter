@@ -1,6 +1,6 @@
-#include "GameState.h"
-
+#include "BoundingBox.h"
 #include "Event.h"
+#include "GameState.h"
 #include "IGameSettings.h"
 #include "IInputManager.h"
 
@@ -75,7 +75,9 @@ void GameState::update(sf::Time elapsedTime)
 	Vector2& crosshairPosition = _crosshair.getPosition();
 	_player.pointAt(crosshairPosition);
 
-	if (_gameSet.collidesWith(_player) == false) {
+	BoundingBox boundingBox = _player.getBoundingBox(elapsedTime);
+
+	if (_gameSet.collidesWith(boundingBox) == false) {
 		_player.move(elapsedTime);
 		_camera.setPosition(_player.getPosition());
 	}

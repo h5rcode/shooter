@@ -1,15 +1,13 @@
 #pragma once
 
 #include "IGameSet.h"
-#include "Prop.h"
-#include "Wall.h"
 
 class GameSet : public IGameSet
 {
 public:
 	GameSet();
 public:
-	bool collidesWith(Player & player) const;
+	bool collidesWith(BoundingBox& boundingBox) const;
 	std::vector<std::shared_ptr<Wall>>& getWalls();
 	std::vector<std::shared_ptr<Prop>>& getProps();
 	void render(sf::RenderWindow& renderWindow);

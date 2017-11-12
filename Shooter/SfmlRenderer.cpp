@@ -51,6 +51,8 @@ void SfmlRenderer::renderHud() {
 	std::stringstream stream;
 	stream << "Crosshair (" << crosshairPosition.x << ", " << crosshairPosition.y << ")";
 	stream << std::endl;
+	stream << "Orientation = " << player.getOrientation();
+	stream << std::endl;
 	stream << "Speed (" << playerSpeed.x << ", " << playerSpeed.y << ")";
 	stream << std::endl;
 	stream << "Speed norm = " << playerSpeed.getNorm();

@@ -4,20 +4,21 @@
 
 #include <string>
 
-#include "Player.h"
+#include "BoundingBox.h"
 #include "Vector2.h"
 
 class Wall {
 public:
 	Wall(Vector2 position, int width, int length, double orientation, std::string texture);
 public:
+	BoundingBox& getBoundingBox();
 	Vector2& getPosition();
 	int getWidth() const;
 	int getLength() const;
 	double getOrientation() const;
-	bool collidesWith(Player& player) const;
 	void render(sf::RenderWindow& renderWindow);
 private:
+	BoundingBox _boundingBox;
 	Vector2 _position;
 	int _width;
 	int _length;

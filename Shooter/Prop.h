@@ -2,17 +2,18 @@
 
 #include <string>
 
-#include "Player.h"
+#include "BoundingBox.h"
 #include "Vector2.h"
 
 class Prop {
 public:
-	Prop(std::string& texture);
+	Prop(Vector2 position, int width, int height, double orientation, std::string& texture);
 public:
-	bool collidesWith(Player& player) const;
+	BoundingBox& getBoundingBox();
 	Vector2& getPosition();
 	std::string& getTexture();
 private:
+	BoundingBox _boundingBox;
 	Vector2 _position;
 	std::string& _texture;
 };

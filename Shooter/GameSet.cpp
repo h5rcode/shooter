@@ -6,28 +6,31 @@ GameSet::GameSet()
 
 	std::string wallTexture = "Resources/textures/wall-01.png";
 
-	Vector2 position1(300, 500);
-	Vector2 position2(200, 256);
+	Vector2 position1(256, 256);
+	Vector2 position2(512, 512);
 
-	_walls.push_back(std::make_shared<Wall>(position1, 30, 100, 0.5, wallTexture));
-	_walls.push_back(std::make_shared<Wall>(position2, 100, 1000, 0, wallTexture));
+	_walls.push_back(std::make_shared<Wall>(position1, 16, 256, 0, wallTexture));
+	_walls.push_back(std::make_shared<Wall>(position2, 16, 256, 0, wallTexture));
 }
 
-bool GameSet::collidesWith(Player& player) const {
+bool GameSet::collidesWith(BoundingBox& boundingBox) const {
 
 	for (std::vector<std::shared_ptr<Wall>>::const_iterator iterator = _walls.begin(); iterator != _walls.end(); iterator++)
 	{
 		std::shared_ptr<Wall> wall = *iterator;
+		BoundingBox& wallBoundingBox = wall->getBoundingBox();
 
-		if (wall->collidesWith(player)) {
+		if (wallBoundingBox.intersects(boundingBox)) {
 			return true;
 		}
 	}
 
-	for (std::vector<std::shared_ptr<Prop>>::const_iterator iterator = _props.begin(); iterator != _props.end(); iterator++) {
+	for (std::vector<std::shared_ptr<Prop>>::const_iterator iterator = _props.begin(); iterator != _props.end(); iterator++)
+	{
 		std::shared_ptr<Prop> prop = *iterator;
+		BoundingBox& propBoundingBox = prop->getBoundingBox();
 
-		if (prop->collidesWith(player)) {
+		if (propBoundingBox.intersects(boundingBox)) {
 			return true;
 		}
 	}

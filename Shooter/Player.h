@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "AnimatedSprite.h"
+#include "BoundingBox.h"
 #include "IWeapon.h"
 #include "Vector2.h"
 
@@ -20,6 +21,7 @@ public:
 	Player();
 
 	bool canAttack() const;
+	BoundingBox getBoundingBox(sf::Time elapsedTime);
 	std::shared_ptr<IWeapon> getEquipedWeapon() const;
 	double getOrientation();
 	Vector2 computePosition(sf::Time elapsedTime);

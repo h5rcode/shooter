@@ -1,13 +1,11 @@
-#define _USE_MATH_DEFINES
-
+#include "Animation.h"
 #include "Player.h"
 
-#include <math.h>
-
-#include "Animation.h"
-
-
 const double MIN_SPEED = 0.01;
+
+const int FRAME_WIDTH = 64;
+const int FRAME_HEIGHT = 64;
+const int NUMBER_OF_FRAMES = 8;
 
 Player::Player() :
 	_friction(5),
@@ -18,17 +16,19 @@ Player::Player() :
 {
 	_texture.loadFromFile("Resources/textures/character.png");
 
-	int frameWidth = 64;
-	int frameHeight = 64;
-	int numberOfFrames = 8;
-
 	_animation.setSpriteSheet(_texture);
-	for (int frameNumber = 0; frameNumber < numberOfFrames; frameNumber++) {
-		_animation.addFrame(sf::IntRect(0, frameNumber * frameHeight, frameWidth, frameHeight));
+	for (int frameNumber = 0; frameNumber < NUMBER_OF_FRAMES; frameNumber++) {
+		_animation.addFrame(sf::IntRect(0, frameNumber * FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT));
 	}
 
 	_animatedSprite.setAnimation(_animation);
-	_animatedSprite.setOrigin(frameWidth / 2, frameHeight / 2);
+	_animatedSprite.setOrigin(FRAME_WIDTH / 2, FRAME_HEIGHT / 2);
+}
+
+BoundingBox Player::getBoundingBox(sf::Time elapsedTime)
+{
+	Vector2 position = computePosition(elapsedTime);
+	return BoundingBox(position, FRAME_WIDTH, FRAME_HEIGHT, _orientation);
 }
 
 bool Player::canAttack() const {
@@ -107,8 +107,7 @@ void Player::pointAt(Vector2& position)
 }
 
 void Player::render(sf::RenderWindow& renderWindow) {
-	int angle = -180 * (_orientation - M_PI_2) / M_PI;
-	_animatedSprite.setRotation(angle);
+	_animatedSprite.setRotation(_orientation);
 	_animatedSprite.setPosition(_position.x, _position.y);
 	renderWindow.draw(_animatedSprite);
 }

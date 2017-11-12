@@ -1,3 +1,5 @@
+#define _USE_MATH_DEFINES
+
 #include "Vector2.h"
 #include <math.h>
 
@@ -35,7 +37,12 @@ double Vector2::computeAngleTo(Vector2& destination) const
 		}
 	}
 
-	return alpha;
+	return 90.f - 180.f * alpha / M_PI;
+}
+
+double Vector2::dotProduct(Vector2& vector) const
+{
+	return this->x * vector.x + this->y * vector.y;
 }
 
 void Vector2::multiply(double alpha)
@@ -59,6 +66,19 @@ void Vector2::normalize()
 	}
 }
 
+void Vector2::rotate(double angle) {
+	double angleRadians = -M_PI * (90.f - angle) / 180.f;
+
+	double cosineAngle = cos(angleRadians);
+	double sineAngle = sin(angleRadians);
+
+	double x = this->x;
+	double y = this->y;
+
+	this->x = x * cosineAngle - y  * sineAngle;
+	this->y = x * sineAngle + y  * cosineAngle;
+}
+
 Vector2 &Vector2::operator+=(const Vector2 &v)
 {
 	this->x += v.x;
@@ -79,4 +99,9 @@ Vector2 multiply(const Vector2 &v, double alpha)
 Vector2 operator+(const Vector2 &v1, const Vector2 &v2)
 {
 	return Vector2(v1.x + v2.x, v1.y + v2.y);
+}
+
+Vector2 operator-(const Vector2 &v1, const Vector2 &v2)
+{
+	return Vector2(v1.x - v2.x, v1.y - v2.y);
 }

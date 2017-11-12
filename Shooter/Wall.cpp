@@ -1,5 +1,3 @@
-#define _USE_MATH_DEFINES
-
 #include "Wall.h"
 
 Wall::Wall(Vector2 position, int width, int length, double orientation, std::string texture) :
@@ -8,19 +6,22 @@ Wall::Wall(Vector2 position, int width, int length, double orientation, std::str
 	_length(length),
 	_orientation(orientation),
 	_texture(),
-	_sprite()
+	_sprite(),
+	_boundingBox(position, width, length, orientation)
 {
 	_texture.loadFromFile(texture);
 	_texture.setRepeated(true);
 
-	int angle = -180 * (_orientation - M_PI_2) / M_PI;
-
 	_sprite.setPosition(position.x, position.y);
-	_sprite.setRotation(angle);
+	_sprite.setRotation(_orientation);
 	_sprite.setTexture(_texture);
 }
 
-Vector2 & Wall::getPosition()
+BoundingBox& Wall::getBoundingBox() {
+	return _boundingBox;
+}
+
+Vector2& Wall::getPosition()
 {
 	return _position;
 }
@@ -38,12 +39,6 @@ int Wall::getLength() const
 double Wall::getOrientation() const
 {
 	return _orientation;
-}
-
-bool Wall::collidesWith(Player& player) const
-{
-	// TODO Implement collision detection.
-	return false;
 }
 
 void Wall::render(sf::RenderWindow& renderWindow) {

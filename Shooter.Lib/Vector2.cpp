@@ -67,7 +67,7 @@ void Vector2::normalize()
 }
 
 void Vector2::rotate(double angle) {
-	double angleRadians = -M_PI * (90.f - angle) / 180.f;
+	double angleRadians = M_PI * angle / 180.f;
 
 	double cosineAngle = cos(angleRadians);
 	double sineAngle = sin(angleRadians);

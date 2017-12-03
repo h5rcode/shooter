@@ -6,6 +6,8 @@ public:
 
 public:
 	bool overlaps(Projection& projection) const;
+	double getMin() const;
+	double getMax() const;
 
 private:
 	double _min;

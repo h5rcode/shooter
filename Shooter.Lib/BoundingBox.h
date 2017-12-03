@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+#include <SFML/Graphics.hpp>
+
 #include "Projection.h"
 #include "Vector2.h"
 
@@ -13,6 +15,7 @@ public:
 public:
 	bool intersects(BoundingBox& boundingBox);
 	Projection project(Vector2& axis);
+	void render(sf::RenderWindow& window);
 
 private:
 	std::vector<std::shared_ptr<Vector2>> _vertices;

@@ -4,10 +4,13 @@ BoundingBox::BoundingBox(Vector2& position, int width, int height, double orient
 	_normals(),
 	_vertices()
 {
-	Vector2 topRight(width / 2, -height / 2);
-	Vector2 bottomRight(width / 2, height / 2);
-	Vector2 bottomLeft(-width / 2, height / 2);
-	Vector2 topLeft(-width / 2, -height / 2);
+	double halfWidth = width / 2.f;
+	double halfHeight = height / 2.f;
+
+	Vector2 topRight(halfWidth, -halfHeight);
+	Vector2 bottomRight(halfWidth, halfHeight);
+	Vector2 bottomLeft(-halfWidth, halfHeight);
+	Vector2 topLeft(-halfWidth, -halfHeight);
 
 	topRight.rotate(orientation);
 	bottomRight.rotate(orientation);
@@ -59,6 +62,18 @@ Projection BoundingBox::project(Vector2& axis) {
 	}
 
 	return Projection(min, max);
+}
+
+void BoundingBox::render(sf::RenderWindow& renderWindow) {
+	sf::VertexArray vertexArray(sf::Points, 0);
+	for each (std::shared_ptr<Vector2> vertex in _vertices)
+	{
+		std::shared_ptr<sf::Vector2f> sfPosition = std::make_shared<sf::Vector2f>(vertex->x, vertex->y);
+		std::shared_ptr<sf::Vertex> sfVertex = std::make_shared<sf::Vertex>(*sfPosition);
+		vertexArray.append(*sfVertex);
+	}
+
+	renderWindow.draw(vertexArray);
 }
 
 bool BoundingBox::intersects(BoundingBox& boundingBox) {

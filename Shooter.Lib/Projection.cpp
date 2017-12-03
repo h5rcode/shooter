@@ -6,6 +6,14 @@ Projection::Projection(double min, double max) :
 {
 }
 
+double Projection::getMin() const {
+	return _min;
+}
+
+double Projection::getMax() const {
+	return _max;
+}
+
 bool Projection::overlaps(Projection& projection) const
 {
 	if (_min <= projection._min && projection._min <= _max)

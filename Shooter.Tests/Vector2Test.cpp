@@ -3,27 +3,6 @@
 #include "gtest/gtest.h"
 #include "Vector2.h"
 
-TEST(Vector2Test_computeAngleTo, getNorm_should_return_0_when_x_and_y_are_equal_to_0)
-{
-	Vector2 vector(0, 0);
-	double norm = vector.getNorm();
-
-	EXPECT_EQ(0, norm);
-}
-
-TEST(Vector2Test_computeAngleTo, getNorm_should_return_euclidian_norm_of_the_vector)
-{
-	double x = rand();
-	double y = rand();
-
-	double euclidianNorm = sqrt(x * x + y * y);
-
-	Vector2 vector(x, y);
-	double norm = vector.getNorm();
-
-	EXPECT_EQ(euclidianNorm, norm);
-}
-
 TEST(Vector2Test_computeAngleTo, should_return_90_when_vectors_are_equal)
 {
 	double x = rand();
@@ -114,4 +93,25 @@ TEST(Vector2Test_rotate, should_update_the_vector_correctly) {
 	rotate_should_update_the_vector_correctly(1, 0, 90, 0, 1);
 	rotate_should_update_the_vector_correctly(1, -1, -90, -1, -1);
 	rotate_should_update_the_vector_correctly(1, 2, 180, -1, -2);
+}
+
+TEST(Vector2Test_getNorm, should_return_0_when_x_and_y_are_equal_to_0)
+{
+	Vector2 vector(0, 0);
+	double norm = vector.getNorm();
+
+	EXPECT_EQ(0, norm);
+}
+
+TEST(Vector2Test_getNorm, should_return_euclidian_norm_of_the_vector)
+{
+	double x = rand();
+	double y = rand();
+
+	double euclidianNorm = sqrt(x * x + y * y);
+
+	Vector2 vector(x, y);
+	double norm = vector.getNorm();
+
+	EXPECT_EQ(euclidianNorm, norm);
 }

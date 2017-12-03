@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleTest", "GoogleTest\GoogleTest.vcxproj", "{F1F7E7B4-7746-41C9-987D-D3AF172028E1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shooter", "Shooter\Shooter.vcxproj", "{064D2134-E2E0-4E40-AC78-9972D89F6BDD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shooter.Tests", "Shooter.Tests\Shooter.Tests.vcxproj", "{EF33D62C-3F89-4896-9B26-9B08147E18B0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shooter.Lib", "Shooter.Lib\Shooter.Lib.vcxproj", "{C75C0D43-1170-40FC-8501-C265A95B0142}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{EF33D62C-3F89-4896-9B26-9B08147E18B0}.Release|x64.Build.0 = Release|x64
 		{EF33D62C-3F89-4896-9B26-9B08147E18B0}.Release|x86.ActiveCfg = Release|Win32
 		{EF33D62C-3F89-4896-9B26-9B08147E18B0}.Release|x86.Build.0 = Release|Win32
+		{C75C0D43-1170-40FC-8501-C265A95B0142}.Debug|x64.ActiveCfg = Debug|x64
+		{C75C0D43-1170-40FC-8501-C265A95B0142}.Debug|x64.Build.0 = Debug|x64
+		{C75C0D43-1170-40FC-8501-C265A95B0142}.Debug|x86.ActiveCfg = Debug|Win32
+		{C75C0D43-1170-40FC-8501-C265A95B0142}.Debug|x86.Build.0 = Debug|Win32
+		{C75C0D43-1170-40FC-8501-C265A95B0142}.Release|x64.ActiveCfg = Release|x64
+		{C75C0D43-1170-40FC-8501-C265A95B0142}.Release|x64.Build.0 = Release|x64
+		{C75C0D43-1170-40FC-8501-C265A95B0142}.Release|x86.ActiveCfg = Release|Win32
+		{C75C0D43-1170-40FC-8501-C265A95B0142}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

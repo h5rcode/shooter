@@ -72,13 +72,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Projets\Shooter\Tools\googletest-release-1.8.0\googletest;D:\Projets\Shooter\Tools\googletest-release-1.8.0\googletest\include;$(SolutionDir)Shooter;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Shooter.Lib;$(SolutionDir)Tools\googletest-release-1.8.0\googletest\include;$(SolutionDir)Tools\googletest-release-1.8.0\googletest;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)Shooter.Lib;$(SolutionDir)Tools\googletest-release-1.8.0\googletest\include;$(SolutionDir)Tools\googletest-release-1.8.0\googletest;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -146,8 +147,8 @@
     <ProjectReference Include="..\GoogleTest\GoogleTest.vcxproj">
       <Project>{f1f7e7b4-7746-41c9-987d-d3af172028e1}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Shooter\Shooter.vcxproj">
-      <Project>{064d2134-e2e0-4e40-ac78-9972d89f6bdd}</Project>
+    <ProjectReference Include="..\Shooter.Lib\Shooter.Lib.vcxproj">
+      <Project>{c75c0d43-1170-40fc-8501-c265a95b0142}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -26,8 +26,8 @@ void SfmlRenderer::render() {
 	Vector2 cameraPosition = camera.getPosition();
 
 	sf::View view;
-	view.setCenter(sf::Vector2f(cameraPosition.x, cameraPosition.y));
-	view.setSize(sf::Vector2f(camera.getViewWidth(), camera.getViewHeight()));
+	view.setCenter(sf::Vector2f((float)cameraPosition.x, (float)cameraPosition.y));
+	view.setSize(sf::Vector2f((float)camera.getViewWidth(), (float)camera.getViewHeight()));
 
 	_window.setView(view);
 

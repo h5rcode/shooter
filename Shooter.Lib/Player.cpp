@@ -112,8 +112,8 @@ void Player::pointAt(Vector2& position)
 }
 
 void Player::render(sf::RenderWindow& renderWindow) {
-	_animatedSprite.setRotation(_orientation);
-	_animatedSprite.setPosition(_position.x, _position.y);
+	_animatedSprite.setRotation((float)_orientation);
+	_animatedSprite.setPosition((float)_position.x, (float)_position.y);
 	renderWindow.draw(_animatedSprite);
 }
 

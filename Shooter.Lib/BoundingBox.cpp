@@ -52,7 +52,7 @@ Projection BoundingBox::project(Vector2& axis) const {
 	double min = axis.dotProduct(*vertex);
 	double max = min;
 
-	for (int i = 1; i < _normals.size(); i++)
+	for (size_t i = 1; i < _normals.size(); i++)
 	{
 		vertex = _vertices.at(i);
 		double dotProduct = axis.dotProduct(*vertex);

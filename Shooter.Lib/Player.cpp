@@ -114,10 +114,6 @@ void Player::pointAt(Vector2& position)
 void Player::render(sf::RenderWindow& renderWindow) {
 	_animatedSprite.setRotation(_orientation);
 	_animatedSprite.setPosition(_position.x, _position.y);
-
-	BoundingBox& boundingBox = getBoundingBox(sf::Time());
-	boundingBox.render(renderWindow);
-
 	renderWindow.draw(_animatedSprite);
 }
 

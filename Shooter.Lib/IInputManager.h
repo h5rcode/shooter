@@ -12,7 +12,7 @@ typedef enum Key {
 class IInputManager
 {
 public:
-	virtual void getMouseState(int& mouseX, int& mouseY) = 0;
+	virtual void getMouseState(double& mouseX, double& mouseY) = 0;
 	virtual bool isKeyDown(Key key) = 0;
 	virtual bool pollEvent(Event& event) = 0;
 };

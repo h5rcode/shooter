@@ -43,7 +43,7 @@ void GameState::processInput()
 	Vector2 acceleration = getPlayerAcceleration();
 	_player.setAcceleration(acceleration);
 
-	int mouseX, mouseY;
+	double mouseX, mouseY;
 	_inputManager.getMouseState(mouseX, mouseY);
 
 	Vector2& crosshairPosition = _crosshair.getPosition();
@@ -107,7 +107,7 @@ Player& GameState::getPlayer() const {
 void GameState::handleMouseButtonDown()
 {
 	if (_player.canAttack()) {
-		int mouseX, mouseY;
+		double mouseX, mouseY;
 		_inputManager.getMouseState(mouseX, mouseY);
 
 		Vector2& crosshairPosition = _crosshair.getPosition();

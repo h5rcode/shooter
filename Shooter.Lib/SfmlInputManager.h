@@ -9,7 +9,7 @@ class SfmlInputManager : public IInputManager
 public:
 	SfmlInputManager(sf::RenderWindow &window);
 
-	void getMouseState(int& mouseX, int& mouseY);
+	void getMouseState(double& mouseX, double& mouseY);
 	bool isKeyDown(Key key);
 	bool pollEvent(Event& event);
 

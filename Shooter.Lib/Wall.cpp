@@ -12,9 +12,9 @@ Wall::Wall(Vector2 position, int width, int length, double orientation, std::str
 	_texture.loadFromFile(texture);
 	_texture.setRepeated(true);
 
-	_sprite.setPosition(position.x, position.y);
-	_sprite.setOrigin(width / 2, length / 2);
-	_sprite.setRotation(_orientation);
+	_sprite.setPosition((float)position.x, (float)position.y);
+	_sprite.setOrigin((float)width / 2, (float)length / 2);
+	_sprite.setRotation((float)_orientation);
 	_sprite.setTexture(_texture);
 	_sprite.setTextureRect(sf::IntRect(0, 0, width, length));
 }

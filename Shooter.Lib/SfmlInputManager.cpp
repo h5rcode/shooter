@@ -9,13 +9,13 @@ SfmlInputManager::SfmlInputManager(sf::RenderWindow &window)
 {
 }
 
-void SfmlInputManager::getMouseState(int& mouseX, int& mouseY) {
+void SfmlInputManager::getMouseState(double& mouseX, double& mouseY) {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(_window);
 
 	sf::Vector2f worldPosition = _window.mapPixelToCoords(mousePosition);
 
-	mouseX = static_cast<int>(worldPosition.x);
-	mouseY = static_cast<int>(worldPosition.y);
+	mouseX = (double)worldPosition.x;
+	mouseY = (double)worldPosition.y;
 }
 
 bool SfmlInputManager::isKeyDown(Key key) {

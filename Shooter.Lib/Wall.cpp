@@ -16,6 +16,7 @@ Wall::Wall(Vector2 position, int width, int length, double orientation, std::str
 	_sprite.setOrigin(width / 2, length / 2);
 	_sprite.setRotation(_orientation);
 	_sprite.setTexture(_texture);
+	_sprite.setTextureRect(sf::IntRect(0, 0, width, length));
 }
 
 BoundingBox& Wall::getBoundingBox() {

@@ -9,8 +9,8 @@ GameSet::GameSet()
 	Vector2 position1(256, 256);
 	Vector2 position2(512, 512);
 
-	_walls.push_back(std::make_shared<Wall>(position1, 16, 256, 0, wallTexture));
-	_walls.push_back(std::make_shared<Wall>(position2, 16, 256, 0, wallTexture));
+	_walls.push_back(std::make_shared<Wall>(position1, 64, 512, 35, wallTexture));
+	_walls.push_back(std::make_shared<Wall>(position2, 32, 256, -15, wallTexture));
 }
 
 bool GameSet::collidesWith(BoundingBox& boundingBox) const {

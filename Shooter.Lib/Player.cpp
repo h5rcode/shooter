@@ -28,7 +28,7 @@ Player::Player() :
 BoundingBox Player::getBoundingBox(sf::Time elapsedTime)
 {
 	Vector2 position = computePosition(elapsedTime);
-	return BoundingBox(position, FRAME_WIDTH, FRAME_HEIGHT, _orientation);
+	return BoundingBox(position, FRAME_WIDTH / 2, FRAME_HEIGHT / 2, _orientation);
 }
 
 bool Player::canAttack() const {
@@ -47,6 +47,11 @@ double Player::getOrientation()
 const Vector2& Player::getSpeed()
 {
 	return _speed;
+}
+
+void Player::immobilize() {
+	_acceleration = Vector2();
+	_speed = Vector2();
 }
 
 Vector2 Player::computePosition(sf::Time elapsedTime)
@@ -109,6 +114,10 @@ void Player::pointAt(Vector2& position)
 void Player::render(sf::RenderWindow& renderWindow) {
 	_animatedSprite.setRotation(_orientation);
 	_animatedSprite.setPosition(_position.x, _position.y);
+
+	BoundingBox& boundingBox = getBoundingBox(sf::Time());
+	boundingBox.render(renderWindow);
+
 	renderWindow.draw(_animatedSprite);
 }
 

@@ -77,7 +77,10 @@ void GameState::update(sf::Time elapsedTime)
 
 	BoundingBox boundingBox = _player.getBoundingBox(elapsedTime);
 
-	if (_gameSet.collidesWith(boundingBox) == false) {
+	if (_gameSet.collidesWith(boundingBox)) {
+		_player.immobilize();
+	}
+	else {
 		_player.move(elapsedTime);
 		_camera.setPosition(_player.getPosition());
 	}

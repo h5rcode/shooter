@@ -27,6 +27,7 @@ public:
 	Vector2 computePosition(sf::Time elapsedTime);
 	Vector2& getPosition();
 	const Vector2& getSpeed();
+	void immobilize();
 	void move(sf::Time elapsedTime);
 	void pointAt(Vector2& position);
 	void render(sf::RenderWindow& renderWindow);

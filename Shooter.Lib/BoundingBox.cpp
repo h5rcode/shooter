@@ -35,14 +35,18 @@ BoundingBox::BoundingBox(Vector2& position, int width, int height, double orient
 
 		Vector2 edge = *nextVertex - *currentVertex;
 
-		std::shared_ptr<Vector2> normal = std::make_shared<Vector2>(-edge.y, edge.x);
+		std::shared_ptr<Vector2> normal = std::make_shared<Vector2>(edge.y, -edge.x);
 		normal->normalize();
 
 		_normals.push_back(normal);
 	}
 }
 
-Projection BoundingBox::project(Vector2& axis) {
+std::vector<std::shared_ptr<Vector2>>& BoundingBox::getNormals() {
+	return _normals;
+}
+
+Projection BoundingBox::project(Vector2& axis) const {
 	std::shared_ptr<Vector2> vertex = _vertices.at(0);
 
 	double min = axis.dotProduct(*vertex);
@@ -76,7 +80,7 @@ void BoundingBox::render(sf::RenderWindow& renderWindow) {
 	renderWindow.draw(vertexArray);
 }
 
-bool BoundingBox::intersects(BoundingBox& boundingBox) {
+bool BoundingBox::intersects(BoundingBox& boundingBox) const {
 	for each (std::shared_ptr<Vector2> normal in _normals)
 	{
 		Projection boundingBoxProjection = boundingBox.project(*normal);

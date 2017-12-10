@@ -2,6 +2,33 @@
 #include "gtest/gtest.h"
 #include "BoundingBox.h"
 
+void expectVectorsAreNearEqual(Vector2& expectedVector, Vector2& actualVector) {
+	double precision = 0.000001;
+
+	EXPECT_NEAR(expectedVector.x, actualVector.x, precision);
+	EXPECT_NEAR(expectedVector.y, actualVector.y, precision);
+}
+
+TEST(BoundingBox_getNormals, should_return_the_expected_normals) {
+	double precision = 0.000001;
+
+	BoundingBox boundingBox(Vector2(), 2, 2, 45);
+
+	std::vector<std::shared_ptr<Vector2>>& normals = boundingBox.getNormals();
+
+	std::shared_ptr<Vector2> normal1 = normals.at(0);
+	std::shared_ptr<Vector2> normal2 = normals.at(1);
+	std::shared_ptr<Vector2> normal3 = normals.at(2);
+	std::shared_ptr<Vector2> normal4 = normals.at(3);
+
+	double halfSqrt2 = sqrt(2.f) / 2.f;
+
+	expectVectorsAreNearEqual(Vector2(halfSqrt2, halfSqrt2), *normal1);
+	expectVectorsAreNearEqual(Vector2(-halfSqrt2, halfSqrt2), *normal2);
+	expectVectorsAreNearEqual(Vector2(-halfSqrt2, -halfSqrt2), *normal3);
+	expectVectorsAreNearEqual(Vector2(halfSqrt2, -halfSqrt2), *normal4);
+}
+
 TEST(BoundingBox_project, should_compute_the_expected_projection) {
 	BoundingBox boundingBox(Vector2(), 1, 2, 0);
 

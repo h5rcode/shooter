@@ -13,8 +13,9 @@ public:
 	BoundingBox(Vector2& position, int width, int height, double orientation);
 
 public:
-	bool intersects(BoundingBox& boundingBox);
-	Projection project(Vector2& axis);
+	std::vector<std::shared_ptr<Vector2>>& getNormals();
+	bool intersects(BoundingBox& boundingBox) const;
+	Projection project(Vector2& axis) const;
 	void render(sf::RenderWindow& window);
 
 private:

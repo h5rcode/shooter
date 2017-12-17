@@ -96,10 +96,11 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)Tools\SFML-2.4.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-graphics-d-2.dll  $(OutputPath)
+      <Command>xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-audio-d-2.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-graphics-d-2.dll  $(OutputPath)
 xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-system-d-2.dll  $(OutputPath)
 xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-window-d-2.dll  $(OutputPath)</Command>
     </PostBuildEvent>
@@ -132,10 +133,11 @@ xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-window-d-2.dll  $(OutputPath
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)Tools\SFML-2.4.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-graphics-2.dll  $(OutputPath)
+      <Command>xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-audio-2.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-graphics-2.dll  $(OutputPath)
 xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-system-2.dll  $(OutputPath)
 xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-window-2.dll  $(OutputPath)</Command>
     </PostBuildEvent>

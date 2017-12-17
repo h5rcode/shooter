@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "AnimatedSprite.h"
@@ -45,6 +46,9 @@ private:
 	Vector2 _speed;
 	Vector2 _position;
 	double _orientation;
+
+	sf::Sound _sound;
+	sf::SoundBuffer _soundBuffer;
 
 	sf::Texture _texture;
 	Animation _animation;

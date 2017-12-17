@@ -13,8 +13,14 @@ Player::Player(Vector2 position) :
 	_friction(5),
 	_maxSpeed(10000),
 	_position(position),
+	_sound(),
+	_soundBuffer(),
 	_texture()
 {
+	_soundBuffer.loadFromFile("Resources/sounds/138476__randomationpictures__step-tap.wav");
+	_sound.setBuffer(_soundBuffer);
+	_sound.setLoop(true);
+
 	_texture.loadFromFile("Resources/textures/character.png");
 
 	_animation.setSpriteSheet(_texture);
@@ -51,6 +57,10 @@ const Vector2& Player::getSpeed()
 }
 
 void Player::immobilize() {
+	if (_sound.getStatus() == sf::Sound::Playing) {
+		_sound.stop();
+	}
+
 	_acceleration = Vector2();
 	_speed = Vector2();
 }
@@ -99,9 +109,14 @@ void Player::move(sf::Time elapsedTime) {
 	_position = nextPosition;
 
 	if (nextSpeed == Vector2(0, 0)) {
+		_sound.stop();
 		_animatedSprite.pause();
 	}
 	else {
+		if (_sound.getStatus() != sf::Sound::Playing) {
+			_sound.play();
+		}
+
 		_animatedSprite.play();
 		_animatedSprite.update(elapsedTime);
 	}

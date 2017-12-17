@@ -6,6 +6,7 @@ const double MIN_SPEED = 0.01;
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
 const int NUMBER_OF_FRAMES = 8;
+const int FRAME_TIME_MILLISECONDS = 150;
 
 Player::Player(Vector2 position) :
 	_animatedSprite(),
@@ -18,6 +19,7 @@ Player::Player(Vector2 position) :
 	_texture()
 {
 	_soundBuffer.loadFromFile("Resources/sounds/138476__randomationpictures__step-tap.wav");
+	_sound.setPlayingOffset(sf::milliseconds(2 * FRAME_TIME_MILLISECONDS));
 	_sound.setBuffer(_soundBuffer);
 	_sound.setLoop(true);
 
@@ -30,6 +32,7 @@ Player::Player(Vector2 position) :
 
 	_animatedSprite.setAnimation(_animation);
 	_animatedSprite.setOrigin(FRAME_WIDTH / 2, FRAME_HEIGHT / 2);
+	_animatedSprite.setFrameTime(sf::milliseconds(FRAME_TIME_MILLISECONDS));
 }
 
 BoundingBox Player::getBoundingBox(sf::Time elapsedTime)
@@ -58,7 +61,7 @@ const Vector2& Player::getSpeed()
 
 void Player::immobilize() {
 	if (_sound.getStatus() == sf::Sound::Playing) {
-		_sound.stop();
+		_sound.pause();
 	}
 
 	_acceleration = Vector2();
@@ -109,7 +112,7 @@ void Player::move(sf::Time elapsedTime) {
 	_position = nextPosition;
 
 	if (nextSpeed == Vector2(0, 0)) {
-		_sound.stop();
+		_sound.pause();
 		_animatedSprite.pause();
 	}
 	else {

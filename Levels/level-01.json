@@ -1,0 +1,32 @@
+{
+	"name": "Introduction",
+	"playerInitialState": {
+		"x": 0,
+		"y": 0,
+		"orientation": 0.0
+	},
+	"walls": [{
+		"x": 256,
+		"y": 256,
+		"orientation": 35.0,
+		"width": 64,
+		"length": 512,
+		"texture": "wall-01.png"
+	},
+	{
+		"x": 512,
+		"y": 512,
+		"orientation": -15.0,
+		"width": 32,
+		"length": 256,
+		"texture": "wall-01.png"
+	}],
+	"props": [{
+		"x": 100,
+		"y": 100,
+		"orientation": 22.5,
+		"width": 192,
+		"height": 64,
+		"texture": "sofa.png"
+	}]
+}

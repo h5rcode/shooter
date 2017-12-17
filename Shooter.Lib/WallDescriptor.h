@@ -3,6 +3,7 @@
 #include <string>
 
 struct WallDescriptor {
+public:
 	std::string texture;
 	double x;
 	double y;

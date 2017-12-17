@@ -7,12 +7,13 @@ const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
 const int NUMBER_OF_FRAMES = 8;
 
-Player::Player() :
+Player::Player(Vector2 position) :
+	_animatedSprite(),
+	_animation(),
 	_friction(5),
 	_maxSpeed(10000),
-	_texture(),
-	_animation(),
-	_animatedSprite()
+	_position(position),
+	_texture()
 {
 	_texture.loadFromFile("Resources/textures/character.png");
 

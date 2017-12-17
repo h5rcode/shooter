@@ -19,12 +19,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		sf::RenderWindow renderWindow(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Shooter");
 		renderWindow.setMouseCursorVisible(false);
 
-		std::vector<std::shared_ptr<Wall>> walls;
-		std::vector<std::shared_ptr<Prop>> props;
-
 		std::string level01FileName = "Levels/level-01.json";
 		LevelDescriptor levelDescriptor;
 		levelDescriptor.loadFromFile(level01FileName);
+
+		std::vector<std::shared_ptr<Wall>> walls = levelDescriptor.getWalls();
+		std::vector<std::shared_ptr<Prop>> props = levelDescriptor.getProps();
 
 		GameSet gameSet(walls, props);
 		GameSettings gameSettings;
@@ -32,7 +32,9 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 		std::string crosshairTexture = "Resources/textures/Crosshair.png";
 		Crosshair crosshair(crosshairTexture);
-		Player player;
+
+		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
+		Player player(playerInitialState.getPosition());
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);
 
 		SfmlRenderer sfmlRenderer(gameState, renderWindow);

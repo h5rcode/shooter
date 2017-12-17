@@ -2,8 +2,7 @@
 	"name": "Introduction",
 	"playerInitialState": {
 		"x": 0,
-		"y": 0,
-		"orientation": 0.0
+		"y": 150
 	},
 	"walls": [{
 		"x": 256,

@@ -18,7 +18,7 @@ typedef enum CharacterState {
 class Player
 {
 public:
-	Player();
+	Player(Vector2 position);
 
 	bool canAttack() const;
 	BoundingBox getBoundingBox(sf::Time elapsedTime);

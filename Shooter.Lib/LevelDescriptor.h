@@ -4,13 +4,21 @@
 #include <string>
 #include <vector>
 
+#include "PlayerInitialStateDescriptor.h"
+#include "Prop.h"
 #include "PropDescriptor.h"
+#include "Vector2.h"
+#include "Wall.h"
 #include "WallDescriptor.h"
 
 struct LevelDescriptor {
 	std::string name;
-	std::vector<std::shared_ptr<PropDescriptor>> props;
-	std::vector<std::shared_ptr<WallDescriptor>> walls;
+	PlayerInitialStateDescriptor playerInitialStateDescriptor;
+	std::vector<std::shared_ptr<PropDescriptor>> propDescriptors;
+	std::vector<std::shared_ptr<WallDescriptor>> wallDescriptors;
 
 	void loadFromFile(std::string& fileName);
+
+	std::vector<std::shared_ptr<Prop>> getProps();
+	std::vector<std::shared_ptr<Wall>> getWalls();
 };

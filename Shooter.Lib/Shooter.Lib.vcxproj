@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Tools\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projets\shooter\Tools\json;$(SolutionDir)Tools\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -96,7 +96,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Tools\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projets\shooter\Tools\json;$(SolutionDir)Tools\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -130,6 +130,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="LevelDescriptor.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerInitialStateDescriptor.cpp" />
     <ClCompile Include="Projection.cpp" />
     <ClCompile Include="Prop.cpp" />
     <ClCompile Include="SfmlInputManager.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="IWeapon.h" />
     <ClInclude Include="LevelDescriptor.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerInitialStateDescriptor.h" />
     <ClInclude Include="Projection.h" />
     <ClInclude Include="Prop.h" />
     <ClInclude Include="PropDescriptor.h" />

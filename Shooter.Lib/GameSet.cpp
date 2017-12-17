@@ -3,6 +3,7 @@
 GameSet::GameSet()
 {
 	_walls = std::vector<std::shared_ptr<Wall>>();
+	_props = std::vector<std::shared_ptr<Prop>>();
 
 	std::string wallTexture = "Resources/textures/wall-01.png";
 
@@ -11,6 +12,10 @@ GameSet::GameSet()
 
 	_walls.push_back(std::make_shared<Wall>(position1, 64, 512, 35, wallTexture));
 	_walls.push_back(std::make_shared<Wall>(position2, 32, 256, -15, wallTexture));
+
+	Vector2 propPosition(100, 100);
+	std::string sofaTexture = "Resources/textures/sofa.png";
+	_props.push_back(std::make_shared<Prop>(propPosition, 192, 64, 22.5, sofaTexture));
 }
 
 bool GameSet::collidesWith(BoundingBox& boundingBox) const {
@@ -54,5 +59,11 @@ void GameSet::render(sf::RenderWindow& renderWindow)
 	{
 		std::shared_ptr<Wall> wall = *it;
 		wall->render(renderWindow);
+	}
+
+	for (std::vector<std::shared_ptr<Prop>>::iterator it = _props.begin(); it != _props.end(); ++it)
+	{
+		std::shared_ptr<Prop> prop = *it;
+		prop->render(renderWindow);
 	}
 }

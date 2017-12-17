@@ -128,6 +128,7 @@
     <ClCompile Include="GameSet.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="LevelDescriptor.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projection.cpp" />
     <ClCompile Include="Prop.cpp" />
@@ -153,13 +154,16 @@
     <ClInclude Include="IInputManager.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="IWeapon.h" />
+    <ClInclude Include="LevelDescriptor.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projection.h" />
     <ClInclude Include="Prop.h" />
+    <ClInclude Include="PropDescriptor.h" />
     <ClInclude Include="SfmlInputManager.h" />
     <ClInclude Include="SfmlRenderer.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="WallDescriptor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

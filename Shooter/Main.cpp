@@ -6,6 +6,7 @@
 #include "GameSet.h"
 #include "GameSettings.h"
 #include "GameState.h"
+#include "LevelDescriptor.h";
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
 
@@ -18,7 +19,14 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		sf::RenderWindow renderWindow(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Shooter");
 		renderWindow.setMouseCursorVisible(false);
 
-		GameSet gameSet;
+		std::vector<std::shared_ptr<Wall>> walls;
+		std::vector<std::shared_ptr<Prop>> props;
+
+		std::string level01FileName = "Levels/level-01.json";
+		LevelDescriptor levelDescriptor;
+		levelDescriptor.loadFromFile(level01FileName);
+
+		GameSet gameSet(walls, props);
 		GameSettings gameSettings;
 		SfmlInputManager inputManager(renderWindow);
 

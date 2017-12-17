@@ -1,21 +1,9 @@
 #include "GameSet.h"
 
-GameSet::GameSet()
+GameSet::GameSet(std::vector<std::shared_ptr<Wall>> walls, std::vector<std::shared_ptr<Prop>> props)
 {
-	_walls = std::vector<std::shared_ptr<Wall>>();
-	_props = std::vector<std::shared_ptr<Prop>>();
-
-	std::string wallTexture = "Resources/textures/wall-01.png";
-
-	Vector2 position1(256, 256);
-	Vector2 position2(512, 512);
-
-	_walls.push_back(std::make_shared<Wall>(position1, 64, 512, 35, wallTexture));
-	_walls.push_back(std::make_shared<Wall>(position2, 32, 256, -15, wallTexture));
-
-	Vector2 propPosition(100, 100);
-	std::string sofaTexture = "Resources/textures/sofa.png";
-	_props.push_back(std::make_shared<Prop>(propPosition, 192, 64, 22.5, sofaTexture));
+	_walls = walls;
+	_props = props;
 }
 
 bool GameSet::collidesWith(BoundingBox& boundingBox) const {

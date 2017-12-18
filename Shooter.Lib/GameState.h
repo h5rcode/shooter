@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <SFML/Graphics.hpp>
 
 #include "Camera.h"
@@ -9,6 +11,7 @@
 #include "IGameState.h"
 #include "IInputManager.h"
 #include "Player.h"
+#include "Prop.h"
 
 class GameState : public IGameState
 {
@@ -28,6 +31,7 @@ private:
 	void handleMouseButtonDown();
 
 private:
+	std::shared_ptr<Prop> _selectedProp;
 	bool _isStopped;
 	Camera _camera;
 	Crosshair _crosshair;
@@ -36,4 +40,3 @@ private:
 	IInputManager& _inputManager;
 	Player& _player;
 };
-

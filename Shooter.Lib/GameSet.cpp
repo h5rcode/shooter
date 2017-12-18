@@ -31,14 +31,29 @@ bool GameSet::collidesWith(BoundingBox& boundingBox) const {
 	return false;
 }
 
-std::vector<std::shared_ptr<Wall>>& GameSet::getWalls()
-{
-	return _walls;
+std::shared_ptr<Prop> GameSet::getPropAt(Vector2& position) {
+	BoundingBox boundingBox(position, 1, 1, 0);
+	for (std::vector<std::shared_ptr<Prop>>::const_iterator iterator = _props.begin(); iterator != _props.end(); iterator++)
+	{
+		std::shared_ptr<Prop> prop = *iterator;
+		BoundingBox& propBoundingBox = prop->getBoundingBox();
+
+		if (propBoundingBox.intersects(boundingBox)) {
+			return prop;
+		}
+	}
+
+	return NULL;
 }
 
 std::vector<std::shared_ptr<Prop>>& GameSet::getProps()
 {
 	return _props;
+}
+
+std::vector<std::shared_ptr<Wall>>& GameSet::getWalls()
+{
+	return _walls;
 }
 
 void GameSet::render(sf::RenderWindow& renderWindow)

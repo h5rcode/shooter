@@ -5,12 +5,13 @@
 #include "IInputManager.h"
 
 GameState::GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManager& inputManager, Crosshair& crosshair, Player& player) :
-	_isStopped(false),
+	_crosshair(crosshair),
 	_gameSet(gameSet),
 	_gameSettings(gameSettings),
 	_inputManager(inputManager),
-	_crosshair(crosshair),
-	_player(player)
+	_isStopped(false),
+	_player(player),
+	_selectedProp(NULL)
 {
 }
 
@@ -73,7 +74,24 @@ void GameState::processInput()
 void GameState::update(sf::Time elapsedTime)
 {
 	Vector2& crosshairPosition = _crosshair.getPosition();
+
 	_player.pointAt(crosshairPosition);
+
+	std::shared_ptr<Prop> selectedProp = _gameSet.getPropAt(crosshairPosition);
+	if (selectedProp == NULL) {
+		if (_selectedProp != NULL) {
+			_selectedProp->setSelected(false);
+			_selectedProp = NULL;
+		}
+	}
+	else if (selectedProp != _selectedProp) {
+		if (_selectedProp != NULL) {
+			_selectedProp->setSelected(false);
+		}
+
+		selectedProp->setSelected(true);
+		_selectedProp = selectedProp;
+	}
 
 	BoundingBox boundingBox = _player.getBoundingBox(elapsedTime);
 

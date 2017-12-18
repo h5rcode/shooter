@@ -2,6 +2,7 @@
 
 Prop::Prop(Vector2 position, int width, int height, double orientation, std::string& texture) :
 	_orientation(orientation),
+	_selected(false),
 	_sprite(),
 	_texture(),
 	_boundingBox(position, width, height, orientation)
@@ -27,4 +28,12 @@ Vector2 & Prop::getPosition()
 
 void Prop::render(sf::RenderWindow& renderWindow) {
 	renderWindow.draw(_sprite);
+
+	if (_selected) {
+		_boundingBox.render(renderWindow);
+	}
+}
+
+void Prop::setSelected(bool selected) {
+	_selected = selected;
 }

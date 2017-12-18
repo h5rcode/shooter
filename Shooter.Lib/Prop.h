@@ -14,10 +14,12 @@ public:
 	BoundingBox & getBoundingBox();
 	Vector2& getPosition();
 	void render(sf::RenderWindow& renderWindow);
+	void setSelected(bool selected);
 private:
 	BoundingBox _boundingBox;
 	double _orientation;
 	Vector2 _position;
-	sf::Texture _texture;
+	bool _selected;
 	sf::Sprite _sprite;
+	sf::Texture _texture;
 };

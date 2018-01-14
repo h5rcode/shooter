@@ -2,9 +2,12 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <memory>
 #include <sstream>
+#include <vector>
 
 #include "Crosshair.h"
+#include "Projectile.h"
 #include "Wall.h"
 
 SfmlRenderer::SfmlRenderer(IGameState& gameState, sf::RenderWindow& window) :
@@ -19,6 +22,7 @@ void SfmlRenderer::render() {
 	_window.clear();
 
 	IGameSet& gameSet = _gameState.getGameSet();
+	std::vector<std::shared_ptr<Projectile>>& projectiles = _gameState.getProjectiles();
 	Camera& camera = _gameState.getCamera();
 	Player& player = _gameState.getPlayer();
 	Crosshair& crosshair = _gameState.getCrosshair();
@@ -33,6 +37,11 @@ void SfmlRenderer::render() {
 
 	gameSet.render(_window);
 	player.render(_window);
+	for each (std::shared_ptr<Projectile> projectile in projectiles)
+	{
+		projectile->render(_window);
+	}
+
 	crosshair.render(_window);
 
 	renderHud();
@@ -56,6 +65,13 @@ void SfmlRenderer::renderHud() {
 	stream << "Speed (" << playerSpeed.x << ", " << playerSpeed.y << ")";
 	stream << std::endl;
 	stream << "Speed norm = " << playerSpeed.getNorm();
+	stream << std::endl;
+	
+	std::shared_ptr<IWeapon> equipedWeapon = player.getEquipedWeapon();
+	if (equipedWeapon != NULL) {
+		stream << equipedWeapon->getDescription();
+		stream << std::endl;
+	}
 
 	sf::Text text;
 	text.setFont(_font);

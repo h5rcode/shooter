@@ -21,11 +21,14 @@ class Player
 public:
 	Player(Vector2 position);
 
+public:
+	std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
 	bool canAttack() const;
+	Vector2 computePosition(sf::Time elapsedTime);
+	void equipWeapon(std::shared_ptr<IWeapon> weapon);
 	BoundingBox getBoundingBox(sf::Time elapsedTime);
 	std::shared_ptr<IWeapon> getEquipedWeapon() const;
 	double getOrientation();
-	Vector2 computePosition(sf::Time elapsedTime);
 	Vector2& getPosition();
 	const Vector2& getSpeed();
 	void immobilize();

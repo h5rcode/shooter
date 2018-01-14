@@ -6,7 +6,7 @@
 #include "GameSet.h"
 #include "GameSettings.h"
 #include "GameState.h"
-#include "LevelDescriptor.h";
+#include "LevelDescriptor.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
 

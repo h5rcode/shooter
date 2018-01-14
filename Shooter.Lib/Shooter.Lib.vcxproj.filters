@@ -72,6 +72,12 @@
     <ClCompile Include="SfmlRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Firearm.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">
@@ -154,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Firearm.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

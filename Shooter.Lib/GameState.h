@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include <SFML/Graphics.hpp>
 
@@ -10,6 +11,7 @@
 #include "IGameSettings.h"
 #include "IGameState.h"
 #include "IInputManager.h"
+#include "Projectile.h"
 #include "Player.h"
 #include "Prop.h"
 
@@ -22,6 +24,7 @@ public:
 	Crosshair& getCrosshair();
 	IGameSet& getGameSet() const;
 	Player& getPlayer() const;
+	std::vector<std::shared_ptr<Projectile>>& getProjectiles();
 	bool isStopped();
 	void processInput();
 	void update(sf::Time elapsedTime);
@@ -39,4 +42,5 @@ private:
 	IGameSettings& _gameSettings;
 	IInputManager& _inputManager;
 	Player& _player;
+	std::vector<std::shared_ptr<Projectile>> _projectiles;
 };

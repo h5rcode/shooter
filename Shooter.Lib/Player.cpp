@@ -35,6 +35,19 @@ Player::Player(Vector2 position) :
 	_animatedSprite.setFrameTime(sf::milliseconds(FRAME_TIME_MILLISECONDS));
 }
 
+std::vector<std::shared_ptr<Projectile>> Player::attackToward(Vector2& position) {
+	std::vector<std::shared_ptr<Projectile>> projectiles;
+	if (_equipedWeapon != NULL) {
+		projectiles = _equipedWeapon->fire(_position, position);
+	}
+
+	return projectiles;
+}
+
+void Player::equipWeapon(std::shared_ptr<IWeapon> weapon) {
+	_equipedWeapon = weapon;
+}
+
 BoundingBox Player::getBoundingBox(sf::Time elapsedTime)
 {
 	Vector2 position = computePosition(elapsedTime);
@@ -42,7 +55,7 @@ BoundingBox Player::getBoundingBox(sf::Time elapsedTime)
 }
 
 bool Player::canAttack() const {
-	return _state == IDLE;
+	return _equipedWeapon != NULL && _equipedWeapon->canAttack();
 }
 
 std::shared_ptr<IWeapon> Player::getEquipedWeapon() const {

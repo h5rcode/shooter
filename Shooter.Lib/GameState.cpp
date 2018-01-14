@@ -1,5 +1,6 @@
 #include "BoundingBox.h"
 #include "Event.h"
+#include "Firearm.h"
 #include "GameState.h"
 #include "IGameSettings.h"
 #include "IInputManager.h"
@@ -11,8 +12,11 @@ GameState::GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManag
 	_inputManager(inputManager),
 	_isStopped(false),
 	_player(player),
+	_projectiles(),
 	_selectedProp(NULL)
 {
+	std::shared_ptr<Firearm> firearm = std::make_shared<Firearm>(20, 10, 1000, 120);
+	_player.equipWeapon(firearm);
 }
 
 Vector2 GameState::getPlayerAcceleration() {
@@ -93,14 +97,28 @@ void GameState::update(sf::Time elapsedTime)
 		_selectedProp = selectedProp;
 	}
 
-	BoundingBox boundingBox = _player.getBoundingBox(elapsedTime);
+	BoundingBox playerBoundingBox = _player.getBoundingBox(elapsedTime);
 
-	if (_gameSet.collidesWith(boundingBox)) {
+	if (_gameSet.collidesWith(playerBoundingBox)) {
 		_player.immobilize();
 	}
 	else {
 		_player.move(elapsedTime);
 		_camera.setPosition(_player.getPosition());
+	}
+
+	for each (std::shared_ptr<Projectile> projectile in _projectiles)
+	{
+		BoundingBox projectileBoundingBox = projectile->getBoundingBox(elapsedTime);
+
+		if (_gameSet.collidesWith(projectileBoundingBox)) {
+			// TODO
+		}
+		else if (projectileBoundingBox.intersects(playerBoundingBox)) {
+			// TODO
+		}
+
+		projectile->move(elapsedTime);
 	}
 }
 
@@ -122,6 +140,10 @@ Player& GameState::getPlayer() const {
 	return _player;
 }
 
+std::vector<std::shared_ptr<Projectile>>& GameState::getProjectiles() {
+	return _projectiles;
+}
+
 void GameState::handleMouseButtonDown()
 {
 	if (_player.canAttack()) {
@@ -129,7 +151,12 @@ void GameState::handleMouseButtonDown()
 		_inputManager.getMouseState(mouseX, mouseY);
 
 		Vector2& crosshairPosition = _crosshair.getPosition();
-		std::shared_ptr<IWeapon> weapon = _player.getEquipedWeapon();
+		std::vector<std::shared_ptr<Projectile>> projectiles = _player.attackToward(crosshairPosition);
+
+		for each (std::shared_ptr<Projectile> projectile in projectiles)
+		{
+			_projectiles.push_back(projectile);
+		}
 	}
 }
 

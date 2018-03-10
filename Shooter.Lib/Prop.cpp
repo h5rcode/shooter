@@ -2,6 +2,7 @@
 
 Prop::Prop(Vector2 position, int width, int height, double orientation, std::string& texture) :
 	_orientation(orientation),
+	_position(position),
 	_selected(false),
 	_sprite(),
 	_texture(),

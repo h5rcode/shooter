@@ -11,6 +11,7 @@ public:
 	std::vector<std::shared_ptr<Prop>>& getProps();
 	std::shared_ptr<Prop> getPropAt(Vector2& position);
 	std::vector<std::shared_ptr<Wall>>& getWalls();
+	void removeProp(std::shared_ptr<Prop> prop);
 	void render(sf::RenderWindow& renderWindow);
 private:
 	std::vector<std::shared_ptr<Wall>> _walls;

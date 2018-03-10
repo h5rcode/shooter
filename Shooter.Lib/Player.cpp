@@ -138,6 +138,12 @@ void Player::move(sf::Time elapsedTime) {
 	}
 }
 
+void Player::pickUpProp(std::shared_ptr<Prop> prop) {
+	if (_prop != NULL) {
+		_prop = prop;
+	}
+}
+
 void Player::pointAt(Vector2& position)
 {
 	_orientation = _position.computeAngleTo(position);

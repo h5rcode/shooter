@@ -9,6 +9,7 @@
 #include "AnimatedSprite.h"
 #include "BoundingBox.h"
 #include "IWeapon.h"
+#include "Prop.h"
 #include "Vector2.h"
 
 typedef enum CharacterState {
@@ -33,6 +34,7 @@ public:
 	const Vector2& getSpeed();
 	void immobilize();
 	void move(sf::Time elapsedTime);
+	void pickUpProp(std::shared_ptr<Prop> prop);
 	void pointAt(Vector2& position);
 	void render(sf::RenderWindow& renderWindow);
 	void setAcceleration(Vector2& acceleration);
@@ -58,6 +60,7 @@ private:
 	AnimatedSprite _animatedSprite;
 
 	std::shared_ptr<IWeapon> _equipedWeapon;
+	std::shared_ptr<Prop> _prop;
 
 	CharacterState _state;
 };

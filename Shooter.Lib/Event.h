@@ -1,8 +1,10 @@
 #pragma once
 
 typedef enum EventType {
-	MOUSE_BUTTON_DOWN,
-	QUIT
+	NOTHING = 0,
+	LEFT_BUTTON_CLICKED = 1,
+	RIGHT_BUTTON_CLICKED = 2,
+	QUIT = 3
 } EventType;
 
 class Event

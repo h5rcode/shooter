@@ -27,11 +27,13 @@ public:
 	std::vector<std::shared_ptr<Projectile>>& getProjectiles();
 	bool isStopped();
 	void processInput();
+	void setSelectedProp(Vector2& crosshairPosition);
 	void update(sf::Time elapsedTime);
 
 private:
 	Vector2 getPlayerAcceleration();
 	void handleMouseButtonDown();
+	void handleUseEvent();
 
 private:
 	std::shared_ptr<Prop> _selectedProp;

@@ -61,8 +61,12 @@ void GameState::processInput()
 
 		switch (eventType)
 		{
-		case MOUSE_BUTTON_DOWN:
+		case LEFT_BUTTON_CLICKED:
 			handleMouseButtonDown();
+			break;
+
+		case RIGHT_BUTTON_CLICKED:
+			handleUseEvent();
 			break;
 
 		case QUIT:
@@ -80,22 +84,7 @@ void GameState::update(sf::Time elapsedTime)
 	Vector2& crosshairPosition = _crosshair.getPosition();
 
 	_player.pointAt(crosshairPosition);
-
-	std::shared_ptr<Prop> selectedProp = _gameSet.getPropAt(crosshairPosition);
-	if (selectedProp == NULL) {
-		if (_selectedProp != NULL) {
-			_selectedProp->setSelected(false);
-			_selectedProp = NULL;
-		}
-	}
-	else if (selectedProp != _selectedProp) {
-		if (_selectedProp != NULL) {
-			_selectedProp->setSelected(false);
-		}
-
-		selectedProp->setSelected(true);
-		_selectedProp = selectedProp;
-	}
+	setSelectedProp(crosshairPosition);
 
 	BoundingBox playerBoundingBox = _player.getBoundingBox(elapsedTime);
 
@@ -107,18 +96,28 @@ void GameState::update(sf::Time elapsedTime)
 		_camera.setPosition(_player.getPosition());
 	}
 
-	for each (std::shared_ptr<Projectile> projectile in _projectiles)
+	std::vector<std::shared_ptr<Projectile>>::iterator projectileIterator = _projectiles.begin();
+	while (projectileIterator != _projectiles.end())
 	{
+		std::shared_ptr<Projectile> projectile = *projectileIterator;
 		BoundingBox projectileBoundingBox = projectile->getBoundingBox(elapsedTime);
 
+		bool eraseProjectile = false;
 		if (_gameSet.collidesWith(projectileBoundingBox)) {
-			// TODO
+			// TODO Handle projectiles that are outside the game set.
+			eraseProjectile = true;
 		}
 		else if (projectileBoundingBox.intersects(playerBoundingBox)) {
-			// TODO
+			// TODO 
 		}
 
-		projectile->move(elapsedTime);
+		if (eraseProjectile) {
+			projectileIterator = _projectiles.erase(projectileIterator);
+		}
+		else {
+			++projectileIterator;
+			projectile->move(elapsedTime);
+		}
 	}
 }
 
@@ -160,7 +159,33 @@ void GameState::handleMouseButtonDown()
 	}
 }
 
+void GameState::handleUseEvent() {
+	if (_selectedProp != NULL) {
+		_player.pickUpProp(_selectedProp);
+		_gameSet.removeProp(_selectedProp);
+		_selectedProp = NULL;
+	}
+}
+
 bool GameState::isStopped()
 {
 	return _isStopped;
+}
+
+void GameState::setSelectedProp(Vector2& crosshairPosition) {
+	std::shared_ptr<Prop> selectedProp = _gameSet.getPropAt(crosshairPosition);
+	if (selectedProp == NULL) {
+		if (_selectedProp != NULL) {
+			_selectedProp->setSelected(false);
+			_selectedProp = NULL;
+		}
+	}
+	else if (selectedProp != _selectedProp) {
+		if (_selectedProp != NULL) {
+			_selectedProp->setSelected(false);
+		}
+
+		selectedProp->setSelected(true);
+		_selectedProp = selectedProp;
+	}
 }

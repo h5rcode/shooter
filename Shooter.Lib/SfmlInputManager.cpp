@@ -32,7 +32,12 @@ bool SfmlInputManager::pollEvent(Event& event) {
 		switch (sfmlEvent.type)
 		{
 		case sf::Event::MouseButtonPressed:
-			event.setType(MOUSE_BUTTON_DOWN);
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
+				event.setType(LEFT_BUTTON_CLICKED);
+			}
+			else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right)) {
+				event.setType(RIGHT_BUTTON_CLICKED);
+			}
 			break;
 
 		case sf::Event::Closed:

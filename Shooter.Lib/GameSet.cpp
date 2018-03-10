@@ -56,6 +56,14 @@ std::vector<std::shared_ptr<Wall>>& GameSet::getWalls()
 	return _walls;
 }
 
+void GameSet::removeProp(std::shared_ptr<Prop> prop) {
+	std::vector<std::shared_ptr<Prop>>::const_iterator position = std::find(_props.begin(), _props.end(), prop);
+
+	if (position != _props.end()) {
+		_props.erase(position);
+	}
+}
+
 void GameSet::render(sf::RenderWindow& renderWindow)
 {
 	for (std::vector<std::shared_ptr<Wall>>::iterator it = _walls.begin(); it != _walls.end(); ++it)

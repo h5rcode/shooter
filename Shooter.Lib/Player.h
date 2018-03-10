@@ -34,7 +34,7 @@ public:
 	const Vector2& getSpeed();
 	void immobilize();
 	void move(sf::Time elapsedTime);
-	void pickUpProp(std::shared_ptr<Prop> prop);
+	bool pickUpProp(std::shared_ptr<Prop> prop);
 	void pointAt(Vector2& position);
 	void render(sf::RenderWindow& renderWindow);
 	void setAcceleration(Vector2& acceleration);
@@ -47,6 +47,7 @@ private:
 private:
 	double _friction;
 	double _maxSpeed;
+	double _reach;
 	Vector2 _acceleration;
 	Vector2 _speed;
 	Vector2 _position;

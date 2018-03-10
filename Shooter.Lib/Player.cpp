@@ -5,6 +5,7 @@ const double MIN_SPEED = 0.01;
 
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
+const int PLAYER_REACH = 64;
 const int NUMBER_OF_FRAMES = 8;
 const int FRAME_TIME_MILLISECONDS = 150;
 
@@ -14,6 +15,7 @@ Player::Player(Vector2 position) :
 	_friction(5),
 	_maxSpeed(10000),
 	_position(position),
+	_reach(PLAYER_REACH),
 	_sound(),
 	_soundBuffer(),
 	_texture()
@@ -138,10 +140,21 @@ void Player::move(sf::Time elapsedTime) {
 	}
 }
 
-void Player::pickUpProp(std::shared_ptr<Prop> prop) {
-	if (_prop != NULL) {
-		_prop = prop;
+bool Player::pickUpProp(std::shared_ptr<Prop> prop) {
+	bool propWasPickedUp = false;
+
+	if (_prop == NULL) {
+		Vector2& propPosition = prop->getPosition();
+		Vector2 positionDifference = _position - propPosition;
+		double distanceBetweenPlayerAndProp = positionDifference.getNorm();
+
+		if (distanceBetweenPlayerAndProp <= _reach) {
+			_prop = prop;
+			propWasPickedUp = true;
+		}
 	}
+
+	return propWasPickedUp;
 }
 
 void Player::pointAt(Vector2& position)

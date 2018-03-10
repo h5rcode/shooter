@@ -161,9 +161,12 @@ void GameState::handleMouseButtonDown()
 
 void GameState::handleUseEvent() {
 	if (_selectedProp != NULL) {
-		_player.pickUpProp(_selectedProp);
-		_gameSet.removeProp(_selectedProp);
-		_selectedProp = NULL;
+		bool propWasPickedUp = _player.pickUpProp(_selectedProp);
+
+		if (propWasPickedUp) {
+			_gameSet.removeProp(_selectedProp);
+			_selectedProp = NULL;
+		}
 	}
 }
 

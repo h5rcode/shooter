@@ -4,7 +4,8 @@ typedef enum EventType {
 	NOTHING = 0,
 	LEFT_BUTTON_CLICKED = 1,
 	RIGHT_BUTTON_CLICKED = 2,
-	QUIT = 3
+	DROP_PROP = 3,
+	QUIT = 4
 } EventType;
 
 class Event

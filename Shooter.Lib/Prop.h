@@ -13,9 +13,15 @@ public:
 public:
 	BoundingBox & getBoundingBox();
 	Vector2& getPosition();
-	void render(sf::RenderWindow& renderWindow);
+	void setOrientation(double orientation);
+	void setPosition(Vector2& position);
 	void setSelected(bool selected);
+	void render(sf::RenderWindow& renderWindow);
 private:
+	void resetBoundingBox();
+private:
+	int _width;
+	int _height;
 	BoundingBox _boundingBox;
 	double _orientation;
 	Vector2 _position;

@@ -69,6 +69,10 @@ void GameState::processInput()
 			handleUseEvent();
 			break;
 
+		case DROP_PROP:
+			handleDropPropEvent();
+			break;
+
 		case QUIT:
 			_isStopped = true;
 			break;
@@ -141,6 +145,23 @@ Player& GameState::getPlayer() const {
 
 std::vector<std::shared_ptr<Projectile>>& GameState::getProjectiles() {
 	return _projectiles;
+}
+
+void GameState::handleDropPropEvent() {
+	std::shared_ptr<Prop> prop = _player.getProp();
+	if (prop != NULL) {
+		Vector2 crosshairPosition = _crosshair.getPosition();
+		BoundingBox& propBoundingBox = prop->getBoundingBox();
+		BoundingBox targetPropBoundingBox = BoundingBox(crosshairPosition, propBoundingBox.getWidth(), propBoundingBox.getHeight(), _player.getOrientation());
+
+		if (_gameSet.collidesWith(targetPropBoundingBox) == false) {
+			_player.dropProp();
+			prop->setOrientation(_player.getOrientation());
+			prop->setPosition(crosshairPosition);
+
+			_gameSet.addProp(prop);
+		}
+	}
 }
 
 void GameState::handleMouseButtonDown()

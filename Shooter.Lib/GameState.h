@@ -32,6 +32,7 @@ public:
 
 private:
 	Vector2 getPlayerAcceleration();
+	void handleDropPropEvent();
 	void handleMouseButtonDown();
 	void handleUseEvent();
 

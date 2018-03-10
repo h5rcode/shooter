@@ -12,6 +12,7 @@
 
 class IGameSet {
 public:
+	virtual void addProp(std::shared_ptr<Prop> prop) = 0;
 	virtual bool collidesWith(BoundingBox& boundingBox) const = 0;
 	virtual std::vector<std::shared_ptr<Wall>>& getWalls() = 0;
 	virtual std::vector<std::shared_ptr<Prop>>& getProps() = 0;

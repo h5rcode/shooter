@@ -6,6 +6,10 @@ GameSet::GameSet(std::vector<std::shared_ptr<Wall>> walls, std::vector<std::shar
 	_props = props;
 }
 
+void GameSet::addProp(std::shared_ptr<Prop> prop) {
+	_props.push_back(prop);
+}
+
 bool GameSet::collidesWith(BoundingBox& boundingBox) const {
 
 	for (std::vector<std::shared_ptr<Wall>>::const_iterator iterator = _walls.begin(); iterator != _walls.end(); iterator++)

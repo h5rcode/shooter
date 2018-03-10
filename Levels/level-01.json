@@ -43,5 +43,13 @@
 		"width": 192,
 		"height": 64,
 		"texture": "sofa.png"
+	},
+	{
+		"x": 300,
+		"y": 100,
+		"orientation": 45,
+		"width": 192,
+		"height": 64,
+		"texture": "sofa.png"
 	}]
 }

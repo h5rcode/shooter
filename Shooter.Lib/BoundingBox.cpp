@@ -1,6 +1,8 @@
 #include "BoundingBox.h"
 
 BoundingBox::BoundingBox(Vector2& position, int width, int height, double orientation) :
+	_height(height),
+	_width(width),
 	_normals(),
 	_vertices()
 {
@@ -42,8 +44,16 @@ BoundingBox::BoundingBox(Vector2& position, int width, int height, double orient
 	}
 }
 
+int BoundingBox::getHeight() const {
+	return _height;
+}
+
 std::vector<std::shared_ptr<Vector2>>& BoundingBox::getNormals() {
 	return _normals;
+}
+
+int BoundingBox::getWidth() const {
+	return _width;
 }
 
 Projection BoundingBox::project(Vector2& axis) const {

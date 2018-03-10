@@ -26,11 +26,13 @@ public:
 	std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
 	bool canAttack() const;
 	Vector2 computePosition(sf::Time elapsedTime);
+	std::shared_ptr<Prop> dropProp();
 	void equipWeapon(std::shared_ptr<IWeapon> weapon);
 	BoundingBox getBoundingBox(sf::Time elapsedTime);
 	std::shared_ptr<IWeapon> getEquipedWeapon() const;
 	double getOrientation();
 	Vector2& getPosition();
+	std::shared_ptr<Prop> getProp();
 	const Vector2& getSpeed();
 	void immobilize();
 	void move(sf::Time elapsedTime);

@@ -56,6 +56,10 @@ BoundingBox Player::getBoundingBox(sf::Time elapsedTime)
 	return BoundingBox(position, FRAME_WIDTH / 2, FRAME_HEIGHT / 2, _orientation);
 }
 
+std::shared_ptr<Prop> Player::getProp() {
+	return _prop;
+}
+
 bool Player::canAttack() const {
 	return _equipedWeapon != NULL && _equipedWeapon->canAttack();
 }
@@ -110,6 +114,12 @@ Vector2 Player::computeSpeed(sf::Time elapsedTime) {
 	}
 
 	return nextSpeed;
+}
+
+std::shared_ptr<Prop> Player::dropProp() {
+	std::shared_ptr<Prop> prop = _prop;
+	_prop = NULL;
+	return prop;
 }
 
 Vector2& Player::getPosition() {

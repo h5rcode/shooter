@@ -7,6 +7,7 @@ class GameSet : public IGameSet
 public:
 	GameSet(std::vector<std::shared_ptr<Wall>> walls, std::vector<std::shared_ptr<Prop>> props);
 public:
+	void addProp(std::shared_ptr<Prop> prop);
 	bool collidesWith(BoundingBox& boundingBox) const;
 	std::vector<std::shared_ptr<Prop>>& getProps();
 	std::shared_ptr<Prop> getPropAt(Vector2& position);

@@ -40,6 +40,12 @@ bool SfmlInputManager::pollEvent(Event& event) {
 			}
 			break;
 
+		case sf::Event::KeyPressed:
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+				event.setType(DROP_PROP);
+			}
+			break;
+
 		case sf::Event::Closed:
 			event.setType(QUIT);
 			break;

@@ -12,11 +12,15 @@ Prop::Prop(Vector2 position, int width, int height, double orientation, std::str
 {
 	_texture.loadFromFile(texture);
 
+	sf::Vector2u textureSize = _texture.getSize();
+
+	sf::Vector2f spriteScale = sf::Vector2f((float)_width / (float)textureSize.x, (float)_height / (float)textureSize.y);
+
 	_sprite.setPosition((float)_position.x, (float)_position.y);
-	_sprite.setOrigin((float)_width / 2, (float)_height / 2);
+	_sprite.setOrigin((float)textureSize.x / 2, (float)textureSize.y / 2);
 	_sprite.setRotation((float)_orientation);
+	_sprite.setScale(spriteScale);
 	_sprite.setTexture(_texture);
-	_sprite.setTextureRect(sf::IntRect(0, 0, _width, _height));
 }
 
 BoundingBox& Prop::getBoundingBox()

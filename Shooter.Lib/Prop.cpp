@@ -13,11 +13,13 @@ Prop::Prop(Vector2 position, int width, int height, double orientation, std::str
 	_texture.loadFromFile(texture);
 
 	sf::Vector2u textureSize = _texture.getSize();
+	float textureWidth = (float)textureSize.x;
+	float textureHeight = (float)textureSize.y;
 
-	sf::Vector2f spriteScale = sf::Vector2f((float)_width / (float)textureSize.x, (float)_height / (float)textureSize.y);
+	sf::Vector2f spriteScale = sf::Vector2f((float)_width / textureWidth, (float)_height / textureHeight);
 
 	_sprite.setPosition((float)_position.x, (float)_position.y);
-	_sprite.setOrigin((float)textureSize.x / 2, (float)textureSize.y / 2);
+	_sprite.setOrigin(textureWidth / 2, textureHeight / 2);
 	_sprite.setRotation((float)_orientation);
 	_sprite.setScale(spriteScale);
 	_sprite.setTexture(_texture);

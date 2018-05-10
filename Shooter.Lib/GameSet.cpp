@@ -1,7 +1,8 @@
 #include "GameSet.h"
 
-GameSet::GameSet(std::vector<std::shared_ptr<Wall>> walls, std::vector<std::shared_ptr<Prop>> props)
+GameSet::GameSet(std::vector<std::shared_ptr<IItem>> items, std::vector<std::shared_ptr<Wall>> walls, std::vector<std::shared_ptr<Prop>> props)
 {
+	_items = items;
 	_walls = walls;
 	_props = props;
 }
@@ -33,6 +34,21 @@ bool GameSet::collidesWith(BoundingBox& boundingBox) const {
 	}
 
 	return false;
+}
+
+std::shared_ptr<IItem> GameSet::getItemAt(Vector2& position) {
+	BoundingBox boundingBox(position, 1, 1, 0);
+	for (std::vector<std::shared_ptr<IItem>>::const_iterator iterator = _items.begin(); iterator != _items.end(); iterator++)
+	{
+		std::shared_ptr<IItem> item = *iterator;
+		BoundingBox& itemBoundingBox = item->getBoundingBox();
+
+		if (itemBoundingBox.intersects(boundingBox)) {
+			return item;
+		}
+	}
+
+	return NULL;
 }
 
 std::shared_ptr<Prop> GameSet::getPropAt(Vector2& position) {

@@ -129,6 +129,8 @@
     <ClCompile Include="GameSet.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="LevelDescriptor.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInitialStateDescriptor.cpp" />
@@ -156,6 +158,10 @@
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="IInputBindings.h" />
     <ClInclude Include="IInputManager.h" />
+    <ClInclude Include="IItem.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="ItemDescriptor.h" />
+    <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="IWeapon.h" />

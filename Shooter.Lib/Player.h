@@ -8,6 +8,7 @@
 
 #include "AnimatedSprite.h"
 #include "BoundingBox.h"
+#include "Inventory.h"
 #include "IWeapon.h"
 #include "Prop.h"
 #include "Vector2.h"
@@ -64,6 +65,8 @@ private:
 
 	std::shared_ptr<IWeapon> _equipedWeapon;
 	std::shared_ptr<Prop> _prop;
+
+	Inventory _inventory;
 
 	CharacterState _state;
 };

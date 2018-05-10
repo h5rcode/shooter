@@ -16,6 +16,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{5df87415-32a6-47a9-adec-0cfd4c62eca4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inventory">
+      <UniqueIdentifier>{d7d4afc8-76f6-4064-af35-51211b87c5ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerInitialStateDescriptor.cpp">
@@ -77,6 +80,12 @@
     </ClCompile>
     <ClCompile Include="Firearm.cpp">
       <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +175,18 @@
     </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="IItem.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDescriptor.h">
+      <Filter>LevelDescriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Inventory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

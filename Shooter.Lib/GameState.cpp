@@ -88,6 +88,7 @@ void GameState::update(sf::Time elapsedTime)
 	Vector2& crosshairPosition = _crosshair.getPosition();
 
 	_player.pointAt(crosshairPosition);
+	setSelectedItem(crosshairPosition);
 	setSelectedProp(crosshairPosition);
 
 	BoundingBox playerBoundingBox = _player.getBoundingBox(elapsedTime);
@@ -194,6 +195,24 @@ void GameState::handleUseEvent() {
 bool GameState::isStopped()
 {
 	return _isStopped;
+}
+
+void GameState::setSelectedItem(Vector2& crosshairPosition) {
+	std::shared_ptr<IItem> selectedItem = _gameSet.getItemAt(crosshairPosition);
+	if (selectedItem == NULL) {
+		if (_selectedItem != NULL) {
+			_selectedItem->setSelected(false);
+			_selectedItem = NULL;
+		}
+	}
+	else if (selectedItem != _selectedItem) {
+		if (_selectedItem != NULL) {
+			_selectedItem->setSelected(false);
+		}
+
+		selectedItem->setSelected(true);
+		_selectedItem = selectedItem;
+	}
 }
 
 void GameState::setSelectedProp(Vector2& crosshairPosition) {

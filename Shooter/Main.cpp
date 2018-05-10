@@ -23,10 +23,11 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		LevelDescriptor levelDescriptor;
 		levelDescriptor.loadFromFile(level01FileName);
 
+		std::vector<std::shared_ptr<IItem>> items = levelDescriptor.getItems();
 		std::vector<std::shared_ptr<Wall>> walls = levelDescriptor.getWalls();
 		std::vector<std::shared_ptr<Prop>> props = levelDescriptor.getProps();
 
-		GameSet gameSet(walls, props);
+		GameSet gameSet(items, walls, props);
 		GameSettings gameSettings;
 		SfmlInputManager inputManager(renderWindow);
 

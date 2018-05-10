@@ -13,6 +13,7 @@ Player::Player(Vector2 position) :
 	_animatedSprite(),
 	_animation(),
 	_friction(5),
+	_inventory(),
 	_maxSpeed(10000),
 	_position(position),
 	_reach(PLAYER_REACH),

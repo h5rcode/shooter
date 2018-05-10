@@ -27,6 +27,7 @@ public:
 	std::vector<std::shared_ptr<Projectile>>& getProjectiles();
 	bool isStopped();
 	void processInput();
+	void setSelectedItem(Vector2& crosshairPosition);
 	void setSelectedProp(Vector2& crosshairPosition);
 	void update(sf::Time elapsedTime);
 
@@ -37,6 +38,7 @@ private:
 	void handleUseEvent();
 
 private:
+	std::shared_ptr<IItem> _selectedItem;
 	std::shared_ptr<Prop> _selectedProp;
 	bool _isStopped;
 	Camera _camera;

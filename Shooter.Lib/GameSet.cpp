@@ -97,4 +97,11 @@ void GameSet::render(sf::RenderWindow& renderWindow)
 		std::shared_ptr<Prop> prop = *it;
 		prop->render(renderWindow);
 	}
+
+	for (std::vector<std::shared_ptr<IItem>>::iterator it = _items.begin(); it != _items.end(); ++it)
+	{
+		std::shared_ptr<IItem> item = *it;
+		item->render(renderWindow);
+	}
+
 }

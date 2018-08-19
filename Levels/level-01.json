@@ -51,5 +51,14 @@
 		"width": 192,
 		"height": 64,
 		"texture": "sofa.png"
+	}],
+	"items": [{
+		"itemId": "SIGSAUER",
+		"x": 500,
+		"y": 500,
+		"orientation": 170,
+		"width": 32,
+		"height": 32,
+		"texture": "sig-sauer.png"
 	}]
 }

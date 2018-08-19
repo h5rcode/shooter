@@ -2,14 +2,26 @@
 
 #include "Firearm.h"
 
-Firearm::Firearm(int capacity, int damage, double muzzleVelocity, int roundsPerMinute) :
+Firearm::Firearm(
+	int capacity,
+	int damage,
+	double muzzleVelocity,
+	int roundsPerMinute,
+	int weight,
+	Vector2 position,
+	int width,
+	int height,
+	double orientation,
+	std::string& texture) :
+	AbstractItem(weight, position, width, height, orientation, texture),
 	_capacity(capacity),
 	_damage(damage),
 	_muzzleVelocity(muzzleVelocity),
 	_remainingRounds(capacity),
 	_roundsPerMinute(roundsPerMinute),
 	_timeBetweenTwoShots(sf::seconds(1.f / (roundsPerMinute / 60.f))),
-	_timeSinceLastShot() {
+	_timeSinceLastShot()
+{
 }
 
 bool Firearm::canAttack() const

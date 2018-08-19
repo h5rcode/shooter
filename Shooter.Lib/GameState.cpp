@@ -1,6 +1,5 @@
 #include "BoundingBox.h"
 #include "Event.h"
-#include "Firearm.h"
 #include "GameState.h"
 #include "IGameSettings.h"
 #include "IInputManager.h"
@@ -15,8 +14,6 @@ GameState::GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManag
 	_projectiles(),
 	_selectedProp(NULL)
 {
-	std::shared_ptr<Firearm> firearm = std::make_shared<Firearm>(20, 10, 1000, 120);
-	_player.equipWeapon(firearm);
 }
 
 Vector2 GameState::getPlayerAcceleration() {

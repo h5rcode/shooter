@@ -15,7 +15,6 @@ std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 	std::vector<std::shared_ptr<IItem>> items;
 
 	ItemFactory itemFactory;
-
 	for (std::vector<std::shared_ptr<ItemDescriptor>>::iterator it = this->itemDescriptors.begin(); it != this->itemDescriptors.end(); ++it)
 	{
 		std::shared_ptr<ItemDescriptor> itemDescriptor = *it;
@@ -23,8 +22,9 @@ std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 		Vector2 position(itemDescriptor->x, itemDescriptor->y);
 		double orientation = itemDescriptor->orientation;
 		std::string itemId = itemDescriptor->itemId;
+		std::string texture = itemDescriptor->texture;
 
-		std::shared_ptr<IItem> prop = itemFactory.buildItem(itemId, position, orientation);
+		std::shared_ptr<IItem> prop = itemFactory.buildItem(itemId, position, orientation, texture);
 		items.push_back(prop);
 	}
 	return items;
@@ -106,6 +106,21 @@ void LevelDescriptor::loadFromFile(std::string& fileName) {
 		propDescriptor->height = prop.at("height").get<int>();
 
 		this->propDescriptors.push_back(propDescriptor);
+	}
+
+	json::value_type items = json.at("items");
+	for (json::iterator it = items.begin(); it != items.end(); ++it)
+	{
+		json::value_type item = *it;
+
+		std::shared_ptr<ItemDescriptor> itemDescriptor = std::make_shared<ItemDescriptor>();
+		itemDescriptor->itemId = item.at("itemId").get<std::string>();
+		itemDescriptor->x = item.at("x").get<double>();
+		itemDescriptor->y = item.at("y").get<double>();
+		itemDescriptor->orientation = item.at("orientation").get<double>();
+		itemDescriptor->texture = TEXTURES_PATH + item.at("texture").get<std::string>();
+
+		this->itemDescriptors.push_back(itemDescriptor);
 	}
 
 	json::value_type playerInitialState = json.at("playerInitialState");

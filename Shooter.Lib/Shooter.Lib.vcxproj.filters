@@ -87,6 +87,9 @@
     <ClCompile Include="ItemFactory.cpp">
       <Filter>Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="AbstractItem.cpp">
+      <Filter>Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">
@@ -186,6 +189,9 @@
       <Filter>LevelDescriptors</Filter>
     </ClInclude>
     <ClInclude Include="ItemFactory.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractItem.h">
       <Filter>Inventory</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,13 +2,24 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "AbstractItem.h"
 #include "IWeapon.h"
 #include "Projectile.h"
 #include "Vector2.h"
 
-class Firearm : public IWeapon {
+class Firearm : public AbstractItem, public IWeapon {
 public:
-	Firearm(int capacity, int damage, double muzzleVelocity, int roundsPerMinute);
+	Firearm(
+		int capacity,
+		int damage,
+		double muzzleVelocity,
+		int roundsPerMinute,
+		int weight,
+		Vector2 position,
+		int width,
+		int height,
+		double orientation,
+		std::string& texture);
 
 public:
 	bool canAttack() const;
@@ -19,7 +30,6 @@ public:
 	int _capacity;
 	int _damage;
 	double _muzzleVelocity;
-	double _orientation;
 	int _remainingRounds;
 	int _roundsPerMinute;
 	sf::Time _timeBetweenTwoShots;

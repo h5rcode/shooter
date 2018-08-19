@@ -9,6 +9,6 @@
 class ItemFactory
 {
 public:
-	std::shared_ptr<IItem> buildItem(std::string itemId, Vector2& position, double orientation);
+	std::shared_ptr<IItem> buildItem(std::string itemId, Vector2& position, double orientation, std::string& texture);
 };
 

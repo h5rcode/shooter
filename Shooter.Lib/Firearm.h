@@ -1,8 +1,10 @@
 #pragma once
 
+#include <memory>
 #include <SFML/Graphics.hpp>
 
 #include "AbstractItem.h"
+#include "IStaticRenderable.h"
 #include "IWeapon.h"
 #include "Projectile.h"
 #include "Vector2.h"
@@ -19,7 +21,7 @@ public:
 		int width,
 		int height,
 		double orientation,
-		std::string& texture);
+		std::shared_ptr<IStaticRenderable> staticRenderable);
 
 public:
 	bool canAttack() const;

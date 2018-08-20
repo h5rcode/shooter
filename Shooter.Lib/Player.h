@@ -6,8 +6,8 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "AnimatedSprite.h"
 #include "BoundingBox.h"
+#include "IAnimatedRenderable.h"
 #include "Inventory.h"
 #include "IWeapon.h"
 #include "Prop.h"
@@ -21,7 +21,7 @@ typedef enum CharacterState {
 class Player
 {
 public:
-	Player(Vector2 position);
+	Player(Vector2 position, IAnimatedRenderable& animatedRenderable);
 
 public:
 	std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
@@ -59,9 +59,7 @@ private:
 	sf::Sound _sound;
 	sf::SoundBuffer _soundBuffer;
 
-	sf::Texture _texture;
-	Animation _animation;
-	AnimatedSprite _animatedSprite;
+	IAnimatedRenderable& _animatedRenderable;
 
 	std::shared_ptr<IWeapon> _equipedWeapon;
 	std::shared_ptr<Prop> _prop;

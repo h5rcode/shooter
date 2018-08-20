@@ -19,6 +19,15 @@
     <Filter Include="Inventory">
       <UniqueIdentifier>{d7d4afc8-76f6-4064-af35-51211b87c5ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Renderables">
+      <UniqueIdentifier>{8c19b5a1-28f1-4f49-b489-f79cb47e6350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{9e93ac56-fb3f-4900-8821-26c828203333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items\Weapons">
+      <UniqueIdentifier>{05485d27-bdb2-4724-b01a-577cac8a4cc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerInitialStateDescriptor.cpp">
@@ -75,20 +84,26 @@
     <ClCompile Include="SfmlRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
-    <ClCompile Include="Firearm.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="ItemFactory.cpp">
-      <Filter>Inventory</Filter>
-    </ClCompile>
     <ClCompile Include="AbstractItem.cpp">
-      <Filter>Inventory</Filter>
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Firearm.cpp">
+      <Filter>Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedRenderable.cpp">
+      <Filter>Rendering\Renderables</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticRenderable.cpp">
+      <Filter>Rendering\Renderables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,9 +117,6 @@
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="IGameState.h">
-      <Filter>World</Filter>
-    </ClInclude>
-    <ClInclude Include="IWeapon.h">
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -173,26 +185,41 @@
     <ClInclude Include="Vector2.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Firearm.h">
-      <Filter>World</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>World</Filter>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
-      <Filter>Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="IItem.h">
       <Filter>Inventory</Filter>
     </ClInclude>
     <ClInclude Include="ItemDescriptor.h">
       <Filter>LevelDescriptors</Filter>
     </ClInclude>
-    <ClInclude Include="ItemFactory.h">
-      <Filter>Inventory</Filter>
+    <ClInclude Include="IItem.h">
+      <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="AbstractItem.h">
-      <Filter>Inventory</Filter>
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Firearm.h">
+      <Filter>Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="IWeapon.h">
+      <Filter>Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnimatedRenderable.h">
+      <Filter>Rendering\Renderables</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedRenderable.h">
+      <Filter>Rendering\Renderables</Filter>
+    </ClInclude>
+    <ClInclude Include="IStaticRenderable.h">
+      <Filter>Rendering\Renderables</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticRenderable.h">
+      <Filter>Rendering\Renderables</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

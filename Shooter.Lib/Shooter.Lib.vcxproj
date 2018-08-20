@@ -132,9 +132,11 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
+    <ClCompile Include="StaticRenderable.cpp" />
     <ClCompile Include="LevelDescriptor.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInitialStateDescriptor.cpp" />
+    <ClCompile Include="AnimatedRenderable.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Projection.cpp" />
     <ClCompile Include="Prop.cpp" />
@@ -161,9 +163,13 @@
     <ClInclude Include="IInputBindings.h" />
     <ClInclude Include="IInputManager.h" />
     <ClInclude Include="IItem.h" />
+    <ClInclude Include="IStaticRenderable.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="IAnimatedRenderable.h" />
     <ClInclude Include="ItemDescriptor.h" />
     <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="StaticRenderable.h" />
+    <ClInclude Include="AnimatedRenderable.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="IWeapon.h" />

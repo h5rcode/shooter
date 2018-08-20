@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "AnimatedRenderable.h"
 #include "GameSet.h"
 #include "GameSettings.h"
 #include "GameState.h"
@@ -35,7 +36,9 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		Crosshair crosshair(crosshairTexture);
 
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
-		Player player(playerInitialState.getPosition());
+
+		AnimatedRenderable playerRenderable;
+		Player player(playerInitialState.getPosition(), playerRenderable);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);
 
 		SfmlRenderer sfmlRenderer(gameState, renderWindow);

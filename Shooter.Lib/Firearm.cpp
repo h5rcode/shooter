@@ -12,8 +12,8 @@ Firearm::Firearm(
 	int width,
 	int height,
 	double orientation,
-	std::string& texture) :
-	AbstractItem(weight, position, width, height, orientation, texture),
+	std::shared_ptr< IStaticRenderable> staticRenderable) :
+	AbstractItem(weight, position, width, height, orientation, staticRenderable),
 	_capacity(capacity),
 	_damage(damage),
 	_muzzleVelocity(muzzleVelocity),

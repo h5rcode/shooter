@@ -1,4 +1,3 @@
-#include "Animation.h"
 #include "Player.h"
 
 const double MIN_SPEED = 0.01;
@@ -6,12 +5,9 @@ const double MIN_SPEED = 0.01;
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
 const int PLAYER_REACH = 64;
-const int NUMBER_OF_FRAMES = 8;
 const int FRAME_TIME_MILLISECONDS = 150;
 
-Player::Player(Vector2 position) :
-	_animatedSprite(),
-	_animation(),
+Player::Player(Vector2 position, IAnimatedRenderable& animatedRenderable) :
 	_friction(5),
 	_inventory(),
 	_maxSpeed(10000),
@@ -19,23 +15,12 @@ Player::Player(Vector2 position) :
 	_reach(PLAYER_REACH),
 	_sound(),
 	_soundBuffer(),
-	_texture()
+	_animatedRenderable(animatedRenderable)
 {
 	_soundBuffer.loadFromFile("Resources/sounds/138476__randomationpictures__step-tap.wav");
 	_sound.setPlayingOffset(sf::milliseconds(2 * FRAME_TIME_MILLISECONDS));
 	_sound.setBuffer(_soundBuffer);
 	_sound.setLoop(true);
-
-	_texture.loadFromFile("Resources/textures/character.png");
-
-	_animation.setSpriteSheet(_texture);
-	for (int frameNumber = 0; frameNumber < NUMBER_OF_FRAMES; frameNumber++) {
-		_animation.addFrame(sf::IntRect(0, frameNumber * FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT));
-	}
-
-	_animatedSprite.setAnimation(_animation);
-	_animatedSprite.setOrigin(FRAME_WIDTH / 2, FRAME_HEIGHT / 2);
-	_animatedSprite.setFrameTime(sf::milliseconds(FRAME_TIME_MILLISECONDS));
 }
 
 std::vector<std::shared_ptr<Projectile>> Player::attackToward(Vector2& position) {
@@ -139,15 +124,15 @@ void Player::move(sf::Time elapsedTime) {
 
 	if (nextSpeed == Vector2(0, 0)) {
 		_sound.pause();
-		_animatedSprite.pause();
+		_animatedRenderable.pause();
 	}
 	else {
 		if (_sound.getStatus() != sf::Sound::Playing) {
 			_sound.play();
 		}
 
-		_animatedSprite.play();
-		_animatedSprite.update(elapsedTime);
+		_animatedRenderable.play();
+		_animatedRenderable.update(elapsedTime);
 	}
 }
 
@@ -174,9 +159,9 @@ void Player::pointAt(Vector2& position)
 }
 
 void Player::render(sf::RenderWindow& renderWindow) {
-	_animatedSprite.setRotation((float)_orientation);
-	_animatedSprite.setPosition((float)_position.x, (float)_position.y);
-	renderWindow.draw(_animatedSprite);
+	_animatedRenderable.setRotation(_orientation);
+	_animatedRenderable.setPosition(_position.x, _position.y);
+	_animatedRenderable.render(renderWindow);
 }
 
 void Player::setAcceleration(Vector2& acceleration) {

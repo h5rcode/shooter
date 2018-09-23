@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Tools\SFML-2.4.2\include;$(SolutionDir)Shooter.Lib;$(SolutionDir)Tools\googletest-release-1.8.0\googletest\include;$(SolutionDir)Tools\googletest-release-1.8.0\googletest;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Tools\SFML-2.4.2\include;$(SolutionDir)Shooter.Lib;$(SolutionDir)Tools\googletest-release-1.8.0\googletest\include;$(SolutionDir)Tools\googletest-release-1.8.0\googletest;D:\Projets\shooter\Tools\googletest-release-1.8.0\googlemock;D:\Projets\shooter\Tools\googletest-release-1.8.0\googlemock\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -90,12 +90,13 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Tools\SFML-2.4.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)Tools\SFML-2.4.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -145,16 +146,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedRenderableMock.h" />
     <ClCompile Include="BoundingBoxTest.cpp" />
+    <ClCompile Include="PlayerTest.cpp" />
     <ClCompile Include="Vector2Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GoogleMock\GoogleMock.vcxproj">
+      <Project>{208da121-4be9-4869-8b13-55efaf4399c5}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\GoogleTest\GoogleTest.vcxproj">
       <Project>{f1f7e7b4-7746-41c9-987d-d3af172028e1}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Shooter.Lib\Shooter.Lib.vcxproj">
       <Project>{c75c0d43-1170-40fc-8501-c265a95b0142}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WeaponMock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

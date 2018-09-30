@@ -4,7 +4,7 @@
 
 class Camera {
 public:
-	Camera();
+	Camera(int viewWidth, int viewHeight);
 	Vector2 getPosition() const;
 	void setPosition(Vector2 position);
 	int getViewWidth() const;

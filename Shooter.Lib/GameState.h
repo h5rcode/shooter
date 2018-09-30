@@ -18,7 +18,13 @@
 class GameState : public IGameState
 {
 public:
-	GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManager& inputManager, Crosshair& crosshair, Player& player);
+	GameState(
+		IGameSet& gameSet,
+		IGameSettings& gameSettings,
+		IInputManager& inputManager,
+		Crosshair& crosshair,
+		Player& player,
+		Camera& camera);
 
 	Camera& getCamera();
 	Crosshair& getCrosshair();
@@ -41,7 +47,7 @@ private:
 	std::shared_ptr<IItem> _selectedItem;
 	std::shared_ptr<Prop> _selectedProp;
 	bool _isStopped;
-	Camera _camera;
+	Camera& _camera;
 	Crosshair _crosshair;
 	IGameSet& _gameSet;
 	IGameSettings& _gameSettings;

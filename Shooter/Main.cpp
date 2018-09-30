@@ -16,9 +16,13 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 {
 	try
 	{
-		// TODO Handle screen dimensions.
-		sf::Vector2i screenDimensions(800, 600);
-		sf::RenderWindow renderWindow(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Shooter");
+		std::vector<sf::VideoMode> fullscreenModes = sf::VideoMode::getFullscreenModes();
+		if (fullscreenModes.size() == 0) {
+			throw std::runtime_error("Not suitable fullscreen mode found.");
+		}
+
+		sf::VideoMode videoMode = fullscreenModes.at(0);
+		sf::RenderWindow renderWindow(videoMode, "Shooter", sf::Style::Fullscreen);
 		renderWindow.setMouseCursorVisible(false);
 
 		std::string level01FileName = "Levels/level-01.json";
@@ -41,7 +45,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		AnimatedRenderable playerRenderable;
 		Inventory inventory;
 		Player player(playerInitialState.getPosition(), playerRenderable, inventory);
-		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);
+		Camera camera(videoMode.width, videoMode.height);
+		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
 
 		SfmlRenderer sfmlRenderer(gameState, renderWindow);
 

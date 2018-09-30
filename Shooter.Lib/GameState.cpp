@@ -4,7 +4,14 @@
 #include "IGameSettings.h"
 #include "IInputManager.h"
 
-GameState::GameState(IGameSet& gameSet, IGameSettings& gameSettings, IInputManager& inputManager, Crosshair& crosshair, Player& player) :
+GameState::GameState(
+	IGameSet& gameSet,
+	IGameSettings& gameSettings,
+	IInputManager& inputManager,
+	Crosshair& crosshair,
+	Player& player,
+	Camera& camera) :
+	_camera(camera),
 	_crosshair(crosshair),
 	_gameSet(gameSet),
 	_gameSettings(gameSettings),

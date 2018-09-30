@@ -1,8 +1,8 @@
 #include "Camera.h"
 
-Camera::Camera() :
-	_viewWidth(800),
-	_viewHeight(600)
+Camera::Camera(int viewWidth, int viewHeight) :
+	_viewWidth(viewWidth),
+	_viewHeight(viewHeight)
 {
 }
 

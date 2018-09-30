@@ -30,6 +30,9 @@
     <ClCompile Include="AnimatedRenderableMock.h">
       <Filter>Header Files\Mocks</Filter>
     </ClCompile>
+    <ClCompile Include="InventoryTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WeaponMock.h">

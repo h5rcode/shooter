@@ -9,13 +9,30 @@ Inventory::Inventory() :
 {
 }
 
+Inventory::Inventory(int maxWeight) :
+	_items(),
+	_currentWeight(0),
+	_maxWeight(maxWeight)
+{
+}
+
 bool Inventory::addItem(std::shared_ptr<IItem> item) {
-	int newWeight = _currentWeight + item->getWeight();
+	int itemWeight = item->getWeight();
+	int newWeight = _currentWeight + itemWeight;
 	if (newWeight > _maxWeight) {
 		return false;
 	}
 
 	_items.push_back(item);
+	_currentWeight += itemWeight;
+
 	return true;
 }
 
+int Inventory::getCurrentWeight() const {
+	return _currentWeight;
+}
+
+int Inventory::getMaxWeight() const {
+	return _maxWeight;
+}

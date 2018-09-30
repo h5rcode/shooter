@@ -163,6 +163,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InventoryMock.h" />
+    <ClInclude Include="ItemMock.h" />
     <ClInclude Include="WeaponMock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

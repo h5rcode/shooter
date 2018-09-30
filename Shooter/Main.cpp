@@ -7,6 +7,7 @@
 #include "GameSet.h"
 #include "GameSettings.h"
 #include "GameState.h"
+#include "Inventory.h"
 #include "LevelDescriptor.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
@@ -38,7 +39,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
 		AnimatedRenderable playerRenderable;
-		Player player(playerInitialState.getPosition(), playerRenderable);
+		Inventory inventory;
+		Player player(playerInitialState.getPosition(), playerRenderable, inventory);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player);
 
 		SfmlRenderer sfmlRenderer(gameState, renderWindow);

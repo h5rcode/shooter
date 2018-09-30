@@ -35,5 +35,11 @@
     <ClInclude Include="WeaponMock.h">
       <Filter>Header Files\Mocks</Filter>
     </ClInclude>
+    <ClInclude Include="ItemMock.h">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryMock.h">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

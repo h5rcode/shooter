@@ -7,9 +7,9 @@ const int FRAME_HEIGHT = 64;
 const int PLAYER_REACH = 64;
 const int FRAME_TIME_MILLISECONDS = 150;
 
-Player::Player(Vector2 position, IAnimatedRenderable& animatedRenderable) :
+Player::Player(Vector2 position, IAnimatedRenderable& animatedRenderable, IInventory& inventory) :
 	_friction(5),
-	_inventory(),
+	_inventory(inventory),
 	_maxSpeed(10000),
 	_position(position),
 	_reach(PLAYER_REACH),
@@ -134,6 +134,19 @@ void Player::move(sf::Time elapsedTime) {
 		_animatedRenderable.play();
 		_animatedRenderable.update(elapsedTime);
 	}
+}
+
+bool Player::pickUpItem(std::shared_ptr<IItem> item) {
+
+	Vector2& itemPosition = item->getPosition();
+	Vector2 positionDifference = _position - itemPosition;
+	double distanceBetweenPlayerAndItem = positionDifference.getNorm();
+
+	if (distanceBetweenPlayerAndItem > _reach) {
+		return false;
+	}
+
+	return _inventory.addItem(item);
 }
 
 bool Player::pickUpProp(std::shared_ptr<Prop> prop) {

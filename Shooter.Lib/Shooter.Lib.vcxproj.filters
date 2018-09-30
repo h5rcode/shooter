@@ -221,5 +221,8 @@
     <ClInclude Include="StaticRenderable.h">
       <Filter>Rendering\Renderables</Filter>
     </ClInclude>
+    <ClInclude Include="IInventory.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

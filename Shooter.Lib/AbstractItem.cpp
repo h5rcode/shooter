@@ -17,6 +17,10 @@ BoundingBox & AbstractItem::getBoundingBox()
 	return _boundingBox;
 }
 
+Vector2 & AbstractItem::getPosition() {
+	return _position;
+}
+
 int AbstractItem::getWeight() const
 {
 	return _weight;

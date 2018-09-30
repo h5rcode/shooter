@@ -8,7 +8,8 @@
 
 #include "BoundingBox.h"
 #include "IAnimatedRenderable.h"
-#include "Inventory.h"
+#include "IInventory.h"
+#include "IItem.h"
 #include "IWeapon.h"
 #include "Prop.h"
 #include "Vector2.h"
@@ -21,7 +22,7 @@ typedef enum CharacterState {
 class Player
 {
 public:
-	Player(Vector2 position, IAnimatedRenderable& animatedRenderable);
+	Player(Vector2 position, IAnimatedRenderable& animatedRenderable, IInventory& inventory);
 
 public:
 	std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
@@ -37,6 +38,7 @@ public:
 	const Vector2& getSpeed();
 	void immobilize();
 	void move(sf::Time elapsedTime);
+	bool pickUpItem(std::shared_ptr<IItem> item);
 	bool pickUpProp(std::shared_ptr<Prop> prop);
 	void pointAt(Vector2& position);
 	void render(sf::RenderWindow& renderWindow);
@@ -64,7 +66,7 @@ private:
 	std::shared_ptr<IWeapon> _equipedWeapon;
 	std::shared_ptr<Prop> _prop;
 
-	Inventory _inventory;
+	IInventory& _inventory;
 
 	CharacterState _state;
 };

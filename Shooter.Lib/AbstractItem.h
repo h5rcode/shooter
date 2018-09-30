@@ -13,6 +13,7 @@ protected:
 
 public:
 	BoundingBox & getBoundingBox() override;
+	Vector2 & getPosition() override;
 	int getWeight() const override;
 	void render(sf::RenderWindow& renderWindow) override;
 	virtual void setSelected(bool selected) override;

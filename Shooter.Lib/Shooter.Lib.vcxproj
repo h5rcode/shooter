@@ -162,6 +162,7 @@
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="IInputBindings.h" />
     <ClInclude Include="IInputManager.h" />
+    <ClInclude Include="IInventory.h" />
     <ClInclude Include="IItem.h" />
     <ClInclude Include="IStaticRenderable.h" />
     <ClInclude Include="Inventory.h" />

@@ -4,8 +4,9 @@
 #include <vector>
 
 #include "IItem.h"
+#include "IInventory.h"
 
-class Inventory
+class Inventory : public IInventory
 {
 public:
 	Inventory();

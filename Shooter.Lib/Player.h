@@ -22,7 +22,7 @@ typedef enum CharacterState {
 class Player
 {
 public:
-	Player(Vector2 position, IAnimatedRenderable& animatedRenderable, IInventory& inventory);
+	Player(Vector2 position, int hitpoints, IAnimatedRenderable& animatedRenderable, IInventory& inventory);
 
 public:
 	std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
@@ -32,10 +32,12 @@ public:
 	void equipWeapon(std::shared_ptr<IWeapon> weapon);
 	BoundingBox getBoundingBox(sf::Time elapsedTime);
 	std::shared_ptr<IWeapon> getEquipedWeapon() const;
+	int getHitpoints() const;
 	double getOrientation();
 	Vector2& getPosition();
 	std::shared_ptr<Prop> getProp();
 	const Vector2& getSpeed();
+	void hurt(int damage);
 	void immobilize();
 	void move(sf::Time elapsedTime);
 	bool pickUpItem(std::shared_ptr<IItem> item);
@@ -51,6 +53,7 @@ private:
 
 private:
 	double _friction;
+	int _hitpoints;
 	double _maxSpeed;
 	double _reach;
 	Vector2 _acceleration;

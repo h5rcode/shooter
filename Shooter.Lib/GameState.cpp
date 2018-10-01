@@ -117,7 +117,8 @@ void GameState::update(sf::Time elapsedTime)
 			eraseProjectile = true;
 		}
 		else if (projectileBoundingBox.intersects(playerBoundingBox)) {
-			// TODO 
+			_player.hurt(projectile->getDamage());
+			eraseProjectile = true;
 		}
 
 		if (eraseProjectile) {

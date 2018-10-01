@@ -23,6 +23,10 @@ BoundingBox Projectile::getBoundingBox(sf::Time elapsedTime) {
 	return BoundingBox(position, _width / 2, _height / 2, _orientation);
 }
 
+int Projectile::getDamage() const {
+	return _damage;
+}
+
 void Projectile::render(sf::RenderWindow& renderWindow) {
 	_sprite.setPosition((float)_position.x, (float)_position.y);
 	_sprite.setRotation((float)_orientation);

@@ -12,6 +12,7 @@ public:
 public:
 	Vector2 computePosition(sf::Time elapsedTime);
 	BoundingBox getBoundingBox(sf::Time elapsedTime);
+	int getDamage() const;
 	void render(sf::RenderWindow& renderWindow);
 	void move(sf::Time elapsedTime);
 

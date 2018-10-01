@@ -44,7 +44,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 		AnimatedRenderable playerRenderable;
 		Inventory inventory;
-		Player player(playerInitialState.getPosition(), playerRenderable, inventory);
+		Player player(playerInitialState.getPosition(), 100, playerRenderable, inventory);
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
 

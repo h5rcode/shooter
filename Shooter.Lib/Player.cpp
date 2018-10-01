@@ -7,8 +7,9 @@ const int FRAME_HEIGHT = 64;
 const int PLAYER_REACH = 64;
 const int FRAME_TIME_MILLISECONDS = 150;
 
-Player::Player(Vector2 position, IAnimatedRenderable& animatedRenderable, IInventory& inventory) :
+Player::Player(Vector2 position, int hitpoints, IAnimatedRenderable& animatedRenderable, IInventory& inventory) :
 	_friction(5),
+	_hitpoints(hitpoints),
 	_inventory(inventory),
 	_maxSpeed(10000),
 	_position(position),
@@ -50,6 +51,10 @@ bool Player::canAttack() const {
 	return _equipedWeapon != NULL && _equipedWeapon->canAttack();
 }
 
+int Player::getHitpoints() const {
+	return 0;
+}
+
 std::shared_ptr<IWeapon> Player::getEquipedWeapon() const {
 	return _equipedWeapon;
 }
@@ -62,6 +67,10 @@ double Player::getOrientation()
 const Vector2& Player::getSpeed()
 {
 	return _speed;
+}
+
+void Player::hurt(int damage) {
+	_hitpoints -= damage;
 }
 
 void Player::immobilize() {

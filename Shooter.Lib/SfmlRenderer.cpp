@@ -24,7 +24,7 @@ void SfmlRenderer::render() {
 	IGameSet& gameSet = _gameState.getGameSet();
 	std::vector<std::shared_ptr<Projectile>>& projectiles = _gameState.getProjectiles();
 	Camera& camera = _gameState.getCamera();
-	Player& player = _gameState.getPlayer();
+	IPlayer& player = _gameState.getPlayer();
 	Crosshair& crosshair = _gameState.getCrosshair();
 
 	Vector2 cameraPosition = camera.getPosition();
@@ -52,7 +52,7 @@ void SfmlRenderer::render() {
 }
 
 void SfmlRenderer::renderHud() {
-	Player& player = _gameState.getPlayer();
+	IPlayer& player = _gameState.getPlayer();
 	Crosshair& crosshair = _gameState.getCrosshair();
 	Vector2 crosshairPosition = crosshair.getPosition();
 	Vector2 playerSpeed = player.getSpeed();

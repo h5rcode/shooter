@@ -9,6 +9,7 @@
 #include "GameState.h"
 #include "Inventory.h"
 #include "LevelDescriptor.h"
+#include "Player.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
 

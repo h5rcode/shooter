@@ -11,8 +11,8 @@
 #include "IGameSettings.h"
 #include "IGameState.h"
 #include "IInputManager.h"
+#include "IPlayer.h"
 #include "Projectile.h"
-#include "Player.h"
 #include "Prop.h"
 
 class GameState : public IGameState
@@ -23,13 +23,13 @@ public:
 		IGameSettings& gameSettings,
 		IInputManager& inputManager,
 		Crosshair& crosshair,
-		Player& player,
+		IPlayer& player,
 		Camera& camera);
 
 	Camera& getCamera();
 	Crosshair& getCrosshair();
 	IGameSet& getGameSet() const;
-	Player& getPlayer() const;
+	IPlayer& getPlayer() const;
 	std::vector<std::shared_ptr<Projectile>>& getProjectiles();
 	bool isStopped();
 	void processInput();
@@ -52,6 +52,6 @@ private:
 	IGameSet& _gameSet;
 	IGameSettings& _gameSettings;
 	IInputManager& _inputManager;
-	Player& _player;
+	IPlayer& _player;
 	std::vector<std::shared_ptr<Projectile>> _projectiles;
 };

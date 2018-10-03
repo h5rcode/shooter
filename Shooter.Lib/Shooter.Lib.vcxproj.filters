@@ -224,5 +224,8 @@
     <ClInclude Include="IInventory.h">
       <Filter>Inventory</Filter>
     </ClInclude>
+    <ClInclude Include="IPlayer.h">
+      <Filter>World</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

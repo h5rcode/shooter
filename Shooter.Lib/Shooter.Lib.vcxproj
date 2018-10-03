@@ -164,6 +164,7 @@
     <ClInclude Include="IInputManager.h" />
     <ClInclude Include="IInventory.h" />
     <ClInclude Include="IItem.h" />
+    <ClInclude Include="IPlayer.h" />
     <ClInclude Include="IStaticRenderable.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="IAnimatedRenderable.h" />

@@ -52,7 +52,7 @@ bool Player::canAttack() const {
 }
 
 int Player::getHitpoints() const {
-	return 0;
+	return _hitpoints;
 }
 
 std::shared_ptr<IWeapon> Player::getEquipedWeapon() const {

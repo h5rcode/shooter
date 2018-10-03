@@ -9,7 +9,7 @@ GameState::GameState(
 	IGameSettings& gameSettings,
 	IInputManager& inputManager,
 	Crosshair& crosshair,
-	Player& player,
+	IPlayer& player,
 	Camera& camera) :
 	_camera(camera),
 	_crosshair(crosshair),
@@ -145,7 +145,7 @@ IGameSet& GameState::getGameSet() const
 	return _gameSet;
 }
 
-Player& GameState::getPlayer() const {
+IPlayer& GameState::getPlayer() const {
 	return _player;
 }
 

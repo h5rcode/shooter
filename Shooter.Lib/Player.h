@@ -10,6 +10,7 @@
 #include "IAnimatedRenderable.h"
 #include "IInventory.h"
 #include "IItem.h"
+#include "IPlayer.h"
 #include "IWeapon.h"
 #include "Prop.h"
 #include "Vector2.h"
@@ -19,7 +20,7 @@ typedef enum CharacterState {
 	ATTACKING
 } CharacterState;
 
-class Player
+class Player : public IPlayer
 {
 public:
 	Player(Vector2 position, int hitpoints, IAnimatedRenderable& animatedRenderable, IInventory& inventory);

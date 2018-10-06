@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Mocks">
+    <Filter Include="Mocks">
       <UniqueIdentifier>{a7f9fe35-4961-4974-86ad-ee1aeb8af9e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -28,21 +28,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedRenderableMock.h">
-      <Filter>Header Files\Mocks</Filter>
+      <Filter>Mocks</Filter>
     </ClCompile>
     <ClCompile Include="InventoryTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnimatedRenderableMock.cpp">
+      <Filter>Mocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WeaponMock.h">
-      <Filter>Header Files\Mocks</Filter>
+      <Filter>Mocks</Filter>
     </ClInclude>
     <ClInclude Include="ItemMock.h">
-      <Filter>Header Files\Mocks</Filter>
+      <Filter>Mocks</Filter>
     </ClInclude>
     <ClInclude Include="InventoryMock.h">
-      <Filter>Header Files\Mocks</Filter>
+      <Filter>Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManagerMock.h">
+      <Filter>Mocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

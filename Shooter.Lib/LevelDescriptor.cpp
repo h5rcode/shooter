@@ -4,17 +4,19 @@
 
 #include "json.hpp"
 
-#include "ItemFactory.h"
 #include "Vector2.h"
 
 using nlohmann::json;
 
 const std::string TEXTURES_PATH = "Resources/textures/";
 
+LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory)
+	: _itemFactory(itemFactory) {
+}
+
 std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 	std::vector<std::shared_ptr<IItem>> items;
 
-	ItemFactory itemFactory;
 	for (std::vector<std::shared_ptr<ItemDescriptor>>::iterator it = this->itemDescriptors.begin(); it != this->itemDescriptors.end(); ++it)
 	{
 		std::shared_ptr<ItemDescriptor> itemDescriptor = *it;
@@ -24,7 +26,7 @@ std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 		std::string itemId = itemDescriptor->itemId;
 		std::string texture = itemDescriptor->texture;
 
-		std::shared_ptr<IItem> prop = itemFactory.buildItem(itemId, position, orientation, texture);
+		std::shared_ptr<IItem> prop = _itemFactory.buildItem(itemId, position, orientation, texture);
 		items.push_back(prop);
 	}
 	return items;

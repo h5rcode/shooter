@@ -6,6 +6,7 @@
 
 #include "IItem.h"
 #include "ItemDescriptor.h"
+#include "ItemFactory.h"
 #include "PlayerInitialStateDescriptor.h"
 #include "Prop.h"
 #include "PropDescriptor.h"
@@ -13,7 +14,10 @@
 #include "Wall.h"
 #include "WallDescriptor.h"
 
-struct LevelDescriptor {
+class LevelDescriptor {
+public:
+	LevelDescriptor(ItemFactory& itemFactory);
+public:
 	std::string name;
 	PlayerInitialStateDescriptor playerInitialStateDescriptor;
 	std::vector<std::shared_ptr<ItemDescriptor>> itemDescriptors;
@@ -25,4 +29,7 @@ struct LevelDescriptor {
 	std::vector<std::shared_ptr<IItem>> getItems();
 	std::vector<std::shared_ptr<Prop>> getProps();
 	std::vector<std::shared_ptr<Wall>> getWalls();
+
+private:
+	ItemFactory& _itemFactory;
 };

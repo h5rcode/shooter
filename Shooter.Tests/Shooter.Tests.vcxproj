@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedRenderableMock.cpp" />
     <ClCompile Include="AnimatedRenderableMock.h" />
     <ClCompile Include="BoundingBoxTest.cpp" />
     <ClCompile Include="InventoryTest.cpp" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClInclude Include="InventoryMock.h" />
     <ClInclude Include="ItemMock.h" />
+    <ClInclude Include="ResourceManagerMock.h" />
     <ClInclude Include="WeaponMock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -132,6 +132,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="StaticRenderable.cpp" />
     <ClCompile Include="LevelDescriptor.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -165,11 +166,13 @@
     <ClInclude Include="IInventory.h" />
     <ClInclude Include="IItem.h" />
     <ClInclude Include="IPlayer.h" />
+    <ClInclude Include="IResourceManager.h" />
     <ClInclude Include="IStaticRenderable.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="IAnimatedRenderable.h" />
     <ClInclude Include="ItemDescriptor.h" />
     <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="StaticRenderable.h" />
     <ClInclude Include="AnimatedRenderable.h" />
     <ClInclude Include="Projectile.h" />

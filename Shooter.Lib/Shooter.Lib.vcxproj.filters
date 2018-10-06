@@ -105,6 +105,9 @@
     <ClCompile Include="StaticRenderable.cpp">
       <Filter>Rendering\Renderables</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">
@@ -226,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="IPlayer.h">
       <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="IResourceManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

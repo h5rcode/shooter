@@ -8,8 +8,10 @@
 #include "GameSettings.h"
 #include "GameState.h"
 #include "Inventory.h"
+#include "ItemFactory.h"
 #include "LevelDescriptor.h"
 #include "Player.h"
+#include "ResourceManager.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
 
@@ -26,8 +28,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		sf::RenderWindow renderWindow(videoMode, "Shooter", sf::Style::Fullscreen);
 		renderWindow.setMouseCursorVisible(false);
 
+		ResourceManager resourceManager;
+
 		std::string level01FileName = "Levels/level-01.json";
-		LevelDescriptor levelDescriptor;
+
+		ItemFactory itemFactory(resourceManager);
+		LevelDescriptor levelDescriptor(itemFactory);
 		levelDescriptor.loadFromFile(level01FileName);
 
 		std::vector<std::shared_ptr<IItem>> items = levelDescriptor.getItems();
@@ -43,7 +49,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
-		AnimatedRenderable playerRenderable;
+		AnimatedRenderable playerRenderable(resourceManager);
 		Inventory inventory;
 		Player player(playerInitialState.getPosition(), 100, playerRenderable, inventory);
 		Camera camera(videoMode.width, videoMode.height);

@@ -1,14 +1,21 @@
 #include "StaticRenderable.h"
 
-StaticRenderable::StaticRenderable(Vector2 position, int width, int height, double orientation, std::string& texture) :
+StaticRenderable::StaticRenderable(
+	Vector2 position,
+	int width,
+	int height,
+	double orientation,
+	IResourceManager& resourceManager,
+	std::string& filename) :
 	_width(width),
 	_height(height),
 	_position(position),
-	_orientation(orientation)
+	_orientation(orientation),
+	_resourceManager(resourceManager)
 {
-	_texture.loadFromFile(texture);
+	sf::Texture* texture = resourceManager.getTexture(filename);
 
-	sf::Vector2u textureSize = _texture.getSize();
+	sf::Vector2u textureSize = texture->getSize();
 	float textureWidth = (float)textureSize.x;
 	float textureHeight = (float)textureSize.y;
 
@@ -18,10 +25,10 @@ StaticRenderable::StaticRenderable(Vector2 position, int width, int height, doub
 	_sprite.setOrigin(textureWidth / 2, textureHeight / 2);
 	_sprite.setRotation((float)_orientation);
 	_sprite.setScale(spriteScale);
-	_sprite.setTexture(_texture);
+	_sprite.setTexture(*texture);
 }
 
-void StaticRenderable::render(sf::RenderWindow& renderWindow) 
+void StaticRenderable::render(sf::RenderWindow& renderWindow)
 {
 	renderWindow.draw(_sprite);
 }

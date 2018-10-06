@@ -54,19 +54,17 @@ void SfmlRenderer::render() {
 
 void SfmlRenderer::renderHud() {
 	IPlayer& player = _gameState.getPlayer();
+	IInventory& inventory = player.getInventory();
 	Crosshair& crosshair = _gameState.getCrosshair();
 	Vector2 crosshairPosition = crosshair.getPosition();
 	Vector2 playerSpeed = player.getSpeed();
 
 	std::stringstream stream;
-	stream << "Crosshair (" << crosshairPosition.x << ", " << crosshairPosition.y << ")";
-	stream << std::endl;
-	stream << "Orientation = " << player.getOrientation();
-	stream << std::endl;
-	stream << "Speed (" << playerSpeed.x << ", " << playerSpeed.y << ")";
-	stream << std::endl;
-	stream << "Speed norm = " << playerSpeed.getNorm();
-	stream << std::endl;
+	stream << "Crosshair (" << crosshairPosition.x << ", " << crosshairPosition.y << ")" << std::endl;
+	stream << "Orientation = " << player.getOrientation() << std::endl;
+	stream << "Speed (" << playerSpeed.x << ", " << playerSpeed.y << ")" << std::endl;
+	stream << "Speed norm = " << playerSpeed.getNorm() << std::endl;
+	stream << "Weight = " << inventory.getCurrentWeight() << "/" << inventory.getMaxWeight() << std::endl;
 
 	std::shared_ptr<IWeapon> equipedWeapon = player.getEquipedWeapon();
 	if (equipedWeapon != NULL) {
@@ -82,7 +80,5 @@ void SfmlRenderer::renderHud() {
 
 	sf::View defaultView = _window.getDefaultView();
 	_window.setView(defaultView);
-
 	_window.draw(text);
-
 }

@@ -60,6 +60,10 @@ int Player::getHitpoints() const {
 	return _hitpoints;
 }
 
+IInventory& Player::getInventory() {
+	return _inventory;
+}
+
 std::shared_ptr<IWeapon> Player::getEquipedWeapon() const {
 	return _equipedWeapon;
 }

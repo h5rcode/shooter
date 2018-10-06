@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "BoundingBox.h"
+#include "IInventory.h"
 #include "IItem.h"
 #include "IWeapon.h"
 #include "Prop.h"
@@ -18,6 +19,7 @@ public:
 	virtual BoundingBox getBoundingBox(sf::Time elapsedTime) = 0;
 	virtual std::shared_ptr<IWeapon> getEquipedWeapon() const = 0;
 	virtual int getHitpoints() const = 0;
+	virtual IInventory& getInventory() = 0;
 	virtual double getOrientation() = 0;
 	virtual Vector2& getPosition() = 0;
 	virtual std::shared_ptr<Prop> getProp() = 0;

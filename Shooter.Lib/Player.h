@@ -8,7 +8,6 @@
 
 #include "BoundingBox.h"
 #include "IAnimatedRenderable.h"
-#include "IInventory.h"
 #include "IItem.h"
 #include "IPlayer.h"
 #include "IResourceManager.h"
@@ -40,6 +39,7 @@ public:
 	BoundingBox getBoundingBox(sf::Time elapsedTime);
 	std::shared_ptr<IWeapon> getEquipedWeapon() const;
 	int getHitpoints() const;
+	IInventory& getInventory();
 	double getOrientation();
 	Vector2& getPosition();
 	std::shared_ptr<Prop> getProp();

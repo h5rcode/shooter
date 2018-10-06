@@ -5,6 +5,7 @@
 #include "InventoryMock.h"
 #include "ItemMock.h"
 #include "Player.h"
+#include "ResourceManagerMock.h"
 #include "WeaponMock.h"
 
 using ::testing::Return;
@@ -13,8 +14,14 @@ using ::testing::ReturnRef;
 TEST(PlayerTest_canAttack, should_return_false_when_there_is_no_equipped_weapon)
 {
 	AnimatedRenderableMock animatedRenderable;
+	ResourceManagerMock resourceManager;
 	InventoryMock inventory;
-	Player player(Vector2(), 1, animatedRenderable, inventory);
+
+	sf::SoundBuffer soundBuffer;
+	EXPECT_CALL(resourceManager, getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav"))
+		.WillOnce(Return(&soundBuffer));
+
+	Player player(Vector2(), 1, animatedRenderable, inventory, resourceManager);
 
 	bool canAttack = player.canAttack();
 
@@ -24,8 +31,14 @@ TEST(PlayerTest_canAttack, should_return_false_when_there_is_no_equipped_weapon)
 TEST(PlayerTest_canAttack, should_return_false_when_the_equipped_weapon_cannot_attack)
 {
 	AnimatedRenderableMock animatedRenderable;
+	ResourceManagerMock resourceManager;
 	InventoryMock inventory;
-	Player player(Vector2(), 1, animatedRenderable, inventory);
+
+	sf::SoundBuffer soundBuffer;
+	EXPECT_CALL(resourceManager, getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav"))
+		.WillOnce(Return(&soundBuffer));
+
+	Player player(Vector2(), 1, animatedRenderable, inventory, resourceManager);
 
 	std::shared_ptr<WeaponMock> weapon = std::make_shared<WeaponMock>();
 	EXPECT_CALL(*weapon, canAttack())
@@ -41,8 +54,14 @@ TEST(PlayerTest_canAttack, should_return_false_when_the_equipped_weapon_cannot_a
 TEST(PlayerTest_canAttack, should_return_true_when_the_equipped_weapon_can_attack)
 {
 	AnimatedRenderableMock animatedRenderable;
+	ResourceManagerMock resourceManager;
 	InventoryMock inventory;
-	Player player(Vector2(), 1, animatedRenderable, inventory);
+
+	sf::SoundBuffer soundBuffer;
+	EXPECT_CALL(resourceManager, getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav"))
+		.WillOnce(Return(&soundBuffer));
+
+	Player player(Vector2(), 1, animatedRenderable, inventory, resourceManager);
 
 	std::shared_ptr<WeaponMock> weapon = std::make_shared<WeaponMock>();
 	EXPECT_CALL(*weapon, canAttack())
@@ -59,8 +78,14 @@ TEST(PlayerTest_hurt, should_decrement_hitpoints_with_the_damage)
 {
 	int hitpoints = 100;
 	AnimatedRenderableMock animatedRenderable;
+	ResourceManagerMock resourceManager;
 	InventoryMock inventory;
-	Player player(Vector2(), hitpoints, animatedRenderable, inventory);
+
+	sf::SoundBuffer soundBuffer;
+	EXPECT_CALL(resourceManager, getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav"))
+		.WillOnce(Return(&soundBuffer));
+
+	Player player(Vector2(), hitpoints, animatedRenderable, inventory, resourceManager);
 
 	int damage = 33;
 
@@ -80,14 +105,18 @@ TEST(PlayerTest_pickUpItem, should_return_true_when_the_item_is_within_reach_and
 		.WillOnce(ReturnRef(itemPosition));
 
 	AnimatedRenderableMock animatedRenderable;
+	ResourceManagerMock resourceManager;
 	InventoryMock inventory;
 
-	std::shared_ptr<IItem> item = (std::shared_ptr<IItem>)itemMock;
+	sf::SoundBuffer soundBuffer;
+	EXPECT_CALL(resourceManager, getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav"))
+		.WillOnce(Return(&soundBuffer));
 
+	std::shared_ptr<IItem> item = (std::shared_ptr<IItem>)itemMock;
 	EXPECT_CALL(inventory, addItem(item))
 		.WillOnce(Return(true));
 
-	Player player(playerPosition, 1, animatedRenderable, inventory);
+	Player player(playerPosition, 1, animatedRenderable, inventory, resourceManager);
 
 	// Act.
 	bool result = player.pickUpItem(item);

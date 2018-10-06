@@ -9,7 +9,7 @@
 
 class Wall {
 public:
-	Wall(Vector2 position, int width, int length, double orientation, std::string texture);
+	Wall(Vector2 position, int width, int length, double orientation, sf::Texture& texture);
 public:
 	BoundingBox& getBoundingBox();
 	Vector2& getPosition();
@@ -23,6 +23,5 @@ private:
 	int _width;
 	int _length;
 	double _orientation;
-	sf::Texture _texture;
 	sf::Sprite _sprite;
 };

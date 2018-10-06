@@ -5,14 +5,11 @@ const int FRAME_HEIGHT = 64;
 const int NUMBER_OF_FRAMES = 8;
 const int FRAME_TIME_MILLISECONDS = 150;
 
-AnimatedRenderable::AnimatedRenderable(IResourceManager& resourceManager) :
+AnimatedRenderable::AnimatedRenderable(sf::Texture& texture) :
 	_animatedSprite(),
-	_animation(),
-	_resourceManager(resourceManager)
+	_animation()
 {
-	sf::Texture* texture = _resourceManager.getTexture("Resources/textures/character.png");
-
-	_animation.setSpriteSheet(*texture);
+	_animation.setSpriteSheet(texture);
 	for (int frameNumber = 0; frameNumber < NUMBER_OF_FRAMES; frameNumber++) {
 		_animation.addFrame(sf::IntRect(0, frameNumber * FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT));
 	}

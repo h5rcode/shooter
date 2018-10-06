@@ -7,7 +7,7 @@
 
 class Projectile {
 public:
-	Projectile(Vector2 position, Vector2 speed, int damage);
+	Projectile(Vector2 position, Vector2 speed, int damage, sf::Texture& texture);
 
 public:
 	Vector2 computePosition(sf::Time elapsedTime);
@@ -21,7 +21,6 @@ public:
 	double _orientation;
 	Vector2 _position;
 	Vector2 _speed;
-	sf::Texture _texture;
 	sf::Sprite _sprite;
 	int _width;
 	int _height;

@@ -1,18 +1,15 @@
 #include "Prop.h"
 
-Prop::Prop(Vector2 position, int width, int height, double orientation, std::string& texture) :
+Prop::Prop(Vector2 position, int width, int height, double orientation, sf::Texture& texture) :
 	_orientation(orientation),
 	_position(position),
 	_width(width),
 	_height(height),
 	_selected(false),
 	_sprite(),
-	_texture(),
 	_boundingBox(position, width, height, orientation)
 {
-	_texture.loadFromFile(texture);
-
-	sf::Vector2u textureSize = _texture.getSize();
+	sf::Vector2u textureSize = texture.getSize();
 	float textureWidth = (float)textureSize.x;
 	float textureHeight = (float)textureSize.y;
 
@@ -22,7 +19,7 @@ Prop::Prop(Vector2 position, int width, int height, double orientation, std::str
 	_sprite.setOrigin(textureWidth / 2, textureHeight / 2);
 	_sprite.setRotation((float)_orientation);
 	_sprite.setScale(spriteScale);
-	_sprite.setTexture(_texture);
+	_sprite.setTexture(texture);
 }
 
 BoundingBox& Prop::getBoundingBox()

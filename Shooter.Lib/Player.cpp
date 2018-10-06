@@ -7,21 +7,26 @@ const int FRAME_HEIGHT = 64;
 const int PLAYER_REACH = 64;
 const int FRAME_TIME_MILLISECONDS = 150;
 
-Player::Player(Vector2 position, int hitpoints, IAnimatedRenderable& animatedRenderable, IInventory& inventory) :
+Player::Player(
+	Vector2 position,
+	int hitpoints,
+	IAnimatedRenderable& animatedRenderable,
+	IInventory& inventory,
+	IResourceManager & resourceManager) :
 	_friction(5),
 	_hitpoints(hitpoints),
 	_inventory(inventory),
 	_maxSpeed(10000),
 	_position(position),
 	_reach(PLAYER_REACH),
-	_sound(),
-	_soundBuffer(),
-	_animatedRenderable(animatedRenderable)
+	_footstepSound(),
+	_animatedRenderable(animatedRenderable),
+	_resourceManager(resourceManager)
 {
-	_soundBuffer.loadFromFile("Resources/sounds/138476__randomationpictures__step-tap.wav");
-	_sound.setPlayingOffset(sf::milliseconds(2 * FRAME_TIME_MILLISECONDS));
-	_sound.setBuffer(_soundBuffer);
-	_sound.setLoop(true);
+	sf::SoundBuffer* soundBuffer = _resourceManager.getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav");
+	_footstepSound.setPlayingOffset(sf::milliseconds(2 * FRAME_TIME_MILLISECONDS));
+	_footstepSound.setBuffer(*soundBuffer);
+	_footstepSound.setLoop(true);
 }
 
 std::vector<std::shared_ptr<Projectile>> Player::attackToward(Vector2& position) {
@@ -74,8 +79,8 @@ void Player::hurt(int damage) {
 }
 
 void Player::immobilize() {
-	if (_sound.getStatus() == sf::Sound::Playing) {
-		_sound.pause();
+	if (_footstepSound.getStatus() == sf::Sound::Playing) {
+		_footstepSound.pause();
 	}
 
 	_acceleration = Vector2();
@@ -132,12 +137,12 @@ void Player::move(sf::Time elapsedTime) {
 	_position = nextPosition;
 
 	if (nextSpeed == Vector2(0, 0)) {
-		_sound.pause();
+		_footstepSound.pause();
 		_animatedRenderable.pause();
 	}
 	else {
-		if (_sound.getStatus() != sf::Sound::Playing) {
-			_sound.play();
+		if (_footstepSound.getStatus() != sf::Sound::Playing) {
+			_footstepSound.play();
 		}
 
 		_animatedRenderable.play();

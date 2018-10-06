@@ -1,6 +1,7 @@
 #include "LevelDescriptor.h"
 
 #include <fstream>
+#include <SFML/Graphics.hpp>
 
 #include "json.hpp"
 
@@ -10,8 +11,8 @@ using nlohmann::json;
 
 const std::string TEXTURES_PATH = "Resources/textures/";
 
-LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory)
-	: _itemFactory(itemFactory) {
+LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, IResourceManager& resourceManager)
+	: _itemFactory(itemFactory), _resourceManager(resourceManager) {
 }
 
 std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
@@ -40,11 +41,11 @@ std::vector<std::shared_ptr<Prop>> LevelDescriptor::getProps() {
 
 		Vector2 position(propDescriptor->x, propDescriptor->y);
 		double orientation = propDescriptor->orientation;
-		std::string texture = propDescriptor->texture;
 		int width = propDescriptor->width;
 		int height = propDescriptor->height;
+		sf::Texture* texture = _resourceManager.getTexture(propDescriptor->texture);
 
-		std::shared_ptr<Prop> prop = std::make_shared<Prop>(position, width, height, orientation, texture);
+		std::shared_ptr<Prop> prop = std::make_shared<Prop>(position, width, height, orientation, *texture);
 		props.push_back(prop);
 	}
 
@@ -59,11 +60,12 @@ std::vector<std::shared_ptr<Wall>> LevelDescriptor::getWalls() {
 
 		Vector2 position(wallDescriptor->x, wallDescriptor->y);
 		double orientation = wallDescriptor->orientation;
-		std::string texture = wallDescriptor->texture;
 		int width = wallDescriptor->width;
 		int length = wallDescriptor->length;
+		sf::Texture* texture = _resourceManager.getTexture(wallDescriptor->texture);
+		texture->setRepeated(true);
 
-		std::shared_ptr<Wall> wall = std::make_shared<Wall>(position, width, length, orientation, texture);
+		std::shared_ptr<Wall> wall = std::make_shared<Wall>(position, width, length, orientation, *texture);
 		walls.push_back(wall);
 	}
 

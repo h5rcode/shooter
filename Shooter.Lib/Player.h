@@ -11,6 +11,7 @@
 #include "IInventory.h"
 #include "IItem.h"
 #include "IPlayer.h"
+#include "IResourceManager.h"
 #include "IWeapon.h"
 #include "Prop.h"
 #include "Vector2.h"
@@ -23,7 +24,12 @@ typedef enum CharacterState {
 class Player : public IPlayer
 {
 public:
-	Player(Vector2 position, int hitpoints, IAnimatedRenderable& animatedRenderable, IInventory& inventory);
+	Player(
+		Vector2 position,
+		int hitpoints,
+		IAnimatedRenderable& animatedRenderable,
+		IInventory& inventory,
+		IResourceManager& resourceManager);
 
 public:
 	std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
@@ -62,10 +68,10 @@ private:
 	Vector2 _position;
 	double _orientation;
 
-	sf::Sound _sound;
-	sf::SoundBuffer _soundBuffer;
+	sf::Sound _footstepSound;
 
 	IAnimatedRenderable& _animatedRenderable;
+	IResourceManager& _resourceManager;
 
 	std::shared_ptr<IWeapon> _equipedWeapon;
 	std::shared_ptr<Prop> _prop;

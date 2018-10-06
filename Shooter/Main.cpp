@@ -33,7 +33,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		std::string level01FileName = "Levels/level-01.json";
 
 		ItemFactory itemFactory(resourceManager);
-		LevelDescriptor levelDescriptor(itemFactory);
+		LevelDescriptor levelDescriptor(itemFactory, resourceManager);
 		levelDescriptor.loadFromFile(level01FileName);
 
 		std::vector<std::shared_ptr<IItem>> items = levelDescriptor.getItems();
@@ -44,18 +44,19 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		GameSettings gameSettings;
 		SfmlInputManager inputManager(renderWindow);
 
-		std::string crosshairTexture = "Resources/textures/Crosshair.png";
-		Crosshair crosshair(crosshairTexture);
+		sf::Texture* crosshairTexture = resourceManager.getTexture("Resources/textures/Crosshair.png");
+		Crosshair crosshair(*crosshairTexture);
 
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
-		AnimatedRenderable playerRenderable(resourceManager);
+		sf::Texture* playerTexture = resourceManager.getTexture("Resources/textures/character.png");
+		AnimatedRenderable playerRenderable(*playerTexture);
 		Inventory inventory;
-		Player player(playerInitialState.getPosition(), 100, playerRenderable, inventory);
+		Player player(playerInitialState.getPosition(), 100, playerRenderable, inventory, resourceManager);
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
 
-		SfmlRenderer sfmlRenderer(gameState, renderWindow);
+		SfmlRenderer sfmlRenderer(gameState, renderWindow, resourceManager);
 
 		sf::Clock frameClock;
 

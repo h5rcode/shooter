@@ -12,15 +12,19 @@ Firearm::Firearm(
 	int width,
 	int height,
 	double orientation,
-	std::shared_ptr< IStaticRenderable> staticRenderable) :
+	IResourceManager&  resourceManager,
+	std::shared_ptr<IStaticRenderable> staticRenderable)
+	:
 	AbstractItem(weight, position, width, height, orientation, staticRenderable),
 	_capacity(capacity),
 	_damage(damage),
+	_projectileTexture((std::string&)"Resources/textures/bullet.png"),
 	_muzzleVelocity(muzzleVelocity),
 	_remainingRounds(capacity),
 	_roundsPerMinute(roundsPerMinute),
 	_timeBetweenTwoShots(sf::seconds(1.f / (roundsPerMinute / 60.f))),
-	_timeSinceLastShot()
+	_timeSinceLastShot(),
+	_resourceManager(resourceManager)
 {
 }
 
@@ -38,12 +42,17 @@ std::vector<std::shared_ptr<Projectile>> Firearm::fire(Vector2& initialPosition,
 {
 	Vector2 projectileDirection = targetPosition - initialPosition;
 	projectileDirection.normalize();
+
 	Vector2 projectileSpeed = multiply(projectileDirection, _muzzleVelocity);
 
+	sf::Texture* projectileTexture = _resourceManager.getTexture(_projectileTexture);
+
+	std::shared_ptr<Projectile> projectile = std::make_shared<Projectile>(initialPosition, projectileSpeed, _damage, *projectileTexture);
+
 	std::vector<std::shared_ptr<Projectile>> projectiles;
-	_timeSinceLastShot.restart();
-	std::shared_ptr<Projectile> projectile = std::make_shared<Projectile>(initialPosition, projectileSpeed, _damage);
 	projectiles.push_back(projectile);
+
+	_timeSinceLastShot.restart();
 	_remainingRounds--;
 
 	return projectiles;

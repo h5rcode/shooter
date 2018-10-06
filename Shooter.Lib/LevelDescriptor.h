@@ -16,7 +16,7 @@
 
 class LevelDescriptor {
 public:
-	LevelDescriptor(ItemFactory& itemFactory);
+	LevelDescriptor(ItemFactory& itemFactory, IResourceManager& resourceManager);
 public:
 	std::string name;
 	PlayerInitialStateDescriptor playerInitialStateDescriptor;
@@ -32,4 +32,5 @@ public:
 
 private:
 	ItemFactory& _itemFactory;
+	IResourceManager& _resourceManager;
 };

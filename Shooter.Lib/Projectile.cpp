@@ -1,19 +1,16 @@
 #include "Projectile.h"
 
-Projectile::Projectile(Vector2 position, Vector2 speed, int damage) :
+Projectile::Projectile(Vector2 position, Vector2 speed, int damage, sf::Texture& texture) :
 	_position(position),
 	_speed(speed),
 	_damage(damage),
 	_width(8),
 	_height(8),
-	_texture(),
 	_sprite()
 {
 	_orientation = _position.computeAngleTo(_position + speed);
 
-	_texture.loadFromFile("Resources/textures/bullet.png");
-
-	_sprite.setTexture(_texture);
+	_sprite.setTexture(texture);
 	_sprite.setTextureRect(sf::IntRect(0, 0, _width, _height));
 	_sprite.setOrigin(_width / 2.f, _height / 2.f);
 }

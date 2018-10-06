@@ -9,7 +9,7 @@
 
 class Prop {
 public:
-	Prop(Vector2 position, int width, int height, double orientation, std::string& texture);
+	Prop(Vector2 position, int width, int height, double orientation, sf::Texture& texture);
 public:
 	BoundingBox & getBoundingBox();
 	Vector2& getPosition();
@@ -27,5 +27,4 @@ private:
 	Vector2 _position;
 	bool _selected;
 	sf::Sprite _sprite;
-	sf::Texture _texture;
 };

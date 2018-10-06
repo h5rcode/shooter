@@ -1,15 +1,12 @@
 #include "Crosshair.h"
 
-Crosshair::Crosshair(std::string& texture) :
-	_texture(),
+Crosshair::Crosshair(sf::Texture& texture) :
 	_sprite()
 {
-	_texture.loadFromFile(texture.c_str());
-
-	sf::Vector2u textureSize = _texture.getSize();
+	sf::Vector2u textureSize = texture.getSize();
 
 	_sprite.setOrigin(textureSize.x / 2, textureSize.y / 2);
-	_sprite.setTexture(_texture);
+	_sprite.setTexture(texture);
 }
 
 Vector2& Crosshair::getPosition()

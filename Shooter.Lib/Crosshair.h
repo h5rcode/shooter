@@ -8,14 +8,13 @@
 class Crosshair
 {
 public:
-	Crosshair(std::string& texture);
+	Crosshair(sf::Texture& texture);
 
 	Vector2& getPosition();
 
 	void render(sf::RenderWindow& renderWindow);
 
 private:
-	sf::Texture _texture;
 	sf::Sprite _sprite;
 
 	Vector2 _position;

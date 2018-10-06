@@ -10,12 +10,13 @@
 #include "Projectile.h"
 #include "Wall.h"
 
-SfmlRenderer::SfmlRenderer(IGameState& gameState, sf::RenderWindow& window) :
+SfmlRenderer::SfmlRenderer(IGameState& gameState, sf::RenderWindow& window, IResourceManager& resourceManager) :
 	_gameState(gameState),
 	_window(window),
-	_font()
+	_resourceManager(resourceManager)
 {
-	_font.loadFromFile("Resources/fonts/arial.ttf");
+	sf::Font* hudFont = _resourceManager.getFont("Resources/fonts/arial.ttf");
+	_font = *hudFont;
 }
 
 void SfmlRenderer::render() {
@@ -66,7 +67,7 @@ void SfmlRenderer::renderHud() {
 	stream << std::endl;
 	stream << "Speed norm = " << playerSpeed.getNorm();
 	stream << std::endl;
-	
+
 	std::shared_ptr<IWeapon> equipedWeapon = player.getEquipedWeapon();
 	if (equipedWeapon != NULL) {
 		stream << equipedWeapon->getDescription();

@@ -14,4 +14,7 @@ public:
 	MOCK_METHOD1(setRotation, void(double rotation));
 	MOCK_METHOD2(setPosition, void(double x, double y));
 	MOCK_METHOD1(update, void(sf::Time elapsedTime));
+
+private:
+	sf::Texture _texture;
 };

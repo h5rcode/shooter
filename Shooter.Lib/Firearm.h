@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "AbstractItem.h"
+#include "IResourceManager.h"
 #include "IStaticRenderable.h"
 #include "IWeapon.h"
 #include "Projectile.h"
@@ -21,6 +22,7 @@ public:
 		int width,
 		int height,
 		double orientation,
+		IResourceManager& resourceManager,
 		std::shared_ptr<IStaticRenderable> staticRenderable);
 
 public:
@@ -31,9 +33,12 @@ public:
 public:
 	int _capacity;
 	int _damage;
+	std::string& _projectileTexture;
 	double _muzzleVelocity;
 	int _remainingRounds;
 	int _roundsPerMinute;
 	sf::Time _timeBetweenTwoShots;
 	sf::Clock _timeSinceLastShot;
+
+	IResourceManager& _resourceManager;
 };

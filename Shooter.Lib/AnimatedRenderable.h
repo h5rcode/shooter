@@ -5,12 +5,11 @@
 #include "AnimatedSprite.h"
 #include "Animation.h"
 #include "IAnimatedRenderable.h"
-#include "IResourceManager.h"
 
 class AnimatedRenderable : public IAnimatedRenderable
 {
 public:
-	AnimatedRenderable(IResourceManager& resourceManager);
+	AnimatedRenderable(sf::Texture& texture);
 
 	void play();
 	void pause();
@@ -21,6 +20,5 @@ public:
 private:
 	Animation _animation;
 	AnimatedSprite _animatedSprite;
-	IResourceManager& _resourceManager;
 };
 

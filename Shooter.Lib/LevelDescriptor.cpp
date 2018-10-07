@@ -27,9 +27,10 @@ std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 		std::string itemId = itemDescriptor->itemId;
 		std::string texture = itemDescriptor->texture;
 
-		std::shared_ptr<IItem> prop = _itemFactory.buildItem(itemId, position, orientation, texture);
-		items.push_back(prop);
+		std::shared_ptr<IItem> item = _itemFactory.buildItem(itemId, position, orientation, texture);
+		items.push_back(item);
 	}
+
 	return items;
 }
 

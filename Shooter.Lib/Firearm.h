@@ -13,6 +13,7 @@
 class Firearm : public AbstractItem, public IWeapon {
 public:
 	Firearm(
+		std::string name,
 		int capacity,
 		int damage,
 		double muzzleVelocity,

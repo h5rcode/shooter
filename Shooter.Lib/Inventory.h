@@ -15,6 +15,7 @@ public:
 public:
 	bool addItem(std::shared_ptr<IItem> item);
 	int getCurrentWeight() const;
+	std::vector<std::shared_ptr<IItem>>& getItems();
 	int getMaxWeight() const;
 
 private:

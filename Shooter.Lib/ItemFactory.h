@@ -13,7 +13,7 @@ public:
 	ItemFactory(IResourceManager& resourceManager);
 
 public:
-	std::shared_ptr<IItem> buildItem(std::string itemId, Vector2& position, double orientation, std::string& texture);
+	std::shared_ptr<IItem> buildItem(std::string itemId, Vector2& position, double orientation, std::string texture);
 
 private:
 	IResourceManager& _resourceManager;

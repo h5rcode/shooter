@@ -1,6 +1,14 @@
 #include "AbstractItem.h"
 
-AbstractItem::AbstractItem(int weight, Vector2 position, int width, int height, double orientation, std::shared_ptr<IStaticRenderable> staticRenderable) :
+AbstractItem::AbstractItem(
+	std::string name,
+	int weight,
+	Vector2 position,
+	int width,
+	int height,
+	double orientation,
+	std::shared_ptr<IStaticRenderable> staticRenderable) :
+	_name(name),
 	_weight(weight),
 	_orientation(orientation),
 	_position(position),
@@ -15,6 +23,10 @@ AbstractItem::AbstractItem(int weight, Vector2 position, int width, int height, 
 BoundingBox & AbstractItem::getBoundingBox()
 {
 	return _boundingBox;
+}
+
+std::string& AbstractItem::getName() {
+	return _name;
 }
 
 Vector2 & AbstractItem::getPosition() {

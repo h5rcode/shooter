@@ -3,6 +3,7 @@
 #include "Firearm.h"
 
 Firearm::Firearm(
+	std::string name,
 	int capacity,
 	int damage,
 	double muzzleVelocity,
@@ -15,7 +16,7 @@ Firearm::Firearm(
 	IResourceManager&  resourceManager,
 	std::shared_ptr<IStaticRenderable> staticRenderable)
 	:
-	AbstractItem(weight, position, width, height, orientation, staticRenderable),
+	AbstractItem(name, weight, position, width, height, orientation, staticRenderable),
 	_capacity(capacity),
 	_damage(damage),
 	_projectileTexture((std::string&)"Resources/textures/bullet.png"),

@@ -33,6 +33,10 @@ int Inventory::getCurrentWeight() const {
 	return _currentWeight;
 }
 
+std::vector<std::shared_ptr<IItem>>& Inventory::getItems() {
+	return _items;
+}
+
 int Inventory::getMaxWeight() const {
 	return _maxWeight;
 }

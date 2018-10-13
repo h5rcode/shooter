@@ -5,17 +5,14 @@ StaticRenderable::StaticRenderable(
 	int width,
 	int height,
 	double orientation,
-	IResourceManager& resourceManager,
-	std::string& filename) :
+	sf::Texture& texture)
+	:
 	_width(width),
 	_height(height),
 	_position(position),
-	_orientation(orientation),
-	_resourceManager(resourceManager)
+	_orientation(orientation)
 {
-	sf::Texture* texture = resourceManager.getTexture(filename);
-
-	sf::Vector2u textureSize = texture->getSize();
+	sf::Vector2u textureSize = texture.getSize();
 	float textureWidth = (float)textureSize.x;
 	float textureHeight = (float)textureSize.y;
 
@@ -25,7 +22,7 @@ StaticRenderable::StaticRenderable(
 	_sprite.setOrigin(textureWidth / 2, textureHeight / 2);
 	_sprite.setRotation((float)_orientation);
 	_sprite.setScale(spriteScale);
-	_sprite.setTexture(*texture);
+	_sprite.setTexture(texture);
 }
 
 void StaticRenderable::render(sf::RenderWindow& renderWindow)

@@ -111,5 +111,4 @@ void GameSet::render(sf::RenderWindow& renderWindow)
 		std::shared_ptr<IItem> item = *it;
 		item->render(renderWindow);
 	}
-
 }

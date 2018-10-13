@@ -60,5 +60,13 @@
 		"width": 32,
 		"height": 32,
 		"texture": "sig-sauer.png"
+	}, {
+		"itemId": "SIGSAUER",
+		"x": 200,
+		"y": 700,
+		"orientation": 0,
+		"width": 32,
+		"height": 32,
+		"texture": "sig-sauer.png"
 	}]
 }

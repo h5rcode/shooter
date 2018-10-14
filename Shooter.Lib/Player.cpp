@@ -38,6 +38,7 @@ Player::Player(
 std::vector<std::shared_ptr<Projectile>> Player::attackToward(Vector2& position) {
 	std::vector<std::shared_ptr<Projectile>> projectiles;
 	if (_equipedWeapon != NULL) {
+		// TODO Shift the initial position so that the projectiles appear before the player and not inside.
 		projectiles = _equipedWeapon->fire(_position, position);
 	}
 

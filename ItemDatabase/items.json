@@ -9,6 +9,6 @@
 	"weaponType": 0,
 	"capacity": 20,
 	"damage": 30,
-	"muzzleVelocity": 30,
-	"roundsPerMinute": 1
+	"muzzleVelocity": 1000,
+	"roundsPerMinute": 240
 }]

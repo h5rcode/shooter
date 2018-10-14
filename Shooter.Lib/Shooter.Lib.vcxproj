@@ -131,6 +131,7 @@
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="ItemDatabase.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="StaticRenderable.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Crosshair.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Firearm.h" />
+    <ClInclude Include="FirearmDescriptor.h" />
     <ClInclude Include="GameSet.h" />
     <ClInclude Include="GameSettings.h" />
     <ClInclude Include="GameState.h" />
@@ -165,12 +167,16 @@
     <ClInclude Include="IInputManager.h" />
     <ClInclude Include="IInventory.h" />
     <ClInclude Include="IItem.h" />
+    <ClInclude Include="IItemDatabase.h" />
     <ClInclude Include="IPlayer.h" />
     <ClInclude Include="IResourceManager.h" />
     <ClInclude Include="IStaticRenderable.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="IAnimatedRenderable.h" />
+    <ClInclude Include="ItemDatabase.h" />
     <ClInclude Include="ItemDescriptor.h" />
+    <ClInclude Include="ItemType.h" />
+    <ClInclude Include="LevelItemDescriptor.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="StaticRenderable.h" />
@@ -189,6 +195,8 @@
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WallDescriptor.h" />
+    <ClInclude Include="WeaponDescriptor.h" />
+    <ClInclude Include="WeaponType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

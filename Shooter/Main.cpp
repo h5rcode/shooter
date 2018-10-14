@@ -8,6 +8,7 @@
 #include "GameSettings.h"
 #include "GameState.h"
 #include "Inventory.h"
+#include "ItemDatabase.h"
 #include "ItemFactory.h"
 #include "LevelDescriptor.h"
 #include "Player.h"
@@ -30,9 +31,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 		ResourceManager resourceManager;
 
+		std::string itemDatabasePath = "ItemDatabase/items.json";
+		ItemDatabase itemDatabase(itemDatabasePath);
+
 		std::string level01FileName = "Levels/level-01.json";
 
-		ItemFactory itemFactory(resourceManager);
+		ItemFactory itemFactory(itemDatabase, resourceManager);
 		LevelDescriptor levelDescriptor(itemFactory, resourceManager);
 		levelDescriptor.loadFromFile(level01FileName);
 

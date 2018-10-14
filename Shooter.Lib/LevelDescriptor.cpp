@@ -18,9 +18,9 @@ LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, IResourceManager& res
 std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 	std::vector<std::shared_ptr<IItem>> items;
 
-	for (std::vector<std::shared_ptr<ItemDescriptor>>::iterator it = this->itemDescriptors.begin(); it != this->itemDescriptors.end(); ++it)
+	for (std::vector<std::shared_ptr<LevelItemDescriptor>>::iterator it = this->itemDescriptors.begin(); it != this->itemDescriptors.end(); ++it)
 	{
-		std::shared_ptr<ItemDescriptor> itemDescriptor = *it;
+		std::shared_ptr<LevelItemDescriptor> itemDescriptor = *it;
 
 		Vector2 position(itemDescriptor->x, itemDescriptor->y);
 		double orientation = itemDescriptor->orientation;
@@ -118,7 +118,7 @@ void LevelDescriptor::loadFromFile(std::string& fileName) {
 	{
 		json::value_type item = *it;
 
-		std::shared_ptr<ItemDescriptor> itemDescriptor = std::make_shared<ItemDescriptor>();
+		std::shared_ptr<LevelItemDescriptor> itemDescriptor = std::make_shared<LevelItemDescriptor>();
 		itemDescriptor->itemId = item.at("itemId").get<std::string>();
 		itemDescriptor->x = item.at("x").get<double>();
 		itemDescriptor->y = item.at("y").get<double>();

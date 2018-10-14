@@ -28,6 +28,9 @@
     <Filter Include="Items\Weapons">
       <UniqueIdentifier>{05485d27-bdb2-4724-b01a-577cac8a4cc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ItemDatabase">
+      <UniqueIdentifier>{9281639b-776b-42ca-8c3f-0f8797524bfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerInitialStateDescriptor.cpp">
@@ -107,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDatabase.cpp">
+      <Filter>ItemDatabase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,9 +197,6 @@
     <ClInclude Include="Inventory.h">
       <Filter>Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="ItemDescriptor.h">
-      <Filter>LevelDescriptors</Filter>
-    </ClInclude>
     <ClInclude Include="IItem.h">
       <Filter>Items</Filter>
     </ClInclude>
@@ -235,6 +238,30 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelItemDescriptor.h">
+      <Filter>LevelDescriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemType.h">
+      <Filter>ItemDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponType.h">
+      <Filter>ItemDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponDescriptor.h">
+      <Filter>ItemDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="FirearmDescriptor.h">
+      <Filter>ItemDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDatabase.h">
+      <Filter>ItemDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="IItemDatabase.h">
+      <Filter>ItemDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDescriptor.h">
+      <Filter>ItemDatabase</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

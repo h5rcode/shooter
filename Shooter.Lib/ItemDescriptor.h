@@ -2,11 +2,19 @@
 
 #include <string>
 
+#include "ItemType.h"
+#include "WeaponDescriptor.h"
+
 struct ItemDescriptor {
-public:
-	std::string itemId;
-	double x;
-	double y;
-	double orientation;
+	std::string id;
+	std::string name;
 	std::string texture;
+	int width;
+	int height;
+	int weight;
+
+	ItemType itemType;
+	union {
+		WeaponDescriptor weapon;
+	};
 };

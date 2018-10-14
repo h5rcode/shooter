@@ -2,6 +2,8 @@
 
 #include "Firearm.h"
 
+using namespace Shooter::Items::Weapons;
+
 Firearm::Firearm(
 	std::string name,
 	int capacity,

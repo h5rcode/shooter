@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "IItem.h"
-#include "ItemDescriptor.h"
 #include "ItemFactory.h"
+#include "LevelItemDescriptor.h"
 #include "PlayerInitialStateDescriptor.h"
 #include "Prop.h"
 #include "PropDescriptor.h"
@@ -20,7 +20,7 @@ public:
 public:
 	std::string name;
 	PlayerInitialStateDescriptor playerInitialStateDescriptor;
-	std::vector<std::shared_ptr<ItemDescriptor>> itemDescriptors;
+	std::vector<std::shared_ptr<LevelItemDescriptor>> itemDescriptors;
 	std::vector<std::shared_ptr<PropDescriptor>> propDescriptors;
 	std::vector<std::shared_ptr<WallDescriptor>> wallDescriptors;
 

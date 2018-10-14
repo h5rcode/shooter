@@ -198,6 +198,12 @@ void GameState::handleUseEvent() {
 
 		if (itemWasPickedUp) {
 			_gameSet.removeItem(_selectedItem);
+
+			std::shared_ptr<IWeapon> weapon = std::dynamic_pointer_cast<IWeapon>(_selectedItem);
+			if (weapon != NULL && _player.getEquipedWeapon() == NULL) {
+				_player.equipWeapon(weapon);
+			}
+
 			_selectedItem = NULL;
 		}
 	}

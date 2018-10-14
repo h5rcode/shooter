@@ -1,5 +1,7 @@
 #include "Inventory.h"
 
+using namespace Shooter::Inventory;
+
 const int MAX_WEIGHT = 100;
 
 Inventory::Inventory() :

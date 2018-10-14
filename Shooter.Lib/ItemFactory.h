@@ -8,16 +8,23 @@
 #include "IResourceManager.h"
 #include "Vector2.h"
 
-class ItemFactory
-{
-public:
-	ItemFactory(IItemDatabase& itemDatabase, IResourceManager& resourceManager);
+using namespace Shooter::ItemDatabase;
+using namespace Shooter::Math;
+using namespace Shooter::Rendering;
 
-public:
-	std::shared_ptr<IItem> buildItem(std::string itemId, Vector2& position, double orientation, std::string textureFilename);
+namespace Shooter {
+	namespace Items {
+		class ItemFactory
+		{
+		public:
+			ItemFactory(IItemDatabase& itemDatabase, IResourceManager& resourceManager);
 
-private:
-	IItemDatabase& _itemDatabase;
-	IResourceManager& _resourceManager;
-};
+		public:
+			std::shared_ptr<IItem> buildItem(std::string itemId, Vector2& position, double orientation, std::string textureFilename);
 
+		private:
+			IItemDatabase& _itemDatabase;
+			IResourceManager& _resourceManager;
+		};
+	}
+}

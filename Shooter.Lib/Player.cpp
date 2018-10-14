@@ -1,5 +1,11 @@
 #include "Player.h"
 
+using namespace Shooter::Inventory;
+using namespace Shooter::Math;
+using namespace Shooter::Rendering;
+using namespace Shooter::Rendering::Renderables;
+using namespace Shooter::World;
+
 const double MIN_SPEED = 0.01;
 
 const int FRAME_WIDTH = 64;

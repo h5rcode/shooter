@@ -6,21 +6,24 @@
 #include "IRenderer.h"
 #include "IResourceManager.h"
 
-class SfmlRenderer : public IRenderer
-{
-public:
-	SfmlRenderer(IGameState& gameState, sf::RenderWindow& window, IResourceManager& resourceManager);
+namespace Shooter {
+	namespace Rendering {
+		class SfmlRenderer : public IRenderer
+		{
+		public:
+			SfmlRenderer(IGameState& gameState, sf::RenderWindow& window, IResourceManager& resourceManager);
 
-public:
-	void render();
+		public:
+			void render();
 
-private:
-	void renderHud();
+		private:
+			void renderHud();
 
-private:
-	IGameState& _gameState;
-	IResourceManager& _resourceManager;
-	sf::RenderWindow& _window;
-	sf::Font _font;
-};
-
+		private:
+			IGameState& _gameState;
+			IResourceManager& _resourceManager;
+			sf::RenderWindow& _window;
+			sf::Font _font;
+		};
+	}
+}

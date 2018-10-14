@@ -1,5 +1,8 @@
 #include "GameSet.h"
 
+using namespace Shooter::Math;
+using namespace Shooter::World;
+
 GameSet::GameSet(std::vector<std::shared_ptr<IItem>> items, std::vector<std::shared_ptr<Wall>> walls, std::vector<std::shared_ptr<Prop>> props)
 {
 	_items = items;

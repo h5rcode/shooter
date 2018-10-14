@@ -1,5 +1,8 @@
 #include "BoundingBox.h"
 
+using namespace Shooter::Math;
+using namespace Shooter::World;
+
 BoundingBox::BoundingBox(Vector2& position, int width, int height, double orientation) :
 	_height(height),
 	_width(width),

@@ -1,7 +1,11 @@
 #pragma once
 
-class IRenderer {
+namespace Shooter {
+	namespace Rendering {
+		class IRenderer {
 
-public:
-	virtual void render() = 0;
-};
+		public:
+			virtual void render() = 0;
+		};
+	}
+}

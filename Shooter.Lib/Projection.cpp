@@ -1,5 +1,7 @@
 #include "Projection.h"
 
+using namespace Shooter::Math;
+
 Projection::Projection(double min, double max) :
 	_min(min),
 	_max(max)

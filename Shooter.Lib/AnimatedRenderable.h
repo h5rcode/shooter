@@ -6,19 +6,24 @@
 #include "Animation.h"
 #include "IAnimatedRenderable.h"
 
-class AnimatedRenderable : public IAnimatedRenderable
-{
-public:
-	AnimatedRenderable(sf::Texture& texture);
+namespace Shooter {
+	namespace Rendering {
+		namespace Renderables {
+			class AnimatedRenderable : public IAnimatedRenderable
+			{
+			public:
+				AnimatedRenderable(sf::Texture& texture);
 
-	void play();
-	void pause();
-	void render(sf::RenderWindow& renderWindow);
-	void setRotation(double rotation);
-	void setPosition(double x, double y);
-	void update(sf::Time elapsedTime);
-private:
-	Animation _animation;
-	AnimatedSprite _animatedSprite;
-};
-
+				void play();
+				void pause();
+				void render(sf::RenderWindow& renderWindow);
+				void setRotation(double rotation);
+				void setPosition(double x, double y);
+				void update(sf::Time elapsedTime);
+			private:
+				Animation _animation;
+				AnimatedSprite _animatedSprite;
+			};
+		}
+	}
+}

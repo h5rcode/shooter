@@ -1,5 +1,10 @@
 #include "AbstractItem.h"
 
+using namespace Shooter::Items;
+using namespace Shooter::Math;
+using namespace Shooter::Rendering::Renderables;
+using namespace Shooter::World;
+
 AbstractItem::AbstractItem(
 	std::string name,
 	int weight,

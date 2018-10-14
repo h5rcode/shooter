@@ -2,7 +2,11 @@
 
 #include "ItemDescriptor.h"
 
-class IItemDatabase {
-public:
-	virtual ItemDescriptor& getItem(std::string& id) = 0;
-};
+namespace Shooter {
+	namespace ItemDatabase {
+		class IItemDatabase {
+		public:
+			virtual ItemDescriptor& getItem(std::string& id) = 0;
+		};
+	}
+}

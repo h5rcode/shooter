@@ -10,11 +10,17 @@
 #include "IPlayer.h"
 #include "Projectile.h"
 
-class IGameState {
-public:
-	virtual Camera& getCamera() = 0;
-	virtual Crosshair& getCrosshair() = 0;
-	virtual IGameSet& getGameSet() const = 0;
-	virtual IPlayer& getPlayer() const = 0;
-	virtual std::vector<std::shared_ptr<Projectile>>& getProjectiles() = 0;
-};
+using namespace Shooter::Items::Weapons;
+
+namespace Shooter {
+	namespace World {
+		class IGameState {
+		public:
+			virtual Camera& getCamera() = 0;
+			virtual Crosshair& getCrosshair() = 0;
+			virtual IGameSet& getGameSet() const = 0;
+			virtual IPlayer& getPlayer() const = 0;
+			virtual std::vector<std::shared_ptr<Projectile>>& getProjectiles() = 0;
+		};
+	}
+}

@@ -3,6 +3,8 @@
 #include "Vector2.h"
 #include <math.h>
 
+using namespace Shooter::Math;
+
 Vector2::Vector2(double x, double y)
 {
 	this->x = x;
@@ -75,8 +77,8 @@ void Vector2::rotate(double angle) {
 	double x = this->x;
 	double y = this->y;
 
-	this->x = x * cosineAngle - y  * sineAngle;
-	this->y = x * sineAngle + y  * cosineAngle;
+	this->x = x * cosineAngle - y * sineAngle;
+	this->y = x * sineAngle + y * cosineAngle;
 }
 
 Vector2 &Vector2::operator+=(const Vector2 &v)
@@ -91,17 +93,17 @@ bool Vector2::operator==(const Vector2 &v)
 	return (this->x == v.x) && (this->y == v.y);
 }
 
-Vector2 multiply(const Vector2 &v, double alpha)
+Vector2 Shooter::Math::multiply(const Vector2 &v, double alpha)
 {
 	return Vector2(alpha * v.x, alpha * v.y);
 }
 
-Vector2 operator+(const Vector2 &v1, const Vector2 &v2)
+Vector2 Shooter::Math::operator+(const Vector2 &v1, const Vector2 &v2)
 {
 	return Vector2(v1.x + v2.x, v1.y + v2.y);
 }
 
-Vector2 operator-(const Vector2 &v1, const Vector2 &v2)
+Vector2 Shooter::Math::operator-(const Vector2 &v1, const Vector2 &v2)
 {
 	return Vector2(v1.x - v2.x, v1.y - v2.y);
 }

@@ -4,6 +4,8 @@
 
 #include "IWeapon.h"
 
+using namespace Shooter::Math;
+
 class WeaponMock : public IWeapon {
 public:
 	MOCK_CONST_METHOD0(canAttack, bool());

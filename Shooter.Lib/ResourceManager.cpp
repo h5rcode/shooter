@@ -1,6 +1,8 @@
 
 #include "ResourceManager.h"
 
+using namespace Shooter::Rendering;
+
 ResourceManager::ResourceManager() {
 }
 

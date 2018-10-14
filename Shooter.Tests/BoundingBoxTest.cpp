@@ -2,6 +2,9 @@
 #include "gtest/gtest.h"
 #include "BoundingBox.h"
 
+using namespace Shooter::Math;
+using namespace Shooter::World;
+
 void expectVectorsAreNearEqual(Vector2& expectedVector, Vector2& actualVector) {
 	double precision = 0.000001;
 

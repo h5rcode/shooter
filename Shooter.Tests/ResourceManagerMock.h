@@ -4,6 +4,8 @@
 
 #include "IResourceManager.h"
 
+using namespace Shooter::Rendering;
+
 class ResourceManagerMock : public IResourceManager {
 public:
 	MOCK_METHOD1(getFont, sf::Font*(const std::string& filename));

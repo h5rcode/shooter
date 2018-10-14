@@ -1,5 +1,9 @@
 #pragma once
 
-class IInputBindings {
+namespace Shooter {
+	namespace Input {
+		class IInputBindings {
 
-};
+		};
+	}
+}

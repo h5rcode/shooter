@@ -3,6 +3,9 @@
 #include "Firearm.h"
 
 using namespace Shooter::Items::Weapons;
+using namespace Shooter::Math;
+using namespace Shooter::Rendering;
+using namespace Shooter::Rendering::Renderables;
 
 Firearm::Firearm(
 	std::string name,

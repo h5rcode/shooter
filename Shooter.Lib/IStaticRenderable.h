@@ -2,7 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 
-class IStaticRenderable {
-public:
-	virtual void render(sf::RenderWindow& renderWindow) = 0;
-};
+namespace Shooter {
+	namespace Rendering {
+		namespace Renderables {
+			class IStaticRenderable {
+			public:
+				virtual void render(sf::RenderWindow& renderWindow) = 0;
+			};
+		}
+	}
+}

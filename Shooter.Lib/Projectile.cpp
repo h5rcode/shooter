@@ -1,5 +1,9 @@
 #include "Projectile.h"
 
+using namespace Shooter::Items::Weapons;
+using namespace Shooter::Math;
+using namespace Shooter::World;
+
 Projectile::Projectile(Vector2 position, Vector2 speed, int damage, sf::Texture& texture) :
 	_position(position),
 	_speed(speed),

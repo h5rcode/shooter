@@ -10,6 +10,10 @@
 #include "Projectile.h"
 #include "Wall.h"
 
+using namespace Shooter::Inventory;
+using namespace Shooter::Math;
+using namespace Shooter::Rendering;
+
 SfmlRenderer::SfmlRenderer(IGameState& gameState, sf::RenderWindow& window, IResourceManager& resourceManager) :
 	_gameState(gameState),
 	_window(window),

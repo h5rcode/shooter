@@ -4,6 +4,12 @@
 #include "IGameSettings.h"
 #include "IInputManager.h"
 
+using namespace Shooter::Input;
+using namespace Shooter::Items;
+using namespace Shooter::Items::Weapons;
+using namespace Shooter::Math;
+using namespace Shooter::World;
+
 GameState::GameState(
 	IGameSet& gameSet,
 	IGameSettings& gameSettings,

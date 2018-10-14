@@ -4,6 +4,8 @@
 
 #include <stdexcept>
 
+using namespace Shooter::Input;
+
 SfmlInputManager::SfmlInputManager(sf::RenderWindow &window)
 	: _window(window)
 {

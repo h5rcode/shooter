@@ -5,18 +5,24 @@
 #include <string>
 #include "Vector2.h"
 
-class Crosshair
-{
-public:
-	Crosshair(sf::Texture& texture);
+using namespace Shooter::Math;
 
-	Vector2& getPosition();
+namespace Shooter {
+	namespace World {
+		class Crosshair
+		{
+		public:
+			Crosshair(sf::Texture& texture);
 
-	void render(sf::RenderWindow& renderWindow);
+			Vector2& getPosition();
 
-private:
-	sf::Sprite _sprite;
+			void render(sf::RenderWindow& renderWindow);
 
-	Vector2 _position;
-};
+		private:
+			sf::Sprite _sprite;
+
+			Vector2 _position;
+		};
+	}
+}
 

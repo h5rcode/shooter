@@ -2,11 +2,15 @@
 
 #include <string>
 
-struct PropDescriptor {
-	std::string texture;
-	double x;
-	double y;
-	double orientation;
-	int width;
-	int height;
-};
+namespace Shooter {
+	namespace LevelDescriptors {
+		struct PropDescriptor {
+			std::string texture;
+			double x;
+			double y;
+			double orientation;
+			int width;
+			int height;
+		};
+	}
+}

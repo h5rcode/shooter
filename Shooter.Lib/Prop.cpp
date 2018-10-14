@@ -1,5 +1,8 @@
 #include "Prop.h"
 
+using namespace Shooter::Math;
+using namespace Shooter::World;
+
 Prop::Prop(Vector2 position, int width, int height, double orientation, sf::Texture& texture) :
 	_orientation(orientation),
 	_position(position),

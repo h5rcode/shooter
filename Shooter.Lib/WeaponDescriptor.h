@@ -3,10 +3,14 @@
 #include "FirearmDescriptor.h"
 #include "WeaponType.h"
 
-struct WeaponDescriptor {
-	WeaponType weaponType;
+namespace Shooter {
+	namespace ItemDatabase {
+		struct WeaponDescriptor {
+			WeaponType weaponType;
 
-	union {
-		FirearmDescriptor firearm;
-	};
-};
+			union {
+				FirearmDescriptor firearm;
+			};
+		};
+	}
+}

@@ -1,5 +1,7 @@
 #include "Event.h"
 
+using namespace Shooter::Input;
+
 Event::Event()
 {
 }

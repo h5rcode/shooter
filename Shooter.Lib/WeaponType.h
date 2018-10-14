@@ -1,5 +1,9 @@
 #pragma once
 
-enum WeaponType {
-	Firearm
-};
+namespace Shooter {
+	namespace ItemDatabase {
+		enum WeaponType {
+			Firearm
+		};
+	}
+}

@@ -1,5 +1,8 @@
 #include "StaticRenderable.h"
 
+using namespace Shooter::Math;
+using namespace Shooter::Rendering::Renderables;
+
 StaticRenderable::StaticRenderable(
 	Vector2 position,
 	int width,

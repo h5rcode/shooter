@@ -16,6 +16,13 @@
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
 
+using namespace Shooter::Inventory;
+using namespace Shooter::ItemDatabase;
+using namespace Shooter::LevelDescriptors;
+using namespace Shooter::Rendering;
+using namespace Shooter::Rendering::Renderables;
+using namespace Shooter::World;
+
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 {
 	try

@@ -5,6 +5,9 @@
 
 using ::testing::Return;
 
+using namespace Shooter::Inventory;
+using namespace Shooter::Math;
+
 TEST(Inventory_addItem, should_return_false_when_the_item_is_too_heavy)
 {
 	Inventory inventory(10);

@@ -4,6 +4,8 @@
 
 #include "AnimatedRenderable.h"
 
+using namespace Shooter::Rendering::Renderables;
+
 class AnimatedRenderableMock : public AnimatedRenderable {
 public:
 	AnimatedRenderableMock();

@@ -4,6 +4,8 @@
 
 #include "IInventory.h"
 
+using namespace Shooter::Inventory;
+
 class InventoryMock : public IInventory {
 public:
 	MOCK_METHOD1(addItem, bool(std::shared_ptr<IItem> item));

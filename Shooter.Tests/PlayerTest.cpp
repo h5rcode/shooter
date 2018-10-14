@@ -11,6 +11,13 @@
 using ::testing::Return;
 using ::testing::ReturnRef;
 
+using namespace Shooter::Inventory;
+using namespace Shooter::Items;
+using namespace Shooter::Items::Weapons;
+using namespace Shooter::Math;
+using namespace Shooter::Rendering;
+using namespace Shooter::Rendering::Renderables;
+
 TEST(PlayerTest_canAttack, should_return_false_when_there_is_no_equipped_weapon)
 {
 	AnimatedRenderableMock animatedRenderable;

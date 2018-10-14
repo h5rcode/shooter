@@ -1,5 +1,8 @@
 #include "Camera.h"
 
+using namespace Shooter::Math;
+using namespace Shooter::World;
+
 Camera::Camera(int viewWidth, int viewHeight) :
 	_viewWidth(viewWidth),
 	_viewHeight(viewHeight)

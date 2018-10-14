@@ -23,6 +23,8 @@
 
 #include "Animation.h"
 
+using namespace Shooter::Rendering;
+
 Animation::Animation() : m_texture(NULL)
 {
 

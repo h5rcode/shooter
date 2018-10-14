@@ -3,6 +3,8 @@
 #include "gtest/gtest.h"
 #include "Vector2.h"
 
+using namespace Shooter::Math;
+
 TEST(Vector2Test_computeAngleTo, should_return_90_when_vectors_are_equal)
 {
 	double x = rand();

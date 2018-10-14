@@ -1,5 +1,8 @@
 #include "Crosshair.h"
 
+using namespace Shooter::Math;
+using namespace Shooter::World;
+
 Crosshair::Crosshair(sf::Texture& texture) :
 	_sprite()
 {

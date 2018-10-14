@@ -2,6 +2,8 @@
 
 #include "GameSettings.h"
 
+using namespace Shooter::Input;
+
 GameSettings::GameSettings() {
 }
 

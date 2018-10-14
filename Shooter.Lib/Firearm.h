@@ -10,6 +10,9 @@
 #include "Projectile.h"
 #include "Vector2.h"
 
+using namespace Shooter::Math;
+using namespace Shooter::Rendering;
+
 namespace Shooter {
 	namespace Items {
 		namespace Weapons {

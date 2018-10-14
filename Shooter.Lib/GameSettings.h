@@ -2,10 +2,14 @@
 
 #include "IGameSettings.h"
 
-class GameSettings : public IGameSettings {
-public:
-	GameSettings();
+namespace Shooter {
+	namespace Input {
+		class GameSettings : public IGameSettings {
+		public:
+			GameSettings();
 
-public:
-	double getAccelerationNorm() const;
-};
+		public:
+			double getAccelerationNorm() const;
+		};
+	}
+}

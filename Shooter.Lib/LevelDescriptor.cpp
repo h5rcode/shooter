@@ -9,6 +9,9 @@
 
 using nlohmann::json;
 
+using namespace Shooter::Items;
+using namespace Shooter::LevelDescriptors;
+
 const std::string TEXTURES_PATH = "Resources/textures/";
 
 LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, IResourceManager& resourceManager)

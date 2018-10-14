@@ -1,5 +1,7 @@
 #include "AnimatedRenderable.h"
 
+using namespace Shooter::Rendering::Renderables;
+
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
 const int NUMBER_OF_FRAMES = 8;

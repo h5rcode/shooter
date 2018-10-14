@@ -2,6 +2,10 @@
 #include "ItemFactory.h"
 #include "StaticRenderable.h"
 
+using namespace Shooter::ItemDatabase;
+using namespace Shooter::Items;
+using namespace Shooter::Math;
+
 ItemFactory::ItemFactory(IItemDatabase& itemDatabase, IResourceManager& resourceManager)
 	:
 	_itemDatabase(itemDatabase),

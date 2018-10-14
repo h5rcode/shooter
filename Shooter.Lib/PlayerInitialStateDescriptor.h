@@ -2,10 +2,16 @@
 
 #include "Vector2.h"
 
-struct PlayerInitialStateDescriptor {
-public:
-	double x;
-	double y;
+using namespace Shooter::Math;
 
-	Vector2 getPosition();
-};
+namespace Shooter {
+	namespace LevelDescriptors {
+		struct PlayerInitialStateDescriptor {
+		public:
+			double x;
+			double y;
+
+			Vector2 getPosition();
+		};
+	}
+}

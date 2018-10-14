@@ -4,6 +4,8 @@
 
 #include "IItem.h"
 
+using namespace Shooter::Math;
+
 class ItemMock : public IItem {
 public:
 	MOCK_METHOD0(getBoundingBox, BoundingBox& ());

@@ -14,23 +14,30 @@
 #include "Wall.h"
 #include "WallDescriptor.h"
 
-class LevelDescriptor {
-public:
-	LevelDescriptor(ItemFactory& itemFactory, IResourceManager& resourceManager);
-public:
-	std::string name;
-	PlayerInitialStateDescriptor playerInitialStateDescriptor;
-	std::vector<std::shared_ptr<LevelItemDescriptor>> itemDescriptors;
-	std::vector<std::shared_ptr<PropDescriptor>> propDescriptors;
-	std::vector<std::shared_ptr<WallDescriptor>> wallDescriptors;
+using namespace Shooter::Items;
+using namespace Shooter::Math;
 
-	void loadFromFile(std::string& fileName);
+namespace Shooter {
+	namespace LevelDescriptors {
+		class LevelDescriptor {
+		public:
+			LevelDescriptor(ItemFactory& itemFactory, IResourceManager& resourceManager);
+		public:
+			std::string name;
+			PlayerInitialStateDescriptor playerInitialStateDescriptor;
+			std::vector<std::shared_ptr<LevelItemDescriptor>> itemDescriptors;
+			std::vector<std::shared_ptr<PropDescriptor>> propDescriptors;
+			std::vector<std::shared_ptr<WallDescriptor>> wallDescriptors;
 
-	std::vector<std::shared_ptr<IItem>> getItems();
-	std::vector<std::shared_ptr<Prop>> getProps();
-	std::vector<std::shared_ptr<Wall>> getWalls();
+			void loadFromFile(std::string& fileName);
 
-private:
-	ItemFactory& _itemFactory;
-	IResourceManager& _resourceManager;
-};
+			std::vector<std::shared_ptr<IItem>> getItems();
+			std::vector<std::shared_ptr<Prop>> getProps();
+			std::vector<std::shared_ptr<Wall>> getWalls();
+
+		private:
+			ItemFactory& _itemFactory;
+			IResourceManager& _resourceManager;
+		};
+	}
+}

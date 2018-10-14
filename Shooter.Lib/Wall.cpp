@@ -1,5 +1,7 @@
 #include "Wall.h"
 
+using namespace Shooter::World;
+
 Wall::Wall(Vector2 position, int width, int length, double orientation, sf::Texture& texture) :
 	_position(position),
 	_width(width),

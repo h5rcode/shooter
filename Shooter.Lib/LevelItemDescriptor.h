@@ -10,7 +10,6 @@ namespace Shooter {
 			double x;
 			double y;
 			double orientation;
-			std::string texture;
 		};
 	}
 }

@@ -28,9 +28,8 @@ std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 		Vector2 position(itemDescriptor->x, itemDescriptor->y);
 		double orientation = itemDescriptor->orientation;
 		std::string itemId = itemDescriptor->itemId;
-		std::string texture = itemDescriptor->texture;
 
-		std::shared_ptr<IItem> item = _itemFactory.buildItem(itemId, position, orientation, texture);
+		std::shared_ptr<IItem> item = _itemFactory.buildItem(itemId, position, orientation);
 		items.push_back(item);
 	}
 
@@ -126,7 +125,6 @@ void LevelDescriptor::loadFromFile(std::string& fileName) {
 		itemDescriptor->x = item.at("x").get<double>();
 		itemDescriptor->y = item.at("y").get<double>();
 		itemDescriptor->orientation = item.at("orientation").get<double>();
-		itemDescriptor->texture = TEXTURES_PATH + item.at("texture").get<std::string>();
 
 		this->itemDescriptors.push_back(itemDescriptor);
 	}

@@ -12,12 +12,13 @@ ItemFactory::ItemFactory(IItemDatabase& itemDatabase, IResourceManager& resource
 	_resourceManager(resourceManager) {
 }
 
-std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& position, double orientation, std::string textureFilename)
+std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& position, double orientation)
 {
 	ItemDescriptor& itemDescriptor = _itemDatabase.getItem(itemId);
 
 	int width = itemDescriptor.width;
 	int height = itemDescriptor.height;
+	std::string& textureFilename = itemDescriptor.texture;
 
 	sf::Texture* texture = _resourceManager.getTexture(textureFilename);
 

@@ -20,7 +20,7 @@ namespace Shooter {
 			ItemFactory(IItemDatabase& itemDatabase, IResourceManager& resourceManager);
 
 		public:
-			std::shared_ptr<IItem> buildItem(std::string itemId, Vector2& position, double orientation, std::string textureFilename);
+			std::shared_ptr<IItem> buildItem(std::string itemId, Vector2& position, double orientation);
 
 		private:
 			IItemDatabase& _itemDatabase;

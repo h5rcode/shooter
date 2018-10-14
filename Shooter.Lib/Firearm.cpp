@@ -24,7 +24,7 @@ Firearm::Firearm(
 	AbstractItem(name, weight, position, width, height, orientation, staticRenderable),
 	_capacity(capacity),
 	_damage(damage),
-	_projectileTexture((std::string&)"Resources/textures/bullet.png"),
+	_projectileTexture("Resources/textures/bullet.png"), // TODO Replace this hardcoded value by a parameter.
 	_muzzleVelocity(muzzleVelocity),
 	_remainingRounds(capacity),
 	_roundsPerMinute(roundsPerMinute),

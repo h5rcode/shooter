@@ -41,7 +41,7 @@ namespace Shooter {
 			public:
 				int _capacity;
 				int _damage;
-				std::string& _projectileTexture;
+				std::string _projectileTexture;
 				double _muzzleVelocity;
 				int _remainingRounds;
 				int _roundsPerMinute;

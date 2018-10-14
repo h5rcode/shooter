@@ -27,7 +27,6 @@ void SfmlRenderer::render() {
 	_window.clear();
 
 	IGameSet& gameSet = _gameState.getGameSet();
-	std::vector<std::shared_ptr<Projectile>>& projectiles = _gameState.getProjectiles();
 	Camera& camera = _gameState.getCamera();
 	IPlayer& player = _gameState.getPlayer();
 	Crosshair& crosshair = _gameState.getCrosshair();
@@ -42,6 +41,8 @@ void SfmlRenderer::render() {
 
 	gameSet.render(_window);
 	player.render(_window);
+
+	std::vector<std::shared_ptr<Projectile>>& projectiles = _gameState.getProjectiles();
 	for each (std::shared_ptr<Projectile> projectile in projectiles)
 	{
 		projectile->render(_window);

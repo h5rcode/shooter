@@ -32,8 +32,6 @@ std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& posit
 		switch (weaponDescriptor.weaponType)
 		{
 		case WeaponType::Firearm:
-
-
 			FirearmDescriptor firearmDescriptor = weaponDescriptor.firearm;
 			return std::make_shared<Shooter::Items::Weapons::Firearm>(
 				itemDescriptor.name,

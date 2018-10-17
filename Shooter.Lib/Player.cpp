@@ -3,7 +3,6 @@
 using namespace Shooter::Inventory;
 using namespace Shooter::Math;
 using namespace Shooter::Rendering;
-using namespace Shooter::Rendering::Renderables;
 using namespace Shooter::World;
 
 const double MIN_SPEED = 0.01;
@@ -16,7 +15,6 @@ const int FRAME_TIME_MILLISECONDS = 150;
 Player::Player(
 	Vector2 position,
 	int hitpoints,
-	IAnimatedRenderable& animatedRenderable,
 	IInventory& inventory,
 	IResourceManager & resourceManager) :
 	_friction(5),
@@ -26,7 +24,6 @@ Player::Player(
 	_position(position),
 	_reach(PLAYER_REACH),
 	_footstepSound(),
-	_animatedRenderable(animatedRenderable),
 	_resourceManager(resourceManager)
 {
 	sf::SoundBuffer* soundBuffer = _resourceManager.getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav");
@@ -80,7 +77,7 @@ double Player::getOrientation()
 	return _orientation;
 }
 
-const Vector2& Player::getSpeed()
+Vector2& Player::getSpeed()
 {
 	return _speed;
 }
@@ -149,15 +146,11 @@ void Player::move(sf::Time elapsedTime) {
 
 	if (nextSpeed == Vector2(0, 0)) {
 		_footstepSound.pause();
-		_animatedRenderable.pause();
 	}
 	else {
 		if (_footstepSound.getStatus() != sf::Sound::Playing) {
 			_footstepSound.play();
 		}
-
-		_animatedRenderable.play();
-		_animatedRenderable.update(elapsedTime);
 	}
 }
 
@@ -194,12 +187,6 @@ bool Player::pickUpProp(std::shared_ptr<Prop> prop) {
 void Player::pointAt(Vector2& position)
 {
 	_orientation = _position.computeAngleTo(position);
-}
-
-void Player::render(sf::RenderWindow& renderWindow) {
-	_animatedRenderable.setRotation(_orientation);
-	_animatedRenderable.setPosition(_position.x, _position.y);
-	_animatedRenderable.render(renderWindow);
 }
 
 void Player::setAcceleration(Vector2& acceleration) {

@@ -14,8 +14,13 @@ using namespace Shooter::Inventory;
 using namespace Shooter::Math;
 using namespace Shooter::Rendering;
 
-SfmlRenderer::SfmlRenderer(IGameState& gameState, sf::RenderWindow& window, IResourceManager& resourceManager) :
+SfmlRenderer::SfmlRenderer(
+	IGameState& gameState,
+	IPlayerRenderer& playerRenderer,
+	sf::RenderWindow& window,
+	IResourceManager& resourceManager) :
 	_gameState(gameState),
+	_playerRenderer(playerRenderer),
 	_window(window),
 	_resourceManager(resourceManager)
 {
@@ -23,7 +28,7 @@ SfmlRenderer::SfmlRenderer(IGameState& gameState, sf::RenderWindow& window, IRes
 	_font = *hudFont;
 }
 
-void SfmlRenderer::render() {
+void SfmlRenderer::render(sf::Time elapsedTime) {
 	_window.clear();
 
 	IGameSet& gameSet = _gameState.getGameSet();
@@ -40,7 +45,8 @@ void SfmlRenderer::render() {
 	_window.setView(view);
 
 	gameSet.render(_window);
-	player.render(_window);
+
+	_playerRenderer.render(player, elapsedTime);
 
 	std::vector<std::shared_ptr<Projectile>>& projectiles = _gameState.getProjectiles();
 	for each (std::shared_ptr<Projectile> projectile in projectiles)

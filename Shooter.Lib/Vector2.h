@@ -20,6 +20,7 @@ namespace Shooter {
 			Vector2 &operator+=(const Vector2 &v);
 
 			bool operator==(const Vector2 &v);
+			bool operator!=(const Vector2 &v);
 		};
 
 		Vector2 multiply(const Vector2 &v, double alpha);

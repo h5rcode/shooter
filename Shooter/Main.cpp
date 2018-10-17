@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "AnimatedRenderable.h"
 #include "GameSet.h"
 #include "GameSettings.h"
 #include "GameState.h"
@@ -12,6 +11,7 @@
 #include "ItemFactory.h"
 #include "LevelDescriptor.h"
 #include "Player.h"
+#include "PlayerRenderer.h"
 #include "ResourceManager.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
@@ -20,7 +20,7 @@ using namespace Shooter::Inventory;
 using namespace Shooter::ItemDatabase;
 using namespace Shooter::LevelDescriptors;
 using namespace Shooter::Rendering;
-using namespace Shooter::Rendering::Renderables;
+using namespace Shooter::Rendering::Renderers;
 using namespace Shooter::World;
 
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
@@ -61,13 +61,13 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
 		sf::Texture* playerTexture = resourceManager.getTexture("Resources/textures/character.png");
-		AnimatedRenderable playerRenderable(*playerTexture);
 		Inventory inventory;
-		Player player(playerInitialState.getPosition(), 100, playerRenderable, inventory, resourceManager);
+		Player player(playerInitialState.getPosition(), 100, inventory, resourceManager);
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
 
-		SfmlRenderer sfmlRenderer(gameState, renderWindow, resourceManager);
+		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
+		SfmlRenderer sfmlRenderer(gameState, playerRenderer, renderWindow, resourceManager);
 
 		sf::Clock frameClock;
 
@@ -84,7 +84,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 			}
 
 			gameState.update(frameTime);
-			sfmlRenderer.render();
+			sfmlRenderer.render(frameTime);
 		}
 
 		return 0;

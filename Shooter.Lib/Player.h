@@ -4,10 +4,8 @@
 #include <string>
 
 #include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
 
 #include "BoundingBox.h"
-#include "IAnimatedRenderable.h"
 #include "IItem.h"
 #include "IPlayer.h"
 #include "IResourceManager.h"
@@ -18,7 +16,6 @@
 using namespace Shooter::Inventory;
 using namespace Shooter::Math;
 using namespace Shooter::Rendering;
-using namespace Shooter::Rendering::Renderables;
 
 namespace Shooter {
 	namespace World {
@@ -33,7 +30,6 @@ namespace Shooter {
 			Player(
 				Vector2 position,
 				int hitpoints,
-				IAnimatedRenderable& animatedRenderable,
 				IInventory& inventory,
 				IResourceManager& resourceManager);
 
@@ -50,14 +46,13 @@ namespace Shooter {
 			double getOrientation();
 			Vector2& getPosition();
 			std::shared_ptr<Prop> getProp();
-			const Vector2& getSpeed();
+			Vector2& getSpeed();
 			void hurt(int damage);
 			void immobilize();
 			void move(sf::Time elapsedTime);
 			bool pickUpItem(std::shared_ptr<IItem> item);
 			bool pickUpProp(std::shared_ptr<Prop> prop);
 			void pointAt(Vector2& position);
-			void render(sf::RenderWindow& renderWindow);
 			void setAcceleration(Vector2& acceleration);
 			void setEquipedWeapon(std::shared_ptr<IWeapon> weapon);
 			void setMaxSpeed(double maxSpeed);
@@ -77,7 +72,6 @@ namespace Shooter {
 
 			sf::Sound _footstepSound;
 
-			IAnimatedRenderable& _animatedRenderable;
 			IResourceManager& _resourceManager;
 
 			std::shared_ptr<IWeapon> _equipedWeapon;

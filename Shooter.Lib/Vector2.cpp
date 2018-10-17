@@ -93,6 +93,11 @@ bool Vector2::operator==(const Vector2 &v)
 	return (this->x == v.x) && (this->y == v.y);
 }
 
+bool Vector2::operator!=(const Vector2 &v)
+{
+	return (this->x != v.x) || (this->y != v.y);
+}
+
 Vector2 Shooter::Math::multiply(const Vector2 &v, double alpha)
 {
 	return Vector2(alpha * v.x, alpha * v.y);

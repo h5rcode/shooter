@@ -27,14 +27,8 @@
     <ClCompile Include="PlayerTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedRenderableMock.h">
-      <Filter>Mocks</Filter>
-    </ClCompile>
     <ClCompile Include="InventoryTest.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimatedRenderableMock.cpp">
-      <Filter>Mocks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

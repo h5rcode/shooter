@@ -31,6 +31,9 @@
     <Filter Include="ItemDatabase">
       <UniqueIdentifier>{9281639b-776b-42ca-8c3f-0f8797524bfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Renderers">
+      <UniqueIdentifier>{ea190b33-4d23-423d-a651-3b34fddf6575}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerInitialStateDescriptor.cpp">
@@ -102,9 +105,6 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Items\Weapons</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedRenderable.cpp">
-      <Filter>Rendering\Renderables</Filter>
-    </ClCompile>
     <ClCompile Include="StaticRenderable.cpp">
       <Filter>Rendering\Renderables</Filter>
     </ClCompile>
@@ -113,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="ItemDatabase.cpp">
       <Filter>ItemDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRenderer.cpp">
+      <Filter>Rendering\Renderers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,12 +218,6 @@
     <ClInclude Include="Projectile.h">
       <Filter>Items\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="IAnimatedRenderable.h">
-      <Filter>Rendering\Renderables</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedRenderable.h">
-      <Filter>Rendering\Renderables</Filter>
-    </ClInclude>
     <ClInclude Include="IStaticRenderable.h">
       <Filter>Rendering\Renderables</Filter>
     </ClInclude>
@@ -262,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="ItemDescriptor.h">
       <Filter>ItemDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlayerRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

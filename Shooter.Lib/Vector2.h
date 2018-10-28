@@ -15,7 +15,7 @@ namespace Shooter {
 			double dotProduct(Vector2& vector) const;
 			void multiply(double alpha);
 			void normalize();
-			void rotate(double angle);
+			void rotate(double angleInDegrees);
 
 			Vector2 &operator+=(const Vector2 &v);
 

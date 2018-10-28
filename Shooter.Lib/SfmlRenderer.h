@@ -4,6 +4,7 @@
 
 #include "IGameState.h"
 #include "IPlayerRenderer.h"
+#include "IProjectileRenderer.h"
 #include "IRenderer.h"
 #include "IResourceManager.h"
 
@@ -17,6 +18,7 @@ namespace Shooter {
 			SfmlRenderer(
 				IGameState& gameState,
 				IPlayerRenderer& playerRenderer,
+				IProjectileRenderer& projectileRenderer,
 				sf::RenderWindow& window,
 				IResourceManager& resourceManager);
 
@@ -29,6 +31,7 @@ namespace Shooter {
 		private:
 			IGameState& _gameState;
 			IPlayerRenderer& _playerRenderer;
+			IProjectileRenderer& _projectileRenderer;
 			IResourceManager& _resourceManager;
 			sf::RenderWindow& _window;
 			sf::Font _font;

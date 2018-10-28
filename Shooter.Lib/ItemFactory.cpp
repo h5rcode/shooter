@@ -44,7 +44,6 @@ std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& posit
 				width,
 				height,
 				orientation,
-				_resourceManager,
 				itemRenderable);
 
 		default:

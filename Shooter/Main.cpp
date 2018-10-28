@@ -12,6 +12,7 @@
 #include "LevelDescriptor.h"
 #include "Player.h"
 #include "PlayerRenderer.h"
+#include "ProjectileRenderer.h"
 #include "ResourceManager.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
@@ -61,13 +62,15 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
 		sf::Texture* playerTexture = resourceManager.getTexture("Resources/textures/character.png");
+		sf::Texture* projectileTexture = resourceManager.getTexture("Resources/textures/bullet.png");
 		Inventory inventory;
 		Player player(playerInitialState.getPosition(), 100, inventory, resourceManager);
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
 
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
-		SfmlRenderer sfmlRenderer(gameState, playerRenderer, renderWindow, resourceManager);
+		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
+		SfmlRenderer sfmlRenderer(gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);
 
 		sf::Clock frameClock;
 

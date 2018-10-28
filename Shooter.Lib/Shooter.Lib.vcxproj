@@ -134,6 +134,7 @@
     <ClCompile Include="ItemDatabase.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="PlayerRenderer.cpp" />
+    <ClCompile Include="ProjectileRenderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="StaticRenderable.cpp" />
     <ClCompile Include="LevelDescriptor.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="IItemDatabase.h" />
     <ClInclude Include="IPlayer.h" />
     <ClInclude Include="IPlayerRenderer.h" />
+    <ClInclude Include="IProjectileRenderer.h" />
     <ClInclude Include="IResourceManager.h" />
     <ClInclude Include="IStaticRenderable.h" />
     <ClInclude Include="Inventory.h" />
@@ -179,6 +181,7 @@
     <ClInclude Include="LevelItemDescriptor.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="PlayerRenderer.h" />
+    <ClInclude Include="ProjectileRenderer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="StaticRenderable.h" />
     <ClInclude Include="Projectile.h" />

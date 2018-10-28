@@ -17,10 +17,12 @@ using namespace Shooter::Rendering;
 SfmlRenderer::SfmlRenderer(
 	IGameState& gameState,
 	IPlayerRenderer& playerRenderer,
+	IProjectileRenderer& projectileRenderer,
 	sf::RenderWindow& window,
 	IResourceManager& resourceManager) :
 	_gameState(gameState),
 	_playerRenderer(playerRenderer),
+	_projectileRenderer(projectileRenderer),
 	_window(window),
 	_resourceManager(resourceManager)
 {
@@ -51,7 +53,7 @@ void SfmlRenderer::render(sf::Time elapsedTime) {
 	std::vector<std::shared_ptr<Projectile>>& projectiles = _gameState.getProjectiles();
 	for each (std::shared_ptr<Projectile> projectile in projectiles)
 	{
-		projectile->render(_window);
+		_projectileRenderer.render(*projectile);
 	}
 
 	crosshair.render(_window);

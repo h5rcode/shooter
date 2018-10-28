@@ -117,6 +117,9 @@
     <ClCompile Include="PlayerRenderer.cpp">
       <Filter>Rendering\Renderers</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectileRenderer.cpp">
+      <Filter>Rendering\Renderers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">
@@ -264,6 +267,12 @@
       <Filter>Rendering\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="IProjectileRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileRenderer.h">
       <Filter>Rendering\Renderers</Filter>
     </ClInclude>
   </ItemGroup>

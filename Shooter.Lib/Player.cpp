@@ -9,7 +9,7 @@ const double MIN_SPEED = 0.01;
 
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
-const int PLAYER_REACH = 64;
+const int PLAYER_REACH = 16;
 const int FRAME_TIME_MILLISECONDS = 150;
 
 Player::Player(
@@ -35,8 +35,10 @@ Player::Player(
 std::vector<std::shared_ptr<Projectile>> Player::attackToward(Vector2& position) {
 	std::vector<std::shared_ptr<Projectile>> projectiles;
 	if (_equipedWeapon != NULL) {
-		// TODO Shift the initial position so that the projectiles appear before the player and not inside.
-		projectiles = _equipedWeapon->fire(_position, position);
+		Vector2 projectileRelativeInitialPosition = Vector2(0, -_reach);
+		projectileRelativeInitialPosition.rotate(_orientation);
+
+		projectiles = _equipedWeapon->fire(_position + projectileRelativeInitialPosition, position);
 	}
 
 	return projectiles;

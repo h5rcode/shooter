@@ -9,7 +9,7 @@ const double MIN_SPEED = 0.01;
 
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
-const int PLAYER_REACH = 16;
+const int PLAYER_REACH = 32;
 const int FRAME_TIME_MILLISECONDS = 150;
 
 Player::Player(

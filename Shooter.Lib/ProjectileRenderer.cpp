@@ -8,7 +8,6 @@ ProjectileRenderer::ProjectileRenderer(sf::RenderWindow& renderWindow, sf::Textu
 }
 
 void ProjectileRenderer::render(Projectile& projectile) {
-
 	int width = projectile.getWidth();
 	int height = projectile.getHeight();
 

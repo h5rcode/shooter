@@ -4,18 +4,22 @@
 #include <SFML/Graphics.hpp>
 
 #include "GameSet.h"
+#include "GameSetRenderer.h"
 #include "GameSettings.h"
 #include "GameState.h"
 #include "Inventory.h"
 #include "ItemDatabase.h"
 #include "ItemFactory.h"
+#include "ItemRenderer.h"
 #include "LevelDescriptor.h"
 #include "Player.h"
 #include "PlayerRenderer.h"
 #include "ProjectileRenderer.h"
+#include "PropRenderer.h"
 #include "ResourceManager.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
+#include "WallRenderer.h"
 
 using namespace Shooter::Inventory;
 using namespace Shooter::ItemDatabase;
@@ -44,7 +48,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 		std::string level01FileName = "Levels/level-01.json";
 
-		ItemFactory itemFactory(itemDatabase, resourceManager);
+		ItemFactory itemFactory(itemDatabase);
 		LevelDescriptor levelDescriptor(itemFactory, resourceManager);
 		levelDescriptor.loadFromFile(level01FileName);
 
@@ -68,9 +72,13 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
 
+		ItemRenderer itemRenderer(itemDatabase, renderWindow, resourceManager);
+		PropRenderer propRenderer(renderWindow, resourceManager);
+		WallRenderer wallRenderer(renderWindow, resourceManager);
+		GameSetRenderer gameSetRenderer(itemRenderer, propRenderer, wallRenderer);
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
 		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
-		SfmlRenderer sfmlRenderer(gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);
+		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);
 
 		sf::Clock frameClock;
 

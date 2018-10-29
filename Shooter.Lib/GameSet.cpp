@@ -54,6 +54,10 @@ std::shared_ptr<IItem> GameSet::getItemAt(Vector2& position) {
 	return NULL;
 }
 
+std::vector<std::shared_ptr<IItem>>& GameSet::getItems() {
+	return _items;
+}
+
 std::shared_ptr<Prop> GameSet::getPropAt(Vector2& position) {
 	BoundingBox boundingBox(position, 1, 1, 0);
 	for (std::vector<std::shared_ptr<Prop>>::const_iterator iterator = _props.begin(); iterator != _props.end(); iterator++)
@@ -92,26 +96,5 @@ void GameSet::removeProp(std::shared_ptr<Prop> prop) {
 
 	if (position != _props.end()) {
 		_props.erase(position);
-	}
-}
-
-void GameSet::render(sf::RenderWindow& renderWindow)
-{
-	for (std::vector<std::shared_ptr<Wall>>::iterator it = _walls.begin(); it != _walls.end(); ++it)
-	{
-		std::shared_ptr<Wall> wall = *it;
-		wall->render(renderWindow);
-	}
-
-	for (std::vector<std::shared_ptr<Prop>>::iterator it = _props.begin(); it != _props.end(); ++it)
-	{
-		std::shared_ptr<Prop> prop = *it;
-		prop->render(renderWindow);
-	}
-
-	for (std::vector<std::shared_ptr<IItem>>::iterator it = _items.begin(); it != _items.end(); ++it)
-	{
-		std::shared_ptr<IItem> item = *it;
-		item->render(renderWindow);
 	}
 }

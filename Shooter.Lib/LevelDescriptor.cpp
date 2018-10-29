@@ -46,9 +46,8 @@ std::vector<std::shared_ptr<Prop>> LevelDescriptor::getProps() {
 		double orientation = propDescriptor->orientation;
 		int width = propDescriptor->width;
 		int height = propDescriptor->height;
-		sf::Texture* texture = _resourceManager.getTexture(propDescriptor->texture);
 
-		std::shared_ptr<Prop> prop = std::make_shared<Prop>(position, width, height, orientation, *texture);
+		std::shared_ptr<Prop> prop = std::make_shared<Prop>(position, width, height, orientation, propDescriptor->texture);
 		props.push_back(prop);
 	}
 
@@ -65,10 +64,8 @@ std::vector<std::shared_ptr<Wall>> LevelDescriptor::getWalls() {
 		double orientation = wallDescriptor->orientation;
 		int width = wallDescriptor->width;
 		int length = wallDescriptor->length;
-		sf::Texture* texture = _resourceManager.getTexture(wallDescriptor->texture);
-		texture->setRepeated(true);
 
-		std::shared_ptr<Wall> wall = std::make_shared<Wall>(position, width, length, orientation, *texture);
+		std::shared_ptr<Wall> wall = std::make_shared<Wall>(position, width, length, orientation, wallDescriptor->texture);
 		walls.push_back(wall);
 	}
 

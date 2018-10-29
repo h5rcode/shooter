@@ -4,13 +4,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "AbstractItem.h"
-#include "IStaticRenderable.h"
 #include "IWeapon.h"
 #include "Projectile.h"
 #include "Vector2.h"
 
 using namespace Shooter::Math;
-using namespace Shooter::Rendering;
 
 namespace Shooter {
 	namespace Items {
@@ -19,6 +17,7 @@ namespace Shooter {
 			class Firearm : public AbstractItem, public IWeapon {
 			public:
 				Firearm(
+					std::string id,
 					std::string name,
 					int capacity,
 					int damage,
@@ -28,8 +27,7 @@ namespace Shooter {
 					Vector2 position,
 					int width,
 					int height,
-					double orientation,
-					std::shared_ptr<IStaticRenderable> staticRenderable);
+					double orientation);
 
 			public:
 				bool canAttack() const;

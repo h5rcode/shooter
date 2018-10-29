@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "IItem.h"
+#include "IResourceManager.h"
 #include "ItemFactory.h"
 #include "LevelItemDescriptor.h"
 #include "PlayerInitialStateDescriptor.h"
@@ -16,6 +17,7 @@
 
 using namespace Shooter::Items;
 using namespace Shooter::Math;
+using namespace Shooter::Rendering;
 
 namespace Shooter {
 	namespace LevelDescriptors {

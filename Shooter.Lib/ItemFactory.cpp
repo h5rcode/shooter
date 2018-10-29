@@ -1,15 +1,12 @@
 #include "Firearm.h"
 #include "ItemFactory.h"
-#include "StaticRenderable.h"
 
 using namespace Shooter::ItemDatabase;
 using namespace Shooter::Items;
 using namespace Shooter::Math;
 
-ItemFactory::ItemFactory(IItemDatabase& itemDatabase, IResourceManager& resourceManager)
-	:
-	_itemDatabase(itemDatabase),
-	_resourceManager(resourceManager) {
+ItemFactory::ItemFactory(IItemDatabase& itemDatabase) :
+	_itemDatabase(itemDatabase) {
 }
 
 std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& position, double orientation)
@@ -18,11 +15,6 @@ std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& posit
 
 	int width = itemDescriptor.width;
 	int height = itemDescriptor.height;
-	std::string& textureFilename = itemDescriptor.texture;
-
-	sf::Texture* texture = _resourceManager.getTexture(textureFilename);
-
-	std::shared_ptr<StaticRenderable> itemRenderable = std::make_shared<StaticRenderable>(position, width, height, orientation, *texture);
 
 	switch (itemDescriptor.itemType)
 	{
@@ -34,6 +26,7 @@ std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& posit
 		case WeaponType::Firearm:
 			FirearmDescriptor firearmDescriptor = weaponDescriptor.firearm;
 			return std::make_shared<Shooter::Items::Weapons::Firearm>(
+				itemDescriptor.id,
 				itemDescriptor.name,
 				firearmDescriptor.capacity,
 				firearmDescriptor.damage,
@@ -43,8 +36,7 @@ std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& posit
 				position,
 				width,
 				height,
-				orientation,
-				itemRenderable);
+				orientation);
 
 		default:
 			throw std::invalid_argument("Unkown weapon type: '" + weaponDescriptor.weaponType);

@@ -2,17 +2,17 @@
 
 using namespace Shooter::Items;
 using namespace Shooter::Math;
-using namespace Shooter::Rendering::Renderables;
 using namespace Shooter::World;
 
 AbstractItem::AbstractItem(
+	std::string id,
 	std::string name,
 	int weight,
 	Vector2 position,
 	int width,
 	int height,
-	double orientation,
-	std::shared_ptr<IStaticRenderable> staticRenderable) :
+	double orientation) :
+	_id(id),
 	_name(name),
 	_weight(weight),
 	_orientation(orientation),
@@ -20,7 +20,6 @@ AbstractItem::AbstractItem(
 	_width(width),
 	_height(height),
 	_selected(false),
-	_staticRenderable(staticRenderable),
 	_boundingBox(position, width, height, orientation)
 {
 }
@@ -30,8 +29,20 @@ BoundingBox & AbstractItem::getBoundingBox()
 	return _boundingBox;
 }
 
+int AbstractItem::getHeight() const {
+	return _height;
+}
+
+std::string& AbstractItem::getId() {
+	return _id;
+}
+
 std::string& AbstractItem::getName() {
 	return _name;
+}
+
+double AbstractItem::getOrientation() const {
+	return _orientation;
 }
 
 Vector2 & AbstractItem::getPosition() {
@@ -43,13 +54,8 @@ int AbstractItem::getWeight() const
 	return _weight;
 }
 
-void AbstractItem::render(sf::RenderWindow& renderWindow)
-{
-	_staticRenderable->render(renderWindow);
-
-	if (_selected) {
-		_boundingBox.render(renderWindow);
-	}
+int AbstractItem::getWidth() const {
+	return _width;
 }
 
 void AbstractItem::setSelected(bool selected)

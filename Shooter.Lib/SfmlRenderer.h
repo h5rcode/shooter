@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "IGameSetRenderer.h"
 #include "IGameState.h"
 #include "IPlayerRenderer.h"
 #include "IProjectileRenderer.h"
@@ -16,6 +17,7 @@ namespace Shooter {
 		{
 		public:
 			SfmlRenderer(
+				IGameSetRenderer& gameSetRenderer,
 				IGameState& gameState,
 				IPlayerRenderer& playerRenderer,
 				IProjectileRenderer& projectileRenderer,
@@ -29,6 +31,7 @@ namespace Shooter {
 			void renderHud();
 
 		private:
+			IGameSetRenderer& _gameSetRenderer;
 			IGameState& _gameState;
 			IPlayerRenderer& _playerRenderer;
 			IProjectileRenderer& _projectileRenderer;

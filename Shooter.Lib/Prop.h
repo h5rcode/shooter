@@ -2,8 +2,6 @@
 
 #include <string>
 
-#include <SFML/Graphics.hpp>
-
 #include "BoundingBox.h"
 #include "Vector2.h"
 
@@ -13,14 +11,18 @@ namespace Shooter {
 	namespace World {
 		class Prop {
 		public:
-			Prop(Vector2 position, int width, int height, double orientation, sf::Texture& texture);
+			Prop(Vector2 position, int width, int height, double orientation, std::string texture);
 		public:
 			BoundingBox & getBoundingBox();
+			int getHeight() const;
+			double getOrientation() const;
 			Vector2& getPosition();
+			std::string& getTexture();
+			int getWidth() const;
+			bool isSelected() const;
 			void setOrientation(double orientation);
 			void setPosition(Vector2& position);
 			void setSelected(bool selected);
-			void render(sf::RenderWindow& renderWindow);
 		private:
 			void resetBoundingBox();
 		private:
@@ -30,7 +32,7 @@ namespace Shooter {
 			double _orientation;
 			Vector2 _position;
 			bool _selected;
-			sf::Sprite _sprite;
+			std::string _texture;
 		};
 	}
 }

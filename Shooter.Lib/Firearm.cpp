@@ -4,10 +4,9 @@
 
 using namespace Shooter::Items::Weapons;
 using namespace Shooter::Math;
-using namespace Shooter::Rendering;
-using namespace Shooter::Rendering::Renderables;
 
 Firearm::Firearm(
+	std::string id,
 	std::string name,
 	int capacity,
 	int damage,
@@ -17,10 +16,9 @@ Firearm::Firearm(
 	Vector2 position,
 	int width,
 	int height,
-	double orientation,
-	std::shared_ptr<IStaticRenderable> staticRenderable)
+	double orientation)
 	:
-	AbstractItem(name, weight, position, width, height, orientation, staticRenderable),
+	AbstractItem(id, name, weight, position, width, height, orientation),
 	_capacity(capacity),
 	_damage(damage),
 	_muzzleVelocity(muzzleVelocity),

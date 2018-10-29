@@ -14,13 +14,13 @@ namespace Shooter {
 		public:
 			void addProp(std::shared_ptr<Prop> prop);
 			bool collidesWith(BoundingBox& boundingBox) const;
-			std::vector<std::shared_ptr<Prop>>& getProps();
 			std::shared_ptr<IItem> getItemAt(Vector2& position);
+			std::vector<std::shared_ptr<IItem>>& getItems();
 			std::shared_ptr<Prop> getPropAt(Vector2& position);
+			std::vector<std::shared_ptr<Prop>>& getProps();
 			std::vector<std::shared_ptr<Wall>>& getWalls();
 			void removeItem(std::shared_ptr<IItem> item);
 			void removeProp(std::shared_ptr<Prop> prop);
-			void render(sf::RenderWindow& renderWindow);
 		private:
 			std::vector<std::shared_ptr<IItem>> _items;
 			std::vector<std::shared_ptr<Wall>> _walls;

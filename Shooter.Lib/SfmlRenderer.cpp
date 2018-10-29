@@ -15,11 +15,13 @@ using namespace Shooter::Math;
 using namespace Shooter::Rendering;
 
 SfmlRenderer::SfmlRenderer(
+	IGameSetRenderer& gameSetRenderer,
 	IGameState& gameState,
 	IPlayerRenderer& playerRenderer,
 	IProjectileRenderer& projectileRenderer,
 	sf::RenderWindow& window,
 	IResourceManager& resourceManager) :
+	_gameSetRenderer(gameSetRenderer),
 	_gameState(gameState),
 	_playerRenderer(playerRenderer),
 	_projectileRenderer(projectileRenderer),
@@ -46,7 +48,7 @@ void SfmlRenderer::render(sf::Time elapsedTime) {
 
 	_window.setView(view);
 
-	gameSet.render(_window);
+	_gameSetRenderer.render(gameSet);
 
 	_playerRenderer.render(player, elapsedTime);
 

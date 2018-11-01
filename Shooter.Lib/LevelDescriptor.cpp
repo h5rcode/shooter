@@ -14,8 +14,8 @@ using namespace Shooter::LevelDescriptors;
 
 const std::string TEXTURES_PATH = "Resources/textures/";
 
-LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, IResourceManager& resourceManager)
-	: _itemFactory(itemFactory), _resourceManager(resourceManager) {
+LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory)
+	: _itemFactory(itemFactory) {
 }
 
 std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {

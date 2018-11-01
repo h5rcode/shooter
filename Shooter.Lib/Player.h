@@ -3,19 +3,15 @@
 #include <memory>
 #include <string>
 
-#include <SFML/Audio.hpp>
-
 #include "BoundingBox.h"
 #include "IItem.h"
 #include "IPlayer.h"
-#include "IResourceManager.h"
 #include "IWeapon.h"
 #include "Prop.h"
 #include "Vector2.h"
 
 using namespace Shooter::Inventory;
 using namespace Shooter::Math;
-using namespace Shooter::Rendering;
 
 namespace Shooter {
 	namespace World {
@@ -30,8 +26,7 @@ namespace Shooter {
 			Player(
 				Vector2 position,
 				int hitpoints,
-				IInventory& inventory,
-				IResourceManager& resourceManager);
+				IInventory& inventory);
 
 		public:
 			std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
@@ -69,10 +64,6 @@ namespace Shooter {
 			Vector2 _speed;
 			Vector2 _position;
 			double _orientation;
-
-			sf::Sound _footstepSound;
-
-			IResourceManager& _resourceManager;
 
 			std::shared_ptr<IWeapon> _equipedWeapon;
 			std::shared_ptr<Prop> _prop;

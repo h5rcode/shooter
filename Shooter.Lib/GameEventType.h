@@ -6,8 +6,10 @@ namespace Shooter {
 			enum GameEventType {
 				PlayerAttacked,
 				PlayerHurt,
-				PlayerImmobilized,
-				PlayerPickedUpItem
+				PlayerPickedUpItem,
+				PlayerStartedMoving,
+				PlayerStoppedMoving,
+				ProjectileImpact
 			};
 		}
 	}

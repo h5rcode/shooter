@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "IGameSettings.h"
 #include "IInputManager.h"
+#include "ProjectileImpactEvent.h"
 
 using namespace Shooter::Input;
 using namespace Shooter::Items;
@@ -103,15 +104,22 @@ void GameState::update(sf::Time elapsedTime)
 
 	BoundingBox playerBoundingBox = _player.getBoundingBox(elapsedTime);
 
+	Vector2 initialSpeed = _player.getSpeed();
 	if (_gameSet.collidesWith(playerBoundingBox)) {
 		_player.immobilize();
-
-		GameEvent gameEvent{ GameEventType::PlayerImmobilized };
-		_gameEvents.push_back(gameEvent);
 	}
 	else {
 		_player.move(elapsedTime);
 		_camera.setPosition(_player.getPosition());
+	}
+
+	Vector2 newSpeed = _player.getSpeed();
+	Vector2 zeroSpeed;
+	if (initialSpeed == zeroSpeed && newSpeed != initialSpeed) {
+		_gameEvents.push_back(GameEvent{ GameEventType::PlayerStartedMoving });
+	}
+	else if (initialSpeed != zeroSpeed && newSpeed == zeroSpeed) {
+		_gameEvents.push_back(GameEvent{ GameEventType::PlayerStoppedMoving });
 	}
 
 	std::vector<std::shared_ptr<Projectile>>::iterator projectileIterator = _projectiles.begin();
@@ -124,13 +132,14 @@ void GameState::update(sf::Time elapsedTime)
 		if (_gameSet.collidesWith(projectileBoundingBox)) {
 			// TODO Handle projectiles that are outside the game set.
 			eraseProjectile = true;
+
+			_gameEvents.push_back(GameEvent{ GameEventType::ProjectileImpact, ProjectileImpactEvent{projectile} });
 		}
 		else if (projectileBoundingBox.intersects(playerBoundingBox)) {
 			_player.hurt(projectile->getDamage());
 			eraseProjectile = true;
 
-			GameEvent gameEvent{ GameEventType::PlayerHurt };
-			_gameEvents.push_back(gameEvent);
+			_gameEvents.push_back(GameEvent{ GameEventType::PlayerHurt });
 		}
 
 		if (eraseProjectile) {
@@ -200,8 +209,7 @@ void GameState::handleMouseButtonDown()
 			_projectiles.push_back(projectile);
 		}
 
-		GameEvent gameEvent{ GameEventType::PlayerAttacked };
-		_gameEvents.push_back(gameEvent);
+		_gameEvents.push_back(GameEvent{ GameEventType::PlayerAttacked });
 	}
 }
 
@@ -210,8 +218,7 @@ void GameState::handleUseEvent() {
 		bool itemWasPickedUp = _player.pickUpItem(_selectedItem);
 
 		if (itemWasPickedUp) {
-			GameEvent gameEvent{ GameEventType::PlayerPickedUpItem };
-			_gameEvents.push_back(gameEvent);
+			_gameEvents.push_back(GameEvent{ GameEventType::PlayerPickedUpItem });
 
 			_gameSet.removeItem(_selectedItem);
 

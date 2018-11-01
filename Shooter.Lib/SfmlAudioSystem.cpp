@@ -4,10 +4,15 @@ using namespace Shooter::Audio;
 
 const int MAX_SOUNDS = 256;
 
-SfmlAudioSystem::SfmlAudioSystem(IGameState& gameState, IResourceManager& resourceManager) :
+SfmlAudioSystem::SfmlAudioSystem(IGameState& gameState, sf::RenderWindow& renderWindow, IResourceManager& resourceManager) :
 	_gameState(gameState),
+	_renderWindow(renderWindow),
 	_resourceManager(resourceManager)
 {
+	sf::SoundBuffer* soundBuffer = _resourceManager.getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav");
+	_playerFootstepsSound.setBuffer(*soundBuffer);
+	_playerFootstepsSound.setRelativeToListener(true);
+	_playerFootstepsSound.setLoop(true);
 }
 
 SfmlAudioSystem::~SfmlAudioSystem() {
@@ -36,20 +41,37 @@ void SfmlAudioSystem::deleteStoppedSounds() {
 void SfmlAudioSystem::update() {
 	std::vector<GameEvent>& gameEvents = _gameState.getGameEvents();
 
+	IPlayer& player = _gameState.getPlayer();
+	Vector2& playerPosition = player.getPosition();
+	sf::Vector2i playerPositionInWindow = _renderWindow.mapCoordsToPixel(sf::Vector2f(playerPosition.x, playerPosition.y));
+	sf::Listener::setPosition(playerPositionInWindow.x, 0., playerPositionInWindow.y);
+
 	for each (GameEvent gameEvent in gameEvents)
 	{
 		switch (gameEvent.GameEventType)
 		{
 		case GameEventType::PlayerAttacked:
-			playSound("Resources/sounds/180961__kleeb__gunshots.wav");
+			playSound("Resources/sounds/180961__kleeb__gunshots.wav", playerPosition, true);
 			break;
 
 		case GameEventType::PlayerHurt:
-			playSound("Resources/sounds/262279__dirtjm__grunts-male.wav");
+			playSound("Resources/sounds/262279__dirtjm__grunts-male.wav", playerPosition, true);
 			break;
 
 		case GameEventType::PlayerPickedUpItem:
-			playSound("Resources/sounds/177054__woodmoose__lowerguncock.wav");
+			playSound("Resources/sounds/177054__woodmoose__lowerguncock.wav", playerPosition, true);
+			break;
+
+		case GameEventType::PlayerStartedMoving:
+			_playerFootstepsSound.play();
+			break;
+
+		case GameEventType::PlayerStoppedMoving:
+			_playerFootstepsSound.stop();
+			break;
+
+		case GameEventType::ProjectileImpact:
+			playSound("Resources/sounds/150839__toxicwafflezz__bullet-impact-3.wav", gameEvent.ProjectileImpactEvent.Projectile->getPosition(), false);
 			break;
 
 		default:
@@ -60,7 +82,7 @@ void SfmlAudioSystem::update() {
 	deleteStoppedSounds();
 }
 
-void SfmlAudioSystem::playSound(std::string filename)
+void SfmlAudioSystem::playSound(std::string filename, Vector2 position, bool relativeToListener, bool loop)
 {
 	if (_sounds.size() >= MAX_SOUNDS) {
 		return;
@@ -70,7 +92,17 @@ void SfmlAudioSystem::playSound(std::string filename)
 
 	sf::Sound* sound = new sf::Sound();
 	sound->setBuffer(*soundBuffer);
+	sound->setLoop(loop);
 	sound->play();
+
+	sf::Vector2i soundPosition = _renderWindow.mapCoordsToPixel(sf::Vector2f(position.x, position.y));
+
+	// TODO Make the min distance and attenuation values properties of each sound.
+	sound->setMinDistance(30);
+	sound->setAttenuation(0.1);
+
+	sound->setRelativeToListener(relativeToListener);
+	sound->setPosition(soundPosition.x, 0, soundPosition.y);
 
 	_sounds.push_back(sound);
 }

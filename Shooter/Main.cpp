@@ -51,7 +51,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		std::string level01FileName = "Levels/level-01.json";
 
 		ItemFactory itemFactory(itemDatabase);
-		LevelDescriptor levelDescriptor(itemFactory, resourceManager);
+		LevelDescriptor levelDescriptor(itemFactory);
 		levelDescriptor.loadFromFile(level01FileName);
 
 		std::vector<std::shared_ptr<IItem>> items = levelDescriptor.getItems();
@@ -70,7 +70,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		sf::Texture* playerTexture = resourceManager.getTexture("Resources/textures/character.png");
 		sf::Texture* projectileTexture = resourceManager.getTexture("Resources/textures/bullet.png");
 		Inventory inventory;
-		Player player(playerInitialState.getPosition(), 100, inventory, resourceManager);
+		Player player(playerInitialState.getPosition(), 100, inventory);
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
 
@@ -81,7 +81,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
 		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
 		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);
-		SfmlAudioSystem sfmlAudioSystem(gameState, resourceManager);
+		SfmlAudioSystem sfmlAudioSystem(gameState, renderWindow, resourceManager);
 
 		sf::Clock frameClock;
 

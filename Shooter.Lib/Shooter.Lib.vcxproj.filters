@@ -320,5 +320,8 @@
     <ClInclude Include="SfmlAudioSystem.h">
       <Filter>Audio</Filter>
     </ClInclude>
+    <ClInclude Include="ProjectileImpactEvent.h">
+      <Filter>World\Events</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

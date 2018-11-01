@@ -2,7 +2,6 @@
 
 using namespace Shooter::Inventory;
 using namespace Shooter::Math;
-using namespace Shooter::Rendering;
 using namespace Shooter::World;
 
 const double MIN_SPEED = 0.01;
@@ -15,21 +14,14 @@ const int FRAME_TIME_MILLISECONDS = 150;
 Player::Player(
 	Vector2 position,
 	int hitpoints,
-	IInventory& inventory,
-	IResourceManager & resourceManager) :
+	IInventory& inventory) :
 	_friction(5),
 	_hitpoints(hitpoints),
 	_inventory(inventory),
 	_maxSpeed(10000),
 	_position(position),
-	_reach(PLAYER_REACH),
-	_footstepSound(),
-	_resourceManager(resourceManager)
+	_reach(PLAYER_REACH)
 {
-	sf::SoundBuffer* soundBuffer = _resourceManager.getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav");
-	_footstepSound.setPlayingOffset(sf::milliseconds(2 * FRAME_TIME_MILLISECONDS));
-	_footstepSound.setBuffer(*soundBuffer);
-	_footstepSound.setLoop(true);
 }
 
 std::vector<std::shared_ptr<Projectile>> Player::attackToward(Vector2& position) {
@@ -89,10 +81,6 @@ void Player::hurt(int damage) {
 }
 
 void Player::immobilize() {
-	if (_footstepSound.getStatus() == sf::Sound::Playing) {
-		_footstepSound.pause();
-	}
-
 	_acceleration = Vector2();
 	_speed = Vector2();
 }
@@ -145,15 +133,6 @@ void Player::move(sf::Time elapsedTime) {
 
 	_speed = nextSpeed;
 	_position = nextPosition;
-
-	if (nextSpeed == Vector2(0, 0)) {
-		_footstepSound.pause();
-	}
-	else {
-		if (_footstepSound.getStatus() != sf::Sound::Playing) {
-			_footstepSound.play();
-		}
-	}
 }
 
 bool Player::pickUpItem(std::shared_ptr<IItem> item) {

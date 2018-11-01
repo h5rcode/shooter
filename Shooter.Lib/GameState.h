@@ -33,6 +33,7 @@ namespace Shooter {
 
 			Camera& getCamera();
 			Crosshair& getCrosshair();
+			std::vector<GameEvent>& getGameEvents();
 			IGameSet& getGameSet() const;
 			IPlayer& getPlayer() const;
 			std::vector<std::shared_ptr<Projectile>>& getProjectiles();
@@ -49,6 +50,7 @@ namespace Shooter {
 			void handleUseEvent();
 
 		private:
+			std::vector<GameEvent> _gameEvents;
 			std::shared_ptr<IItem> _selectedItem;
 			std::shared_ptr<Prop> _selectedProp;
 			bool _isStopped;

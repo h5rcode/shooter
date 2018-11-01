@@ -17,10 +17,12 @@
 #include "ProjectileRenderer.h"
 #include "PropRenderer.h"
 #include "ResourceManager.h"
+#include "SfmlAudioSystem.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
 #include "WallRenderer.h"
 
+using namespace Shooter::Audio;
 using namespace Shooter::Inventory;
 using namespace Shooter::ItemDatabase;
 using namespace Shooter::LevelDescriptors;
@@ -38,7 +40,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		}
 
 		sf::VideoMode videoMode = fullscreenModes.at(0);
-		sf::RenderWindow renderWindow(videoMode, "Shooter", sf::Style::Fullscreen);
+		sf::RenderWindow renderWindow(videoMode, "Shooter", sf::Style::Default);
 		renderWindow.setMouseCursorVisible(false);
 
 		ResourceManager resourceManager;
@@ -79,6 +81,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
 		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
 		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);
+		SfmlAudioSystem sfmlAudioSystem(gameState, resourceManager);
 
 		sf::Clock frameClock;
 
@@ -86,6 +89,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		while (goOn) {
 
 			sf::Time frameTime = frameClock.restart();
+
+			gameState.getGameEvents().clear();
 
 			gameState.processInput();
 
@@ -96,6 +101,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 			gameState.update(frameTime);
 			sfmlRenderer.render(frameTime);
+			sfmlAudioSystem.update();
 		}
 
 		return 0;

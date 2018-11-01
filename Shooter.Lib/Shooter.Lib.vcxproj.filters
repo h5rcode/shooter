@@ -31,6 +31,12 @@
     <Filter Include="Rendering\Renderers">
       <UniqueIdentifier>{ea190b33-4d23-423d-a651-3b34fddf6575}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\Events">
+      <UniqueIdentifier>{bb8ccca0-5772-4d02-9b0c-3c895d62e49f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{311750f0-7874-4acb-ae0a-72bc92fa8b92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerInitialStateDescriptor.cpp">
@@ -38,9 +44,6 @@
     </ClCompile>
     <ClCompile Include="LevelDescriptor.cpp">
       <Filter>LevelDescriptors</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSet.cpp">
-      <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>World</Filter>
@@ -125,6 +128,12 @@
     </ClCompile>
     <ClCompile Include="PropRenderer.cpp">
       <Filter>Rendering\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSet.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="SfmlAudioSystem.cpp">
+      <Filter>Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +307,18 @@
     </ClInclude>
     <ClInclude Include="PropRenderer.h">
       <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvent.h">
+      <Filter>World\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEventType.h">
+      <Filter>World\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="IAudioSystem.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SfmlAudioSystem.h">
+      <Filter>Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

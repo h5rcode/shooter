@@ -105,6 +105,9 @@ void GameState::update(sf::Time elapsedTime)
 
 	if (_gameSet.collidesWith(playerBoundingBox)) {
 		_player.immobilize();
+
+		GameEvent gameEvent{ GameEventType::PlayerImmobilized };
+		_gameEvents.push_back(gameEvent);
 	}
 	else {
 		_player.move(elapsedTime);
@@ -125,6 +128,9 @@ void GameState::update(sf::Time elapsedTime)
 		else if (projectileBoundingBox.intersects(playerBoundingBox)) {
 			_player.hurt(projectile->getDamage());
 			eraseProjectile = true;
+
+			GameEvent gameEvent{ GameEventType::PlayerHurt };
+			_gameEvents.push_back(gameEvent);
 		}
 
 		if (eraseProjectile) {
@@ -144,6 +150,10 @@ Camera& GameState::getCamera() {
 Crosshair& GameState::getCrosshair()
 {
 	return _crosshair;
+}
+
+std::vector<GameEvent>& GameState::getGameEvents() {
+	return _gameEvents;
 }
 
 IGameSet& GameState::getGameSet() const
@@ -189,6 +199,9 @@ void GameState::handleMouseButtonDown()
 		{
 			_projectiles.push_back(projectile);
 		}
+
+		GameEvent gameEvent{ GameEventType::PlayerAttacked };
+		_gameEvents.push_back(gameEvent);
 	}
 }
 
@@ -197,6 +210,9 @@ void GameState::handleUseEvent() {
 		bool itemWasPickedUp = _player.pickUpItem(_selectedItem);
 
 		if (itemWasPickedUp) {
+			GameEvent gameEvent{ GameEventType::PlayerPickedUpItem };
+			_gameEvents.push_back(gameEvent);
+
 			_gameSet.removeItem(_selectedItem);
 
 			std::shared_ptr<IWeapon> weapon = std::dynamic_pointer_cast<IWeapon>(_selectedItem);

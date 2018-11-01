@@ -10,5 +10,5 @@
 	"capacity": 20,
 	"damage": 30,
 	"muzzleVelocity": 1000,
-	"roundsPerMinute": 240
+	"roundsPerMinute": 360
 }]

@@ -1,0 +1,14 @@
+[{
+	"id": "SOFA-01",
+	"name": "Sofa",
+	"width": 192,
+	"height": 64,
+	"texture": "sofa.png"
+},
+{
+	"id": "TOME",
+	"name": "Tome",
+	"width": 64,
+	"height": 64,
+	"texture": "tome.png"
+}]

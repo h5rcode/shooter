@@ -1,7 +1,7 @@
 #include "Firearm.h"
 #include "ItemFactory.h"
 
-using namespace Shooter::ItemDatabase;
+using namespace Shooter::WorldDatabase::Items;
 using namespace Shooter::Items;
 using namespace Shooter::Math;
 

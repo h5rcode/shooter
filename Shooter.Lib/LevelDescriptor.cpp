@@ -11,11 +11,13 @@ using nlohmann::json;
 
 using namespace Shooter::Items;
 using namespace Shooter::LevelDescriptors;
+using namespace Shooter::WorldDatabase::Props;
 
 const std::string TEXTURES_PATH = "Resources/textures/";
 
-LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory)
-	: _itemFactory(itemFactory) {
+LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, IPropDatabase& propDatabase) :
+	_itemFactory(itemFactory),
+	_propDatabase(propDatabase) {
 }
 
 std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
@@ -38,16 +40,22 @@ std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 
 std::vector<std::shared_ptr<Prop>> LevelDescriptor::getProps() {
 	std::vector<std::shared_ptr<Prop>> props;
-	for (std::vector<std::shared_ptr<PropDescriptor>>::iterator it = this->propDescriptors.begin(); it != this->propDescriptors.end(); ++it)
+	for (std::vector<std::shared_ptr<LevelPropDescriptor>>::iterator it = this->propDescriptors.begin(); it != this->propDescriptors.end(); ++it)
 	{
-		std::shared_ptr<PropDescriptor> propDescriptor = *it;
+		std::shared_ptr<LevelPropDescriptor> levelPropDescriptor = *it;
+		PropDescriptor& propDescriptor = _propDatabase.getProp(levelPropDescriptor->id);
 
-		Vector2 position(propDescriptor->x, propDescriptor->y);
-		double orientation = propDescriptor->orientation;
-		int width = propDescriptor->width;
-		int height = propDescriptor->height;
+		Vector2 position(levelPropDescriptor->x, levelPropDescriptor->y);
+		double orientation = levelPropDescriptor->orientation;
 
-		std::shared_ptr<Prop> prop = std::make_shared<Prop>(position, width, height, orientation, propDescriptor->texture);
+		std::shared_ptr<Prop> prop = std::make_shared<Prop>(
+			levelPropDescriptor->id,
+			propDescriptor.name,
+			position,
+			propDescriptor.width,
+			propDescriptor.height,
+			orientation);
+
 		props.push_back(prop);
 	}
 
@@ -101,13 +109,11 @@ void LevelDescriptor::loadFromFile(std::string& fileName) {
 	{
 		json::value_type prop = *it;
 
-		std::shared_ptr<PropDescriptor> propDescriptor = std::make_shared<PropDescriptor>();
+		std::shared_ptr<LevelPropDescriptor> propDescriptor = std::make_shared<LevelPropDescriptor>();
 		propDescriptor->x = prop.at("x").get<double>();
 		propDescriptor->y = prop.at("y").get<double>();
 		propDescriptor->orientation = prop.at("orientation").get<double>();
-		propDescriptor->texture = TEXTURES_PATH + prop.at("texture").get<std::string>();
-		propDescriptor->width = prop.at("width").get<int>();
-		propDescriptor->height = prop.at("height").get<int>();
+		propDescriptor->id = prop.at("propId").get<std::string>();
 
 		this->propDescriptors.push_back(propDescriptor);
 	}

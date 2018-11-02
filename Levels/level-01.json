@@ -37,20 +37,16 @@
 		"texture": "wall-01.png"
 	}],
 	"props": [{
+		"propId": "SOFA-01",
 		"x": 150,
 		"y": 50,
-		"orientation": 180,
-		"width": 192,
-		"height": 64,
-		"texture": "sofa.png"
+		"orientation": 180
 	},
 	{
+		"propId": "SOFA-01",
 		"x": 300,
 		"y": 100,
-		"orientation": 45,
-		"width": 192,
-		"height": 64,
-		"texture": "sofa.png"
+		"orientation": 45
 	}],
 	"items": [{
 		"itemId": "SIGSAUER",

@@ -1,16 +1,19 @@
+#include "PropDescriptor.h"
 #include "PropRenderer.h"
 
 using namespace Shooter::Rendering::Renderers;
 
-PropRenderer::PropRenderer(sf::RenderWindow& renderWindow, IResourceManager& resourceManager) :
+PropRenderer::PropRenderer(IPropDatabase& propDatabase, sf::RenderWindow& renderWindow, IResourceManager& resourceManager) :
+	_propDatabase(propDatabase),
 	_renderWindow(renderWindow),
 	_resourceManager(resourceManager)
 {
 }
 
-void PropRenderer::render(Prop& prop) {
-
-	sf::Texture* texture = _resourceManager.getTexture(prop.getTexture());
+void PropRenderer::render(Prop& prop)
+{
+	PropDescriptor& propDescriptor = _propDatabase.getProp(prop.getId());
+	sf::Texture* texture = _resourceManager.getTexture(propDescriptor.texture);
 	int width = prop.getWidth();
 	int height = prop.getHeight();
 

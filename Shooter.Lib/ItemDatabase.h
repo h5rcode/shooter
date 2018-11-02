@@ -8,16 +8,18 @@
 #include "WeaponDescriptor.h"
 
 namespace Shooter {
-	namespace ItemDatabase {
-		class ItemDatabase : public IItemDatabase {
-		public:
-			ItemDatabase(std::string& fileName);
+	namespace WorldDatabase {
+		namespace Items {
+			class ItemDatabase : public IItemDatabase {
+			public:
+				ItemDatabase(std::string fileName);
 
-		public:
-			ItemDescriptor& getItem(std::string& id);
+			public:
+				ItemDescriptor& getItem(std::string& id);
 
-		private:
-			std::map<std::string, ItemDescriptor> _items;
-		};
+			private:
+				std::map<std::string, ItemDescriptor> _items;
+			};
+		}
 	}
 }

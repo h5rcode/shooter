@@ -25,9 +25,6 @@
     <Filter Include="Items\Weapons">
       <UniqueIdentifier>{05485d27-bdb2-4724-b01a-577cac8a4cc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ItemDatabase">
-      <UniqueIdentifier>{9281639b-776b-42ca-8c3f-0f8797524bfb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rendering\Renderers">
       <UniqueIdentifier>{ea190b33-4d23-423d-a651-3b34fddf6575}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,15 @@
     </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{311750f0-7874-4acb-ae0a-72bc92fa8b92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WorldDatabase">
+      <UniqueIdentifier>{9281639b-776b-42ca-8c3f-0f8797524bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WorldDatabase\Items">
+      <UniqueIdentifier>{43362bbe-41ed-444e-b686-ccb9bcadf50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WorldDatabase\Props">
+      <UniqueIdentifier>{a9efc7b1-dc4b-4538-a436-2e334609af96}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,9 +114,6 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="ItemDatabase.cpp">
-      <Filter>ItemDatabase</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerRenderer.cpp">
       <Filter>Rendering\Renderers</Filter>
     </ClCompile>
@@ -134,6 +137,12 @@
     </ClCompile>
     <ClCompile Include="SfmlAudioSystem.cpp">
       <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDatabase.cpp">
+      <Filter>WorldDatabase\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="PropDatabase.cpp">
+      <Filter>WorldDatabase\Props</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +171,6 @@
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="LevelDescriptor.h">
-      <Filter>LevelDescriptors</Filter>
-    </ClInclude>
-    <ClInclude Include="PropDescriptor.h">
       <Filter>LevelDescriptors</Filter>
     </ClInclude>
     <ClInclude Include="WallDescriptor.h">
@@ -251,27 +257,6 @@
     <ClInclude Include="LevelItemDescriptor.h">
       <Filter>LevelDescriptors</Filter>
     </ClInclude>
-    <ClInclude Include="ItemType.h">
-      <Filter>ItemDatabase</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponType.h">
-      <Filter>ItemDatabase</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponDescriptor.h">
-      <Filter>ItemDatabase</Filter>
-    </ClInclude>
-    <ClInclude Include="FirearmDescriptor.h">
-      <Filter>ItemDatabase</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemDatabase.h">
-      <Filter>ItemDatabase</Filter>
-    </ClInclude>
-    <ClInclude Include="IItemDatabase.h">
-      <Filter>ItemDatabase</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemDescriptor.h">
-      <Filter>ItemDatabase</Filter>
-    </ClInclude>
     <ClInclude Include="IPlayerRenderer.h">
       <Filter>Rendering\Renderers</Filter>
     </ClInclude>
@@ -322,6 +307,39 @@
     </ClInclude>
     <ClInclude Include="ProjectileImpactEvent.h">
       <Filter>World\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="FirearmDescriptor.h">
+      <Filter>WorldDatabase\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="IItemDatabase.h">
+      <Filter>WorldDatabase\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDatabase.h">
+      <Filter>WorldDatabase\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDescriptor.h">
+      <Filter>WorldDatabase\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemType.h">
+      <Filter>WorldDatabase\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponDescriptor.h">
+      <Filter>WorldDatabase\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponType.h">
+      <Filter>WorldDatabase\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="IPropDatabase.h">
+      <Filter>WorldDatabase\Props</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelPropDescriptor.h">
+      <Filter>LevelDescriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="PropDescriptor.h">
+      <Filter>WorldDatabase\Props</Filter>
+    </ClInclude>
+    <ClInclude Include="PropDatabase.h">
+      <Filter>WorldDatabase\Props</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

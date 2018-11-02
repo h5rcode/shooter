@@ -6,13 +6,13 @@
 
 using nlohmann::json;
 
-using namespace Shooter::ItemDatabase;
+using namespace Shooter::WorldDatabase::Items;
 
 const std::string TEXTURES_PATH = "Resources/textures/";
 
 static WeaponDescriptor parseWeaponDescriptor(json::value_type& jsonValue);
 
-ItemDatabase::ItemDatabase(std::string& fileName) {
+ItemDatabase::ItemDatabase(std::string fileName) {
 	std::ifstream fileStream(fileName);
 
 	json json;

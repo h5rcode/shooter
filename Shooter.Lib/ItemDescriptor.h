@@ -6,19 +6,21 @@
 #include "WeaponDescriptor.h"
 
 namespace Shooter {
-	namespace ItemDatabase {
-		struct ItemDescriptor {
-			std::string id;
-			std::string name;
-			std::string texture;
-			int width;
-			int height;
-			int weight;
+	namespace WorldDatabase {
+		namespace Items {
+			struct ItemDescriptor {
+				std::string id;
+				std::string name;
+				std::string texture;
+				int width;
+				int height;
+				int weight;
 
-			ItemType itemType;
-			union {
-				WeaponDescriptor weapon;
+				ItemType itemType;
+				union {
+					WeaponDescriptor weapon;
+				};
 			};
-		};
+		}
 	}
 }

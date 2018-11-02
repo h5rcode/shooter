@@ -4,7 +4,7 @@
 #include "IItemDatabase.h"
 #include "IItemRenderer.h"
 
-using namespace Shooter::ItemDatabase;
+using namespace Shooter::WorldDatabase::Items;
 
 namespace Shooter {
 	namespace Rendering {

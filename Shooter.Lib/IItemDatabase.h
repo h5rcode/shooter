@@ -3,10 +3,12 @@
 #include "ItemDescriptor.h"
 
 namespace Shooter {
-	namespace ItemDatabase {
-		class IItemDatabase {
-		public:
-			virtual ItemDescriptor& getItem(std::string& id) = 0;
-		};
+	namespace WorldDatabase {
+		namespace Items {
+			class IItemDatabase {
+			public:
+				virtual ItemDescriptor& getItem(std::string& id) = 0;
+			};
+		}
 	}
 }

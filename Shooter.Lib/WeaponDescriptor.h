@@ -4,13 +4,15 @@
 #include "WeaponType.h"
 
 namespace Shooter {
-	namespace ItemDatabase {
-		struct WeaponDescriptor {
-			WeaponType weaponType;
+	namespace WorldDatabase {
+		namespace Items {
+			struct WeaponDescriptor {
+				WeaponType weaponType;
 
-			union {
-				FirearmDescriptor firearm;
+				union {
+					FirearmDescriptor firearm;
+				};
 			};
-		};
+		}
 	}
 }

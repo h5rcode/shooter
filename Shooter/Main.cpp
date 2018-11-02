@@ -15,6 +15,7 @@
 #include "Player.h"
 #include "PlayerRenderer.h"
 #include "ProjectileRenderer.h"
+#include "PropDatabase.h"
 #include "PropRenderer.h"
 #include "ResourceManager.h"
 #include "SfmlAudioSystem.h"
@@ -24,11 +25,12 @@
 
 using namespace Shooter::Audio;
 using namespace Shooter::Inventory;
-using namespace Shooter::ItemDatabase;
+using namespace Shooter::WorldDatabase::Items;
 using namespace Shooter::LevelDescriptors;
 using namespace Shooter::Rendering;
 using namespace Shooter::Rendering::Renderers;
 using namespace Shooter::World;
+using namespace Shooter::WorldDatabase::Props;
 
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 {
@@ -43,15 +45,13 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		sf::RenderWindow renderWindow(videoMode, "Shooter", sf::Style::Default);
 		renderWindow.setMouseCursorVisible(false);
 
-		ResourceManager resourceManager;
-
-		std::string itemDatabasePath = "ItemDatabase/items.json";
-		ItemDatabase itemDatabase(itemDatabasePath);
+		ItemDatabase itemDatabase("WorldDatabase/items.json");
+		PropDatabase propDatabase("WorldDatabase/props.json");
 
 		std::string level01FileName = "Levels/level-01.json";
 
 		ItemFactory itemFactory(itemDatabase);
-		LevelDescriptor levelDescriptor(itemFactory);
+		LevelDescriptor levelDescriptor(itemFactory, propDatabase);
 		levelDescriptor.loadFromFile(level01FileName);
 
 		std::vector<std::shared_ptr<IItem>> items = levelDescriptor.getItems();
@@ -64,6 +64,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
+		ResourceManager resourceManager;
 		sf::Texture* playerTexture = resourceManager.getTexture("Resources/textures/character.png");
 		sf::Texture* projectileTexture = resourceManager.getTexture("Resources/textures/bullet.png");
 		Inventory inventory;
@@ -73,7 +74,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
 
 		ItemRenderer itemRenderer(itemDatabase, renderWindow, resourceManager);
-		PropRenderer propRenderer(renderWindow, resourceManager);
+		PropRenderer propRenderer(propDatabase, renderWindow, resourceManager);
 		WallRenderer wallRenderer(renderWindow, resourceManager);
 		GameSetRenderer gameSetRenderer(itemRenderer, propRenderer, wallRenderer);
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);

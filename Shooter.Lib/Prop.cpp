@@ -3,14 +3,15 @@
 using namespace Shooter::Math;
 using namespace Shooter::World;
 
-Prop::Prop(Vector2 position, int width, int height, double orientation, std::string texture) :
+Prop::Prop(std::string id, std::string name, Vector2 position, int width, int height, double orientation) :
+	_id(id),
+	_name(name),
 	_orientation(orientation),
 	_position(position),
 	_width(width),
 	_height(height),
 	_selected(false),
-	_boundingBox(position, width, height, orientation),
-	_texture(texture)
+	_boundingBox(position, width, height, orientation)
 {
 }
 
@@ -23,6 +24,14 @@ int Prop::getHeight() const {
 	return _height;
 }
 
+std::string& Prop::getId() {
+	return _id;
+}
+
+std::string& Prop::getName() {
+	return _name;
+}
+
 double Prop::getOrientation() const {
 	return _orientation;
 }
@@ -30,10 +39,6 @@ double Prop::getOrientation() const {
 Vector2 & Prop::getPosition()
 {
 	return _position;
-}
-
-std::string& Prop::getTexture() {
-	return _texture;
 }
 
 int Prop::getWidth() const {

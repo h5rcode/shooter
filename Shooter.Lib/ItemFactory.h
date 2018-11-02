@@ -7,7 +7,7 @@
 #include "IItemDatabase.h"
 #include "Vector2.h"
 
-using namespace Shooter::ItemDatabase;
+using namespace Shooter::WorldDatabase::Items;
 using namespace Shooter::Math;
 
 namespace Shooter {

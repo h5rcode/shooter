@@ -10,6 +10,10 @@ namespace Shooter {
 			virtual sf::Font* getFont(const std::string& filename) = 0;
 			virtual sf::SoundBuffer* getSoundBuffer(const std::string& filename) = 0;
 			virtual sf::Texture* getTexture(const std::string& filename) = 0;
+
+			virtual void loadFont(const std::string& filename) = 0;
+			virtual void loadSoundBuffer(const std::string& filename) = 0;
+			virtual void loadTexture(const std::string& filename) = 0;
 		};
 	}
 }

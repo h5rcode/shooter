@@ -14,6 +14,10 @@ namespace Shooter {
 			sf::SoundBuffer* getSoundBuffer(const std::string& filename);
 			sf::Texture* getTexture(const std::string& filename);
 
+			void loadFont(const std::string& filename);
+			void loadSoundBuffer(const std::string& filename);
+			void loadTexture(const std::string& filename);
+
 		private:
 			std::map<std::string, sf::Font*> _fonts;
 			std::map<std::string, sf::SoundBuffer*> _soundBuffers;

@@ -67,3 +67,41 @@ sf::Texture* ResourceManager::getTexture(const std::string& filename) {
 
 	return it->second;
 }
+void ResourceManager::loadFont(const std::string& filename) {
+	const auto& it = _fonts.find(filename);
+
+	if (it != _fonts.end()) {
+		throw std::runtime_error("The font '" + filename + "' is already loaded.");
+	}
+
+	sf::Font* font = new sf::Font();
+	font->loadFromFile(filename);
+
+	_fonts[filename] = font;
+}
+
+void ResourceManager::loadSoundBuffer(const std::string& filename) {
+	const auto& it = _soundBuffers.find(filename);
+
+	if (it != _soundBuffers.end()) {
+		throw std::runtime_error("The sound buffer '" + filename + "' is already loaded.");
+	}
+
+	sf::SoundBuffer* soundBuffer = new sf::SoundBuffer();
+	soundBuffer->loadFromFile(filename);
+
+	_soundBuffers[filename] = soundBuffer;
+}
+
+void ResourceManager::loadTexture(const std::string& filename) {
+	const auto& it = _textures.find(filename);
+
+	if (it != _textures.end()) {
+		throw std::runtime_error("The texture '" + filename + "' is already loaded.");
+	}
+
+	sf::Texture* texture = new sf::Texture();
+	texture->loadFromFile(filename);
+
+	_textures[filename] = texture;
+}

@@ -30,15 +30,19 @@ SfmlRenderer::SfmlRenderer(
 {
 	sf::Font* hudFont = _resourceManager.getFont("Resources/fonts/arial.ttf");
 	_font = *hudFont;
+
+	sf::Texture* crosshairTexture = _resourceManager.getTexture("Resources/textures/Crosshair.png");
+	_crosshairSprite.setTexture(*crosshairTexture);
+
+	sf::Vector2u textureSize = crosshairTexture->getSize();
+
+	_crosshairSprite.setOrigin(textureSize.x / 2, textureSize.y / 2);
 }
 
 void SfmlRenderer::render(sf::Time elapsedTime) {
 	_window.clear();
 
-	IGameSet& gameSet = _gameState.getGameSet();
 	Camera& camera = _gameState.getCamera();
-	IPlayer& player = _gameState.getPlayer();
-	Crosshair& crosshair = _gameState.getCrosshair();
 
 	Vector2 cameraPosition = camera.getPosition();
 
@@ -48,8 +52,10 @@ void SfmlRenderer::render(sf::Time elapsedTime) {
 
 	_window.setView(view);
 
+	IGameSet& gameSet = _gameState.getGameSet();
 	_gameSetRenderer.render(gameSet);
 
+	IPlayer& player = _gameState.getPlayer();
 	_playerRenderer.render(player, elapsedTime);
 
 	std::vector<std::shared_ptr<Projectile>>& projectiles = _gameState.getProjectiles();
@@ -58,13 +64,18 @@ void SfmlRenderer::render(sf::Time elapsedTime) {
 		_projectileRenderer.render(*projectile);
 	}
 
-	crosshair.render(_window);
-
+	renderCrosshair();
 	renderHud();
 
 	_window.setView(view);
-
 	_window.display();
+}
+
+void SfmlRenderer::renderCrosshair() {
+	Crosshair& crosshair = _gameState.getCrosshair();
+	Vector2& crosshairPosition = crosshair.getPosition();
+	_crosshairSprite.setPosition(crosshairPosition.x, crosshairPosition.y);
+	_window.draw(_crosshairSprite);
 }
 
 void SfmlRenderer::renderHud() {

@@ -28,9 +28,11 @@ namespace Shooter {
 			void render(sf::Time elapsedTime);
 
 		private:
+			void renderCrosshair();
 			void renderHud();
 
 		private:
+			sf::Sprite _crosshairSprite;
 			IGameSetRenderer& _gameSetRenderer;
 			IGameState& _gameState;
 			IPlayerRenderer& _playerRenderer;

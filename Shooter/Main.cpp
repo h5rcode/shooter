@@ -62,14 +62,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		GameSettings gameSettings;
 		SfmlInputManager inputManager(renderWindow);
 
-		sf::Texture* crosshairTexture = resourceManager.getTexture("Resources/textures/Crosshair.png");
-		Crosshair crosshair(*crosshairTexture);
-
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
 		sf::Texture* playerTexture = resourceManager.getTexture("Resources/textures/character.png");
 		sf::Texture* projectileTexture = resourceManager.getTexture("Resources/textures/bullet.png");
 		Inventory inventory;
+		Crosshair crosshair;
 		Player player(playerInitialState.getPosition(), 100, inventory);
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);

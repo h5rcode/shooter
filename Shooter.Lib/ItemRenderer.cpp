@@ -11,7 +11,7 @@ ItemRenderer::ItemRenderer(IItemDatabase& itemDatabase, sf::RenderWindow& render
 }
 
 void ItemRenderer::render(IItem& item) {
-	std::shared_ptr<ItemDescriptor> itemDescriptor = _itemDatabase.getItem(item.getId());
+	ItemDescriptor* itemDescriptor = _itemDatabase.getItem(item.getId());
 	sf::Texture* texture = _resourceManager.getTexture(itemDescriptor->texture);
 
 	sf::Vector2u textureSize = texture->getSize();

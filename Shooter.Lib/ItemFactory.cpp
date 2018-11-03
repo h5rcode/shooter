@@ -13,7 +13,7 @@ ItemFactory::ItemFactory(IItemDatabase& itemDatabase) :
 
 std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& position, double orientation)
 {
-	std::shared_ptr<ItemDescriptor> itemDescriptor = _itemDatabase.getItem(itemId);
+	ItemDescriptor* itemDescriptor = _itemDatabase.getItem(itemId);
 
 	int width = itemDescriptor->width;
 	int height = itemDescriptor->height;
@@ -22,13 +22,13 @@ std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& posit
 	{
 	case ItemType::Weapon:
 	{
-		std::shared_ptr<WeaponDescriptor> weaponDescriptor = std::dynamic_pointer_cast<WeaponDescriptor>(itemDescriptor);
+		WeaponDescriptor* weaponDescriptor = static_cast<WeaponDescriptor*>(itemDescriptor);
 
 		switch (weaponDescriptor->weaponType)
 		{
 		case WeaponType::Firearm:
 		{
-			std::shared_ptr<FirearmDescriptor> firearmDescriptor = std::dynamic_pointer_cast<FirearmDescriptor>(weaponDescriptor);
+			FirearmDescriptor* firearmDescriptor = static_cast<FirearmDescriptor*>(weaponDescriptor);
 			return std::make_shared<Shooter::Items::Weapons::Firearm>(
 				itemDescriptor->id,
 				itemDescriptor->name,

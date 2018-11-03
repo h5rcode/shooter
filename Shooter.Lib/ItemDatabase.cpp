@@ -12,7 +12,7 @@ using namespace Shooter::WorldDatabase::Items;
 
 const std::string TEXTURES_PATH = "Resources/textures/";
 
-static std::shared_ptr<WeaponDescriptor> parseWeaponDescriptor(json::value_type& jsonValue);
+static WeaponDescriptor* parseWeaponDescriptor(json::value_type& jsonValue);
 
 ItemDatabase::ItemDatabase(std::string fileName) {
 	std::ifstream fileStream(fileName);
@@ -20,7 +20,7 @@ ItemDatabase::ItemDatabase(std::string fileName) {
 	json json;
 	fileStream >> json;
 
-	std::shared_ptr<ItemDescriptor> itemDescriptor;
+	ItemDescriptor* itemDescriptor;
 	for (json::iterator it = json.begin(); it != json.end(); ++it) {
 		json::value_type item = *it;
 
@@ -42,17 +42,25 @@ ItemDatabase::ItemDatabase(std::string fileName) {
 	}
 }
 
-std::shared_ptr<ItemDescriptor> ItemDatabase::getItem(std::string& id) {
+ItemDatabase::~ItemDatabase()
+{
+	for (auto& it : _items)
+	{
+		delete it.second;
+	}
+}
+
+ItemDescriptor* ItemDatabase::getItem(std::string& id) {
 	return _items[id];
 }
 
-static std::shared_ptr<WeaponDescriptor> parseWeaponDescriptor(json::value_type& jsonValue) {
+static WeaponDescriptor* parseWeaponDescriptor(json::value_type& jsonValue) {
 	WeaponType weaponType = jsonValue.at("itemType").get<WeaponType>();
 	switch (weaponType)
 	{
 	case WeaponType::Firearm:
 	{
-		std::shared_ptr<FirearmDescriptor> firearmDescriptor = std::make_shared<FirearmDescriptor>();
+		FirearmDescriptor* firearmDescriptor = new FirearmDescriptor();
 		firearmDescriptor->id = jsonValue.at("id").get<std::string>();
 		firearmDescriptor->name = jsonValue.at("name").get<std::string>();
 		firearmDescriptor->itemType = ItemType::Weapon;

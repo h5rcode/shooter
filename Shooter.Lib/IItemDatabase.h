@@ -7,7 +7,7 @@ namespace Shooter {
 		namespace Items {
 			class IItemDatabase {
 			public:
-				virtual std::shared_ptr<ItemDescriptor> getItem(std::string& id) = 0;
+				virtual ItemDescriptor* getItem(std::string& id) = 0;
 			};
 		}
 	}

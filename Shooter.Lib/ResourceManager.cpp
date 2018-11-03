@@ -59,6 +59,7 @@ sf::Texture* ResourceManager::getTexture(const std::string& filename) {
 	if (it == _textures.end()) {
 		sf::Texture* texture = new sf::Texture();
 		texture->loadFromFile(filename);
+		texture->setSmooth(true);
 
 		_textures[filename] = texture;
 
@@ -102,6 +103,7 @@ void ResourceManager::loadTexture(const std::string& filename) {
 
 	sf::Texture* texture = new sf::Texture();
 	texture->loadFromFile(filename);
+	texture->setSmooth(true);
 
 	_textures[filename] = texture;
 }

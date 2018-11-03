@@ -17,9 +17,7 @@ namespace Shooter {
 				int weight;
 
 				ItemType itemType;
-				union {
-					WeaponDescriptor weapon;
-				};
+				WeaponDescriptor weapon;
 			};
 		}
 	}

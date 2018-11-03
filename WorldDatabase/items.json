@@ -10,5 +10,6 @@
 	"capacity": 20,
 	"damage": 30,
 	"muzzleVelocity": 2000,
-	"roundsPerMinute": 360
+	"roundsPerMinute": 360,
+	"gunshotSound": "180961__kleeb__gunshots.wav"
 }]

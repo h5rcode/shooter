@@ -8,10 +8,7 @@ namespace Shooter {
 		namespace Items {
 			struct WeaponDescriptor {
 				WeaponType weaponType;
-
-				union {
-					FirearmDescriptor firearm;
-				};
+				FirearmDescriptor firearm;
 			};
 		}
 	}

@@ -35,8 +35,7 @@ ItemDatabase::ItemDatabase(std::string fileName) {
 		switch (itemType)
 		{
 		case ItemType::Weapon:
-			WeaponDescriptor weaponDescriptor = parseWeaponDescriptor(item);
-			itemDescriptor.weapon = weaponDescriptor;
+			itemDescriptor.weapon = parseWeaponDescriptor(item);
 			break;
 
 		default:
@@ -63,15 +62,17 @@ static WeaponDescriptor parseWeaponDescriptor(json::value_type& jsonValue) {
 	switch (weaponType)
 	{
 	case WeaponType::Firearm:
+	{
 		FirearmDescriptor firearmDescriptor;
-
 		firearmDescriptor.capacity = jsonValue.at("capacity").get<int>();
 		firearmDescriptor.damage = jsonValue.at("damage").get<int>();
 		firearmDescriptor.muzzleVelocity = jsonValue.at("muzzleVelocity").get<double>();
 		firearmDescriptor.roundsPerMinute = jsonValue.at("roundsPerMinute").get<int>();
+		firearmDescriptor.gunshotSound = jsonValue.at("gunshotSound").get<std::string>();
 
 		weaponDescriptor.firearm = firearmDescriptor;
-		break;
+	}
+	break;
 
 	default:
 		std::stringstream message;

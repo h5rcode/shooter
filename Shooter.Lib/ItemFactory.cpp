@@ -19,11 +19,13 @@ std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& posit
 	switch (itemDescriptor.itemType)
 	{
 	case ItemType::Weapon:
+	{
 		WeaponDescriptor weaponDescriptor = itemDescriptor.weapon;
 
 		switch (weaponDescriptor.weaponType)
 		{
 		case WeaponType::Firearm:
+		{
 			FirearmDescriptor firearmDescriptor = weaponDescriptor.firearm;
 			return std::make_shared<Shooter::Items::Weapons::Firearm>(
 				itemDescriptor.id,
@@ -37,12 +39,13 @@ std::shared_ptr<IItem> ItemFactory::buildItem(std::string itemId, Vector2& posit
 				width,
 				height,
 				orientation);
-
+		}
 		default:
 			throw std::invalid_argument("Unkown weapon type: '" + weaponDescriptor.weaponType);
 		}
 
 		break;
+	}
 	default:
 		break;
 	}

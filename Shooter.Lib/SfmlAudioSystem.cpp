@@ -1,11 +1,19 @@
 #include "SfmlAudioSystem.h"
 
+#include "FirearmDescriptor.h"
+#include "WeaponDescriptor.h"
+
 using namespace Shooter::Audio;
 
 const int MAX_SOUNDS = 256;
+const std::string SOUND_PATH = "Resources/sounds/";
 
-SfmlAudioSystem::SfmlAudioSystem(IGameState& gameState, sf::RenderWindow& renderWindow, IResourceManager& resourceManager) :
+SfmlAudioSystem::SfmlAudioSystem(IGameState& gameState,
+	IItemDatabase& itemDatabase,
+	sf::RenderWindow& renderWindow,
+	IResourceManager& resourceManager) :
 	_gameState(gameState),
+	_itemDatabase(itemDatabase),
 	_renderWindow(renderWindow),
 	_resourceManager(resourceManager)
 {
@@ -51,8 +59,18 @@ void SfmlAudioSystem::update() {
 		switch (gameEvent.GameEventType)
 		{
 		case GameEventType::PlayerAttacked:
-			playSound("Resources/sounds/180961__kleeb__gunshots.wav", playerPosition, true);
-			break;
+		{
+			std::shared_ptr<IWeapon> weapon = player.getEquipedWeapon();
+			std::shared_ptr<IItem> item = std::dynamic_pointer_cast<IItem>(weapon);
+			std::shared_ptr<ItemDescriptor> itemDescriptor = _itemDatabase.getItem(item->getId());
+			std::shared_ptr<WeaponDescriptor> weaponDescriptor = std::dynamic_pointer_cast<WeaponDescriptor>(itemDescriptor);
+
+			if (weaponDescriptor->weaponType == WeaponType::Firearm) {
+				std::shared_ptr<FirearmDescriptor> firearmDescriptor = std::dynamic_pointer_cast<FirearmDescriptor>(weaponDescriptor);
+				playSound(SOUND_PATH + firearmDescriptor->gunshotSound, playerPosition, true);
+			}
+		}
+		break;
 
 		case GameEventType::PlayerHurt:
 			playSound("Resources/sounds/262279__dirtjm__grunts-male.wav", playerPosition, true);

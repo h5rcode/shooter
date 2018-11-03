@@ -80,7 +80,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
 		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
 		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);
-		SfmlAudioSystem sfmlAudioSystem(gameState, renderWindow, resourceManager);
+		SfmlAudioSystem sfmlAudioSystem(gameState, itemDatabase, renderWindow, resourceManager);
 
 		sf::Clock frameClock;
 

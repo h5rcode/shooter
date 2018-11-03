@@ -3,12 +3,13 @@
 #include <string>
 
 #include "ItemType.h"
-#include "WeaponDescriptor.h"
 
 namespace Shooter {
 	namespace WorldDatabase {
 		namespace Items {
 			struct ItemDescriptor {
+				virtual ~ItemDescriptor() {}
+
 				std::string id;
 				std::string name;
 				std::string texture;
@@ -17,7 +18,6 @@ namespace Shooter {
 				int weight;
 
 				ItemType itemType;
-				WeaponDescriptor weapon;
 			};
 		}
 	}

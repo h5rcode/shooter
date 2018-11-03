@@ -15,10 +15,10 @@ namespace Shooter {
 				ItemDatabase(std::string fileName);
 
 			public:
-				ItemDescriptor& getItem(std::string& id);
+				std::shared_ptr<ItemDescriptor> getItem(std::string& id);
 
 			private:
-				std::map<std::string, ItemDescriptor> _items;
+				std::map<std::string, std::shared_ptr<ItemDescriptor>> _items;
 			};
 		}
 	}

@@ -4,13 +4,15 @@
 
 #include "json.hpp"
 
+#include "FirearmDescriptor.h"
+
 using nlohmann::json;
 
 using namespace Shooter::WorldDatabase::Items;
 
 const std::string TEXTURES_PATH = "Resources/textures/";
 
-static WeaponDescriptor parseWeaponDescriptor(json::value_type& jsonValue);
+static std::shared_ptr<WeaponDescriptor> parseWeaponDescriptor(json::value_type& jsonValue);
 
 ItemDatabase::ItemDatabase(std::string fileName) {
 	std::ifstream fileStream(fileName);
@@ -18,24 +20,16 @@ ItemDatabase::ItemDatabase(std::string fileName) {
 	json json;
 	fileStream >> json;
 
-	ItemDescriptor itemDescriptor;
+	std::shared_ptr<ItemDescriptor> itemDescriptor;
 	for (json::iterator it = json.begin(); it != json.end(); ++it) {
 		json::value_type item = *it;
 
 		ItemType itemType = item.at("itemType").get<ItemType>();
 
-		itemDescriptor.id = item.at("id").get<std::string>();
-		itemDescriptor.name = item.at("name").get<std::string>();
-		itemDescriptor.itemType = itemType;
-		itemDescriptor.width = item.at("width").get<int>();
-		itemDescriptor.height = item.at("height").get<int>();
-		itemDescriptor.weight = item.at("weight").get<int>();
-		itemDescriptor.texture = TEXTURES_PATH + item.at("texture").get<std::string>();
-
 		switch (itemType)
 		{
 		case ItemType::Weapon:
-			itemDescriptor.weapon = parseWeaponDescriptor(item);
+			itemDescriptor = parseWeaponDescriptor(item);
 			break;
 
 		default:
@@ -44,33 +38,36 @@ ItemDatabase::ItemDatabase(std::string fileName) {
 			throw std::invalid_argument(message.str());
 		}
 
-		_items[itemDescriptor.id] = itemDescriptor;
+		_items[itemDescriptor->id] = itemDescriptor;
 	}
 }
 
-ItemDescriptor& ItemDatabase::getItem(std::string& id) {
+std::shared_ptr<ItemDescriptor> ItemDatabase::getItem(std::string& id) {
 	return _items[id];
 }
 
-static WeaponDescriptor parseWeaponDescriptor(json::value_type& jsonValue) {
-	WeaponDescriptor weaponDescriptor;
-
+static std::shared_ptr<WeaponDescriptor> parseWeaponDescriptor(json::value_type& jsonValue) {
 	WeaponType weaponType = jsonValue.at("itemType").get<WeaponType>();
-
-	weaponDescriptor.weaponType = weaponType;
-
 	switch (weaponType)
 	{
 	case WeaponType::Firearm:
 	{
-		FirearmDescriptor firearmDescriptor;
-		firearmDescriptor.capacity = jsonValue.at("capacity").get<int>();
-		firearmDescriptor.damage = jsonValue.at("damage").get<int>();
-		firearmDescriptor.muzzleVelocity = jsonValue.at("muzzleVelocity").get<double>();
-		firearmDescriptor.roundsPerMinute = jsonValue.at("roundsPerMinute").get<int>();
-		firearmDescriptor.gunshotSound = jsonValue.at("gunshotSound").get<std::string>();
+		std::shared_ptr<FirearmDescriptor> firearmDescriptor = std::make_shared<FirearmDescriptor>();
+		firearmDescriptor->id = jsonValue.at("id").get<std::string>();
+		firearmDescriptor->name = jsonValue.at("name").get<std::string>();
+		firearmDescriptor->itemType = ItemType::Weapon;
+		firearmDescriptor->weaponType = weaponType;
+		firearmDescriptor->width = jsonValue.at("width").get<int>();
+		firearmDescriptor->height = jsonValue.at("height").get<int>();
+		firearmDescriptor->weight = jsonValue.at("weight").get<int>();
+		firearmDescriptor->texture = TEXTURES_PATH + jsonValue.at("texture").get<std::string>();
+		firearmDescriptor->capacity = jsonValue.at("capacity").get<int>();
+		firearmDescriptor->damage = jsonValue.at("damage").get<int>();
+		firearmDescriptor->muzzleVelocity = jsonValue.at("muzzleVelocity").get<double>();
+		firearmDescriptor->roundsPerMinute = jsonValue.at("roundsPerMinute").get<int>();
+		firearmDescriptor->gunshotSound = jsonValue.at("gunshotSound").get<std::string>();
 
-		weaponDescriptor.firearm = firearmDescriptor;
+		return firearmDescriptor;
 	}
 	break;
 
@@ -79,6 +76,4 @@ static WeaponDescriptor parseWeaponDescriptor(json::value_type& jsonValue) {
 		message << "Unkown weapon type '" << weaponType << "'.";
 		throw new std::invalid_argument(message.str());
 	}
-
-	return weaponDescriptor;
 }

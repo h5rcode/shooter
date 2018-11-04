@@ -13,8 +13,6 @@ using namespace Shooter::Items;
 using namespace Shooter::LevelDescriptors;
 using namespace Shooter::WorldDatabase::Props;
 
-const std::string TEXTURES_PATH = "Resources/textures/";
-
 LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, IPropDatabase& propDatabase) :
 	_itemFactory(itemFactory),
 	_propDatabase(propDatabase) {
@@ -43,13 +41,13 @@ std::vector<std::shared_ptr<Prop>> LevelDescriptor::getProps() {
 	for (std::vector<std::shared_ptr<LevelPropDescriptor>>::iterator it = this->propDescriptors.begin(); it != this->propDescriptors.end(); ++it)
 	{
 		std::shared_ptr<LevelPropDescriptor> levelPropDescriptor = *it;
-		PropDescriptor& propDescriptor = _propDatabase.getProp(levelPropDescriptor->id);
+		PropDescriptor& propDescriptor = _propDatabase.getProp(levelPropDescriptor->propId);
 
 		Vector2 position(levelPropDescriptor->x, levelPropDescriptor->y);
 		double orientation = levelPropDescriptor->orientation;
 
 		std::shared_ptr<Prop> prop = std::make_shared<Prop>(
-			levelPropDescriptor->id,
+			levelPropDescriptor->propId,
 			propDescriptor.name,
 			position,
 			propDescriptor.width,
@@ -83,56 +81,39 @@ std::vector<std::shared_ptr<Wall>> LevelDescriptor::getWalls() {
 void LevelDescriptor::loadFromFile(std::string& fileName) {
 	std::ifstream fileStream(fileName);
 
-	json json;
-	fileStream >> json;
+	json jsonObject;
+	fileStream >> jsonObject;
 
-	this->name = json.at("name").get<std::string>();
+	this->name = jsonObject.at("name").get<std::string>();
 
-	json::value_type walls = json.at("walls");
+	json::value_type walls = jsonObject.at("walls");
 	for (json::iterator it = walls.begin(); it != walls.end(); ++it)
 	{
-		json::value_type wall = *it;
-
-		std::shared_ptr<WallDescriptor> wallDescriptor = std::make_shared<WallDescriptor>();
-		wallDescriptor->x = wall.at("x").get<double>();
-		wallDescriptor->y = wall.at("y").get<double>();
-		wallDescriptor->orientation = wall.at("orientation").get<double>();
-		wallDescriptor->texture = TEXTURES_PATH + wall.at("texture").get<std::string>();
-		wallDescriptor->width = wall.at("width").get<int>();
-		wallDescriptor->length = wall.at("length").get<int>();
+		WallDescriptor wd = *it;
+		std::shared_ptr<WallDescriptor> wallDescriptor = std::make_shared<WallDescriptor>(wd);
 
 		this->wallDescriptors.push_back(wallDescriptor);
 	}
 
-	json::value_type props = json.at("props");
+	json::value_type props = jsonObject.at("props");
 	for (json::iterator it = props.begin(); it != props.end(); ++it)
 	{
-		json::value_type prop = *it;
-
-		std::shared_ptr<LevelPropDescriptor> propDescriptor = std::make_shared<LevelPropDescriptor>();
-		propDescriptor->x = prop.at("x").get<double>();
-		propDescriptor->y = prop.at("y").get<double>();
-		propDescriptor->orientation = prop.at("orientation").get<double>();
-		propDescriptor->id = prop.at("propId").get<std::string>();
+		LevelPropDescriptor ld = *it;
+		std::shared_ptr<LevelPropDescriptor> propDescriptor = std::make_shared<LevelPropDescriptor>(ld);
 
 		this->propDescriptors.push_back(propDescriptor);
 	}
 
-	json::value_type items = json.at("items");
+	json::value_type items = jsonObject.at("items");
 	for (json::iterator it = items.begin(); it != items.end(); ++it)
 	{
-		json::value_type item = *it;
-
-		std::shared_ptr<LevelItemDescriptor> itemDescriptor = std::make_shared<LevelItemDescriptor>();
-		itemDescriptor->itemId = item.at("itemId").get<std::string>();
-		itemDescriptor->x = item.at("x").get<double>();
-		itemDescriptor->y = item.at("y").get<double>();
-		itemDescriptor->orientation = item.at("orientation").get<double>();
+		LevelItemDescriptor id = *it;
+		std::shared_ptr<LevelItemDescriptor> itemDescriptor = std::make_shared<LevelItemDescriptor>(id);
 
 		this->itemDescriptors.push_back(itemDescriptor);
 	}
 
-	json::value_type playerInitialState = json.at("playerInitialState");
+	json::value_type playerInitialState = jsonObject.at("playerInitialState");
 	this->playerInitialStateDescriptor.x = playerInitialState.at("x").get<double>();
 	this->playerInitialStateDescriptor.y = playerInitialState.at("y").get<double>();
 }

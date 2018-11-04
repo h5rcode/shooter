@@ -144,6 +144,15 @@
     <ClCompile Include="PropDatabase.cpp">
       <Filter>WorldDatabase\Props</Filter>
     </ClCompile>
+    <ClCompile Include="WallDescriptor.cpp">
+      <Filter>LevelDescriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelPropDescriptor.cpp">
+      <Filter>LevelDescriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelItemDescriptor.cpp">
+      <Filter>LevelDescriptors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">

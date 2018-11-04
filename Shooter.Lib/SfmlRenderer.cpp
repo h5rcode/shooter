@@ -31,7 +31,7 @@ SfmlRenderer::SfmlRenderer(
 	sf::Font* hudFont = _resourceManager.getFont("Resources/fonts/arial.ttf");
 	_font = *hudFont;
 
-	sf::Texture* crosshairTexture = _resourceManager.getTexture("Resources/textures/Crosshair.png");
+	sf::Texture* crosshairTexture = _resourceManager.getTexture("Crosshair.png");
 	_crosshairSprite.setTexture(*crosshairTexture);
 
 	sf::Vector2u textureSize = crosshairTexture->getSize();

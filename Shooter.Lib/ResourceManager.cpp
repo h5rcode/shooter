@@ -1,6 +1,8 @@
 
 #include "ResourceManager.h"
 
+const std::string TEXTURES_PATH = "Resources/textures/";
+
 using namespace Shooter::Rendering;
 
 ResourceManager::ResourceManager() {
@@ -54,14 +56,15 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename) {
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename) {
-	const auto& it = _textures.find(filename);
+	std::string filepath = TEXTURES_PATH + filename;
+	const auto& it = _textures.find(filepath);
 
 	if (it == _textures.end()) {
 		sf::Texture* texture = new sf::Texture();
-		texture->loadFromFile(filename);
+		texture->loadFromFile(filepath);
 		texture->setSmooth(true);
 
-		_textures[filename] = texture;
+		_textures[filepath] = texture;
 
 		return texture;
 	}
@@ -95,15 +98,16 @@ void ResourceManager::loadSoundBuffer(const std::string& filename) {
 }
 
 void ResourceManager::loadTexture(const std::string& filename) {
-	const auto& it = _textures.find(filename);
+	std::string filepath = TEXTURES_PATH + filename;
+	const auto& it = _textures.find(filepath);
 
 	if (it != _textures.end()) {
 		throw std::runtime_error("The texture '" + filename + "' is already loaded.");
 	}
 
 	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile(filename);
+	texture->loadFromFile(filepath);
 	texture->setSmooth(true);
 
-	_textures[filename] = texture;
+	_textures[filepath] = texture;
 }

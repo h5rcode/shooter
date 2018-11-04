@@ -122,6 +122,8 @@
     <ClCompile Include="AbstractItem.cpp" />
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="LevelItemDescriptor.cpp" />
+    <ClCompile Include="LevelPropDescriptor.cpp" />
     <ClCompile Include="PropDatabase.cpp" />
     <ClCompile Include="SfmlAudioSystem.cpp" />
     <ClCompile Include="BoundingBox.cpp" />
@@ -152,6 +154,7 @@
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WallRenderer.cpp" />
+    <ClCompile Include="WallDescriptor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractItem.h" />

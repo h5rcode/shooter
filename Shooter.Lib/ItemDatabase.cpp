@@ -11,8 +11,6 @@ using nlohmann::json;
 
 using namespace Shooter::WorldDatabase::Items;
 
-const std::string TEXTURES_PATH = "Resources/textures/";
-
 static WeaponDescriptor* parseWeaponDescriptor(json::value_type& jsonValue);
 
 ItemDatabase::ItemDatabase(std::string fileName) {
@@ -69,7 +67,7 @@ static WeaponDescriptor* parseWeaponDescriptor(json::value_type& jsonValue) {
 		firearmDescriptor->width = jsonValue.at("width").get<int>();
 		firearmDescriptor->height = jsonValue.at("height").get<int>();
 		firearmDescriptor->weight = jsonValue.at("weight").get<int>();
-		firearmDescriptor->texture = TEXTURES_PATH + jsonValue.at("texture").get<std::string>();
+		firearmDescriptor->texture = jsonValue.at("texture").get<std::string>();
 		firearmDescriptor->capacity = jsonValue.at("capacity").get<int>();
 		firearmDescriptor->damage = jsonValue.at("damage").get<int>();
 		firearmDescriptor->muzzleVelocity = jsonValue.at("muzzleVelocity").get<double>();

@@ -65,8 +65,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
 		ResourceManager resourceManager;
-		sf::Texture* playerTexture = resourceManager.getTexture("Resources/textures/character.png");
-		sf::Texture* projectileTexture = resourceManager.getTexture("Resources/textures/bullet.png");
+		sf::Texture* playerTexture = resourceManager.getTexture("character.png");
+		sf::Texture* projectileTexture = resourceManager.getTexture("bullet.png");
 		Inventory inventory;
 		Crosshair crosshair;
 		Player player(playerInitialState.getPosition(), 100, inventory);

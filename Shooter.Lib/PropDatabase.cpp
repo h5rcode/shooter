@@ -8,8 +8,6 @@ using nlohmann::json;
 
 using namespace Shooter::WorldDatabase::Props;
 
-const std::string TEXTURES_PATH = "Resources/textures/";
-
 PropDatabase::PropDatabase(std::string filename) {
 	std::ifstream fileStream(filename);
 
@@ -24,7 +22,7 @@ PropDatabase::PropDatabase(std::string filename) {
 		itemDescriptor.name = item.at("name").get<std::string>();
 		itemDescriptor.width = item.at("width").get<int>();
 		itemDescriptor.height = item.at("height").get<int>();
-		itemDescriptor.texture = TEXTURES_PATH + item.at("texture").get<std::string>();
+		itemDescriptor.texture = item.at("texture").get<std::string>();
 
 		_props[itemDescriptor.id] = itemDescriptor;
 	}

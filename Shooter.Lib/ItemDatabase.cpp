@@ -1,6 +1,7 @@
 #include "ItemDatabase.h"
 
 #include <fstream>
+#include <sstream>
 
 #include "json.hpp"
 

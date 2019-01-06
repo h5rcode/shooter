@@ -152,6 +152,7 @@
     <ClCompile Include="Prop.cpp" />
     <ClCompile Include="SfmlInputManager.cpp" />
     <ClCompile Include="SfmlRenderer.cpp" />
+    <ClCompile Include="SoundDatabase.cpp" />
     <ClCompile Include="UpdatePlayerMovementStateCommand.cpp" />
     <ClCompile Include="UseCommand.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="IInputEventHandler.h" />
     <ClInclude Include="InputEventHandler.h" />
     <ClInclude Include="IPropDatabase.h" />
+    <ClInclude Include="ISoundDatabase.h" />
     <ClInclude Include="PlayerHurtEvent.h" />
     <ClInclude Include="PlayerPickedUpItemEvent.h" />
     <ClInclude Include="ProjectileImpactEvent.h" />
@@ -223,6 +225,8 @@
     <ClInclude Include="LevelPropDescriptor.h" />
     <ClInclude Include="SfmlInputManager.h" />
     <ClInclude Include="SfmlRenderer.h" />
+    <ClInclude Include="SoundDatabase.h" />
+    <ClInclude Include="SoundDescriptor.h" />
     <ClInclude Include="UpdatePlayerMovementStateCommand.h" />
     <ClInclude Include="UseCommand.h" />
     <ClInclude Include="Vector2.h" />

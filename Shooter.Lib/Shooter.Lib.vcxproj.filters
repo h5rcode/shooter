@@ -46,6 +46,9 @@
     <Filter Include="World\Commands">
       <UniqueIdentifier>{0d813f48-4ad3-4973-8a3d-4fa1cda54528}</UniqueIdentifier>
     </Filter>
+    <Filter Include="WorldDatabase\Sounds">
+      <UniqueIdentifier>{deb4739b-45c0-43b4-b89a-5669b7662fd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerInitialStateDescriptor.cpp">
@@ -164,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="UpdatePlayerMovementStateCommand.cpp">
       <Filter>World\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundDatabase.cpp">
+      <Filter>WorldDatabase\Sounds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -379,6 +385,15 @@
     </ClInclude>
     <ClInclude Include="UpdatePlayerMovementStateCommand.h">
       <Filter>World\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ISoundDatabase.h">
+      <Filter>WorldDatabase\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundDescriptor.h">
+      <Filter>WorldDatabase\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundDatabase.h">
+      <Filter>WorldDatabase\Sounds</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include "ResourceManager.h"
 
 const std::string TEXTURES_PATH = "Resources/textures/";
+const std::string SOUND_PATH = "Resources/sounds/";
 
 using namespace Shooter::Rendering;
 
@@ -41,13 +42,14 @@ sf::Font* ResourceManager::getFont(const std::string& filename) {
 }
 
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename) {
-	const auto& it = _soundBuffers.find(filename);
+	std::string filepath = SOUND_PATH + filename;
+	const auto& it = _soundBuffers.find(filepath);
 
 	if (it == _soundBuffers.end()) {
 		sf::SoundBuffer* soundBuffer = new sf::SoundBuffer();
-		soundBuffer->loadFromFile(filename);
+		soundBuffer->loadFromFile(filepath);
 
-		_soundBuffers[filename] = soundBuffer;
+		_soundBuffers[filepath] = soundBuffer;
 
 		return soundBuffer;
 	}
@@ -85,16 +87,17 @@ void ResourceManager::loadFont(const std::string& filename) {
 }
 
 void ResourceManager::loadSoundBuffer(const std::string& filename) {
-	const auto& it = _soundBuffers.find(filename);
+	std::string filepath = SOUND_PATH + filename;
+	const auto& it = _soundBuffers.find(filepath);
 
 	if (it != _soundBuffers.end()) {
 		throw std::runtime_error("The sound buffer '" + filename + "' is already loaded.");
 	}
 
 	sf::SoundBuffer* soundBuffer = new sf::SoundBuffer();
-	soundBuffer->loadFromFile(filename);
+	soundBuffer->loadFromFile(filepath);
 
-	_soundBuffers[filename] = soundBuffer;
+	_soundBuffers[filepath] = soundBuffer;
 }
 
 void ResourceManager::loadTexture(const std::string& filename) {

@@ -23,6 +23,7 @@
 #include "SfmlAudioSystem.h"
 #include "SfmlInputManager.h"
 #include "SfmlRenderer.h"
+#include "SoundDatabase.h"
 #include "WallRenderer.h"
 
 using namespace Shooter::Audio;
@@ -33,6 +34,7 @@ using namespace Shooter::Rendering;
 using namespace Shooter::Rendering::Renderers;
 using namespace Shooter::World;
 using namespace Shooter::WorldDatabase::Props;
+using namespace Shooter::WorldDatabase::Sounds;
 
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 {
@@ -50,6 +52,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 		ItemDatabase itemDatabase("WorldDatabase/items.json");
 		PropDatabase propDatabase("WorldDatabase/props.json");
+		SoundDatabase soundDatabase("WorldDatabase/sounds.json");
 
 		std::string level01FileName = "Levels/level-01.json";
 
@@ -69,6 +72,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
 		ResourceManager resourceManager;
+
+		resourceManager.loadSoundBuffer(soundDatabase.getBulletImpactFilename());
+		resourceManager.loadSoundBuffer(soundDatabase.getFootstepFilename());
+		resourceManager.loadSoundBuffer(soundDatabase.getGruntFilename());
+		resourceManager.loadSoundBuffer(soundDatabase.getPickupItemFilename());
+
 		sf::Texture* playerTexture = resourceManager.getTexture("character.png");
 		sf::Texture* projectileTexture = resourceManager.getTexture("bullet.png");
 		Inventory inventory;
@@ -84,7 +93,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
 		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
 		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);
-		SfmlAudioSystem sfmlAudioSystem(gameState, itemDatabase, renderWindow, resourceManager);
+		SfmlAudioSystem sfmlAudioSystem(gameState, itemDatabase, renderWindow, resourceManager, soundDatabase);
 
 		sf::Clock frameClock;
 

@@ -6,41 +6,48 @@
 using namespace Shooter::Audio;
 
 const int MAX_SOUNDS = 256;
-const std::string SOUND_PATH = "Resources/sounds/";
 
-SfmlAudioSystem::SfmlAudioSystem(IGameState& gameState,
+SfmlAudioSystem::SfmlAudioSystem(
+	IGameState& gameState,
 	IItemDatabase& itemDatabase,
 	sf::RenderWindow& renderWindow,
-	IResourceManager& resourceManager) :
+	IResourceManager& resourceManager,
+	ISoundDatabase& soundDatabase) :
 	_gameState(gameState),
 	_itemDatabase(itemDatabase),
 	_renderWindow(renderWindow),
-	_resourceManager(resourceManager)
+	_resourceManager(resourceManager),
+	_soundDatabase(soundDatabase)
 {
-	sf::SoundBuffer* soundBuffer = _resourceManager.getSoundBuffer("Resources/sounds/138476__randomationpictures__step-tap.wav");
+	std::string filename = _soundDatabase.getFootstepFilename();
+	sf::SoundBuffer* soundBuffer = _resourceManager.getSoundBuffer(filename);
 	_playerFootstepsSound.setBuffer(*soundBuffer);
 	_playerFootstepsSound.setRelativeToListener(true);
 	_playerFootstepsSound.setLoop(true);
 }
 
-SfmlAudioSystem::~SfmlAudioSystem() {
+SfmlAudioSystem::~SfmlAudioSystem()
+{
 	for each (sf::Sound* sound in _sounds)
 	{
 		delete sound;
 	}
 }
 
-void SfmlAudioSystem::deleteStoppedSounds() {
+void SfmlAudioSystem::deleteStoppedSounds()
+{
 	std::vector<sf::Sound*>::iterator soundIterator = _sounds.begin();
 	while (soundIterator != _sounds.end())
 	{
 		sf::Sound* sound = *soundIterator;
 
-		if (sound->getStatus() == sf::SoundSource::Status::Stopped) {
+		if (sound->getStatus() == sf::SoundSource::Status::Stopped)
+		{
 			soundIterator = _sounds.erase(soundIterator);
 			delete sound;
 		}
-		else {
+		else
+		{
 			++soundIterator;
 		}
 	}
@@ -64,35 +71,46 @@ void SfmlAudioSystem::update(std::vector<GameEvent>& gameEvents)
 			ItemDescriptor* itemDescriptor = _itemDatabase.getItem(item->getId());
 			WeaponDescriptor* weaponDescriptor = static_cast<WeaponDescriptor*>(itemDescriptor);
 
-			if (weaponDescriptor->weaponType == WeaponType::Firearm) {
+			if (weaponDescriptor->weaponType == WeaponType::Firearm)
+			{
 				FirearmDescriptor* firearmDescriptor = static_cast<FirearmDescriptor*>(weaponDescriptor);
-				playSound(SOUND_PATH + firearmDescriptor->gunshotSound, playerPosition, true);
+				playSound(firearmDescriptor->gunshotSound, playerPosition, true);
 			}
 		}
 		break;
 
 		case GameEventType::PlayerHurt:
-			playSound("Resources/sounds/262279__dirtjm__grunts-male.wav", playerPosition, true);
-			break;
+		{
+			std::string& filename = _soundDatabase.getGruntFilename();
+			playSound(filename, playerPosition, true);
+		}
+		break;
 
 		case GameEventType::PlayerPickedUpItem:
-			playSound("Resources/sounds/177054__woodmoose__lowerguncock.wav", playerPosition, true);
-			break;
+		{
+			std::string& filename = _soundDatabase.getPickupItemFilename();
+			playSound(filename, playerPosition, true);
+		}
+		break;
 
 		case GameEventType::PlayerStartedMoving:
+		{
 			_playerFootstepsSound.play();
-			break;
+		}
+		break;
 
 		case GameEventType::PlayerStoppedMoving:
+		{
 			_playerFootstepsSound.stop();
-			break;
+		}
+		break;
 
 		case GameEventType::ProjectileImpact:
-			playSound("Resources/sounds/150839__toxicwafflezz__bullet-impact-3.wav", gameEvent.ProjectileImpact.Projectile->getPosition(), false);
-			break;
-
-		default:
-			break;
+		{
+			std::string& filename = _soundDatabase.getBulletImpactFilename();
+			playSound(filename, gameEvent.ProjectileImpact.Projectile->getPosition(), false);
+		}
+		break;
 		}
 	}
 
@@ -101,7 +119,8 @@ void SfmlAudioSystem::update(std::vector<GameEvent>& gameEvents)
 
 void SfmlAudioSystem::playSound(std::string filename, Vector2 position, bool relativeToListener, bool loop)
 {
-	if (_sounds.size() >= MAX_SOUNDS) {
+	if (_sounds.size() >= MAX_SOUNDS)
+	{
 		return;
 	}
 

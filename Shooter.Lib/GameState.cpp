@@ -33,6 +33,37 @@ Vector2& GameState::getPlayerMovementState() {
 	return _playerMovementState;
 }
 
+Camera& GameState::getCamera() {
+	return _camera;
+}
+
+Crosshair& GameState::getCrosshair()
+{
+	return _crosshair;
+}
+
+IGameSet& GameState::getGameSet() const
+{
+	return _gameSet;
+}
+
+IPlayer& GameState::getPlayer() const {
+	return _player;
+}
+
+std::vector<std::shared_ptr<Projectile>>& GameState::getProjectiles() {
+	return _projectiles;
+}
+
+std::shared_ptr<IItem> GameState::getSelectedItem() {
+	return _selectedItem;
+}
+
+bool GameState::isStopped()
+{
+	return _isStopped;
+}
+
 std::vector<GameEvent> GameState::processInput()
 {
 	std::vector<GameEvent> gameEvents;
@@ -47,6 +78,33 @@ std::vector<GameEvent> GameState::processInput()
 	}
 
 	return gameEvents;
+}
+
+void GameState::selectItemAtPosition(Vector2& position) {
+	std::shared_ptr<IItem> selectedItem = _gameSet.getItemAt(position);
+	if (selectedItem == NULL) {
+		if (_selectedItem != NULL) {
+			_selectedItem->setSelected(false);
+			_selectedItem = NULL;
+		}
+	}
+	else if (selectedItem != _selectedItem) {
+		if (_selectedItem != NULL) {
+			_selectedItem->setSelected(false);
+		}
+
+		selectedItem->setSelected(true);
+		_selectedItem = selectedItem;
+	}
+}
+
+void GameState::setSelectedItem(std::shared_ptr<IItem> selectedItem)
+{
+	_selectedItem = selectedItem;
+}
+
+void GameState::stop() {
+	_isStopped = true;
 }
 
 std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
@@ -121,62 +179,4 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
 	}
 
 	return gameEvents;
-}
-
-Camera& GameState::getCamera() {
-	return _camera;
-}
-
-Crosshair& GameState::getCrosshair()
-{
-	return _crosshair;
-}
-
-IGameSet& GameState::getGameSet() const
-{
-	return _gameSet;
-}
-
-IPlayer& GameState::getPlayer() const {
-	return _player;
-}
-
-std::vector<std::shared_ptr<Projectile>>& GameState::getProjectiles() {
-	return _projectiles;
-}
-
-std::shared_ptr<IItem> GameState::getSelectedItem() {
-	return _selectedItem;
-}
-
-bool GameState::isStopped()
-{
-	return _isStopped;
-}
-
-void GameState::selectItemAtPosition(Vector2& position) {
-	std::shared_ptr<IItem> selectedItem = _gameSet.getItemAt(position);
-	if (selectedItem == NULL) {
-		if (_selectedItem != NULL) {
-			_selectedItem->setSelected(false);
-			_selectedItem = NULL;
-		}
-	}
-	else if (selectedItem != _selectedItem) {
-		if (_selectedItem != NULL) {
-			_selectedItem->setSelected(false);
-		}
-
-		selectedItem->setSelected(true);
-		_selectedItem = selectedItem;
-	}
-}
-
-void GameState::setSelectedItem(std::shared_ptr<IItem> selectedItem)
-{
-	_selectedItem = selectedItem;
-}
-
-void GameState::stop() {
-	_isStopped = true;
 }

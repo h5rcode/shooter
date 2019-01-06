@@ -78,6 +78,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		resourceManager.loadSoundBuffer(soundDatabase.getGruntFilename());
 		resourceManager.loadSoundBuffer(soundDatabase.getPickupItemFilename());
 
+		std::vector<std::string> allsoundFilenames = itemDatabase.getAllSoundFilenames();
+		for each (const std::string& soundFilename in allsoundFilenames)
+		{
+			resourceManager.loadSoundBuffer(soundFilename);
+		}
+
 		sf::Texture* playerTexture = resourceManager.getTexture("character.png");
 		sf::Texture* projectileTexture = resourceManager.getTexture("bullet.png");
 		Inventory inventory;

@@ -49,6 +49,27 @@ ItemDatabase::~ItemDatabase()
 	}
 }
 
+std::vector<std::string> ItemDatabase::getAllSoundFilenames() {
+	std::vector<std::string> soundFilenames;
+
+	for (auto& it : _items)
+	{
+		ItemDescriptor* itemDescriptor = it.second;
+
+		if (itemDescriptor->itemType == ItemType::Weapon) {
+			WeaponDescriptor* weaponDescriptor = static_cast<WeaponDescriptor*>(itemDescriptor);
+
+			if (weaponDescriptor->weaponType == WeaponType::Firearm) {
+				FirearmDescriptor* firearmDescriptor = static_cast<FirearmDescriptor*>(weaponDescriptor);
+
+				soundFilenames.push_back(firearmDescriptor->gunshotSound);
+			}
+		}
+	}
+
+	return soundFilenames;
+}
+
 ItemDescriptor* ItemDatabase::getItem(std::string& id) {
 	return _items[id];
 }

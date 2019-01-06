@@ -16,6 +16,7 @@ namespace Shooter {
 				~ItemDatabase();
 
 			public:
+				std::vector<std::string> getAllSoundFilenames();
 				ItemDescriptor* getItem(std::string& id);
 
 			private:

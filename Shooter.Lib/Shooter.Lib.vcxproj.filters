@@ -43,6 +43,9 @@
     <Filter Include="WorldDatabase\Props">
       <UniqueIdentifier>{a9efc7b1-dc4b-4538-a436-2e334609af96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\Commands">
+      <UniqueIdentifier>{0d813f48-4ad3-4973-8a3d-4fa1cda54528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerInitialStateDescriptor.cpp">
@@ -79,9 +82,6 @@
       <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="SfmlInputManager.cpp">
-      <Filter>Inputs</Filter>
-    </ClCompile>
-    <ClCompile Include="Event.cpp">
       <Filter>Inputs</Filter>
     </ClCompile>
     <ClCompile Include="GameSettings.cpp">
@@ -153,6 +153,18 @@
     <ClCompile Include="LevelItemDescriptor.cpp">
       <Filter>LevelDescriptors</Filter>
     </ClCompile>
+    <ClCompile Include="UseCommand.cpp">
+      <Filter>World\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackCommand.cpp">
+      <Filter>World\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="InputEventHandler.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdatePlayerMovementStateCommand.cpp">
+      <Filter>World\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">
@@ -219,9 +231,6 @@
       <Filter>Inputs</Filter>
     </ClInclude>
     <ClInclude Include="GameSettings.h">
-      <Filter>Inputs</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
       <Filter>Inputs</Filter>
     </ClInclude>
     <ClInclude Include="Projection.h">
@@ -314,9 +323,6 @@
     <ClInclude Include="SfmlAudioSystem.h">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileImpactEvent.h">
-      <Filter>World\Events</Filter>
-    </ClInclude>
     <ClInclude Include="FirearmDescriptor.h">
       <Filter>WorldDatabase\Items</Filter>
     </ClInclude>
@@ -349,6 +355,30 @@
     </ClInclude>
     <ClInclude Include="PropDatabase.h">
       <Filter>WorldDatabase\Props</Filter>
+    </ClInclude>
+    <ClInclude Include="UseCommand.h">
+      <Filter>World\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackCommand.h">
+      <Filter>World\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileImpactEvent.h">
+      <Filter>World\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHurtEvent.h">
+      <Filter>World\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPickedUpItemEvent.h">
+      <Filter>World\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputEventHandler.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="InputEventHandler.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdatePlayerMovementStateCommand.h">
+      <Filter>World\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

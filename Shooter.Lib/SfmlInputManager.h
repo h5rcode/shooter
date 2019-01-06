@@ -12,14 +12,10 @@ namespace Shooter {
 			SfmlInputManager(sf::RenderWindow &window);
 
 			void getMouseState(double& mouseX, double& mouseY);
-			bool isKeyDown(Key key);
-			bool pollEvent(Event& event);
+			bool pollEvent(sf::Event& event);
 
 		private:
 			sf::RenderWindow& _window;
-
-		private:
-			sf::Keyboard::Key getSfmlKey(Key key) const;
 		};
 	}
 }

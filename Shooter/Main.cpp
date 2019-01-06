@@ -7,6 +7,7 @@
 #include "GameSetRenderer.h"
 #include "GameSettings.h"
 #include "GameState.h"
+#include "InputEventHandler.h"
 #include "Inventory.h"
 #include "ItemDatabase.h"
 #include "ItemFactory.h"
@@ -61,6 +62,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		GameSet gameSet(items, walls, props);
 		GameSettings gameSettings;
 		SfmlInputManager inputManager(renderWindow);
+		InputEventHandler inputEventHandler(inputManager);
 
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 
@@ -71,7 +73,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		Crosshair crosshair;
 		Player player(playerInitialState.getPosition(), 100, inventory);
 		Camera camera(videoMode.width, videoMode.height);
-		GameState gameState(gameSet, gameSettings, inputManager, crosshair, player, camera);
+		GameState gameState(gameSet, gameSettings, inputEventHandler, inputManager, crosshair, player, camera);
 
 		ItemRenderer itemRenderer(itemDatabase, renderWindow, resourceManager);
 		PropRenderer propRenderer(propDatabase, renderWindow, resourceManager);

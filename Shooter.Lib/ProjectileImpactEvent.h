@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "Projectile.h"
-#include "ProjectileImpactEvent.h"
 
 using namespace Shooter::Items::Weapons;
 

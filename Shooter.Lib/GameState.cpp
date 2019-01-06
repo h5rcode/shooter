@@ -1,9 +1,7 @@
 #include "BoundingBox.h"
-#include "Event.h"
 #include "GameState.h"
 #include "IGameSettings.h"
 #include "IInputManager.h"
-#include "ProjectileImpactEvent.h"
 
 using namespace Shooter::Input;
 using namespace Shooter::Items;
@@ -14,6 +12,7 @@ using namespace Shooter::World;
 GameState::GameState(
 	IGameSet& gameSet,
 	IGameSettings& gameSettings,
+	IInputEventHandler& inputEventHandler,
 	IInputManager& inputManager,
 	Crosshair& crosshair,
 	IPlayer& player,
@@ -23,73 +22,25 @@ GameState::GameState(
 	_gameSet(gameSet),
 	_gameSettings(gameSettings),
 	_inputManager(inputManager),
+	_inputEventHandler(inputEventHandler),
 	_isStopped(false),
 	_player(player),
-	_projectiles(),
-	_selectedProp(NULL)
+	_projectiles()
 {
 }
 
-Vector2 GameState::getPlayerAcceleration() {
-	Vector2 acceleration;
-	if (_inputManager.isKeyDown(UP)) {
-		acceleration.y--;
-	}
-
-	if (_inputManager.isKeyDown(DOWN)) {
-		acceleration.y++;
-	}
-
-	if (_inputManager.isKeyDown(LEFT)) {
-		acceleration.x--;
-	}
-
-	if (_inputManager.isKeyDown(RIGHT)) {
-		acceleration.x++;
-	}
-
-	acceleration.normalize();
-	acceleration.multiply(_gameSettings.getAccelerationNorm());
-
-	return acceleration;
+Vector2& GameState::getPlayerMovementState() {
+	return _playerMovementState;
 }
 
 void GameState::processInput()
 {
-	Vector2 acceleration = getPlayerAcceleration();
-	_player.setAcceleration(acceleration);
-
-	double mouseX, mouseY;
-	_inputManager.getMouseState(mouseX, mouseY);
-
-	Vector2& crosshairPosition = _crosshair.getPosition();
-	crosshairPosition.x = mouseX;
-	crosshairPosition.y = mouseY;
-
-	Event event;
+	sf::Event event;
 	while (_inputManager.pollEvent(event)) {
-		EventType eventType = event.getType();
-
-		switch (eventType)
+		std::vector<GameEvent> newGameEvents = _inputEventHandler.handle(*this, event);
+		for each (GameEvent newGameEvent in newGameEvents)
 		{
-		case LEFT_BUTTON_CLICKED:
-			handleMouseButtonDown();
-			break;
-
-		case RIGHT_BUTTON_CLICKED:
-			handleUseEvent();
-			break;
-
-		case DROP_PROP:
-			handleDropPropEvent();
-			break;
-
-		case QUIT:
-			_isStopped = true;
-			break;
-
-		default:
-			break;
+			_gameEvents.push_back(newGameEvent);
 		}
 	}
 }
@@ -97,10 +48,15 @@ void GameState::processInput()
 void GameState::update(sf::Time elapsedTime)
 {
 	Vector2& crosshairPosition = _crosshair.getPosition();
+	_inputManager.getMouseState(crosshairPosition.x, crosshairPosition.y);
+
+	Vector2 acceleration = _playerMovementState;
+	acceleration.normalize();
+	acceleration.multiply(_gameSettings.getAccelerationNorm());
+	_player.setAcceleration(acceleration);
 
 	_player.pointAt(crosshairPosition);
-	setSelectedItem(crosshairPosition);
-	setSelectedProp(crosshairPosition);
+	selectItemAtPosition(crosshairPosition);
 
 	BoundingBox playerBoundingBox = _player.getBoundingBox(elapsedTime);
 
@@ -133,13 +89,20 @@ void GameState::update(sf::Time elapsedTime)
 			// TODO Handle projectiles that are outside the game set.
 			eraseProjectile = true;
 
-			_gameEvents.push_back(GameEvent{ GameEventType::ProjectileImpact, ProjectileImpactEvent{projectile} });
+			GameEvent gameEvent;
+			gameEvent.Type = GameEventType::ProjectileImpact;
+			gameEvent.ProjectileImpact = ProjectileImpactEvent{ projectile };
+			_gameEvents.push_back(gameEvent);
 		}
 		else if (projectileBoundingBox.intersects(playerBoundingBox)) {
-			_player.hurt(projectile->getDamage());
+			int damage = projectile->getDamage();
+			_player.hurt(damage);
 			eraseProjectile = true;
 
-			_gameEvents.push_back(GameEvent{ GameEventType::PlayerHurt });
+			GameEvent gameEvent;
+			gameEvent.Type = GameEventType::PlayerHurt;
+			gameEvent.PlayerHurt = PlayerHurtEvent{ damage };
+			_gameEvents.push_back(gameEvent);
 		}
 
 		if (eraseProjectile) {
@@ -178,58 +141,8 @@ std::vector<std::shared_ptr<Projectile>>& GameState::getProjectiles() {
 	return _projectiles;
 }
 
-void GameState::handleDropPropEvent() {
-	std::shared_ptr<Prop> prop = _player.getProp();
-	if (prop != NULL) {
-		Vector2 crosshairPosition = _crosshair.getPosition();
-		BoundingBox& propBoundingBox = prop->getBoundingBox();
-		BoundingBox targetPropBoundingBox = BoundingBox(crosshairPosition, propBoundingBox.getWidth(), propBoundingBox.getHeight(), _player.getOrientation());
-
-		if (_gameSet.collidesWith(targetPropBoundingBox) == false) {
-			_player.dropProp();
-			prop->setOrientation(_player.getOrientation());
-			prop->setPosition(crosshairPosition);
-
-			_gameSet.addProp(prop);
-		}
-	}
-}
-
-void GameState::handleMouseButtonDown()
-{
-	if (_player.canAttack()) {
-		double mouseX, mouseY;
-		_inputManager.getMouseState(mouseX, mouseY);
-
-		Vector2& crosshairPosition = _crosshair.getPosition();
-		std::vector<std::shared_ptr<Projectile>> projectiles = _player.attackToward(crosshairPosition);
-
-		for each (std::shared_ptr<Projectile> projectile in projectiles)
-		{
-			_projectiles.push_back(projectile);
-		}
-
-		_gameEvents.push_back(GameEvent{ GameEventType::PlayerAttacked });
-	}
-}
-
-void GameState::handleUseEvent() {
-	if (_selectedItem != NULL) {
-		bool itemWasPickedUp = _player.pickUpItem(_selectedItem);
-
-		if (itemWasPickedUp) {
-			_gameEvents.push_back(GameEvent{ GameEventType::PlayerPickedUpItem });
-
-			_gameSet.removeItem(_selectedItem);
-
-			std::shared_ptr<IWeapon> weapon = std::dynamic_pointer_cast<IWeapon>(_selectedItem);
-			if (weapon != NULL && _player.getEquipedWeapon() == NULL) {
-				_player.equipWeapon(weapon);
-			}
-
-			_selectedItem = NULL;
-		}
-	}
+std::shared_ptr<IItem> GameState::getSelectedItem() {
+	return _selectedItem;
 }
 
 bool GameState::isStopped()
@@ -237,8 +150,8 @@ bool GameState::isStopped()
 	return _isStopped;
 }
 
-void GameState::setSelectedItem(Vector2& crosshairPosition) {
-	std::shared_ptr<IItem> selectedItem = _gameSet.getItemAt(crosshairPosition);
+void GameState::selectItemAtPosition(Vector2& position) {
+	std::shared_ptr<IItem> selectedItem = _gameSet.getItemAt(position);
 	if (selectedItem == NULL) {
 		if (_selectedItem != NULL) {
 			_selectedItem->setSelected(false);
@@ -255,20 +168,11 @@ void GameState::setSelectedItem(Vector2& crosshairPosition) {
 	}
 }
 
-void GameState::setSelectedProp(Vector2& crosshairPosition) {
-	std::shared_ptr<Prop> selectedProp = _gameSet.getPropAt(crosshairPosition);
-	if (selectedProp == NULL) {
-		if (_selectedProp != NULL) {
-			_selectedProp->setSelected(false);
-			_selectedProp = NULL;
-		}
-	}
-	else if (selectedProp != _selectedProp) {
-		if (_selectedProp != NULL) {
-			_selectedProp->setSelected(false);
-		}
+void GameState::setSelectedItem(std::shared_ptr<IItem> selectedItem)
+{
+	_selectedItem = selectedItem;
+}
 
-		selectedProp->setSelected(true);
-		_selectedProp = selectedProp;
-	}
+void GameState::stop() {
+	_isStopped = true;
 }

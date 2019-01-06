@@ -7,7 +7,6 @@
 #include "IItem.h"
 #include "IPlayer.h"
 #include "IWeapon.h"
-#include "Prop.h"
 #include "Vector2.h"
 
 using namespace Shooter::Inventory;
@@ -32,7 +31,6 @@ namespace Shooter {
 			std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
 			bool canAttack() const;
 			Vector2 computePosition(sf::Time elapsedTime);
-			std::shared_ptr<Prop> dropProp();
 			void equipWeapon(std::shared_ptr<IWeapon> weapon);
 			BoundingBox getBoundingBox(sf::Time elapsedTime);
 			std::shared_ptr<IWeapon> getEquipedWeapon() const;
@@ -40,13 +38,11 @@ namespace Shooter {
 			IInventory& getInventory();
 			double getOrientation();
 			Vector2& getPosition();
-			std::shared_ptr<Prop> getProp();
 			Vector2& getSpeed();
 			void hurt(int damage);
 			void immobilize();
 			void move(sf::Time elapsedTime);
 			bool pickUpItem(std::shared_ptr<IItem> item);
-			bool pickUpProp(std::shared_ptr<Prop> prop);
 			void pointAt(Vector2& position);
 			void setAcceleration(Vector2& acceleration);
 			void setEquipedWeapon(std::shared_ptr<IWeapon> weapon);
@@ -66,7 +62,6 @@ namespace Shooter {
 			double _orientation;
 
 			std::shared_ptr<IWeapon> _equipedWeapon;
-			std::shared_ptr<Prop> _prop;
 
 			IInventory& _inventory;
 

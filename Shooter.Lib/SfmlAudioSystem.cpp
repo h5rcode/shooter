@@ -56,7 +56,7 @@ void SfmlAudioSystem::update() {
 
 	for each (GameEvent gameEvent in gameEvents)
 	{
-		switch (gameEvent.GameEventType)
+		switch (gameEvent.Type)
 		{
 		case GameEventType::PlayerAttacked:
 		{
@@ -89,7 +89,7 @@ void SfmlAudioSystem::update() {
 			break;
 
 		case GameEventType::ProjectileImpact:
-			playSound("Resources/sounds/150839__toxicwafflezz__bullet-impact-3.wav", gameEvent.ProjectileImpactEvent.Projectile->getPosition(), false);
+			playSound("Resources/sounds/150839__toxicwafflezz__bullet-impact-3.wav", gameEvent.ProjectileImpact.Projectile->getPosition(), false);
 			break;
 
 		default:

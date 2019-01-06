@@ -10,10 +10,10 @@
 #include "IGameSet.h"
 #include "IGameSettings.h"
 #include "IGameState.h"
+#include "IInputEventHandler.h"
 #include "IInputManager.h"
 #include "IPlayer.h"
 #include "Projectile.h"
-#include "Prop.h"
 
 using namespace Shooter::Input;
 using namespace Shooter::Math;
@@ -26,6 +26,7 @@ namespace Shooter {
 			GameState(
 				IGameSet& gameSet,
 				IGameSettings& gameSettings,
+				IInputEventHandler& inputEventHandler,
 				IInputManager& inputManager,
 				Crosshair& crosshair,
 				IPlayer& player,
@@ -36,30 +37,28 @@ namespace Shooter {
 			std::vector<GameEvent>& getGameEvents();
 			IGameSet& getGameSet() const;
 			IPlayer& getPlayer() const;
+			Vector2& getPlayerMovementState();
 			std::vector<std::shared_ptr<Projectile>>& getProjectiles();
+			std::shared_ptr<IItem> getSelectedItem();
 			bool isStopped();
 			void processInput();
-			void setSelectedItem(Vector2& crosshairPosition);
-			void setSelectedProp(Vector2& crosshairPosition);
+			void selectItemAtPosition(Vector2& position);
+			void setSelectedItem(std::shared_ptr<IItem> selectedItem);
+			void stop();
 			void update(sf::Time elapsedTime);
-
-		private:
-			Vector2 getPlayerAcceleration();
-			void handleDropPropEvent();
-			void handleMouseButtonDown();
-			void handleUseEvent();
 
 		private:
 			std::vector<GameEvent> _gameEvents;
 			std::shared_ptr<IItem> _selectedItem;
-			std::shared_ptr<Prop> _selectedProp;
 			bool _isStopped;
 			Camera& _camera;
 			Crosshair _crosshair;
 			IGameSet& _gameSet;
 			IGameSettings& _gameSettings;
+			IInputEventHandler& _inputEventHandler;
 			IInputManager& _inputManager;
 			IPlayer& _player;
+			Vector2 _playerMovementState;
 			std::vector<std::shared_ptr<Projectile>> _projectiles;
 		};
 	}

@@ -46,10 +46,6 @@ BoundingBox Player::getBoundingBox(sf::Time elapsedTime)
 	return BoundingBox(position, FRAME_WIDTH / 2, FRAME_HEIGHT / 2, _orientation);
 }
 
-std::shared_ptr<Prop> Player::getProp() {
-	return _prop;
-}
-
 bool Player::canAttack() const {
 	return _equipedWeapon != NULL && _equipedWeapon->canAttack();
 }
@@ -114,12 +110,6 @@ Vector2 Player::computeSpeed(sf::Time elapsedTime) {
 	return nextSpeed;
 }
 
-std::shared_ptr<Prop> Player::dropProp() {
-	std::shared_ptr<Prop> prop = _prop;
-	_prop = NULL;
-	return prop;
-}
-
 Vector2& Player::getPosition() {
 	return _position;
 }
@@ -146,23 +136,6 @@ bool Player::pickUpItem(std::shared_ptr<IItem> item) {
 	}
 
 	return _inventory.addItem(item);
-}
-
-bool Player::pickUpProp(std::shared_ptr<Prop> prop) {
-	bool propWasPickedUp = false;
-
-	if (_prop == NULL) {
-		Vector2& propPosition = prop->getPosition();
-		Vector2 positionDifference = _position - propPosition;
-		double distanceBetweenPlayerAndProp = positionDifference.getNorm();
-
-		if (distanceBetweenPlayerAndProp <= _reach) {
-			_prop = prop;
-			propWasPickedUp = true;
-		}
-	}
-
-	return propWasPickedUp;
 }
 
 void Player::pointAt(Vector2& position)

@@ -11,7 +11,7 @@ namespace Shooter {
 			class IItemDatabase {
 			public:
 				virtual std::vector<std::string> getAllSoundFilenames() = 0;
-				virtual ItemDescriptor* getItem(std::string& id) = 0;
+				virtual ItemDescriptor& getItem(std::string& id) = 0;
 			};
 		}
 	}

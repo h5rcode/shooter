@@ -2,12 +2,10 @@
 
 #include <string>
 
-#include "WeaponDescriptor.h"
-
 namespace Shooter {
 	namespace WorldDatabase {
 		namespace Items {
-			struct FirearmDescriptor : public WeaponDescriptor {
+			struct FirearmDescriptor {
 				int capacity;
 				int damage;
 				double muzzleVelocity;

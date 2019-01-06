@@ -3,6 +3,7 @@
 #include <string>
 
 #include "ItemType.h"
+#include "WeaponDescriptor.h"
 
 namespace Shooter {
 	namespace WorldDatabase {
@@ -16,6 +17,7 @@ namespace Shooter {
 				int weight;
 
 				ItemType itemType;
+				std::shared_ptr<WeaponDescriptor> weapon;
 			};
 		}
 	}

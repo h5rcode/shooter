@@ -68,12 +68,12 @@ void SfmlAudioSystem::update(std::vector<GameEvent>& gameEvents)
 		{
 			std::shared_ptr<IWeapon> weapon = player.getEquipedWeapon();
 			std::shared_ptr<IItem> item = std::dynamic_pointer_cast<IItem>(weapon);
-			ItemDescriptor* itemDescriptor = _itemDatabase.getItem(item->getId());
-			WeaponDescriptor* weaponDescriptor = static_cast<WeaponDescriptor*>(itemDescriptor);
+			ItemDescriptor& itemDescriptor = _itemDatabase.getItem(item->getId());
+			std::shared_ptr<WeaponDescriptor> weaponDescriptor = itemDescriptor.weapon;
 
 			if (weaponDescriptor->weaponType == WeaponType::Firearm)
 			{
-				FirearmDescriptor* firearmDescriptor = static_cast<FirearmDescriptor*>(weaponDescriptor);
+				std::shared_ptr<FirearmDescriptor> firearmDescriptor = weaponDescriptor->Firearm;
 				playSound(firearmDescriptor->gunshotSound, playerPosition, true);
 			}
 		}

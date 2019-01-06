@@ -13,14 +13,13 @@ namespace Shooter {
 			class ItemDatabase : public IItemDatabase {
 			public:
 				ItemDatabase(std::string fileName);
-				~ItemDatabase();
 
 			public:
 				std::vector<std::string> getAllSoundFilenames();
-				ItemDescriptor* getItem(std::string& id);
+				ItemDescriptor& getItem(std::string& id);
 
 			private:
-				std::map<std::string, ItemDescriptor*> _items;
+				std::map<std::string, std::shared_ptr<ItemDescriptor>> _items;
 			};
 		}
 	}

@@ -11,8 +11,8 @@ ItemRenderer::ItemRenderer(IItemDatabase& itemDatabase, sf::RenderWindow& render
 }
 
 void ItemRenderer::render(IItem& item) {
-	ItemDescriptor* itemDescriptor = _itemDatabase.getItem(item.getId());
-	sf::Texture* texture = _resourceManager.getTexture(itemDescriptor->texture);
+	ItemDescriptor& itemDescriptor = _itemDatabase.getItem(item.getId());
+	sf::Texture* texture = _resourceManager.getTexture(itemDescriptor.texture);
 
 	sf::Vector2u textureSize = texture->getSize();
 	float textureWidth = (float)textureSize.x;

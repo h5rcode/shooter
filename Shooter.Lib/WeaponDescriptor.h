@@ -1,13 +1,14 @@
 #pragma once
 
-#include "ItemDescriptor.h"
+#include "FirearmDescriptor.h"
 #include "WeaponType.h"
 
 namespace Shooter {
 	namespace WorldDatabase {
 		namespace Items {
-			struct WeaponDescriptor : public ItemDescriptor {
+			struct WeaponDescriptor {
 				WeaponType weaponType;
+				std::shared_ptr<FirearmDescriptor> Firearm;
 			};
 		}
 	}

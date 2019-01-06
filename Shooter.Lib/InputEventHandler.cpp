@@ -1,8 +1,5 @@
 #include "InputEventHandler.h"
 
-InputEventHandler::InputEventHandler(IInputManager& inputManager) :
-	_inputManager(inputManager) {}
-
 std::vector<GameEvent> InputEventHandler::handle(IGameState& gameState, sf::Event& event)
 {
 	switch (event.type)
@@ -25,16 +22,16 @@ std::vector<GameEvent> InputEventHandler::handle(IGameState& gameState, sf::Even
 		switch (event.key.code)
 		{
 		case sf::Keyboard::Z:
-			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::UP, MovementType::STARTED);
+			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::UP, MovementType::START);
 			break;
 		case sf::Keyboard::S:
-			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::DOWN, MovementType::STARTED);
+			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::DOWN, MovementType::START);
 			break;
 		case sf::Keyboard::Q:
-			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::LEFT, MovementType::STARTED);
+			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::LEFT, MovementType::START);
 			break;
 		case sf::Keyboard::D:
-			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::RIGHT, MovementType::STARTED);
+			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::RIGHT, MovementType::START);
 			break;
 		}
 	}
@@ -45,16 +42,16 @@ std::vector<GameEvent> InputEventHandler::handle(IGameState& gameState, sf::Even
 		switch (event.key.code)
 		{
 		case sf::Keyboard::Z:
-			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::UP, MovementType::STOPPED);
+			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::UP, MovementType::STOP);
 			break;
 		case sf::Keyboard::S:
-			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::DOWN, MovementType::STOPPED);
+			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::DOWN, MovementType::STOP);
 			break;
 		case sf::Keyboard::Q:
-			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::LEFT, MovementType::STOPPED);
+			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::LEFT, MovementType::STOP);
 			break;
 		case sf::Keyboard::D:
-			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::RIGHT, MovementType::STOPPED);
+			_updatePlayerMovementStateCommand.execute(gameState, MovementDirection::RIGHT, MovementType::STOP);
 			break;
 		}
 	}

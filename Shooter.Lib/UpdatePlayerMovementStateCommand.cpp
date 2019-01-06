@@ -6,19 +6,21 @@ void UpdatePlayerMovementStateCommand::execute(IGameState& gameState, MovementDi
 {
 	Vector2& playerMovementState = gameState.getPlayerMovementState();
 
+	bool isStopping = movementType == MovementType::STOP;
+
 	switch (direction)
 	{
 	case Shooter::World::Commands::UP:
-		playerMovementState.y = movementType == MovementType::STOPPED ? 0 : -1;
+		playerMovementState.y = isStopping ? 0 : -1;
 		break;
 	case Shooter::World::Commands::DOWN:
-		playerMovementState.y = movementType == MovementType::STOPPED ? 0 : 1;
+		playerMovementState.y = isStopping ? 0 : 1;
 		break;
 	case Shooter::World::Commands::LEFT:
-		playerMovementState.x = movementType == MovementType::STOPPED ? 0 : -1;
+		playerMovementState.x = isStopping ? 0 : -1;
 		break;
 	case Shooter::World::Commands::RIGHT:
-		playerMovementState.x = movementType == MovementType::STOPPED ? 0 : 1;
+		playerMovementState.x = isStopping ? 0 : 1;
 		break;
 	}
 }

@@ -133,7 +133,7 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
 		_camera.setPosition(_player.getPosition());
 	}
 
-	Vector2 newSpeed = _player.getSpeed();
+	Vector2& newSpeed = _player.getSpeed();
 	Vector2 zeroSpeed;
 	if (initialSpeed == zeroSpeed && newSpeed != initialSpeed) {
 		gameEvents.push_back(GameEvent{ GameEventType::PlayerStartedMoving });

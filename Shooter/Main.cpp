@@ -63,7 +63,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		GameSet gameSet(items, walls, props);
 		GameSettings gameSettings;
 		SfmlInputManager inputManager(renderWindow);
-		InputEventHandler inputEventHandler(inputManager);
+		InputEventHandler inputEventHandler;
 
 		PlayerInitialStateDescriptor playerInitialState = levelDescriptor.playerInitialStateDescriptor;
 

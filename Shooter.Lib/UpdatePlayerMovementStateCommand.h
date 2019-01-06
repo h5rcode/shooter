@@ -13,8 +13,8 @@ namespace Shooter {
 			};
 
 			enum MovementType {
-				STARTED,
-				STOPPED
+				START,
+				STOP
 			};
 
 			class UpdatePlayerMovementStateCommand {

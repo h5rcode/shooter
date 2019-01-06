@@ -33,20 +33,26 @@ Vector2& GameState::getPlayerMovementState() {
 	return _playerMovementState;
 }
 
-void GameState::processInput()
+std::vector<GameEvent> GameState::processInput()
 {
+	std::vector<GameEvent> gameEvents;
+
 	sf::Event event;
 	while (_inputManager.pollEvent(event)) {
 		std::vector<GameEvent> newGameEvents = _inputEventHandler.handle(*this, event);
 		for each (GameEvent newGameEvent in newGameEvents)
 		{
-			_gameEvents.push_back(newGameEvent);
+			gameEvents.push_back(newGameEvent);
 		}
 	}
+
+	return gameEvents;
 }
 
-void GameState::update(sf::Time elapsedTime)
+std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
 {
+	std::vector<GameEvent> gameEvents;
+
 	Vector2& crosshairPosition = _crosshair.getPosition();
 	_inputManager.getMouseState(crosshairPosition.x, crosshairPosition.y);
 
@@ -72,10 +78,10 @@ void GameState::update(sf::Time elapsedTime)
 	Vector2 newSpeed = _player.getSpeed();
 	Vector2 zeroSpeed;
 	if (initialSpeed == zeroSpeed && newSpeed != initialSpeed) {
-		_gameEvents.push_back(GameEvent{ GameEventType::PlayerStartedMoving });
+		gameEvents.push_back(GameEvent{ GameEventType::PlayerStartedMoving });
 	}
 	else if (initialSpeed != zeroSpeed && newSpeed == zeroSpeed) {
-		_gameEvents.push_back(GameEvent{ GameEventType::PlayerStoppedMoving });
+		gameEvents.push_back(GameEvent{ GameEventType::PlayerStoppedMoving });
 	}
 
 	std::vector<std::shared_ptr<Projectile>>::iterator projectileIterator = _projectiles.begin();
@@ -92,7 +98,7 @@ void GameState::update(sf::Time elapsedTime)
 			GameEvent gameEvent;
 			gameEvent.Type = GameEventType::ProjectileImpact;
 			gameEvent.ProjectileImpact = ProjectileImpactEvent{ projectile };
-			_gameEvents.push_back(gameEvent);
+			gameEvents.push_back(gameEvent);
 		}
 		else if (projectileBoundingBox.intersects(playerBoundingBox)) {
 			int damage = projectile->getDamage();
@@ -102,7 +108,7 @@ void GameState::update(sf::Time elapsedTime)
 			GameEvent gameEvent;
 			gameEvent.Type = GameEventType::PlayerHurt;
 			gameEvent.PlayerHurt = PlayerHurtEvent{ damage };
-			_gameEvents.push_back(gameEvent);
+			gameEvents.push_back(gameEvent);
 		}
 
 		if (eraseProjectile) {
@@ -113,6 +119,8 @@ void GameState::update(sf::Time elapsedTime)
 			projectile->move(elapsedTime);
 		}
 	}
+
+	return gameEvents;
 }
 
 Camera& GameState::getCamera() {
@@ -122,10 +130,6 @@ Camera& GameState::getCamera() {
 Crosshair& GameState::getCrosshair()
 {
 	return _crosshair;
-}
-
-std::vector<GameEvent>& GameState::getGameEvents() {
-	return _gameEvents;
 }
 
 IGameSet& GameState::getGameSet() const

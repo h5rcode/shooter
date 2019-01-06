@@ -46,9 +46,8 @@ void SfmlAudioSystem::deleteStoppedSounds() {
 	}
 }
 
-void SfmlAudioSystem::update() {
-	std::vector<GameEvent>& gameEvents = _gameState.getGameEvents();
-
+void SfmlAudioSystem::update(std::vector<GameEvent>& gameEvents)
+{
 	IPlayer& player = _gameState.getPlayer();
 	Vector2& playerPosition = player.getPosition();
 	sf::Vector2i playerPositionInWindow = _renderWindow.mapCoordsToPixel(sf::Vector2f(playerPosition.x, playerPosition.y));

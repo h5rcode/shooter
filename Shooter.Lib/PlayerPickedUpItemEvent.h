@@ -2,6 +2,8 @@
 
 #include "IItem.h"
 
+using namespace Shooter::Items;
+
 namespace Shooter {
 	namespace World {
 		namespace Events {

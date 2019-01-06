@@ -21,7 +21,7 @@ namespace Shooter {
 				IResourceManager& resourceManager);
 			~SfmlAudioSystem();
 		public:
-			void update();
+			void update(std::vector<GameEvent>& gameEvents);
 
 		private:
 			void deleteStoppedSounds();

@@ -7,6 +7,7 @@
 
 #include "Camera.h"
 #include "Crosshair.h"
+#include "GameEvent.h"
 #include "IGameSet.h"
 #include "IGameSettings.h"
 #include "IGameState.h"
@@ -34,21 +35,19 @@ namespace Shooter {
 
 			Camera& getCamera();
 			Crosshair& getCrosshair();
-			std::vector<GameEvent>& getGameEvents();
 			IGameSet& getGameSet() const;
 			IPlayer& getPlayer() const;
 			Vector2& getPlayerMovementState();
 			std::vector<std::shared_ptr<Projectile>>& getProjectiles();
 			std::shared_ptr<IItem> getSelectedItem();
 			bool isStopped();
-			void processInput();
+			std::vector<GameEvent> processInput();
 			void selectItemAtPosition(Vector2& position);
 			void setSelectedItem(std::shared_ptr<IItem> selectedItem);
 			void stop();
-			void update(sf::Time elapsedTime);
+			std::vector<GameEvent> update(sf::Time elapsedTime);
 
 		private:
-			std::vector<GameEvent> _gameEvents;
 			std::shared_ptr<IItem> _selectedItem;
 			bool _isStopped;
 			Camera& _camera;

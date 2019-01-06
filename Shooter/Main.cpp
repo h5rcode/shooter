@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "GameEvent.h"
 #include "GameSet.h"
 #include "GameSetRenderer.h"
 #include "GameSettings.h"
@@ -91,18 +92,22 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 			sf::Time frameTime = frameClock.restart();
 
-			gameState.getGameEvents().clear();
-
-			gameState.processInput();
+			std::vector<GameEvent> gameEventsAfterProcessingInputs = gameState.processInput();
 
 			if (gameState.isStopped()) {
 				goOn = false;
 				break;
 			}
 
-			gameState.update(frameTime);
+			std::vector<GameEvent> gameEventsAfterUpdate = gameState.update(frameTime);
+
 			sfmlRenderer.render(frameTime);
-			sfmlAudioSystem.update();
+
+			std::vector<GameEvent> frameGameEvents;
+			frameGameEvents.insert(frameGameEvents.end(), gameEventsAfterProcessingInputs.begin(), gameEventsAfterProcessingInputs.end());
+			frameGameEvents.insert(frameGameEvents.end(), gameEventsAfterUpdate.begin(), gameEventsAfterUpdate.end());
+
+			sfmlAudioSystem.update(frameGameEvents);
 		}
 
 		return 0;

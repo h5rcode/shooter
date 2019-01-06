@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+#include <SFML/Graphics.hpp>
+
 #include "IGameSet.h"
 
 #include "Camera.h"
@@ -25,10 +27,9 @@ namespace Shooter {
 			virtual Vector2& getPlayerMovementState() = 0;
 			virtual std::vector<std::shared_ptr<Projectile>>& getProjectiles() = 0;
 			virtual std::shared_ptr<IItem> getSelectedItem() = 0;
-			virtual std::vector<GameEvent> processInput() = 0;
 			virtual void setSelectedItem(std::shared_ptr<IItem> selectedItem) = 0;
 			virtual void stop() = 0;
-			virtual std::vector<GameEvent> update(sf::Time elapsedTime) = 0;
+			virtual std::vector<GameEvent> update(sf::Time elapsedTime, std::vector<sf::Event>& events) = 0;
 		};
 	}
 }

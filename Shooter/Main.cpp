@@ -39,7 +39,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 	try
 	{
 		std::vector<sf::VideoMode> fullscreenModes = sf::VideoMode::getFullscreenModes();
-		if (fullscreenModes.size() == 0) {
+		if (fullscreenModes.size() == 0)
+		{
 			throw std::runtime_error("Not suitable fullscreen mode found.");
 		}
 
@@ -88,35 +89,38 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		sf::Clock frameClock;
 
 		bool goOn = true;
-		while (goOn) {
-
+		while (goOn)
+		{
 			sf::Time frameTime = frameClock.restart();
 
-			std::vector<GameEvent> gameEventsAfterProcessingInputs = gameState.processInput();
+			std::vector<sf::Event> events;
+			sf::Event event;
+			while (inputManager.pollEvent(event))
+			{
+				events.push_back(event);
+			}
 
-			if (gameState.isStopped()) {
+			if (gameState.isStopped())
+			{
 				goOn = false;
 				break;
 			}
 
-			std::vector<GameEvent> gameEventsAfterUpdate = gameState.update(frameTime);
+			std::vector<GameEvent> gameEvents = gameState.update(frameTime, events);
 
 			sfmlRenderer.render(frameTime);
-
-			std::vector<GameEvent> frameGameEvents;
-			frameGameEvents.insert(frameGameEvents.end(), gameEventsAfterProcessingInputs.begin(), gameEventsAfterProcessingInputs.end());
-			frameGameEvents.insert(frameGameEvents.end(), gameEventsAfterUpdate.begin(), gameEventsAfterUpdate.end());
-
-			sfmlAudioSystem.update(frameGameEvents);
+			sfmlAudioSystem.update(gameEvents);
 		}
 
 		return 0;
 	}
-	catch (std::exception& e) {
+	catch (std::exception& e)
+	{
 		const char* what = e.what();
 		return -1;
 	}
-	catch (...) {
+	catch (...)
+	{
 		return -1;
 	}
 }

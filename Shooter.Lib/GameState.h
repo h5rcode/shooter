@@ -41,11 +41,10 @@ namespace Shooter {
 			std::vector<std::shared_ptr<Projectile>>& getProjectiles();
 			std::shared_ptr<IItem> getSelectedItem();
 			bool isStopped();
-			std::vector<GameEvent> processInput();
 			void selectItemAtPosition(Vector2& position);
 			void setSelectedItem(std::shared_ptr<IItem> selectedItem);
 			void stop();
-			std::vector<GameEvent> update(sf::Time elapsedTime);
+			std::vector<GameEvent> update(sf::Time elapsedTime, std::vector<sf::Event>& events);
 
 		private:
 			std::shared_ptr<IItem> _selectedItem;

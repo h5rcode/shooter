@@ -29,11 +29,13 @@ GameState::GameState(
 {
 }
 
-Vector2& GameState::getPlayerMovementState() {
+Vector2& GameState::getPlayerMovementState()
+{
 	return _playerMovementState;
 }
 
-Camera& GameState::getCamera() {
+Camera& GameState::getCamera()
+{
 	return _camera;
 }
 
@@ -47,15 +49,18 @@ IGameSet& GameState::getGameSet() const
 	return _gameSet;
 }
 
-IPlayer& GameState::getPlayer() const {
+IPlayer& GameState::getPlayer() const
+{
 	return _player;
 }
 
-std::vector<std::shared_ptr<Projectile>>& GameState::getProjectiles() {
+std::vector<std::shared_ptr<Projectile>>& GameState::getProjectiles()
+{
 	return _projectiles;
 }
 
-std::shared_ptr<IItem> GameState::getSelectedItem() {
+std::shared_ptr<IItem> GameState::getSelectedItem()
+{
 	return _selectedItem;
 }
 
@@ -64,32 +69,21 @@ bool GameState::isStopped()
 	return _isStopped;
 }
 
-std::vector<GameEvent> GameState::processInput()
+void GameState::selectItemAtPosition(Vector2& position)
 {
-	std::vector<GameEvent> gameEvents;
-
-	sf::Event event;
-	while (_inputManager.pollEvent(event)) {
-		std::vector<GameEvent> newGameEvents = _inputEventHandler.handle(*this, event);
-		for each (GameEvent newGameEvent in newGameEvents)
-		{
-			gameEvents.push_back(newGameEvent);
-		}
-	}
-
-	return gameEvents;
-}
-
-void GameState::selectItemAtPosition(Vector2& position) {
 	std::shared_ptr<IItem> selectedItem = _gameSet.getItemAt(position);
-	if (selectedItem == NULL) {
-		if (_selectedItem != NULL) {
+	if (selectedItem == NULL)
+	{
+		if (_selectedItem != NULL)
+		{
 			_selectedItem->setSelected(false);
 			_selectedItem = NULL;
 		}
 	}
-	else if (selectedItem != _selectedItem) {
-		if (_selectedItem != NULL) {
+	else if (selectedItem != _selectedItem)
+	{
+		if (_selectedItem != NULL)
+		{
 			_selectedItem->setSelected(false);
 		}
 
@@ -103,13 +97,22 @@ void GameState::setSelectedItem(std::shared_ptr<IItem> selectedItem)
 	_selectedItem = selectedItem;
 }
 
-void GameState::stop() {
+void GameState::stop()
+{
 	_isStopped = true;
 }
 
-std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
+std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::Event>& events)
 {
 	std::vector<GameEvent> gameEvents;
+	for each (sf::Event event in events)
+	{
+		std::vector<GameEvent> newGameEvents = _inputEventHandler.handle(*this, event);
+		for each (GameEvent newGameEvent in newGameEvents)
+		{
+			gameEvents.push_back(newGameEvent);
+		}
+	}
 
 	Vector2& crosshairPosition = _crosshair.getPosition();
 	_inputManager.getMouseState(crosshairPosition.x, crosshairPosition.y);
@@ -135,10 +138,12 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
 
 	Vector2& newSpeed = _player.getSpeed();
 	Vector2 zeroSpeed;
-	if (initialSpeed == zeroSpeed && newSpeed != initialSpeed) {
+	if (initialSpeed == zeroSpeed && newSpeed != initialSpeed)
+	{
 		gameEvents.push_back(GameEvent{ GameEventType::PlayerStartedMoving });
 	}
-	else if (initialSpeed != zeroSpeed && newSpeed == zeroSpeed) {
+	else if (initialSpeed != zeroSpeed && newSpeed == zeroSpeed)
+	{
 		gameEvents.push_back(GameEvent{ GameEventType::PlayerStoppedMoving });
 	}
 
@@ -149,7 +154,8 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
 		BoundingBox projectileBoundingBox = projectile->getBoundingBox(elapsedTime);
 
 		bool eraseProjectile = false;
-		if (_gameSet.collidesWith(projectileBoundingBox)) {
+		if (_gameSet.collidesWith(projectileBoundingBox))
+		{
 			// TODO Handle projectiles that are outside the game set.
 			eraseProjectile = true;
 
@@ -158,7 +164,8 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
 			gameEvent.ProjectileImpact = ProjectileImpactEvent{ projectile };
 			gameEvents.push_back(gameEvent);
 		}
-		else if (projectileBoundingBox.intersects(playerBoundingBox)) {
+		else if (projectileBoundingBox.intersects(playerBoundingBox))
+		{
 			int damage = projectile->getDamage();
 			_player.hurt(damage);
 			eraseProjectile = true;
@@ -169,10 +176,12 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime)
 			gameEvents.push_back(gameEvent);
 		}
 
-		if (eraseProjectile) {
+		if (eraseProjectile)
+		{
 			projectileIterator = _projectiles.erase(projectileIterator);
 		}
-		else {
+		else
+		{
 			++projectileIterator;
 			projectile->move(elapsedTime);
 		}

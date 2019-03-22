@@ -123,6 +123,9 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackCommand.cpp" />
+    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="FloorDescriptor.cpp" />
+    <ClCompile Include="FloorRenderer.cpp" />
     <ClCompile Include="InputEventHandler.cpp" />
     <ClCompile Include="LevelItemDescriptor.cpp" />
     <ClCompile Include="LevelPropDescriptor.cpp" />
@@ -165,6 +168,10 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackCommand.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="FloorDescriptor.h" />
+    <ClInclude Include="FloorRenderer.h" />
+    <ClInclude Include="IFloorRenderer.h" />
     <ClInclude Include="IInputEventHandler.h" />
     <ClInclude Include="InputEventHandler.h" />
     <ClInclude Include="IPropDatabase.h" />

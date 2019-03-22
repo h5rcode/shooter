@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "FloorRenderer.h"
 #include "GameEvent.h"
 #include "GameSet.h"
 #include "GameSetRenderer.h"
@@ -60,11 +61,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		LevelDescriptor levelDescriptor(itemFactory, propDatabase);
 		levelDescriptor.loadFromFile(level01FileName);
 
+		std::vector<std::shared_ptr<Floor>> floors = levelDescriptor.getFloors();
 		std::vector<std::shared_ptr<IItem>> items = levelDescriptor.getItems();
 		std::vector<std::shared_ptr<Wall>> walls = levelDescriptor.getWalls();
 		std::vector<std::shared_ptr<Prop>> props = levelDescriptor.getProps();
 
-		GameSet gameSet(items, walls, props);
+		GameSet gameSet(floors, items, walls, props);
 		GameSettings gameSettings;
 		SfmlInputManager inputManager(renderWindow);
 		InputEventHandler inputEventHandler;
@@ -84,6 +86,11 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 			resourceManager.loadSoundBuffer(soundFilename);
 		}
 
+		for each (const std::shared_ptr<Floor>& floor in floors)
+		{
+			resourceManager.loadTexture(floor->getTexture(), true);
+		}
+
 		sf::Texture* playerTexture = resourceManager.getTexture("character.png");
 		sf::Texture* projectileTexture = resourceManager.getTexture("bullet.png");
 		Inventory inventory;
@@ -92,10 +99,11 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputEventHandler, inputManager, crosshair, player, camera);
 
+		FloorRenderer floorRenderer(renderWindow, resourceManager);
 		ItemRenderer itemRenderer(itemDatabase, renderWindow, resourceManager);
 		PropRenderer propRenderer(propDatabase, renderWindow, resourceManager);
 		WallRenderer wallRenderer(renderWindow, resourceManager);
-		GameSetRenderer gameSetRenderer(itemRenderer, propRenderer, wallRenderer);
+		GameSetRenderer gameSetRenderer(floorRenderer, itemRenderer, propRenderer, wallRenderer);
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
 		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
 		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);

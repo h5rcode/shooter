@@ -13,7 +13,7 @@ namespace Shooter {
 
 			virtual void loadFont(const std::string& filename) = 0;
 			virtual void loadSoundBuffer(const std::string& filename) = 0;
-			virtual void loadTexture(const std::string& filename) = 0;
+			virtual void loadTexture(const std::string& filename, bool repeated = false) = 0;
 		};
 	}
 }

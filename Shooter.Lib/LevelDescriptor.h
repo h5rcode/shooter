@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "Floor.h"
+#include "FloorDescriptor.h"
 #include "IItem.h"
 #include "IPropDatabase.h"
 #include "ItemFactory.h"
@@ -27,12 +29,14 @@ namespace Shooter {
 		public:
 			std::string name;
 			PlayerInitialStateDescriptor playerInitialStateDescriptor;
+			std::vector<std::shared_ptr<FloorDescriptor>> floorDescriptors;
 			std::vector<std::shared_ptr<LevelItemDescriptor>> itemDescriptors;
 			std::vector<std::shared_ptr<LevelPropDescriptor>> propDescriptors;
 			std::vector<std::shared_ptr<WallDescriptor>> wallDescriptors;
 
 			void loadFromFile(std::string& fileName);
 
+			std::vector<std::shared_ptr<Floor>> getFloors();
 			std::vector<std::shared_ptr<IItem>> getItems();
 			std::vector<std::shared_ptr<Prop>> getProps();
 			std::vector<std::shared_ptr<Wall>> getWalls();

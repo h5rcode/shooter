@@ -16,7 +16,7 @@ namespace Shooter {
 
 			void loadFont(const std::string& filename);
 			void loadSoundBuffer(const std::string& filename);
-			void loadTexture(const std::string& filename);
+			void loadTexture(const std::string& filename, bool repeated = false);
 
 		private:
 			std::map<std::string, sf::Font*> _fonts;

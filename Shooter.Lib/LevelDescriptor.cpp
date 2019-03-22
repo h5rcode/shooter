@@ -18,6 +18,24 @@ LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, IPropDatabase& propDa
 	_propDatabase(propDatabase) {
 }
 
+std::vector<std::shared_ptr<Floor>> LevelDescriptor::getFloors() {
+	std::vector<std::shared_ptr<Floor>> floors;
+	for (std::vector<std::shared_ptr<FloorDescriptor>>::iterator it = this->floorDescriptors.begin(); it != this->floorDescriptors.end(); ++it)
+	{
+		std::shared_ptr<FloorDescriptor> floorDescriptor = *it;
+
+		Vector2 position(floorDescriptor->x, floorDescriptor->y);
+		double orientation = floorDescriptor->orientation;
+		int width = floorDescriptor->width;
+		int length = floorDescriptor->length;
+
+		std::shared_ptr<Floor> floor = std::make_shared<Floor>(position, width, length, orientation, floorDescriptor->texture);
+		floors.push_back(floor);
+	}
+
+	return floors;
+}
+
 std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 	std::vector<std::shared_ptr<IItem>> items;
 
@@ -85,6 +103,15 @@ void LevelDescriptor::loadFromFile(std::string& fileName) {
 	fileStream >> jsonObject;
 
 	this->name = jsonObject.at("name").get<std::string>();
+
+	json::value_type floors = jsonObject.at("floors");
+	for (json::iterator it = floors.begin(); it != floors.end(); ++it)
+	{
+		FloorDescriptor fd = *it;
+		std::shared_ptr<FloorDescriptor> floorDescriptor = std::make_shared<FloorDescriptor>(fd);
+
+		this->floorDescriptors.push_back(floorDescriptor);
+	}
 
 	json::value_type walls = jsonObject.at("walls");
 	for (json::iterator it = walls.begin(); it != walls.end(); ++it)

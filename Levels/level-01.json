@@ -4,6 +4,14 @@
 		"x": 200,
 		"y": 200
 	},
+	"floors": [{
+		"x": 1024,
+		"y": 1024,
+		"orientation": 0,
+		"width": 2048,
+		"length": 2048,
+		"texture": "tiles-01.png"
+	}],
 	"walls": [{
 		"x": 1024,
 		"y": 8,
@@ -52,8 +60,9 @@
 		"itemId": "SIGSAUER",
 		"x": 500,
 		"y": 500,
-		"orientation": 170
-	}, {
+		"orientation": 73
+	},
+	{
 		"itemId": "SIGSAUER",
 		"x": 200,
 		"y": 300,

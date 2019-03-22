@@ -3,8 +3,13 @@
 using namespace Shooter::Math;
 using namespace Shooter::World;
 
-GameSet::GameSet(std::vector<std::shared_ptr<IItem>> items, std::vector<std::shared_ptr<Wall>> walls, std::vector<std::shared_ptr<Prop>> props)
+GameSet::GameSet(
+	std::vector<std::shared_ptr<Floor>> floors,
+	std::vector<std::shared_ptr<IItem>> items,
+	std::vector<std::shared_ptr<Wall>> walls,
+	std::vector<std::shared_ptr<Prop>> props)
 {
+	_floors = floors;
 	_items = items;
 	_walls = walls;
 	_props = props;
@@ -37,6 +42,10 @@ bool GameSet::collidesWith(BoundingBox& boundingBox) const {
 	}
 
 	return false;
+}
+
+std::vector<std::shared_ptr<Floor>>& GameSet::getFloors() {
+	return _floors;
 }
 
 std::shared_ptr<IItem> GameSet::getItemAt(Vector2& position) {

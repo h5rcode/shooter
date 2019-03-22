@@ -171,6 +171,15 @@
     <ClCompile Include="SoundDatabase.cpp">
       <Filter>WorldDatabase\Sounds</Filter>
     </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorDescriptor.cpp">
+      <Filter>LevelDescriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorRenderer.cpp">
+      <Filter>Rendering\Renderers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">
@@ -394,6 +403,18 @@
     </ClInclude>
     <ClInclude Include="SoundDatabase.h">
       <Filter>WorldDatabase\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorDescriptor.h">
+      <Filter>LevelDescriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="IFloorRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

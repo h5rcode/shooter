@@ -2,13 +2,20 @@
 
 using namespace Shooter::Rendering::Renderers;
 
-GameSetRenderer::GameSetRenderer(IItemRenderer& itemRenderer, IPropRenderer& propRenderer, IWallRenderer& wallRenderer) :
+GameSetRenderer::GameSetRenderer(IFloorRenderer& floorRenderer, IItemRenderer& itemRenderer, IPropRenderer& propRenderer, IWallRenderer& wallRenderer) :
+	_floorRenderer(floorRenderer),
 	_itemRenderer(itemRenderer),
 	_propRenderer(propRenderer),
 	_wallRenderer(wallRenderer) {
 }
 
 void GameSetRenderer::render(IGameSet& gameSet) const {
+	std::vector<std::shared_ptr<Floor>>& floors = gameSet.getFloors();
+	for each (const std::shared_ptr<Floor>& floor in floors)
+	{
+		_floorRenderer.render(*floor);
+	}
+
 	std::vector<std::shared_ptr<IItem>>& items = gameSet.getItems();
 	for (std::vector<std::shared_ptr<IItem>>::iterator it = items.begin(); it != items.end(); ++it)
 	{

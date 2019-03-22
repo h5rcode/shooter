@@ -100,7 +100,7 @@ void ResourceManager::loadSoundBuffer(const std::string& filename) {
 	_soundBuffers[filepath] = soundBuffer;
 }
 
-void ResourceManager::loadTexture(const std::string& filename) {
+void ResourceManager::loadTexture(const std::string& filename, bool repeated) {
 	std::string filepath = TEXTURES_PATH + filename;
 	const auto& it = _textures.find(filepath);
 
@@ -111,6 +111,7 @@ void ResourceManager::loadTexture(const std::string& filename) {
 	sf::Texture* texture = new sf::Texture();
 	texture->loadFromFile(filepath);
 	texture->setSmooth(true);
+	texture->setRepeated(repeated);
 
 	_textures[filepath] = texture;
 }

@@ -37,7 +37,7 @@ namespace Shooter {
 			Crosshair& getCrosshair();
 			IGameSet& getGameSet() const;
 			IPlayer& getPlayer() const;
-			Vector2& getPlayerMovementState();
+			PlayerMovementState& getPlayerMovementState();
 			std::vector<std::shared_ptr<Projectile>>& getProjectiles();
 			std::shared_ptr<IItem> getSelectedItem();
 			bool isStopped();
@@ -56,7 +56,7 @@ namespace Shooter {
 			IInputEventHandler& _inputEventHandler;
 			IInputManager& _inputManager;
 			IPlayer& _player;
-			Vector2 _playerMovementState;
+			PlayerMovementState _playerMovementState;
 			std::vector<std::shared_ptr<Projectile>> _projectiles;
 		};
 	}

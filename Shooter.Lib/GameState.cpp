@@ -29,7 +29,7 @@ GameState::GameState(
 {
 }
 
-Vector2& GameState::getPlayerMovementState()
+PlayerMovementState& GameState::getPlayerMovementState()
 {
 	return _playerMovementState;
 }
@@ -117,7 +117,23 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 	Vector2& crosshairPosition = _crosshair.getPosition();
 	_inputManager.getMouseState(crosshairPosition.x, crosshairPosition.y);
 
-	Vector2 acceleration = _playerMovementState;
+	Vector2 acceleration;
+	if (_playerMovementState.Up) {
+		acceleration.y--;
+	}
+
+	if (_playerMovementState.Down) {
+		acceleration.y++;
+	}
+
+	if (_playerMovementState.Left) {
+		acceleration.x--;
+	}
+
+	if (_playerMovementState.Right) {
+		acceleration.x++;
+	}
+
 	acceleration.normalize();
 	acceleration.multiply(_gameSettings.getAccelerationNorm());
 	_player.setAcceleration(acceleration);

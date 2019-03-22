@@ -4,23 +4,23 @@ using namespace Shooter::World::Commands;
 
 void UpdatePlayerMovementStateCommand::execute(IGameState& gameState, MovementDirection direction, MovementType movementType)
 {
-	Vector2& playerMovementState = gameState.getPlayerMovementState();
+	PlayerMovementState& playerMovementState = gameState.getPlayerMovementState();
 
-	bool isStopping = movementType == MovementType::STOP;
+	bool isStarting = movementType == MovementType::START;
 
 	switch (direction)
 	{
 	case Shooter::World::Commands::UP:
-		playerMovementState.y = isStopping ? 0 : -1;
+		playerMovementState.Up = isStarting;
 		break;
 	case Shooter::World::Commands::DOWN:
-		playerMovementState.y = isStopping ? 0 : 1;
+		playerMovementState.Down = isStarting;
 		break;
 	case Shooter::World::Commands::LEFT:
-		playerMovementState.x = isStopping ? 0 : -1;
+		playerMovementState.Left = isStarting;
 		break;
 	case Shooter::World::Commands::RIGHT:
-		playerMovementState.x = isStopping ? 0 : 1;
+		playerMovementState.Right = isStarting;
 		break;
 	}
 }

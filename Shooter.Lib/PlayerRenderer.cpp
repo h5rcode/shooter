@@ -4,7 +4,7 @@ using namespace Shooter::Rendering::Renderers;
 
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
-const int NUMBER_OF_FRAMES = 8;
+const int NUMBER_OF_FRAMES = 4;
 const int FRAME_TIME_MILLISECONDS = 150;
 
 PlayerRenderer::PlayerRenderer(sf::RenderWindow& renderWindow, sf::Texture& texture) :

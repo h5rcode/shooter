@@ -4,21 +4,20 @@ using namespace Shooter::Inventory;
 using namespace Shooter::Math;
 using namespace Shooter::World;
 
-const double MIN_SPEED = 0.01;
+const double MIN_SPEED = 1;
 
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
 const int PLAYER_REACH = 32;
-const int FRAME_TIME_MILLISECONDS = 150;
 
 Player::Player(
 	Vector2 position,
 	int hitpoints,
 	IInventory& inventory) :
-	_friction(5),
+	_friction(20),
 	_hitpoints(hitpoints),
 	_inventory(inventory),
-	_maxSpeed(10000),
+	_maxSpeed(200),
 	_position(position),
 	_reach(PLAYER_REACH)
 {
@@ -92,15 +91,20 @@ Vector2 Player::computePosition(sf::Time elapsedTime)
 Vector2 Player::computeSpeed(sf::Time elapsedTime) {
 	double elapsedSeconds = elapsedTime.asSeconds();
 
-	Vector2 friction = multiply(_speed, -_friction);
-	Vector2 speedIncrement = multiply(_acceleration + friction, elapsedSeconds);
+	Vector2 speedIncrement;
+	if (_acceleration != Vector2(0, 0)) {
+		speedIncrement = multiply(_acceleration, elapsedSeconds);
+	}
+	else {
+		speedIncrement = multiply(_speed, -_friction * elapsedSeconds);
+	}
 
 	Vector2 nextSpeed = _speed + speedIncrement;
 
 	double speedNorm = nextSpeed.getNorm();
 	if (speedNorm > _maxSpeed) {
 		nextSpeed.normalize();
-		multiply(nextSpeed, _maxSpeed);
+		nextSpeed = multiply(nextSpeed, _maxSpeed);
 	}
 	else if (speedNorm <= MIN_SPEED) {
 		nextSpeed.x = 0;

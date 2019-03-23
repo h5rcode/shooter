@@ -5,7 +5,7 @@ using namespace Shooter::Rendering::Renderers;
 const int FRAME_WIDTH = 64;
 const int FRAME_HEIGHT = 64;
 const int NUMBER_OF_FRAMES = 4;
-const int FRAME_TIME_MILLISECONDS = 150;
+const int FRAME_TIME_MILLISECONDS = 300;
 
 PlayerRenderer::PlayerRenderer(sf::RenderWindow& renderWindow, sf::Texture& texture) :
 	_renderWindow(renderWindow) {
@@ -27,7 +27,7 @@ void PlayerRenderer::render(IPlayer& player, sf::Time elapsedTime) {
 
 	if (speed == Vector2(0, 0)) {
 		if (_animatedSprite.isPlaying()) {
-			_animatedSprite.pause();
+			_animatedSprite.stop();
 		}
 	}
 	else {

@@ -25,8 +25,14 @@ namespace Shooter {
 			void render(sf::RenderWindow& window);
 
 		private:
-			int _height;
-			int _width;
+			double _height;
+			double _width;
+
+			double _minX;
+			double _maxX;
+			double _minY;
+			double _maxY;
+
 			std::vector<std::shared_ptr<Vector2>> _vertices;
 			std::vector<std::shared_ptr<Vector2>> _normals;
 		};

@@ -36,6 +36,31 @@ BoundingBox::BoundingBox(Vector2& position, int width, int height, double orient
 	for (int i = 0; i < numberOfVertices; i++)
 	{
 		std::shared_ptr<Vector2> currentVertex = _vertices.at(i);
+
+		if (i == 0) {
+			_minX = currentVertex->x;
+			_maxX = currentVertex->x;
+			_minY = currentVertex->y;
+			_maxY = currentVertex->y;
+		}
+		else {
+			if (currentVertex->x < _minX) {
+				_minX = currentVertex->x;
+			}
+
+			if (currentVertex->x > _maxX) {
+				_maxX = currentVertex->x;
+			}
+
+			if (currentVertex->y < _minY) {
+				_minY = currentVertex->y;
+			}
+
+			if (currentVertex->y > _maxY) {
+				_maxY = currentVertex->y;
+			}
+		}
+
 		std::shared_ptr<Vector2> nextVertex = _vertices.at((i + 1) % numberOfVertices);
 
 		Vector2 edge = *nextVertex - *currentVertex;
@@ -94,6 +119,10 @@ void BoundingBox::render(sf::RenderWindow& renderWindow) {
 }
 
 bool BoundingBox::intersects(BoundingBox& boundingBox) const {
+	if ((_maxX < boundingBox._minX || boundingBox._maxX < _minX) && (_maxY < boundingBox._minY || boundingBox._maxY < _minY)) {
+		return false;
+	}
+
 	for each (std::shared_ptr<Vector2> normal in _normals)
 	{
 		Projection boundingBoxProjection = boundingBox.project(*normal);

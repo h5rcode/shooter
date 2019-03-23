@@ -118,19 +118,19 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 	_inputManager.getMouseState(crosshairPosition.x, crosshairPosition.y);
 
 	Vector2 acceleration;
-	if (_playerMovementState.Up) {
+	if (_playerMovementState.up) {
 		acceleration.y--;
 	}
 
-	if (_playerMovementState.Down) {
+	if (_playerMovementState.down) {
 		acceleration.y++;
 	}
 
-	if (_playerMovementState.Left) {
+	if (_playerMovementState.left) {
 		acceleration.x--;
 	}
 
-	if (_playerMovementState.Right) {
+	if (_playerMovementState.right) {
 		acceleration.x++;
 	}
 

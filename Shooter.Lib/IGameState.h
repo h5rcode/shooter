@@ -20,15 +20,16 @@ namespace Shooter {
 	namespace World {
 		struct PlayerMovementState {
 			PlayerMovementState() :
-				Up(false),
-				Down(false),
-				Left(false),
-				Right(false) {
+				up(false),
+				down(false),
+				left(false),
+				right(false) {
 			}
-			bool Up;
-			bool Down;
-			bool Left;
-			bool Right;
+
+			bool up;
+			bool down;
+			bool left;
+			bool right;
 		};
 
 		class IGameState {

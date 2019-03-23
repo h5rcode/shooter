@@ -11,16 +11,16 @@ void UpdatePlayerMovementStateCommand::execute(IGameState& gameState, MovementDi
 	switch (direction)
 	{
 	case Shooter::World::Commands::UP:
-		playerMovementState.Up = isStarting;
+		playerMovementState.up = isStarting;
 		break;
 	case Shooter::World::Commands::DOWN:
-		playerMovementState.Down = isStarting;
+		playerMovementState.down = isStarting;
 		break;
 	case Shooter::World::Commands::LEFT:
-		playerMovementState.Left = isStarting;
+		playerMovementState.left = isStarting;
 		break;
 	case Shooter::World::Commands::RIGHT:
-		playerMovementState.Right = isStarting;
+		playerMovementState.right = isStarting;
 		break;
 	}
 }

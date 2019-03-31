@@ -49,6 +49,12 @@
     <Filter Include="WorldDatabase\Sounds">
       <UniqueIdentifier>{deb4739b-45c0-43b4-b89a-5669b7662fd0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Npcs">
+      <UniqueIdentifier>{0befa742-bb73-4914-99ec-024aada0b0ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WorldDatabase\Npcs">
+      <UniqueIdentifier>{78ec4e5b-ca99-4e1f-a0c1-c7e11855e1f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerInitialStateDescriptor.cpp">
@@ -178,6 +184,21 @@
       <Filter>LevelDescriptors</Filter>
     </ClCompile>
     <ClCompile Include="FloorRenderer.cpp">
+      <Filter>Rendering\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="NonPlayingCharacterDatabase.cpp">
+      <Filter>WorldDatabase\Npcs</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelNpcDescriptor.cpp">
+      <Filter>LevelDescriptors</Filter>
+    </ClCompile>
+    <ClCompile Include="NonPlayingCharacterFactory.cpp">
+      <Filter>Npcs</Filter>
+    </ClCompile>
+    <ClCompile Include="NonPlayingCharacter.cpp">
+      <Filter>Npcs</Filter>
+    </ClCompile>
+    <ClCompile Include="NonPlayingCharacterRenderer.cpp">
       <Filter>Rendering\Renderers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -414,6 +435,33 @@
       <Filter>Rendering\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="FloorRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="NonPlayingCharacterFactory.h">
+      <Filter>Npcs</Filter>
+    </ClInclude>
+    <ClInclude Include="INonPlayingCharacterDatabase.h">
+      <Filter>WorldDatabase\Npcs</Filter>
+    </ClInclude>
+    <ClInclude Include="NonPlayingCharacterDatabase.h">
+      <Filter>WorldDatabase\Npcs</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelNpcDescriptor.h">
+      <Filter>LevelDescriptors</Filter>
+    </ClInclude>
+    <ClInclude Include="NonPlayingCharacterDescriptor.h">
+      <Filter>WorldDatabase\Npcs</Filter>
+    </ClInclude>
+    <ClInclude Include="INonPlayingCharacter.h">
+      <Filter>Npcs</Filter>
+    </ClInclude>
+    <ClInclude Include="NonPlayingCharacter.h">
+      <Filter>Npcs</Filter>
+    </ClInclude>
+    <ClInclude Include="NonPlayingCharacterRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="INonPlayingCharacterRenderer.h">
       <Filter>Rendering\Renderers</Filter>
     </ClInclude>
   </ItemGroup>

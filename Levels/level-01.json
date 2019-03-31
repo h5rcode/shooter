@@ -44,6 +44,12 @@
 		"length": 2048,
 		"texture": "wall-01.png"
 	}],
+	"npcs": [{
+		"npcId": "TURTLE",
+		"x": 150,
+		"y": 400,
+		"orientation": 270
+	}],
 	"props": [{
 		"propId": "SOFA-01",
 		"x": 150,

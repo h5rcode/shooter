@@ -15,6 +15,7 @@ GameState::GameState(
 	IInputEventHandler& inputEventHandler,
 	IInputManager& inputManager,
 	Crosshair& crosshair,
+	std::vector<std::shared_ptr<INonPlayingCharacter>>& nonPlayingCharacters,
 	IPlayer& player,
 	Camera& camera) :
 	_camera(camera),
@@ -27,6 +28,10 @@ GameState::GameState(
 	_player(player),
 	_projectiles()
 {
+	for each (std::shared_ptr<INonPlayingCharacter> nonPlayingCharacter in nonPlayingCharacters)
+	{
+		_nonPlayingCharacters.push_back(nonPlayingCharacter);
+	}
 }
 
 PlayerMovementState& GameState::getPlayerMovementState()
@@ -47,6 +52,10 @@ Crosshair& GameState::getCrosshair()
 IGameSet& GameState::getGameSet() const
 {
 	return _gameSet;
+}
+
+std::vector<std::shared_ptr<INonPlayingCharacter>>& GameState::getNonPlayingCharacters() {
+	return _nonPlayingCharacters;
 }
 
 IPlayer& GameState::getPlayer() const
@@ -144,7 +153,17 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 	BoundingBox playerBoundingBox = _player.getBoundingBox(elapsedTime);
 
 	Vector2 initialSpeed = _player.getSpeed();
-	if (_gameSet.collidesWith(playerBoundingBox)) {
+
+	bool collidesWithNpc = false;
+	for each (std::shared_ptr<INonPlayingCharacter> npc in _nonPlayingCharacters)
+	{
+		collidesWithNpc = npc->getBoundingBox(elapsedTime).intersects(_player.getBoundingBox(elapsedTime));
+		if (collidesWithNpc) {
+			break;
+		}
+	}
+
+	if (collidesWithNpc || _gameSet.collidesWith(playerBoundingBox)) {
 		_player.immobilize();
 	}
 	else {
@@ -190,6 +209,17 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 			gameEvent.Type = GameEventType::PlayerHurt;
 			gameEvent.PlayerHurt = PlayerHurtEvent{ damage };
 			gameEvents.push_back(gameEvent);
+		}
+		else {
+			for each (std::shared_ptr<INonPlayingCharacter> npc in _nonPlayingCharacters)
+			{
+				BoundingBox npcBoundingBox = npc->getBoundingBox(elapsedTime);
+				if (projectileBoundingBox.intersects(npcBoundingBox)) {
+					int damage = projectile->getDamage();
+					npc->hurt(damage);
+					eraseProjectile = true;
+				}
+			}
 		}
 
 		if (eraseProjectile)

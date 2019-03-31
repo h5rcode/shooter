@@ -15,6 +15,8 @@
 #include "ItemFactory.h"
 #include "ItemRenderer.h"
 #include "LevelDescriptor.h"
+#include "NonPlayingCharacterDatabase.h"
+#include "NonPlayingCharacterRenderer.h"
 #include "Player.h"
 #include "PlayerRenderer.h"
 #include "ProjectileRenderer.h"
@@ -52,19 +54,22 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		renderWindow.setMouseCursorVisible(false);
 
 		ItemDatabase itemDatabase("WorldDatabase/items.json");
+		NonPlayingCharacterDatabase npcDatabase("WorldDatabase/npcs.json");
 		PropDatabase propDatabase("WorldDatabase/props.json");
 		SoundDatabase soundDatabase("WorldDatabase/sounds.json");
 
 		std::string level01FileName = "Levels/level-01.json";
 
 		ItemFactory itemFactory(itemDatabase);
-		LevelDescriptor levelDescriptor(itemFactory, propDatabase);
+		NonPlayingCharacterFactory npcFactory(npcDatabase);
+		LevelDescriptor levelDescriptor(itemFactory, npcFactory, propDatabase);
 		levelDescriptor.loadFromFile(level01FileName);
 
 		std::vector<std::shared_ptr<Floor>> floors = levelDescriptor.getFloors();
 		std::vector<std::shared_ptr<IItem>> items = levelDescriptor.getItems();
 		std::vector<std::shared_ptr<Wall>> walls = levelDescriptor.getWalls();
 		std::vector<std::shared_ptr<Prop>> props = levelDescriptor.getProps();
+		std::vector<std::shared_ptr<INonPlayingCharacter>> nonPlayingCharacters = levelDescriptor.getNonPlayingCharacters();
 
 		GameSet gameSet(floors, items, walls, props);
 		GameSettings gameSettings;
@@ -97,16 +102,17 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		Crosshair crosshair;
 		Player player(playerInitialState.getPosition(), 100, inventory);
 		Camera camera(videoMode.width, videoMode.height);
-		GameState gameState(gameSet, gameSettings, inputEventHandler, inputManager, crosshair, player, camera);
+		GameState gameState(gameSet, gameSettings, inputEventHandler, inputManager, crosshair, nonPlayingCharacters, player, camera);
 
 		FloorRenderer floorRenderer(renderWindow, resourceManager);
 		ItemRenderer itemRenderer(itemDatabase, renderWindow, resourceManager);
 		PropRenderer propRenderer(propDatabase, renderWindow, resourceManager);
 		WallRenderer wallRenderer(renderWindow, resourceManager);
 		GameSetRenderer gameSetRenderer(floorRenderer, itemRenderer, propRenderer, wallRenderer);
+		NonPlayingCharacterRenderer npcRenderer(npcDatabase, renderWindow, resourceManager);
 		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
 		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
-		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, playerRenderer, projectileRenderer, renderWindow, resourceManager);
+		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, npcRenderer, playerRenderer, projectileRenderer, renderWindow, resourceManager);
 		SfmlAudioSystem sfmlAudioSystem(gameState, itemDatabase, renderWindow, resourceManager, soundDatabase);
 
 		sf::Clock frameClock;

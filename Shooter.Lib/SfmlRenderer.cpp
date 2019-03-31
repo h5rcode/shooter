@@ -17,12 +17,14 @@ using namespace Shooter::Rendering;
 SfmlRenderer::SfmlRenderer(
 	IGameSetRenderer& gameSetRenderer,
 	IGameState& gameState,
+	INonPlayingCharacterRenderer& npcRenderer,
 	IPlayerRenderer& playerRenderer,
 	IProjectileRenderer& projectileRenderer,
 	sf::RenderWindow& window,
 	IResourceManager& resourceManager) :
 	_gameSetRenderer(gameSetRenderer),
 	_gameState(gameState),
+	_npcRenderer(npcRenderer),
 	_playerRenderer(playerRenderer),
 	_projectileRenderer(projectileRenderer),
 	_window(window),
@@ -55,6 +57,13 @@ void SfmlRenderer::render(sf::Time elapsedTime) {
 	IGameSet& gameSet = _gameState.getGameSet();
 	_gameSetRenderer.render(gameSet);
 
+	std::vector<std::shared_ptr<INonPlayingCharacter>> npcs = _gameState.getNonPlayingCharacters();
+
+	for each (std::shared_ptr<INonPlayingCharacter> npc in npcs)
+	{
+		_npcRenderer.render(*npc);
+	}
+
 	IPlayer& player = _gameState.getPlayer();
 	_playerRenderer.render(player, elapsedTime);
 
@@ -74,7 +83,7 @@ void SfmlRenderer::render(sf::Time elapsedTime) {
 void SfmlRenderer::renderCrosshair() {
 	Crosshair& crosshair = _gameState.getCrosshair();
 	Vector2& crosshairPosition = crosshair.getPosition();
-	_crosshairSprite.setPosition(crosshairPosition.x, crosshairPosition.y);
+	_crosshairSprite.setPosition((float)crosshairPosition.x, (float)crosshairPosition.y);
 	_window.draw(_crosshairSprite);
 }
 

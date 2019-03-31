@@ -4,6 +4,7 @@
 
 #include "IGameSetRenderer.h"
 #include "IGameState.h"
+#include "INonPlayingCharacterRenderer.h"
 #include "IPlayerRenderer.h"
 #include "IProjectileRenderer.h"
 #include "IRenderer.h"
@@ -19,6 +20,7 @@ namespace Shooter {
 			SfmlRenderer(
 				IGameSetRenderer& gameSetRenderer,
 				IGameState& gameState,
+				INonPlayingCharacterRenderer& npcRenderer,
 				IPlayerRenderer& playerRenderer,
 				IProjectileRenderer& projectileRenderer,
 				sf::RenderWindow& window,
@@ -35,6 +37,7 @@ namespace Shooter {
 			sf::Sprite _crosshairSprite;
 			IGameSetRenderer& _gameSetRenderer;
 			IGameState& _gameState;
+			INonPlayingCharacterRenderer& _npcRenderer;
 			IPlayerRenderer& _playerRenderer;
 			IProjectileRenderer& _projectileRenderer;
 			IResourceManager& _resourceManager;

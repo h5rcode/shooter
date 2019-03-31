@@ -1,0 +1,7 @@
+[{
+	"id": "TURTLE",
+	"name": "Turtle",
+	"width": 32,
+	"height": 32,
+	"texture": "turtle.png"
+}]

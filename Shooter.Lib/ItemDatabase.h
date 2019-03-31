@@ -5,7 +5,6 @@
 
 #include "IItemDatabase.h"
 #include "ItemDescriptor.h"
-#include "WeaponDescriptor.h"
 
 namespace Shooter {
 	namespace WorldDatabase {

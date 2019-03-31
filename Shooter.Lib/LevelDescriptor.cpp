@@ -13,8 +13,9 @@ using namespace Shooter::Items;
 using namespace Shooter::LevelDescriptors;
 using namespace Shooter::WorldDatabase::Props;
 
-LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, IPropDatabase& propDatabase) :
+LevelDescriptor::LevelDescriptor(ItemFactory& itemFactory, NonPlayingCharacterFactory& npcFactory, IPropDatabase& propDatabase) :
 	_itemFactory(itemFactory),
+	_npcFactory(npcFactory),
 	_propDatabase(propDatabase) {
 }
 
@@ -52,6 +53,23 @@ std::vector<std::shared_ptr<IItem>> LevelDescriptor::getItems() {
 	}
 
 	return items;
+}
+
+std::vector<std::shared_ptr<INonPlayingCharacter>> LevelDescriptor::getNonPlayingCharacters() {
+	std::vector<std::shared_ptr<INonPlayingCharacter>> npcs;
+	for (std::vector<std::shared_ptr<LevelNpcDescriptor>>::iterator it = this->nonPlayingCharacters.begin(); it != this->nonPlayingCharacters.end(); ++it)
+	{
+		std::shared_ptr<LevelNpcDescriptor> npcDescriptor = *it;
+
+		Vector2 position(npcDescriptor->x, npcDescriptor->y);
+		double orientation = npcDescriptor->orientation;
+		std::string npcId = npcDescriptor->npcId;
+
+		std::shared_ptr<INonPlayingCharacter> npc = _npcFactory.build(npcId, position, orientation);
+		npcs.push_back(npc);
+	}
+
+	return npcs;
 }
 
 std::vector<std::shared_ptr<Prop>> LevelDescriptor::getProps() {
@@ -120,6 +138,15 @@ void LevelDescriptor::loadFromFile(std::string& fileName) {
 		std::shared_ptr<WallDescriptor> wallDescriptor = std::make_shared<WallDescriptor>(wd);
 
 		this->wallDescriptors.push_back(wallDescriptor);
+	}
+
+	json::value_type npcs = jsonObject.at("npcs");
+	for (json::iterator it = npcs.begin(); it != npcs.end(); ++it)
+	{
+		LevelNpcDescriptor npcd = *it;
+		std::shared_ptr<LevelNpcDescriptor> npcDescriptor = std::make_shared<LevelNpcDescriptor>(npcd);
+
+		this->nonPlayingCharacters.push_back(npcDescriptor);
 	}
 
 	json::value_type props = jsonObject.at("props");

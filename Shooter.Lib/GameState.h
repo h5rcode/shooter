@@ -13,6 +13,7 @@
 #include "IGameState.h"
 #include "IInputEventHandler.h"
 #include "IInputManager.h"
+#include "INonPlayingCharacter.h"
 #include "IPlayer.h"
 #include "Projectile.h"
 
@@ -30,12 +31,14 @@ namespace Shooter {
 				IInputEventHandler& inputEventHandler,
 				IInputManager& inputManager,
 				Crosshair& crosshair,
+				std::vector<std::shared_ptr<INonPlayingCharacter>>& nonPlayingCharacters,
 				IPlayer& player,
 				Camera& camera);
 
 			Camera& getCamera();
 			Crosshair& getCrosshair();
 			IGameSet& getGameSet() const;
+			std::vector<std::shared_ptr<INonPlayingCharacter>>& getNonPlayingCharacters();
 			IPlayer& getPlayer() const;
 			PlayerMovementState& getPlayerMovementState();
 			std::vector<std::shared_ptr<Projectile>>& getProjectiles();
@@ -55,6 +58,7 @@ namespace Shooter {
 			IGameSettings& _gameSettings;
 			IInputEventHandler& _inputEventHandler;
 			IInputManager& _inputManager;
+			std::vector<std::shared_ptr<INonPlayingCharacter>> _nonPlayingCharacters;
 			IPlayer& _player;
 			PlayerMovementState _playerMovementState;
 			std::vector<std::shared_ptr<Projectile>> _projectiles;

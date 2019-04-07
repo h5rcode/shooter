@@ -4,4 +4,25 @@
 	"width": 192,
 	"height": 64,
 	"texture": "sofa.png"
+},
+{
+	"id": "SWIVEL-CHAIR-01",
+	"name": "Swivel chair",
+	"width": 64,
+	"height": 64,
+	"texture": "swivel-chair.png"
+},
+{
+	"id": "RED-LAMP-01",
+	"name": "Red lamp",
+	"width": 64,
+	"height": 64,
+	"texture": "red-lamp.png"
+},
+{
+	"id": "WOODEN-TABLE-01",
+	"name": "Wooden table",
+	"width": 128,
+	"height": 64,
+	"texture": "wooden-table.png"
 }]

@@ -2,7 +2,7 @@
 	"name": "Introduction",
 	"playerInitialState": {
 		"x": 200,
-		"y": 200
+		"y": 400
 	},
 	"floors": [{
 		"x": 1024,
@@ -52,15 +52,27 @@
 	}],
 	"props": [{
 		"propId": "SOFA-01",
-		"x": 150,
-		"y": 50,
-		"orientation": 180
+		"x": 48,
+		"y": 196,
+		"orientation": 270
 	},
 	{
-		"propId": "SOFA-01",
-		"x": 300,
-		"y": 100,
-		"orientation": 45
+		"propId": "RED-LAMP-01",
+		"x": 48,
+		"y": 48,
+		"orientation": 0
+	},
+	{
+		"propId": "SWIVEL-CHAIR-01",
+		"x": 250,
+		"y": 110,
+		"orientation": 0
+	},
+	{
+		"propId": "WOODEN-TABLE-01",
+		"x": 250,
+		"y": 48,
+		"orientation": 0
 	}],
 	"items": [{
 		"itemId": "SIGSAUER",

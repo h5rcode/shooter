@@ -118,6 +118,10 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		sf::Clock frameClock;
 
 		bool goOn = true;
+
+		const int updatesPerSecond = 60;
+		const sf::Time maximumUpdateTimeStep = sf::milliseconds(1000 / updatesPerSecond);
+
 		while (goOn)
 		{
 			sf::Time frameTime = frameClock.restart();
@@ -135,7 +139,13 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 				break;
 			}
 
-			std::vector<GameEvent> gameEvents = gameState.update(frameTime, events);
+			std::vector<GameEvent> gameEvents;
+			sf::Time lag = frameTime;
+			while (lag > sf::Time::Zero) {
+				sf::Time updateTimeStep = lag < maximumUpdateTimeStep ? lag : maximumUpdateTimeStep;
+				gameEvents = gameState.update(updateTimeStep, events);
+				lag -= maximumUpdateTimeStep;
+			}
 
 			sfmlRenderer.render(frameTime);
 			sfmlAudioSystem.update(gameEvents);

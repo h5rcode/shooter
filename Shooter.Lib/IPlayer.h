@@ -6,6 +6,7 @@
 #include "IInventory.h"
 #include "IItem.h"
 #include "IWeapon.h"
+#include "Segment.h"
 #include "Vector2.h"
 
 using namespace Shooter::Inventory;
@@ -27,6 +28,7 @@ namespace Shooter {
 			virtual double getOrientation() = 0;
 			virtual Vector2& getPosition() = 0;
 			virtual Vector2& getSpeed() = 0;
+			virtual Segment getTrajectory(sf::Time elapsedTime) = 0;
 			virtual void hurt(int damage) = 0;
 			virtual void immobilize() = 0;
 			virtual void move(sf::Time elapsedTime) = 0;

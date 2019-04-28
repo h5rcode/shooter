@@ -201,6 +201,9 @@
     <ClCompile Include="NonPlayingCharacterRenderer.cpp">
       <Filter>Rendering\Renderers</Filter>
     </ClCompile>
+    <ClCompile Include="Segment.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">
@@ -463,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="INonPlayingCharacterRenderer.h">
       <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Segment.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -135,6 +135,7 @@
     <ClCompile Include="NonPlayingCharacterFactory.cpp" />
     <ClCompile Include="NonPlayingCharacterRenderer.cpp" />
     <ClCompile Include="PropDatabase.cpp" />
+    <ClCompile Include="Segment.cpp" />
     <ClCompile Include="SfmlAudioSystem.cpp" />
     <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="ProjectileImpactEvent.h" />
     <ClInclude Include="PropDatabase.h" />
     <ClInclude Include="PropDescriptor.h" />
+    <ClInclude Include="Segment.h" />
     <ClInclude Include="SfmlAudioSystem.h" />
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Camera.h" />

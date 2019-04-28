@@ -39,6 +39,7 @@ namespace Shooter {
 			double getOrientation();
 			Vector2& getPosition();
 			Vector2& getSpeed();
+			Segment getTrajectory(sf::Time elapsedTime);
 			void hurt(int damage);
 			void immobilize();
 			void move(sf::Time elapsedTime);

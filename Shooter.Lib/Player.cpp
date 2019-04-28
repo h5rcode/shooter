@@ -71,6 +71,12 @@ Vector2& Player::getSpeed()
 	return _speed;
 }
 
+Segment Player::getTrajectory(sf::Time elapsedTime) {
+	Vector2 nextPosition = computePosition(elapsedTime);
+
+	return Segment(_position, nextPosition);
+}
+
 void Player::hurt(int damage) {
 	_hitpoints -= damage;
 }

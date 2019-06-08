@@ -38,7 +38,7 @@ SfmlRenderer::SfmlRenderer(
 
 	sf::Vector2u textureSize = crosshairTexture->getSize();
 
-	_crosshairSprite.setOrigin(textureSize.x / 2, textureSize.y / 2);
+	_crosshairSprite.setOrigin((float)(textureSize.x / 2), (float)(textureSize.y / 2));
 }
 
 void SfmlRenderer::render(sf::Time elapsedTime) {

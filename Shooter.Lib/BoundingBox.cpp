@@ -121,7 +121,7 @@ std::vector<std::shared_ptr<Collision>> BoundingBox::computeCollisionsWithSegmen
 }
 
 int BoundingBox::getHeight() const {
-	return _height;
+	return (int)_height;
 }
 
 std::vector<std::shared_ptr<Vector2>>& BoundingBox::getNormals() {
@@ -129,7 +129,7 @@ std::vector<std::shared_ptr<Vector2>>& BoundingBox::getNormals() {
 }
 
 int BoundingBox::getWidth() const {
-	return _width;
+	return (int)_width;
 }
 
 Projection BoundingBox::project(Vector2& axis) const {

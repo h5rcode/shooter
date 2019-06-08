@@ -57,8 +57,8 @@ void SfmlAudioSystem::update(std::vector<GameEvent>& gameEvents)
 {
 	IPlayer& player = _gameState.getPlayer();
 	Vector2& playerPosition = player.getPosition();
-	sf::Vector2i playerPositionInWindow = _renderWindow.mapCoordsToPixel(sf::Vector2f(playerPosition.x, playerPosition.y));
-	sf::Listener::setPosition(playerPositionInWindow.x, 0., playerPositionInWindow.y);
+	sf::Vector2i playerPositionInWindow = _renderWindow.mapCoordsToPixel(sf::Vector2f((float)playerPosition.x, (float)playerPosition.y));
+	sf::Listener::setPosition((float)playerPositionInWindow.x, 0., (float)playerPositionInWindow.y);
 
 	for each (GameEvent gameEvent in gameEvents)
 	{
@@ -131,14 +131,14 @@ void SfmlAudioSystem::playSound(std::string filename, Vector2 position, bool rel
 	sound->setLoop(loop);
 	sound->play();
 
-	sf::Vector2i soundPosition = _renderWindow.mapCoordsToPixel(sf::Vector2f(position.x, position.y));
+	sf::Vector2i soundPosition = _renderWindow.mapCoordsToPixel(sf::Vector2f((float)position.x, (float)position.y));
 
 	// TODO Make the min distance and attenuation values properties of each sound.
-	sound->setMinDistance(30);
-	sound->setAttenuation(0.1);
+	sound->setMinDistance(30.f);
+	sound->setAttenuation(0.1f);
 
 	sound->setRelativeToListener(relativeToListener);
-	sound->setPosition(soundPosition.x, 0, soundPosition.y);
+	sound->setPosition((float)soundPosition.x, 0.f, (float)soundPosition.y);
 
 	_sounds.push_back(sound);
 }

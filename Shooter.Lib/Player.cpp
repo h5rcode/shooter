@@ -18,6 +18,8 @@ Player::Player(
 	_hitpoints(hitpoints),
 	_inventory(inventory),
 	_maxSpeed(200),
+	_orientation(0.),
+	_state(CharacterState::IDLE),
 	_position(position),
 	_reach(PLAYER_REACH)
 {

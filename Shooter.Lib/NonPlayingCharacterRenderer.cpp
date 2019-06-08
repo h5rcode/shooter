@@ -21,6 +21,6 @@ void NonPlayingCharacterRenderer::render(INonPlayingCharacter& npc) {
 	_sprite.setTexture(*texture);
 	_sprite.setPosition((float)position.x, (float)position.y);
 	_sprite.setRotation((float)npc.getOrientation());
-	_sprite.setOrigin(textureSize.x / 2, textureSize.y / 2);
+	_sprite.setOrigin((float)(textureSize.x / 2), (float)(textureSize.y / 2));
 	_renderWindow.draw(_sprite);
 }

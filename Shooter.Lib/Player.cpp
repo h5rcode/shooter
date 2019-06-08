@@ -49,6 +49,19 @@ bool Player::canAttack() const {
 	return _equipedWeapon != NULL && _equipedWeapon->canAttack();
 }
 
+void Player::collide(Vector2& collisionNormal) {
+	Vector2 speedIncrement = collisionNormal;
+	double speedComponentAlongNormal = _speed.dotProduct(collisionNormal);
+	speedIncrement.multiply(speedComponentAlongNormal);
+
+	Vector2 accelerationIncrement = collisionNormal;
+	double accelerationComponentAlongNormal = _acceleration.dotProduct(collisionNormal);
+	accelerationIncrement.multiply(speedComponentAlongNormal);
+
+	_speed -= speedIncrement;
+	_acceleration -= accelerationIncrement;
+}
+
 int Player::getHitpoints() const {
 	return _hitpoints;
 }
@@ -71,12 +84,6 @@ Vector2& Player::getSpeed()
 	return _speed;
 }
 
-Segment Player::getTrajectory(sf::Time elapsedTime) {
-	Vector2 nextPosition = computePosition(elapsedTime);
-
-	return Segment(_position, nextPosition);
-}
-
 void Player::hurt(int damage) {
 	_hitpoints -= damage;
 }
@@ -88,36 +95,9 @@ void Player::immobilize() {
 
 Vector2 Player::computePosition(sf::Time elapsedTime)
 {
-	Vector2 nextSpeed = computeSpeed(elapsedTime);
-	Vector2 positionIncrement = multiply(nextSpeed, elapsedTime.asSeconds());
+	Vector2 positionIncrement = multiply(_speed, elapsedTime.asSeconds());
 
 	return _position + positionIncrement;
-}
-
-Vector2 Player::computeSpeed(sf::Time elapsedTime) {
-	double elapsedSeconds = elapsedTime.asSeconds();
-
-	Vector2 speedIncrement;
-	if (_acceleration != Vector2(0, 0)) {
-		speedIncrement = multiply(_acceleration, elapsedSeconds);
-	}
-	else {
-		speedIncrement = multiply(_speed, -_friction * elapsedSeconds);
-	}
-
-	Vector2 nextSpeed = _speed + speedIncrement;
-
-	double speedNorm = nextSpeed.getNorm();
-	if (speedNorm > _maxSpeed) {
-		nextSpeed.normalize();
-		nextSpeed = multiply(nextSpeed, _maxSpeed);
-	}
-	else if (speedNorm <= MIN_SPEED) {
-		nextSpeed.x = 0;
-		nextSpeed.y = 0;
-	}
-
-	return nextSpeed;
 }
 
 Vector2& Player::getPosition() {
@@ -125,14 +105,7 @@ Vector2& Player::getPosition() {
 }
 
 void Player::move(sf::Time elapsedTime) {
-	double elapsedSeconds = elapsedTime.asSeconds();
-
-	Vector2 nextSpeed = computeSpeed(elapsedTime);
-	Vector2 positionIncrement = multiply(nextSpeed, elapsedSeconds);
-	Vector2 nextPosition = _position + positionIncrement;
-
-	_speed = nextSpeed;
-	_position = nextPosition;
+	_position = computePosition(elapsedTime);
 }
 
 bool Player::pickUpItem(std::shared_ptr<IItem> item) {
@@ -164,4 +137,30 @@ void Player::setEquipedWeapon(std::shared_ptr<IWeapon> weapon) {
 
 void Player::setMaxSpeed(double maxSpeed) {
 	_maxSpeed = maxSpeed;
+}
+
+void Player::updateSpeed(sf::Time elapsedTime) {
+	double elapsedSeconds = elapsedTime.asSeconds();
+
+	Vector2 speedIncrement;
+	if (_acceleration != Vector2(0, 0)) {
+		speedIncrement = multiply(_acceleration, elapsedSeconds);
+	}
+	else {
+		speedIncrement = multiply(_speed, -_friction * elapsedSeconds);
+	}
+
+	Vector2 nextSpeed = _speed + speedIncrement;
+
+	double speedNorm = nextSpeed.getNorm();
+	if (speedNorm > _maxSpeed) {
+		nextSpeed.normalize();
+		nextSpeed = multiply(nextSpeed, _maxSpeed);
+	}
+	else if (speedNorm <= MIN_SPEED) {
+		nextSpeed.x = 0;
+		nextSpeed.y = 0;
+	}
+
+	_speed = nextSpeed;
 }

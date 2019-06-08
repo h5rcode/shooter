@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "BoundingBox.h"
+#include "Collision.h"
 #include "Floor.h"
 #include "IItem.h"
 #include "Prop.h"
@@ -27,6 +28,7 @@ namespace Shooter {
 			virtual std::vector<std::shared_ptr<Wall>>& getWalls() = 0;
 			virtual void removeItem(std::shared_ptr<IItem> item) = 0;
 			virtual void removeProp(std::shared_ptr<Prop> prop) = 0;
+			virtual std::vector<std::shared_ptr<Collision>> computeCollisionsWithSegment(Vector2& segmentOrigin, Vector2& segmentEnd) = 0;
 		};
 	}
 }

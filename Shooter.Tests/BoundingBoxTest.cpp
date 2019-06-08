@@ -12,6 +12,35 @@ void expectVectorsAreNearEqual(Vector2& expectedVector, Vector2& actualVector) {
 	EXPECT_NEAR(expectedVector.y, actualVector.y, precision);
 }
 
+TEST(BoudingBox_testCollisionWithSegment, should_return_2_collisions_when_the_segment_collides_at_the_corner_of_the_box) {
+	BoundingBox boundingBox(Vector2(2, 2), 4, 4, 0);
+
+	std::vector<std::shared_ptr<Collision>> collisions = boundingBox.computeCollisionsWithSegment(Vector2(-1, 0), Vector2(0, 0));
+
+	EXPECT_EQ(2, collisions.size());
+
+	std::shared_ptr<Collision> collision1 = collisions.at(0);
+	std::shared_ptr<Collision> collision2 = collisions.at(1);
+
+	EXPECT_EQ(0, collision1->position.x);
+	EXPECT_EQ(0, collision1->position.y);
+	EXPECT_EQ(-1, collision1->normal.x);
+	EXPECT_EQ(0, collision1->normal.y);
+
+	EXPECT_EQ(0, collision2->position.x);
+	EXPECT_EQ(0, collision2->position.y);
+	EXPECT_EQ(0, collision2->normal.x);
+	EXPECT_EQ(-1, collision2->normal.y);
+}
+
+TEST(BoudingBox_testCollisionWithSegment, should_return_false_when_the_box_does_not_collide_with_the_segment) {
+	BoundingBox boundingBox(Vector2(2, 2), 4, 4, 0);
+
+	std::vector<std::shared_ptr<Collision>> collisions = boundingBox.computeCollisionsWithSegment(Vector2(-1, 2), Vector2(-2, 2));
+
+	// TODO EXPECT_FALSE(testResult.collides);
+}
+
 TEST(BoundingBox_getNormals, should_return_the_expected_normals) {
 	double precision = 0.000001;
 

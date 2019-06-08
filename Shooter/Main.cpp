@@ -22,6 +22,7 @@
 #include "ProjectileRenderer.h"
 #include "PropDatabase.h"
 #include "PropRenderer.h"
+#include "RenderingOptions.h"
 #include "ResourceManager.h"
 #include "SfmlAudioSystem.h"
 #include "SfmlInputManager.h"
@@ -104,13 +105,15 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		Camera camera(videoMode.width, videoMode.height);
 		GameState gameState(gameSet, gameSettings, inputEventHandler, inputManager, crosshair, nonPlayingCharacters, player, camera);
 
+		RenderingOptions renderingOptions;
+		renderingOptions.DrawSpeed = true;
 		FloorRenderer floorRenderer(renderWindow, resourceManager);
 		ItemRenderer itemRenderer(itemDatabase, renderWindow, resourceManager);
-		PropRenderer propRenderer(propDatabase, renderWindow, resourceManager);
+		PropRenderer propRenderer(propDatabase, renderingOptions, renderWindow, resourceManager);
 		WallRenderer wallRenderer(renderWindow, resourceManager);
 		GameSetRenderer gameSetRenderer(floorRenderer, itemRenderer, propRenderer, wallRenderer);
 		NonPlayingCharacterRenderer npcRenderer(npcDatabase, renderWindow, resourceManager);
-		PlayerRenderer playerRenderer(renderWindow, *playerTexture);
+		PlayerRenderer playerRenderer(renderingOptions, renderWindow, *playerTexture);
 		ProjectileRenderer projectileRenderer(renderWindow, *projectileTexture);
 		SfmlRenderer sfmlRenderer(gameSetRenderer, gameState, npcRenderer, playerRenderer, projectileRenderer, renderWindow, resourceManager);
 		SfmlAudioSystem sfmlAudioSystem(gameState, itemDatabase, renderWindow, resourceManager, soundDatabase);

@@ -3,8 +3,13 @@
 
 using namespace Shooter::Rendering::Renderers;
 
-PropRenderer::PropRenderer(IPropDatabase& propDatabase, sf::RenderWindow& renderWindow, IResourceManager& resourceManager) :
+PropRenderer::PropRenderer(
+	IPropDatabase& propDatabase,
+	RenderingOptions& renderingOptions,
+	sf::RenderWindow& renderWindow,
+	IResourceManager& resourceManager) :
 	_propDatabase(propDatabase),
+	_renderingOptions(renderingOptions),
 	_renderWindow(renderWindow),
 	_resourceManager(resourceManager)
 {
@@ -34,4 +39,8 @@ void PropRenderer::render(Prop& prop)
 	sprite.setTexture(*texture);
 
 	_renderWindow.draw(sprite);
+
+	if (_renderingOptions.DrawBoundingBoxes) {
+		// TODO Render the bounding box.
+	}
 }

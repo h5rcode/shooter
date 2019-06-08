@@ -88,6 +88,13 @@ Vector2 &Vector2::operator+=(const Vector2 &v)
 	return *this;
 }
 
+Vector2 &Vector2::operator-=(const Vector2 &v)
+{
+	this->x -= v.x;
+	this->y -= v.y;
+	return *this;
+}
+
 bool Vector2::operator==(const Vector2 &v)
 {
 	return (this->x == v.x) && (this->y == v.y);
@@ -96,6 +103,10 @@ bool Vector2::operator==(const Vector2 &v)
 bool Vector2::operator!=(const Vector2 &v)
 {
 	return (this->x != v.x) || (this->y != v.y);
+}
+
+double Shooter::Math::determinant(const Vector2& v1, const Vector2& v2) {
+	return v1.x * v2.y - v2.x * v1.y;
 }
 
 Vector2 Shooter::Math::multiply(const Vector2 &v, double alpha)

@@ -26,6 +26,7 @@ namespace Shooter {
 			std::vector<std::shared_ptr<Wall>>& getWalls();
 			void removeItem(std::shared_ptr<IItem> item);
 			void removeProp(std::shared_ptr<Prop> prop);
+			std::vector<std::shared_ptr<Collision>> computeCollisionsWithSegment(Vector2& segmentOrigin, Vector2& segmentEnd);
 		private:
 			std::vector<std::shared_ptr<Floor>> _floors;
 			std::vector<std::shared_ptr<IItem>> _items;

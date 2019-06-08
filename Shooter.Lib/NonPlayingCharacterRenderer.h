@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "INonPlayingCharacterDatabase.h"
 #include "INonPlayingCharacterRenderer.h"
 #include "IResourceManager.h"

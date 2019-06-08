@@ -30,6 +30,7 @@ namespace Shooter {
 		public:
 			std::vector<std::shared_ptr<Projectile>> attackToward(Vector2& position);
 			bool canAttack() const;
+			void collide(Vector2& collisionNormal);
 			Vector2 computePosition(sf::Time elapsedTime);
 			void equipWeapon(std::shared_ptr<IWeapon> weapon);
 			BoundingBox getBoundingBox(sf::Time elapsedTime);
@@ -39,7 +40,6 @@ namespace Shooter {
 			double getOrientation();
 			Vector2& getPosition();
 			Vector2& getSpeed();
-			Segment getTrajectory(sf::Time elapsedTime);
 			void hurt(int damage);
 			void immobilize();
 			void move(sf::Time elapsedTime);
@@ -48,9 +48,7 @@ namespace Shooter {
 			void setAcceleration(Vector2& acceleration);
 			void setEquipedWeapon(std::shared_ptr<IWeapon> weapon);
 			void setMaxSpeed(double maxSpeed);
-
-		private:
-			Vector2 computeSpeed(sf::Time elapsedTime);
+			void updateSpeed(sf::Time elapsedTime);
 
 		private:
 			double _friction;

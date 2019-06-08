@@ -146,6 +146,7 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 	acceleration.normalize();
 	acceleration.multiply(_gameSettings.getAccelerationNorm());
 	_player.setAcceleration(acceleration);
+	_player.updateSpeed(elapsedTime);
 
 	_player.pointAt(crosshairPosition);
 	selectItemAtPosition(crosshairPosition);
@@ -157,16 +158,29 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 	bool collidesWithNpc = false;
 	for each (std::shared_ptr<INonPlayingCharacter> npc in _nonPlayingCharacters)
 	{
-		collidesWithNpc = npc->getBoundingBox(elapsedTime).intersects(_player.getBoundingBox(elapsedTime));
+		collidesWithNpc = npc->getBoundingBox(elapsedTime).intersects(playerBoundingBox);
 		if (collidesWithNpc) {
 			break;
 		}
 	}
 
-	if (collidesWithNpc || _gameSet.collidesWith(playerBoundingBox)) {
+	Vector2& playerCurrentPosition = _player.getPosition();
+	Vector2 playerNextPosition = _player.computePosition(elapsedTime);
+
+	std::vector<std::shared_ptr<Collision>> collisions = _gameSet.computeCollisionsWithSegment(playerCurrentPosition, playerNextPosition);
+
+	if (collidesWithNpc) {
 		_player.immobilize();
 	}
 	else {
+		if (collisions.size() > 1) {
+			int a = 3;
+		}
+
+		for each (std::shared_ptr<Collision> collision in collisions) {
+			_player.collide(collision->normal);
+		}
+
 		_player.move(elapsedTime);
 		_camera.setPosition(_player.getPosition());
 	}

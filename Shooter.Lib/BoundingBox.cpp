@@ -1,4 +1,5 @@
 #include "BoundingBox.h"
+#include "CollisionHelper.h"
 
 using namespace Shooter::Math;
 using namespace Shooter::World;
@@ -72,6 +73,53 @@ BoundingBox::BoundingBox(Vector2& position, int width, int height, double orient
 	}
 }
 
+std::vector<std::shared_ptr<Collision>> BoundingBox::computeCollisionsWithSegment(Vector2& segmentOrigin, Vector2& segmentEnd) {
+	int numberOfVertices = _vertices.size();
+
+	double segmentOriginX = segmentOrigin.x;
+	double segmentOriginY = segmentOrigin.y;
+
+	double segmentEndX = segmentEnd.x;
+	double segmentEndY = segmentEnd.y;
+
+	Vector2 segment = segmentEnd - segmentOrigin;
+
+	int collisionCount = 0;
+
+	std::vector<std::shared_ptr<Collision>> collisions;
+	for (int i = 0; i < numberOfVertices; i++) {
+		std::shared_ptr<Vector2> edgeOrigin = _vertices.at(i);
+		std::shared_ptr<Vector2> edgeEnd = _vertices.at((i + 1) % numberOfVertices);
+
+		if (!Shooter::World::segmentsCollide(segmentOrigin, segmentEnd, *edgeOrigin, *edgeEnd)) {
+			continue;
+		}
+
+		double k = computeRelativeIntersectionPoint(segmentOrigin, segmentEnd, *edgeOrigin, *edgeEnd);
+
+		if (k >= 0 && k <= 1) {
+			Vector2 impactRelativeToSegmentOrigin = segment;
+			impactRelativeToSegmentOrigin.multiply(k);
+			std::shared_ptr<Vector2> collisionNormal = _normals.at(i);
+
+			std::shared_ptr<Collision> collision = std::make_shared<Collision>();
+
+			collision->normal = *collisionNormal;
+			collision->position = segmentOrigin + impactRelativeToSegmentOrigin;
+
+			collisions.push_back(collision);
+
+			collisionCount++;
+
+			if (collisionCount > 1) {
+				int a = 3;
+			}
+		}
+	}
+
+	return collisions;
+}
+
 int BoundingBox::getHeight() const {
 	return _height;
 }
@@ -104,18 +152,6 @@ Projection BoundingBox::project(Vector2& axis) const {
 	}
 
 	return Projection(min, max);
-}
-
-void BoundingBox::render(sf::RenderWindow& renderWindow) {
-	sf::VertexArray vertexArray(sf::Points, 0);
-	for each (std::shared_ptr<Vector2> vertex in _vertices)
-	{
-		std::shared_ptr<sf::Vector2f> sfPosition = std::make_shared<sf::Vector2f>(vertex->x, vertex->y);
-		std::shared_ptr<sf::Vertex> sfVertex = std::make_shared<sf::Vertex>(*sfPosition);
-		vertexArray.append(*sfVertex);
-	}
-
-	renderWindow.draw(vertexArray);
 }
 
 bool BoundingBox::intersects(BoundingBox& boundingBox) const {

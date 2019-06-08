@@ -18,10 +18,13 @@ namespace Shooter {
 			void rotate(double angleInDegrees);
 
 			Vector2 &operator+=(const Vector2 &v);
+			Vector2 &operator-=(const Vector2 &v);
 
 			bool operator==(const Vector2 &v);
 			bool operator!=(const Vector2 &v);
 		};
+
+		double determinant(const Vector2 &v1, const Vector2 &v2);
 
 		Vector2 multiply(const Vector2 &v, double alpha);
 

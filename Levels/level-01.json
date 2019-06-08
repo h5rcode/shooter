@@ -57,6 +57,12 @@
 		"orientation": 270
 	},
 	{
+		"propId": "PLANT-01",
+		"x": 400,
+		"y": 48,
+		"orientation": 0
+	},
+	{
 		"propId": "RED-LAMP-01",
 		"x": 48,
 		"y": 48,

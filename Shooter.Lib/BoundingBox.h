@@ -3,8 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include <SFML/Graphics.hpp>
-
+#include "Collision.h"
 #include "Projection.h"
 #include "Vector2.h"
 
@@ -22,7 +21,7 @@ namespace Shooter {
 			int getWidth() const;
 			bool intersects(BoundingBox& boundingBox) const;
 			Projection project(Vector2& axis) const;
-			void render(sf::RenderWindow& window);
+			std::vector<std::shared_ptr<Collision>> computeCollisionsWithSegment(Vector2& segmentOrigin, Vector2& segmentEnd);
 
 		private:
 			double _height;

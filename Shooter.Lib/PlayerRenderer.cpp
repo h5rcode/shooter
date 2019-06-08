@@ -7,7 +7,8 @@ const int FRAME_HEIGHT = 64;
 const int NUMBER_OF_FRAMES = 4;
 const int FRAME_TIME_MILLISECONDS = 300;
 
-PlayerRenderer::PlayerRenderer(sf::RenderWindow& renderWindow, sf::Texture& texture) :
+PlayerRenderer::PlayerRenderer(RenderingOptions& renderingOptions, sf::RenderWindow& renderWindow, sf::Texture& texture) :
+	_renderingOptions(renderingOptions),
 	_renderWindow(renderWindow) {
 
 	_animation.setSpriteSheet(texture);
@@ -42,4 +43,12 @@ void PlayerRenderer::render(IPlayer& player, sf::Time elapsedTime) {
 	_animatedSprite.setPosition((float)position.x, (float)position.y);
 
 	_renderWindow.draw(_animatedSprite);
+
+	if (_renderingOptions.DrawSpeed) {
+		sf::Vertex speedLine[] = {
+			sf::Vertex(sf::Vector2f((float)position.x, (float)position.y)),
+			sf::Vertex(sf::Vector2f((float)(position.x + speed.x), (float)(position.y + speed.y))),
+		};
+		_renderWindow.draw(speedLine, 2, sf::Lines);
+	}
 }

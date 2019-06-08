@@ -107,3 +107,36 @@ void GameSet::removeProp(std::shared_ptr<Prop> prop) {
 		_props.erase(position);
 	}
 }
+
+std::vector<std::shared_ptr<Collision>> GameSet::computeCollisionsWithSegment(Vector2& segmentOrigin, Vector2& segmentEnd) {
+	std::vector<std::shared_ptr<Collision>> collisions;
+
+	for each (std::shared_ptr<Wall> wall in _walls)
+	{
+		BoundingBox wallBoundingBox = wall->getBoundingBox();
+		std::vector<std::shared_ptr<Collision>> wallCollisions = wallBoundingBox.computeCollisionsWithSegment(segmentOrigin, segmentEnd);
+
+		for each (std::shared_ptr<Collision> wallCollision in wallCollisions)
+		{
+			collisions.push_back(wallCollision);
+		}
+	}
+
+	for each (std::shared_ptr<Prop> prop in _props)
+	{
+		int collisionsCount = 0;
+		BoundingBox propBoundingBox = prop->getBoundingBox();
+		std::vector<std::shared_ptr<Collision>> propCollisions = propBoundingBox.computeCollisionsWithSegment(segmentOrigin, segmentEnd);
+
+		for each (std::shared_ptr<Collision> propCollision in propCollisions)
+		{
+			collisions.push_back(propCollision);
+			collisionsCount++;
+			if (collisionsCount > 1) {
+				int a = 3;
+			}
+		}
+	}
+
+	return collisions;
+}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "IResourceManager.h"
 #include "IItemDatabase.h"
 #include "IItemRenderer.h"

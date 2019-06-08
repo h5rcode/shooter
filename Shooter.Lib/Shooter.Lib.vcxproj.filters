@@ -201,8 +201,8 @@
     <ClCompile Include="NonPlayingCharacterRenderer.cpp">
       <Filter>Rendering\Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="Segment.cpp">
-      <Filter>Math</Filter>
+    <ClCompile Include="CollisionHelper.cpp">
+      <Filter>World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -467,8 +467,14 @@
     <ClInclude Include="INonPlayingCharacterRenderer.h">
       <Filter>Rendering\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="Segment.h">
-      <Filter>Math</Filter>
+    <ClInclude Include="RenderingOptions.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionHelper.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

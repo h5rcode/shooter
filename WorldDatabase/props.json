@@ -1,4 +1,11 @@
 [{
+	"id": "PLANT-01",
+	"name": "Plant",
+	"width": 64,
+	"height": 64,
+	"texture": "plant-01.png"
+},
+{
 	"id": "SOFA-01",
 	"name": "Sofa",
 	"width": 192,

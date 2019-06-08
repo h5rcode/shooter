@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "BoundingBox.h"
 #include "Vector2.h"
 

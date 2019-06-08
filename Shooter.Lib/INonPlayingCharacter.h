@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "IInventory.h"
 
 using namespace Shooter::Math;

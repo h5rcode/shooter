@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoundingBoxTest.cpp" />
+    <ClCompile Include="CollisionHelperTest.cpp" />
     <ClCompile Include="InventoryTest.cpp" />
     <ClCompile Include="PlayerTest.cpp" />
     <ClCompile Include="Vector2Test.cpp" />

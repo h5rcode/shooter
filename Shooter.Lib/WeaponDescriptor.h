@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "FirearmDescriptor.h"
 #include "WeaponType.h"
 

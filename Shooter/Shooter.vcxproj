@@ -31,32 +31,32 @@
     <ProjectGuid>{064D2134-E2E0-4E40-AC78-9972D89F6BDD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Shooter</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -102,7 +102,8 @@
       <Command>xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-audio-d-2.dll  $(OutputPath)
 xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-graphics-d-2.dll  $(OutputPath)
 xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-system-d-2.dll  $(OutputPath)
-xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-window-d-2.dll  $(OutputPath)</Command>
+xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\sfml-window-d-2.dll  $(OutputPath)
+xcopy /d /y $(SolutionDir)Tools\SFML-2.4.2\bin\openal32.dll  $(OutputPath)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

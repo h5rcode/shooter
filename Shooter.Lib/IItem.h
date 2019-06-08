@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "BoundingBox.h"
 
 using namespace Shooter::Math;

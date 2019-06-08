@@ -14,7 +14,7 @@ using namespace Shooter::Items;
 using namespace Shooter::Items::Weapons;
 using namespace Shooter::Math;
 
-TEST(PlayerTest_canAttack, should_return_false_when_there_is_no_equipped_weapon)
+TEST(Player_canAttack, should_return_false_when_there_is_no_equipped_weapon)
 {
 	InventoryMock inventory;
 
@@ -25,7 +25,7 @@ TEST(PlayerTest_canAttack, should_return_false_when_there_is_no_equipped_weapon)
 	EXPECT_FALSE(canAttack);
 }
 
-TEST(PlayerTest_canAttack, should_return_false_when_the_equipped_weapon_cannot_attack)
+TEST(Player_canAttack, should_return_false_when_the_equipped_weapon_cannot_attack)
 {
 	InventoryMock inventory;
 
@@ -42,7 +42,7 @@ TEST(PlayerTest_canAttack, should_return_false_when_the_equipped_weapon_cannot_a
 	EXPECT_FALSE(result);
 }
 
-TEST(PlayerTest_canAttack, should_return_true_when_the_equipped_weapon_can_attack)
+TEST(Player_canAttack, should_return_true_when_the_equipped_weapon_can_attack)
 {
 	InventoryMock inventory;
 
@@ -59,7 +59,22 @@ TEST(PlayerTest_canAttack, should_return_true_when_the_equipped_weapon_can_attac
 	EXPECT_TRUE(result);
 }
 
-TEST(PlayerTest_hurt, should_decrement_hitpoints_with_the_damage)
+TEST(Player_collide, should_stop_movement_in_the_direction_opposite_to_the_collision_normal) {
+	InventoryMock inventory;
+
+	Player player(Vector2(), 1, inventory);
+
+	player.setAcceleration(Vector2(1, 0));
+	player.updateSpeed(sf::seconds(10));
+
+	Vector2 speedBeforeCollision = player.getSpeed();
+
+	player.collide(Vector2(-1, 0));
+
+	Vector2& speedAfterCollision = player.getSpeed();
+}
+
+TEST(Player_hurt, should_decrement_hitpoints_with_the_damage)
 {
 	int hitpoints = 100;
 	InventoryMock inventory;
@@ -73,7 +88,7 @@ TEST(PlayerTest_hurt, should_decrement_hitpoints_with_the_damage)
 	EXPECT_EQ(hitpoints - damage, player.getHitpoints());
 }
 
-TEST(PlayerTest_pickUpItem, should_return_true_when_the_item_is_within_reach_and_can_be_added_to_the_inventory)
+TEST(Player_pickUpItem, should_return_true_when_the_item_is_within_reach_and_can_be_added_to_the_inventory)
 {
 	// Arrange.
 	Vector2 playerPosition;
@@ -96,4 +111,17 @@ TEST(PlayerTest_pickUpItem, should_return_true_when_the_item_is_within_reach_and
 
 	// Assert.
 	EXPECT_TRUE(result);
+}
+
+TEST(Player_updateSpeed, should_increment_the_speed_according_to_the_acceleration_and_the_elapsed_time) {
+	InventoryMock inventory;
+
+	Player player(Vector2(), 1, inventory);
+
+	player.setAcceleration(Vector2(1, 0));
+	player.updateSpeed(sf::seconds(10));
+
+	Vector2& speed = player.getSpeed();
+
+	EXPECT_EQ(10, speed.x);
 }

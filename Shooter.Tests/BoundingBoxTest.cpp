@@ -38,7 +38,7 @@ TEST(BoudingBox_testCollisionWithSegment, should_return_false_when_the_box_does_
 
 	std::vector<std::shared_ptr<Collision>> collisions = boundingBox.computeCollisionsWithSegment(Vector2(-1, 2), Vector2(-2, 2));
 
-	// TODO EXPECT_FALSE(testResult.collides);
+	EXPECT_EQ(0, collisions.size());
 }
 
 TEST(BoundingBox_getNormals, should_return_the_expected_normals) {

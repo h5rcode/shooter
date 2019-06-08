@@ -173,10 +173,6 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 		_player.immobilize();
 	}
 	else {
-		if (collisions.size() > 1) {
-			int a = 3;
-		}
-
 		for each (std::shared_ptr<Collision> collision in collisions) {
 			_player.collide(collision->normal);
 		}

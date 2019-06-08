@@ -91,12 +91,14 @@ void SfmlRenderer::renderHud() {
 	IPlayer& player = _gameState.getPlayer();
 	IInventory& inventory = player.getInventory();
 	Crosshair& crosshair = _gameState.getCrosshair();
-	Vector2 crosshairPosition = crosshair.getPosition();
-	Vector2 playerSpeed = player.getSpeed();
+	Vector2& crosshairPosition = crosshair.getPosition();
+	Vector2& playerPosition = player.getPosition();
+	Vector2& playerSpeed = player.getSpeed();
 
 	std::stringstream stream;
 	stream << "Crosshair (" << crosshairPosition.x << ", " << crosshairPosition.y << ")" << std::endl;
 	stream << "Orientation = " << player.getOrientation() << std::endl;
+	stream << "Position (" << playerPosition.x << ", " << playerPosition.y << ")" << std::endl;
 	stream << "Speed (" << playerSpeed.x << ", " << playerSpeed.y << ")" << std::endl;
 	stream << "Speed norm = " << playerSpeed.getNorm() << std::endl;
 	stream << "Weight = " << inventory.getCurrentWeight() << "/" << inventory.getMaxWeight() << std::endl;

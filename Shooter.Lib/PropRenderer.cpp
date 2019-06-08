@@ -4,10 +4,12 @@
 using namespace Shooter::Rendering::Renderers;
 
 PropRenderer::PropRenderer(
+	IBoundingBoxRenderer& boundingBoxRenderer,
 	IPropDatabase& propDatabase,
 	RenderingOptions& renderingOptions,
 	sf::RenderWindow& renderWindow,
 	IResourceManager& resourceManager) :
+	_boundingBoxRenderer(boundingBoxRenderer),
 	_propDatabase(propDatabase),
 	_renderingOptions(renderingOptions),
 	_renderWindow(renderWindow),
@@ -41,6 +43,7 @@ void PropRenderer::render(Prop& prop)
 	_renderWindow.draw(sprite);
 
 	if (_renderingOptions.DrawBoundingBoxes) {
-		// TODO Render the bounding box.
+		BoundingBox& boundingBox = prop.getBoundingBox();
+		_boundingBoxRenderer.render(boundingBox);
 	}
 }

@@ -18,6 +18,7 @@ namespace Shooter {
 		public:
 			int getHeight() const;
 			std::vector<std::shared_ptr<Vector2>>& getNormals();
+			std::vector<std::shared_ptr<Vector2>>& getVertices();
 			int getWidth() const;
 			bool intersects(BoundingBox& boundingBox) const;
 			Projection project(Vector2& axis) const;

@@ -58,7 +58,7 @@ void Player::collide(Vector2& collisionNormal) {
 
 	Vector2 accelerationIncrement = collisionNormal;
 	double accelerationComponentAlongNormal = _acceleration.dotProduct(collisionNormal);
-	accelerationIncrement.multiply(speedComponentAlongNormal);
+	accelerationIncrement.multiply(accelerationComponentAlongNormal);
 
 	_speed -= speedIncrement;
 	_acceleration -= accelerationIncrement;

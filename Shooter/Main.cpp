@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "BoundingBoxRenderer.h"
 #include "FloorRenderer.h"
 #include "GameEvent.h"
 #include "GameSet.h"
@@ -87,12 +88,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 		resourceManager.loadSoundBuffer(soundDatabase.getPickupItemFilename());
 
 		std::vector<std::string> allsoundFilenames = itemDatabase.getAllSoundFilenames();
-		for each (const std::string& soundFilename in allsoundFilenames)
+		for each (const std::string & soundFilename in allsoundFilenames)
 		{
 			resourceManager.loadSoundBuffer(soundFilename);
 		}
 
-		for each (const std::shared_ptr<Floor>& floor in floors)
+		for each (const std::shared_ptr<Floor> & floor in floors)
 		{
 			resourceManager.loadTexture(floor->getTexture(), true);
 		}
@@ -107,9 +108,12 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLi
 
 		RenderingOptions renderingOptions;
 		renderingOptions.DrawSpeed = true;
+		renderingOptions.DrawBoundingBoxes = true;
+
+		BoundingBoxRenderer boundingBoxRenderer(renderWindow);
 		FloorRenderer floorRenderer(renderWindow, resourceManager);
 		ItemRenderer itemRenderer(itemDatabase, renderWindow, resourceManager);
-		PropRenderer propRenderer(propDatabase, renderingOptions, renderWindow, resourceManager);
+		PropRenderer propRenderer(boundingBoxRenderer, propDatabase, renderingOptions, renderWindow, resourceManager);
 		WallRenderer wallRenderer(renderWindow, resourceManager);
 		GameSetRenderer gameSetRenderer(floorRenderer, itemRenderer, propRenderer, wallRenderer);
 		NonPlayingCharacterRenderer npcRenderer(npcDatabase, renderWindow, resourceManager);

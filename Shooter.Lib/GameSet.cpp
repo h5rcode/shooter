@@ -132,9 +132,6 @@ std::vector<std::shared_ptr<Collision>> GameSet::computeCollisionsWithSegment(Ve
 		{
 			collisions.push_back(propCollision);
 			collisionsCount++;
-			if (collisionsCount > 1) {
-				int a = 3;
-			}
 		}
 	}
 

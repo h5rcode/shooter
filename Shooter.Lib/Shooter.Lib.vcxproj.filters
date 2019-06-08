@@ -204,6 +204,9 @@
     <ClCompile Include="CollisionHelper.cpp">
       <Filter>World</Filter>
     </ClCompile>
+    <ClCompile Include="BoundingBoxRenderer.cpp">
+      <Filter>Rendering\Renderers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSet.h">
@@ -475,6 +478,12 @@
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="IBoundingBoxRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBoxRenderer.h">
+      <Filter>Rendering\Renderers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

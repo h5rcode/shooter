@@ -10,8 +10,8 @@ BoundingBox::BoundingBox(Vector2& position, int width, int height, double orient
 	_normals(),
 	_vertices()
 {
-	double halfWidth = width / 2.f;
-	double halfHeight = height / 2.f;
+	double halfWidth = width / 2.;
+	double halfHeight = height / 2.;
 
 	Vector2 topRight(halfWidth, -halfHeight);
 	Vector2 bottomRight(halfWidth, halfHeight);
@@ -126,6 +126,10 @@ int BoundingBox::getHeight() const {
 
 std::vector<std::shared_ptr<Vector2>>& BoundingBox::getNormals() {
 	return _normals;
+}
+
+std::vector<std::shared_ptr<Vector2>>& BoundingBox::getVertices() {
+	return _vertices;
 }
 
 int BoundingBox::getWidth() const {

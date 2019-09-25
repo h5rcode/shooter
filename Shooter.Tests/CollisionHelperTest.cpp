@@ -3,6 +3,38 @@
 
 using namespace Shooter::World;
 
+TEST(CollisionHelper_computeCollisionBetweenSegments, should_return_a_correct_value_when_segments_intersect) {
+	Vector2 a(1, 1);
+	Vector2 b(-1, -1);
+
+	Vector2 o(0.5, -1);
+	Vector2 p(0.5, 1);
+
+	std::shared_ptr<Collision> collision = computeCollisionBetweenSegments(a, b, o, p);
+
+	EXPECT_FALSE(collision == nullptr);
+
+	Vector2 expectedPosition = Vector2(0.5, 0.5);
+	Vector2& position = collision->position;
+	EXPECT_TRUE(expectedPosition == position);
+
+	Vector2 expectedNormal = Vector2(1, 0);
+	Vector2& normal = collision->normal;
+	EXPECT_TRUE(expectedNormal == normal);
+}
+
+TEST(CollisionHelper_computeCollisionBetweenSegments, should_return_a_null_pointer_when_segments_do_not_intersect) {
+	Vector2 a(0.25, 1);
+	Vector2 b(0, -1);
+
+	Vector2 o(0.5, -1);
+	Vector2 p(0.5, 1);
+
+	std::shared_ptr<Collision> collision = computeCollisionBetweenSegments(a, b, o, p);
+
+	EXPECT_TRUE(collision == nullptr);
+}
+
 TEST(CollisionHelper_lineCollidesWithSegment, should_return_true_when_segment_is_aligned_with_line) {
 	Vector2 a(0, 0);
 	Vector2 b(1, 1);

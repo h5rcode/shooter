@@ -4,6 +4,39 @@
 
 using namespace Shooter::World;
 
+std::shared_ptr<Collision> Shooter::World::computeCollisionBetweenSegments(Vector2& a, Vector2& b, Vector2& o, Vector2& p) {
+
+	if (!segmentsCollide(a, b, o, p)) {
+		return nullptr;
+	}
+
+	double k = computeRelativeIntersectionPoint(a, b, o, p);
+	if (k < 0 || k > 1) {
+		return nullptr;
+	}
+
+	Vector2 ab = b - a;
+	Vector2 op = p - o;
+
+	Vector2 impactRelativeToA = ab;
+	impactRelativeToA.multiply(k);
+
+	Vector2 position = a + impactRelativeToA;
+	Vector2 normal = Vector2(op.y, -op.x);
+	normal.normalize();
+
+	double dotProductAbNormal = ab.dotProduct(normal);
+	if (dotProductAbNormal > 0) {
+		normal = multiply(normal, -1);
+	}
+
+	std::shared_ptr<Collision> collision = std::make_shared<Collision>();
+	collision->normal = normal;
+	collision->position = position;
+
+	return collision;
+}
+
 double Shooter::World::computeRelativeIntersectionPoint(Vector2& a, Vector2& b, Vector2& o, Vector2& p) {
 	Vector2 ab = b - a;
 	Vector2 op = p - o;

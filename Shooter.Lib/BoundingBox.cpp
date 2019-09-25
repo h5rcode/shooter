@@ -84,36 +84,15 @@ std::vector<std::shared_ptr<Collision>> BoundingBox::computeCollisionsWithSegmen
 
 	Vector2 segment = segmentEnd - segmentOrigin;
 
-	int collisionCount = 0;
-
 	std::vector<std::shared_ptr<Collision>> collisions;
 	for (int i = 0; i < numberOfVertices; i++) {
 		std::shared_ptr<Vector2> edgeOrigin = _vertices.at(i);
 		std::shared_ptr<Vector2> edgeEnd = _vertices.at((i + 1) % numberOfVertices);
 
-		if (!Shooter::World::segmentsCollide(segmentOrigin, segmentEnd, *edgeOrigin, *edgeEnd)) {
-			continue;
-		}
-
-		double k = computeRelativeIntersectionPoint(segmentOrigin, segmentEnd, *edgeOrigin, *edgeEnd);
-
-		if (k >= 0 && k <= 1) {
-			Vector2 impactRelativeToSegmentOrigin = segment;
-			impactRelativeToSegmentOrigin.multiply(k);
-			std::shared_ptr<Vector2> collisionNormal = _normals.at(i);
-
-			std::shared_ptr<Collision> collision = std::make_shared<Collision>();
-
-			collision->normal = *collisionNormal;
-			collision->position = segmentOrigin + impactRelativeToSegmentOrigin;
-
+		std::shared_ptr<Collision> collision = computeCollisionBetweenSegments(segmentOrigin, segmentEnd, *edgeOrigin, *edgeEnd);
+		if (collision != nullptr)
+		{
 			collisions.push_back(collision);
-
-			collisionCount++;
-
-			if (collisionCount > 1) {
-				int a = 3;
-			}
 		}
 	}
 

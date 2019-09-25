@@ -113,7 +113,7 @@ std::vector<std::shared_ptr<Collision>> GameSet::computeCollisionsWithSegment(Ve
 
 	for each (std::shared_ptr<Wall> wall in _walls)
 	{
-		BoundingBox wallBoundingBox = wall->getBoundingBox();
+		BoundingBox& wallBoundingBox = wall->getBoundingBox();
 		std::vector<std::shared_ptr<Collision>> wallCollisions = wallBoundingBox.computeCollisionsWithSegment(segmentOrigin, segmentEnd);
 
 		for each (std::shared_ptr<Collision> wallCollision in wallCollisions)
@@ -124,7 +124,7 @@ std::vector<std::shared_ptr<Collision>> GameSet::computeCollisionsWithSegment(Ve
 
 	for each (std::shared_ptr<Prop> prop in _props)
 	{
-		BoundingBox propBoundingBox = prop->getBoundingBox();
+		BoundingBox& propBoundingBox = prop->getBoundingBox();
 		std::vector<std::shared_ptr<Collision>> propCollisions = propBoundingBox.computeCollisionsWithSegment(segmentOrigin, segmentEnd);
 
 		for each (std::shared_ptr<Collision> propCollision in propCollisions)

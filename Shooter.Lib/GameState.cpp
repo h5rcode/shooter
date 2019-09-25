@@ -145,6 +145,9 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 
 	acceleration.normalize();
 	acceleration.multiply(_gameSettings.getAccelerationNorm());
+
+	Vector2 initialSpeed = _player.getSpeed();
+
 	_player.setAcceleration(acceleration);
 	_player.updateSpeed(elapsedTime);
 
@@ -152,8 +155,6 @@ std::vector<GameEvent> GameState::update(sf::Time elapsedTime, std::vector<sf::E
 	selectItemAtPosition(crosshairPosition);
 
 	BoundingBox playerBoundingBox = _player.getBoundingBox(elapsedTime);
-
-	Vector2 initialSpeed = _player.getSpeed();
 
 	bool collidesWithNpc = false;
 	for each (std::shared_ptr<INonPlayingCharacter> npc in _nonPlayingCharacters)
